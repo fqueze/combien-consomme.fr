@@ -7,4 +7,3 @@ _site
 *.rej
 *~
 yarn.lock
-package-lock.json
