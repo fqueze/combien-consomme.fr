@@ -9,7 +9,7 @@ tags: ['test']
 Pour réchauffer le lait maternel, l'indispensable chauffe biberon. Combien consomme-t-il ?
 <!-- excerpt -->
 
-## Le materiel
+## Le matériel
 <div id="Introduction">
 <div>
 
@@ -49,11 +49,11 @@ Le réchauffage dure ici 1 minute et 55 secondes. La consommation est maximale �
    
 ### Pour un bébé
 
-Si on suppose que la consommation mesurée sur 24h ({{ 88.3 | energy}}) est représentative, en extrapolant et en supposant que le tirealaitement dure environ 1 an (d'abord en allaitement exclusif, puis en allaitement mixte mais avec de plus gros biberons), on obtient {{ 88.3 | energyCostPerYear }} au total.
+Si on suppose que la consommation mesurée sur 24h ({{ 88.3 | energy}}) est représentative, en extrapolant et en supposant que le tire-allaitement dure environ 1 an (d'abord en allaitement exclusif, puis en allaitement mixte mais avec de plus gros biberons), on obtient {{ 88.3 | energyCostPerYear }} au total.
 
 C'est bien moins que le prix d'achat neuf du chauffe biberon. Mais un tout petit peu plus que ce que j'ai payé le chauffe biberon d'occasion.
 
-La consommation n'étant pas nulle au repos, il ne faudra pas oublié de débrancher le chauffe biberon quand il aura perdu son utilité, ou lorsqu'on part en vacances.
+La consommation n'étant pas nulle au repos, il ne faudra pas oublier de débrancher le chauffe biberon quand il aura perdu son utilité, ou lorsqu'on part en vacances.
 
 <div id="plusloin">
 
