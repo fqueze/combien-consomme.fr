@@ -8,7 +8,7 @@ const htmlmin = require("html-minifier");
 const Image = require("@11ty/eleventy-img");
 
 const isDev = process.env.ELEVENTY_ENV === 'dev';
-const baseUrl = isDev ? 'http://localhost:8080' : 'https://www.combien-consomme.fr';
+const baseUrl = isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr';
 const profilerUrl = isDev ? 'http://localhost:4242' : 'https://profiler.firefox.com'
 
 moment.locale('fr');
