@@ -1,0 +1,19 @@
+---
+layout: base-layout.njk
+pagination:
+  data: collections.post
+  size: 100
+  reverse: true
+  alias: posts
+pagetitle: Tous les tests articles
+---
+{% for post in posts %}
+  <article class="list">
+    <a href="{{ post.url | url }}">{% if post.data.img %}{% image "./images/" + post.data.img, "Image représentant l'article " + post.data.title, "192w", 192 %}{% else %}{% image "./images/hp-missing.png", "Image générique", "192w", 192 %}{% endif %}</a>
+    <h1>
+      <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+    </h1>
+    <time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time>
+    <p>{{ post.page.excerpt }}</p>
+  </article>
+{% endfor %}
