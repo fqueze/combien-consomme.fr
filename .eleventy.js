@@ -41,6 +41,10 @@ function toPrecisionIfNotInt(number) {
 }
 
 function formatPower(powerW) {
+  if (powerW < 1) {
+    return toPrecisionIfNotInt(powerW * 1000) + nbsp + "mW";
+  }
+
   if (powerW > 1000) {
     return toPrecisionIfNotInt(powerW / 1000) + nbsp + "kW";
   }
@@ -49,6 +53,10 @@ function formatPower(powerW) {
 }
 
 function formatEnergy(energyWh) {
+  if (energyWh < 1) {
+    return toPrecisionIfNotInt(energyWh * 1000) + nbsp + "mWh";
+  }
+
   if (energyWh > 1000) {
     return toPrecisionIfNotInt(energyWh / 1000) + nbsp + "kWh";
   }
