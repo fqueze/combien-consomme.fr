@@ -13,6 +13,10 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:description" content="{{pagedesc}}">
 {% endif %}
+{% if img %}
+    <meta property="og:image" content="{% img img | url %}">
+    <meta name="twitter:image" content="{% img img | url %}">
+{% endif %}
 {#
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
@@ -30,8 +34,6 @@
     <meta name="application-name" content="combien-consomme.fr"
 
     <meta name="keywords" content="consommation, puissance, énergie, électricité, watt, kwh, mesure, mesurer, wattmètre, coût">
-    <meta property="og:image" content="TODO">
-    <meta name="twitter:image" content="TODO">
 #}
     <style>{% set css %}
 * { box-sizing: border-box; }

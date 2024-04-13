@@ -217,6 +217,17 @@ module.exports = function (eleventyConfig) {
     return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
   });
 
+  eleventyConfig.addShortcode("img", async function(src) {
+    const imageOptions = {
+      formats: ["jpeg"],
+      outputDir: "./_site/img/",
+      widths: [800],
+    };
+
+    let metadata = await Image("./images/" + src, imageOptions);
+    return metadata.jpeg[0].url;
+  });
+
   eleventyConfig.addShortcode("image", async function(src, alt, sizes, width) {
     const imageOptions = {
       formats: ["avif", "jpeg", "svg"],
