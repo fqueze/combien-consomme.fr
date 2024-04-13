@@ -36,24 +36,24 @@ function formatDuration(timeMs) {
   return result;
 }
 
+function toPrecisionIfNotInt(number) {
+  return Math.round(number) == number ? number : number.toPrecision(3);
+}
+
 function formatPower(powerW) {
   if (powerW > 1000) {
-    return (powerW / 1000).toPrecision(3) + nbsp + "kW";
+    return toPrecisionIfNotInt(powerW / 1000) + nbsp + "kW";
   }
 
-  if (Math.round(powerW) == powerW) {
-    return powerW + nbsp + "W";
-  }
-
-  return powerW.toPrecision(3) + nbsp + "W";
+  return toPrecisionIfNotInt(powerW) + nbsp + "W";
 }
 
 function formatEnergy(energyWh) {
   if (energyWh > 1000) {
-    return (energyWh / 1000).toPrecision(3) + nbsp + "kWh";
+    return toPrecisionIfNotInt(energyWh / 1000) + nbsp + "kWh";
   }
 
-  return energyWh.toPrecision(3) + nbsp + "Wh";
+  return toPrecisionIfNotInt(energyWh) + nbsp + "Wh";
 }
 
 function formatCost(energyWh) {
@@ -78,12 +78,9 @@ async function loadProfile(profile) {
 }
 
 function getStatsFromCounterSamples(profile, samples, range = "", keepAllSamples = false) {
+  const profilingStartTime = profile.meta.profilingStartTime || 0;
   function time(i) {
-    if (!profile.meta.profilingStartTime) {
-      return samples.time[i];
-    }
-
-    return Math.max(0, samples.time[i] - profile.meta.profilingStartTime);
+    return Math.max(0, samples.time[i] - profilingStartTime);
   }
   
   let powerValues = [];
@@ -352,6 +349,9 @@ module.exports = function (eleventyConfig) {
     }
     for (let {name, description, samples} of counters) {
       let {stats, firstSample, lastSample, values} = getStatsFromCounterSamples({meta}, samples, options.range, multiCounters);
+      if (options.debug) {
+        console.log(profile, options, stats);
+      }
       if (values.length == 0) {
         throw new Error(`No sample in range, profile: ${profile}, options=${JSON.stringify(options)}`);
       }
