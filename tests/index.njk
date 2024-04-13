@@ -6,7 +6,13 @@ pagination:
   reverse: true
   alias: tests
 pagetitle: Tous les tests d'objets
+pagedesc: Pour chaque objet testé, une description de l'objet et de la méthode de mesure précédera les résultats et leur interprêtation.
 ---
+<section>
+  <h1>{{ pagetitle }}</h1>
+  <p>{{ pagedesc }}</p>
+</section>
+
 {% for test in tests %}
   <article class="list">
     <a href="{{ test.url | url }}">{% image "./images/" + test.data.img, "Image représentant " + test.data.title, "192w", 192 %}</a>

@@ -1,10 +1,12 @@
 ---
 layout: base-layout.njk
-pagetitle: À propos de
+pagetitle: À propos de combien-consomme.fr
+pagedesc: À quelles questions combien-consomme.fr répond, pour quelle raison il a été créé, dans quel esprit.
 ---
 
 <article>
-<h1>À propos</h1>
+
+# {{ pagetitle }}
 
 L'idée de ce site est venue d'une simple recherche sur internet. On se demandait combien consomme une yaourtière, combien ça coûte en électricité de faire ses yaourts, et si c'est rentable, à la fois en euros, et en CO2 de faire ses yaourt soi-même plutôt que de les acheter.
 

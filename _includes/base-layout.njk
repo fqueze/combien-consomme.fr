@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <title>{{pagetitle}} - combien-consomme.fr</title>
+    <meta name="twitter:title" content="{{pagetitle}}">
+    <meta property="og:title" content="{{pagetitle}}">
+{% if pagedesc %}
+    <meta name="description" content="{{pagedesc}}">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{pagedesc}}">
+    <meta property="og:url" content="https://combien-consomme.fr">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="{{pagedesc}}">
+{% endif %}
 {#
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
@@ -19,16 +29,8 @@
     <meta name="copyright" content="combien-consomme.fr">
     <meta name="application-name" content="combien-consomme.fr"
 
-    <meta name="description" content="TODO">
     <meta name="keywords" content="consommation, puissance, énergie, électricité, watt, kwh, mesure, mesurer, wattmètre, coût">
-    <meta property="og:title" content="{{pagetitle}}">
-    <meta property="og:type" content="website">
     <meta property="og:image" content="TODO">
-    <meta property="og:url" content="https://combien-consomme.fr">
-    <meta property="og:description" content="TODO">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{{pagetitle}}">
-    <meta name="twitter:description" content="TODO">
     <meta name="twitter:image" content="TODO">
 #}
     <style>{% set css %}

@@ -176,6 +176,10 @@ module.exports = function (eleventyConfig) {
     return content.replace(/ ([?:;])/g, nbsp + "$1");
   });
 
+  eleventyConfig.addFilter('trim', string => {
+    return string.trim();
+  });
+
   eleventyConfig.addFilter('dateIso', date => {
     return moment(date).toISOString();
   });
