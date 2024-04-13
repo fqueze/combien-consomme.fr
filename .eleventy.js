@@ -352,6 +352,9 @@ module.exports = function (eleventyConfig) {
     }
     for (let {name, description, samples} of counters) {
       let {stats, firstSample, lastSample, values} = getStatsFromCounterSamples({meta}, samples, options.range, multiCounters);
+      if (values.length == 0) {
+        throw new Error(`No sample in range, profile: ${profile}, options=${JSON.stringify(options)}`);
+      }
       let graph = values.map((v, i) => ({
         x: (samples.time[firstSample + i] - samples.time[firstSample]) / stats.durationMs,
         y: v / stats.maxPowerW}));
