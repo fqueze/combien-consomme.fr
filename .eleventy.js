@@ -181,6 +181,10 @@ module.exports = function (eleventyConfig) {
     return content.replace(/ ([?:;])/g, nbsp + "$1");
   });
 
+  eleventyConfig.addFilter("limit", function(array, limit) {
+    return array.slice(0, limit);
+  });
+
   eleventyConfig.addFilter('trim', string => {
     return string.trim();
   });
