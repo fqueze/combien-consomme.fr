@@ -9,7 +9,7 @@ tags: ['post']
 Une prise connectée est un moyen très simple d'enregistrer un profil de la consommation d'un appareil. Voyons comment faire avec une prise Shelly Plus Plug S.
 <!-- excerpt -->
 
-## Le materiel
+## Le matériel
 <div id="Introduction">
 <div>
 

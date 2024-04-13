@@ -9,7 +9,7 @@ tags: ['test']
 Un aspirateur connecté est très pratique, mais quelle consommation supplémentaire cause-t-il ?
 <!-- excerpt -->
 
-### Le materiel
+### Le matériel
 
 {% image "./images/roomba-i3plus.jpg" "Aspirateur robot Roomba i3 plus, avec sa tour de vidage, branché sur une prise connectée Shelly Plus Plug S" "512w" 512 %}
 

@@ -9,7 +9,7 @@ tags: ['test']
 Un aspirateur puissant pour nettoyer lors d'un chantier, ou pour le bricolage. À quoi ressemble sa consommation ?
 <!-- excerpt -->
 
-## Le materiel
+## Le matériel
 <div id="Introduction">
 <div>
 

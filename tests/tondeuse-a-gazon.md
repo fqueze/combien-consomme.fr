@@ -9,7 +9,7 @@ tags: ['test']
 Quelle est la consommation d'une tondeuse à gazon électrique ? Combien ça coûte en électricité de tondre sa pelouse ? Est-ce que la consommation varie avec la hauteur de l'herbe ? Regardons ça !
 <!-- excerpt -->
 
-## Le materiel
+## Le matériel
 <div id="Introduction">
 <div>
 

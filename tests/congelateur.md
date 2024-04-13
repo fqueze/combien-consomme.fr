@@ -9,7 +9,7 @@ tags: ['test']
 Un gros congélateur permet de conserver une grande quantité de nourriture pendant des mois. Quel est le coût de revient ?
 <!-- excerpt -->
 
-## Le materiel
+## Le matériel
 <div id="Introduction">
 <div>
 

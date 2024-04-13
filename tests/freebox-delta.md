@@ -9,7 +9,7 @@ tags: ['test']
 Une connexion internet rapide comme la fibre, mais pour quel coût énergétique ?
 <!-- excerpt -->
 
-## Le materiel
+## Le matériel
 <div id="Introduction">
 <div>
 Il s'agit ici uniquement du serveur de la Freebox Delta (abonnement Delta S, donc offre sans la partie vidéo).
