@@ -19,12 +19,12 @@ Ce n'est ni un modèle très haut de gamme, ni le premier prix.
 
 ### Méthode de mesure
 
-L'aspirateur est branché sur [une prise connectée Shelly Plus PlugS]({{ '/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/' | url }}) qui permet de mesurer sa consommation.
+La tondeuse est branchée sur [une prise connectée Shelly Plus PlugS]({{ '/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/' | url }}) qui permet de mesurer sa consommation.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
 
 </div>
-{% image "./images/tondeuse.jpg" "Aspirateur Kärcher Eau et Poussières WD3" "512w" 512 %}
+{% image "./images/tondeuse.jpg" "Photo de la tondeuse, dans la pelouse déjà tondue, entourée de fleurs oranges" "512w" 512 %}
 </div>
 
 ## Consommation
@@ -41,7 +41,7 @@ Regardons maintenant en excluant le pic de démarrage :
 
 La consommation maximale mesurée ({{ 1853.9 | power }}) est maintenant très proche de la puissance indiquée sur l'étiquette :
 
-{% image "./images/tondeuse-etiquette.jpg" "Etiquette de l'aspirateur Kärcher WD3" "512w" 512 %}
+{% image "./images/tondeuse-etiquette.jpg" "Etiquette de la tondeuse Bosch Rotak 43" "512w" 512 %}
 
 On remarque sur le graphique que la consommation varie beaucoup d'un instant à un autre. Les creux à {{ 0 | power }} correspondent évidemment à des moments où la tondeuse était arrêtée car je déplaçais la rallonge. Les pics correspondent auxw moments où le moteur forçait en rencontrant des herbes plus hautes, voire à des moments où la tondeuse se bloquait presque (le moteur ralentissait) avec un bourage d'herbe, et où j'ai dû incliner la tondeuse pour que l'herbe s'évacue par les côtés.
 
