@@ -395,7 +395,6 @@ module.exports = function (eleventyConfig) {
       result += `<div class="profile">`
         + svg
         + profileDescription
-        + `</div>`
         + `<table>
 <tr><th>Consommation</th><td>${formatEnergy(stats.energyWh)} — ${formatCost(stats.energyWh)}</td></tr>
 <tr><th>Durée</th><td>${formatDuration(stats.durationMs)}</td></tr>
@@ -403,7 +402,8 @@ module.exports = function (eleventyConfig) {
 <table class="power">
 <tr><th rowspan="2">Puissance</th><td>médiane</td><td>moyenne</td><td>maximale</td></tr>
 <tr><td>${formatPower(stats.medianPowerW)}</td><td>${formatPower(stats.averagePowerW)}</td><td>${formatPower(stats.maxPowerW)}</td></tr>
-</table>`;
+</table>`
+        + `</div>`;
     }
     if (multiCounters) {
       result += options.name ?

@@ -280,20 +280,26 @@ article > h1 {
 }
 
 #plusloin > ul > li {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .profile {
-  clear: both;
-  padding-top: 1px;
   color: #374151 !important;
-  border: 5px solid #064e3b88;
-  border-radius: 8px;
+  border-radius: 0px;
   overflow: hidden;
 }
 .profile > div {
+  padding-top: 1px;
+  border-left: 5px solid #064e3b88;
+  border-right: 5px solid #064e3b88;
   position: relative;
-  padding-bottom: 5%
+  padding-bottom: calc(5% - 1px);
+}
+.profile > div:first-of-type {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-top: 5px solid #064e3b88;
+  overflow: hidden;
 }
 .profile > div + div {
   border-top: solid 1.5px #064e3b88;
@@ -310,9 +316,17 @@ article > h1 {
 .profile > p {
   font-weight: bold;
   margin: 0;
-  border-top: 1.5px solid #e5e7eb;
   background-color: #064e3b88;
   color: #042f2e;
+  border: 5px solid transparent;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top: none;
+}
+.profile > p:before {
+  border-top: 1px solid #e5e7eb;
+  display: block;
+  content: "";
 }
 img {
   max-width: 100%;
