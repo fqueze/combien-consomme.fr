@@ -47,7 +47,7 @@ Regardons cette phase de chauffage de plus près :
 
 La courbe est presque plate pendant 50s (pendant lesquelle la machine ne fait probablement que remplir le tambour d'eau chaude), puis on observe un comportement cyclique. On peut supposer que la machine continue à chauffer de l'eau tout en faisant tourner le tambour.
 
-Pendant les 16 minutes de chauffage, la machine a consommé {{ 618 | energy }}, soit environ 84% de l'énergie totale consommée pour toute la lessive {{ 736 | energy }}.
+Pendant les 16 minutes de chauffage, la machine a consommé {{ 618 | Wh }}, soit environ 84% de l'énergie totale consommée pour toute la lessive {{ 736 | Wh }}.
 
 Regardons maintenant ce qu'il se passe avant la phase de chauffage :
 
