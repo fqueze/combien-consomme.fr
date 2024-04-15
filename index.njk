@@ -16,7 +16,6 @@ pagedesc: Simple curiosité, envie de réduire ses factures et son empreinte car
 <div id="Articles">
   <h2><a href="{{ '/posts/' | url }}">Articles récents</a></h2>
   <div>
-
 {% for post in collections.post | reverse | limit(3) %}
     <div>
       <h3><a href="{{ post.url | url }}">{% if post.data.img %}{% image "./images/" + post.data.img, "Image représentant l'article " + post.data.title, "380w", 380 %}{% else %}{% image "./images/hp-missing.png", "Image générique", "380w", 380 %}{% endif %}
@@ -30,9 +29,9 @@ pagedesc: Simple curiosité, envie de réduire ses factures et son empreinte car
 
 <div id="Objets">
   <h2><a href="{{ '/tests/' | url }}">Objets testés</a></h2>
-  <div class="lg-react-element f1cv48ku container gx-3">
+  <div>
 {% for test in collections.test | reverse | limit(6) %}
-    <a href="{{ test.url | url }}" title="Combien consome {{ test.data.title }}">{% image "./images/" + test.data.img, "Image représentant " + test.data.title, "392w", 392 %}</a>
+    <a href="{{ test.url | url }}" title="{{ test.data.pagetitle }}">{% image "./images/" + test.data.img, "Image représentant " + test.data.title, "392w", 392 %}</a>
 {% endfor %}
   </div>
 </div>

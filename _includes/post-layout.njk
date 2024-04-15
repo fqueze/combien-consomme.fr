@@ -7,4 +7,11 @@ eleventyComputed:
 <article>
 <h1>{{ title }}</h1> 
 <time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time> 
-{{ content | safe }}</article>
+{{ content | safe }}
+</article>
+{% set previous = collections.post | getPreviousCollectionItem(page) %}
+{% set next = collections.post | getNextCollectionItem(page) %}
+<div id="np">
+  {% if previous %}<a href="{{ previous.url | url }}"><span title="Article précédent">‹</span>{% if previous.data.img %}{% image "./images/" + previous.data.img, "Image représentant l'article " + previous.data.title, "64w", 64 %}{% else %}{% image "./images/hp-missing.png", "Image générique", "64w", 64 %}{% endif %}<div>{{ previous.data.pagetitle }}</div></a>{%else %}<div></div>{% endif %}
+  {% if next %}<a href="{{ next.url | url }}">{% if next.data.img %}{% image "./images/" + next.data.img, "Image représentant l'article " + next.data.title, "64w", 64 %}{% else %}{% image "./images/hp-missing.png", "Image générique", "64w", 64 %}{% endif %}<div>{{ next.data.pagetitle }}</div><span title="Article suivant">›</span></a>{% endif %}
+</div>

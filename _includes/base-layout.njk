@@ -104,6 +104,10 @@ body > *, #plusloin {
     padding-top: 0;
     margin-top: 64px;
   }
+  #np {
+    margin-left: 72px;
+    margin-right: 72px;
+  }
 }
 
 header {
@@ -399,6 +403,49 @@ article.list > time {
 article.list > h1 {
   font-size: 2rem;
   line-height: 1em;
+}
+
+/* np = next/previous */
+#np {
+  background-color: #042f2e;
+  color: #e5e7eb !important;
+  padding: 0;
+}
+#np > * {
+  width: 50%;
+  display: inline-flex;
+  vertical-align: top;
+}
+#np > a {
+  padding: 4px;
+  color: #e5e7eb !important;
+  text-decoration: none;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+}
+#np > a:hover {
+  background-color: #064e3b !important;
+}
+#np > a > picture {
+  flex: 0 0 72px !important;
+}
+#np > a > picture > img {
+  display:block;
+  box-sizing: content-box;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  padding: 4px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+#np > a > div {
+  flex: auto;
+  padding: .1em 2px;
+}
+#np > a > span {
+  font-size: 6rem;
+  margin: 1rem 4px;
 }
 
 {% endset %}
