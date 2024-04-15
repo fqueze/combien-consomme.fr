@@ -45,7 +45,7 @@ De manière plus générale, à mesure que le mixage avance, la résistance du h
 
 On constate d'ailleurs sur les 15 dernières secondes que la consommation est fortement réduite comparée à la consommation au début du mixage. C'est une indication que... c'est prêt ! Bon appétit.
 
-Comme les pois chiches sont fermes mais relativement mous au regard de ce que le mixeur peut mixer (rappelez vous, les noix de cajou !), et que la préparation contient beaucoup d'eau, la consommation maximale ({{ 348 | power }}) est loin de la puissance de 1000 W indiquée sur l'appareil :
+Comme les pois chiches sont fermes mais relativement mous au regard de ce que le mixeur peut mixer (rappelez vous, les noix de cajou !), et que la préparation contient beaucoup d'eau, la consommation maximale ({{ 348 | W }}) est loin de la puissance de 1000 W indiquée sur l'appareil :
 
 {% image "./images/mixer-etiquette.jpg" "Etiquette du mixeur" "512w" 512 %}
 

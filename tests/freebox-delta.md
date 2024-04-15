@@ -33,7 +33,7 @@ L'enregistrement correspond à un jour où je ne travaillais pas, et donc les au
 
 {% profile "freebox-delta.json.gz" '{"name": "Freebox Delta server pendant une journée"}' %}
 
-La consommation est assez stable toute la journée. Elle varie peu en fonction de l'utilisation, et reste autour de {{ 27 | power }}.
+La consommation est assez stable toute la journée. Elle varie peu en fonction de l'utilisation, et reste autour de {{ 27 | W }}.
 
 ### Sur l'année
 

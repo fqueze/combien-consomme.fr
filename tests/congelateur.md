@@ -41,12 +41,12 @@ Nous avons observé que le comportement est cyclique. Regardons de plus près ce
 
 On observe environ 15 minutes de fonctionnement, suivies d'environ 25 minutes à l'arrêt, avant de le redémarrage suivant.
 
-Il y a un pic avec une forte consommation au démarrage, atteignant ici {{ 1720 | power }} pendant à peu près une seconde. Ça correspond au démarrage du moteur électrique du compresseur.
+Il y a un pic avec une forte consommation au démarrage, atteignant ici {{ 1720 | W }} pendant à peu près une seconde. Ça correspond au démarrage du moteur électrique du compresseur.
 
 Zoomons maintenant sur la consommation après le pic :
 {% profile "congel24h.json.gz" '{"name": "Congélateur - zoom sur le fonctionnement après le pic de démarrage", "range":"62706327m885648"}' %}
 
-La consommation est à peu près stable sur toute la période de fonctionnement. On observe une consommation d'environ {{ 80 | power }} pendant environ 1 minutes 30, ensuite la consommation décroit lentement, passant de {{ 74 | power }} à {{ 68 | power }}, avant de s'arrêter complètement. Je ne sais pas ce qui explique ces légères variations.
+La consommation est à peu près stable sur toute la période de fonctionnement. On observe une consommation d'environ {{ 80 | W }} pendant environ 1 minutes 30, ensuite la consommation décroit lentement, passant de {{ 74 | W }} à {{ 68 | W }}, avant de s'arrêter complètement. Je ne sais pas ce qui explique ces légères variations.
 
 <div id="plusloin">
 

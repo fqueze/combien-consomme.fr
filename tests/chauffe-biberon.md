@@ -38,14 +38,14 @@ On voit ici que dans cette journée, nous avons réchauffé du lait 6 fois.
 Regardons les consommations mesurées :
 - La consommation moyenne d'indique pas grand chose.
 - La consommation maximale correspond à la consommation quand le chauffe biberon est activement en fonctionnement.
-- La consommation médiane, de {{ 0.46 | power }}, correspond à la consommation au repos, quand le chauffe biberon ne fait rien. On pourrait s'attendre à ce qu'elle soit nulle, mais il doit y avoir un peu d'électronique qui reste sous tension.
+- La consommation médiane, de {{ 0.46 | W }}, correspond à la consommation au repos, quand le chauffe biberon ne fait rien. On pourrait s'attendre à ce qu'elle soit nulle, mais il doit y avoir un peu d'électronique qui reste sous tension.
 
 ### Un réchauffage
 
 Regardons maintenant de plus près ce qu'il se passe lors d'une utilisation :
 {% profile "chauffe-biberon.json.gz" '{"name": "Une utilisation du chauffe biberon", "range": "29253226m120173"}' %}
 
-Le réchauffage dure ici 1 minute et 55 secondes. La consommation est maximale à environ {{ 420 | power }} pendant 1 minute et 50 secondes, puis descent entre 70 et {{ 90 | power }} pendant environ 5 secondes, avant de revenir à l'état de repos.
+Le réchauffage dure ici 1 minute et 55 secondes. La consommation est maximale à environ {{ 420 | W }} pendant 1 minute et 50 secondes, puis descent entre 70 et {{ 90 | W }} pendant environ 5 secondes, avant de revenir à l'état de repos.
    
 ### Pour un bébé
 

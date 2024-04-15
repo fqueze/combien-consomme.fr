@@ -53,7 +53,7 @@ Regardons maintenant ce qu'il se passe avant la phase de chauffage :
 
 {% profile "lave-linge-40-quotidien.json.gz" '{"name": "Début du cycle de lavage", "range": "m492618"}' %}
 
-La consommation est la plupart du temps inférieure à {{ 30 | power }}. On observe des périodes de 5 à 6 secondes où la consommation est plus élevée, avec des pics bien marqués au début, correspondant probablement au démarrage d'un moteur électrique. Rotations du tambour ?
+La consommation est la plupart du temps inférieure à {{ 30 | W }}. On observe des périodes de 5 à 6 secondes où la consommation est plus élevée, avec des pics bien marqués au début, correspondant probablement au démarrage d'un moteur électrique. Rotations du tambour ?
 
 Regardons la forme du profil une fois le chauffage terminé :
 
@@ -67,7 +67,7 @@ Une partie ayant une consommation plus élevée près de la fin attire mon atten
 
 Je pense reconnaître ici la phase d'essorage, avec le tambour qui entre en rotation, accélère, puis maintient sa rotation à une vitesse constante pendant un certain temps, avant d'accélérer par paliers, pour finalement atteindre la vitesse maximum pendant un peu plus d'une minute.
 
-La consommation maximale ({{ 847 | power }}) de cette phase est assez élevée.
+La consommation maximale ({{ 847 | W }}) de cette phase est assez élevée.
 
 ### Une lessive avec prélavage
 

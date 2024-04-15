@@ -205,7 +205,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('profilerLink', profilerLink);
 
   eleventyConfig.addFilter('energy', formatEnergy);
-  eleventyConfig.addFilter('power', formatPower);
+  eleventyConfig.addFilter('W', formatPower);
   eleventyConfig.addFilter('energyCostPerYear', function(energyWhPerDay) {
     let energyWh = energyWhPerDay * 365.25;
     return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;

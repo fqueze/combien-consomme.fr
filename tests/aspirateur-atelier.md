@@ -36,13 +36,13 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 Voyons à quoi ressemble un profil de consommation. Ici l'aspirateur a été mis en marche, et a fonctionné à vide (il n'a aspiré que de l'air) pendant une minute.
 {% profile "aspirateur-karsher.json.gz" '{"name": "Aspiration pendant une minute", "range": "m65286"}' %}
 
-On observe un pic de consommation au démarrage. On s'y attendait, tous les moteurs électriques font ça. Ici la consommation mesurée au démarrage est de {{ 1789 | power }}. C'est la consommation maximale.
+On observe un pic de consommation au démarrage. On s'y attendait, tous les moteurs électriques font ça. Ici la consommation mesurée au démarrage est de {{ 1789 | W }}. C'est la consommation maximale.
 
-Ensuite, la consommation se stabilise à {{ 1180 | power }} (c'est la consommation médiane). Cette valeur est étonnamment élevée, pour un aspirateur dont la puissance indiquée sur l'étiquette est de "1000 W" :
+Ensuite, la consommation se stabilise à {{ 1180 | W }} (c'est la consommation médiane). Cette valeur est étonnamment élevée, pour un aspirateur dont la puissance indiquée sur l'étiquette est de "1000 W" :
 
 {% image "./images/aspirateur-karsher-etiquette.jpg" "Etiquette de l'aspirateur Kärcher WD3" "512w" 512 %}
 
-Lors de l'arrêt, la puissance diminue d'abord à {{ 866 | power }} pendant 2 secondes avant de devenir nulle :
+Lors de l'arrêt, la puissance diminue d'abord à {{ 866 | W }} pendant 2 secondes avant de devenir nulle :
 {% profile "aspirateur-karsher.json.gz" '{"name": "Arrêt de l\'aspirateur", "range": "44648m20476"}' %}
 
 Je ne connais pas l'explication de ce phénomène.
@@ -52,7 +52,7 @@ Je ne connais pas l'explication de ce phénomène.
 Cette fois ci, au cours du test j'ai bouché le tuyau une première fois pendant quelques secondes, puis 3 autres fois pendant des durées plus brèves, pour simuler ce qui se passe lorsqu'on aspire en conditions réelles et que l'aspirateur est parfois bloqué.
 {% profile "aspirateur-karsher.json.gz" '{"name": "Aspiration avec le tuyau bouché", "range": "513798m21758"}' %}
 
-Je m'attendais à ce que le moteur force et que la consommation augmente pendant ces périodes, mais en réalité il se passe le contraire : la consommation diminue quand il n'y a pas d'air qui passe dans le tuyau, avec une consommation minimale mesurée à {{ 981 | power }}.
+Je m'attendais à ce que le moteur force et que la consommation augmente pendant ces périodes, mais en réalité il se passe le contraire : la consommation diminue quand il n'y a pas d'air qui passe dans le tuyau, avec une consommation minimale mesurée à {{ 981 | W }}.
 
 
 <div id="plusloin">

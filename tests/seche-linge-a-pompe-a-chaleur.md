@@ -59,13 +59,13 @@ Le séchage en lui même présente une consommation très régulière :
 
 {% profile "seche-linge-coton.json.gz" '{"name": "Séchage", "range": "203192m5917975"}' %}
 
-Ce graphique montre une courbe très régulière. On démarre le séchage par une consommation d'environ {{ 350 | power }}, qui monte tout doucement pendant 1 heure 15 jusqu'à une consommation maximale de {{ 534 | power }} avant de redescendre lentement (en 20 minutes) jusqu'à {{ 500 | power }}.
+Ce graphique montre une courbe très régulière. On démarre le séchage par une consommation d'environ {{ 350 | W }}, qui monte tout doucement pendant 1 heure 15 jusqu'à une consommation maximale de {{ 534 | W }} avant de redescendre lentement (en 20 minutes) jusqu'à {{ 500 | W }}.
 
 L'évolution du taux d'humidité et de la température du linge au cours du cycle explique probablement ces variations lentes.
 
 #### Arrêt
 
-À la fin du cycle, on observe à nouveau 3 rotations de tambour, et pour finir une toute petite consommation (inférieure à {{ 2 | power }}) pendant environ 25 secondes. Ça doit être le moment où le sèche linge nous joue une petite musique pour nous signaler qu'il a fini, avant de s'éteindre complètement.
+À la fin du cycle, on observe à nouveau 3 rotations de tambour, et pour finir une toute petite consommation (inférieure à {{ 2 | W }}) pendant environ 25 secondes. Ça doit être le moment où le sèche linge nous joue une petite musique pour nous signaler qu'il a fini, avant de s'éteindre complètement.
 
 {% profile "seche-linge-coton.json.gz" '{"name": "Fin du cycle", "range": "6116616m86471"}' %}
 
