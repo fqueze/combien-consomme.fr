@@ -6,7 +6,7 @@ date: 2024-04-15
 tags: ['test']
 ---
 
-Le lave linge fait partie des gros consommateurs d'eau et d'énergie d'une maison. Comment se répartit sa consommation au fil du temps ? Combien coûte une lessive en électricité ?
+Le lave-linge fait partie des gros consommateurs d'eau et d'énergie d'une maison. Comment se répartit sa consommation au fil du temps ? Combien coûte une lessive en électricité ?
 <!-- excerpt -->
 
 ## Le matériel
@@ -19,19 +19,33 @@ Il y a de nombreux programmes, mais sans bien connaître les différences entre 
 
 ### Méthode de mesure
 
-Le lave linge est branché sur une prise de courant qui a une ligne dédiée allant jusqu'au tableau électrique.
+Le lave-linge est branché sur une prise de courant qui a une ligne dédiée allant jusqu'au tableau électrique.
 
-[Le tableau électrique contient un module Shelly EM]({{ '/posts/mesurer-la-consommation-avec-shelly-em/' | url }}) qui mesure la consommation sur les lignes dédiées au lave linge et au sèche linge.
+[Le tableau électrique contient un module Shelly EM]({{ '/posts/mesurer-la-consommation-avec-shelly-em/' | url }}) qui mesure la consommation sur les lignes dédiées au lave-linge et au sèche linge.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
 
 </div>
-{% image "./images/lave-linge.jpg" "Lave linge Samsung" "512w" 512 %}
+{% image "./images/lave-linge.jpg" "lave-linge Samsung" "512w" 512 %}
 </div>
 
 ## Consommation
 
 ### Sur une lessive complète
+
+#### Programme
+
+{% image "./images/lave-linge-programme-quotidien-40-1400.jpg" "Programme sélectionné : quotidien, 40°C, 1400 tr/min" "512w" 512 %}
+
+Les options sélectionnées sont les suivantes :
+- programme « Quotidien »
+- température de l'eau : 40°C
+- 2 rinçages
+- essorage à 1400 tours par minute.
+
+La durée prévue du cycle est d'une heure et trois minutes.
+
+#### Vue d'ensemble
 
 Voyons à quoi ressemble un profil de consommation pour une lessive sur le programme quotidien à 40°C, avec essorage à 1400 tr/min (la vitesse maximum).
 {% profile "lave-linge-40-quotidien.json.gz" '{"name": "Une lessive au programme « quotidien » à 40°C"}' %}
@@ -40,6 +54,9 @@ Plusieurs observations à la vue de ce profil :
 - la consommation est très différente à différents moments du cycle de lavage.
 - les valeurs de consommation médiane, moyenne et maximales sont très éloignées.
 - une phase de quelques minutes a une consommation beaucoup plus élevée que les autres. On peut deviner que c'est la partie de la lessive pendant laquelle la machine chauffe de l'eau.
+- la durée totale du cycle avant que la consommation ne devienne nulle a été d'1h15. Si on retire les 2 dernières minutes où la consommation était inférieure à {{ 3 | W }}, il reste 1h13, soit 10 minutes de plus que le temps qui était prévu au démarrage.
+
+#### En détails
 
 Regardons cette phase de chauffage de plus près :
 
@@ -63,17 +80,23 @@ De nombreuses formes semblent assez caractéristiques. Si je connaissais mieux l
 
 Une partie ayant une consommation plus élevée près de la fin attire mon attention, zoomons :
 
-{% profile "lave-linge-40-quotidien.json.gz" '{"name": "Essorage", "range": "3937920m435117"}' %}
+{% profile "lave-linge-40-quotidien.json.gz" '{"name": "Essorage", "range": "3955207m414900"}' %}
 
 Je pense reconnaître ici la phase d'essorage, avec le tambour qui entre en rotation, accélère, puis maintient sa rotation à une vitesse constante pendant un certain temps, avant d'accélérer par paliers, pour finalement atteindre la vitesse maximum pendant un peu plus d'une minute.
 
 La consommation maximale ({{ 847 | W }}) de cette phase est assez élevée.
 
-### Une lessive avec prélavage
+### Sur une lessive avec prélavage
 
-On observe ici qu'il y a 2 phases de chauffe :
+Voici un profil d'une autre lessive :
+{% profile "lave-linge-prelavage.json.gz" '{"name": "Lessive avec prélavage"}' %}
 
-TODO
+Je ne me souviens plus exactement du programme utilisé, mais on peut observer qu'il y a 2 phases de chauffe, indicant qu'il y a eu un prélavage.
+La première phase de chauffe dure 8 minutes, la deuxième 10. C'est moins que les 16 minutes observées précédemment, donc je suppose que la température était moins élevée.
+
+{% profile "lave-linge-prelavage.json.gz" '{"name": "Essorage", "range": "5240522m413150"}' %}
+
+La consommation totale et la puissance maximale pendant l'essorage sont moins élevées. Peut-être un essorage à 1200 tr/min au lieu de 1400 ?
 
 ### Conseils pour l'autoconsommation photovoltaïque
 
