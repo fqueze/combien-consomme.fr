@@ -402,7 +402,7 @@ module.exports = function (eleventyConfig) {
 </table>
 <table class="power">
 <tr><th rowspan="2"><a href="/posts/quelle-puissance-mesurer/">Puissance</a></th><td>médiane</td><td>moyenne</td><td>maximale</td></tr>
-<tr><td>${formatPower(stats.medianPowerW)}</td><td>${formatPower(stats.averagePowerW)}</td><td>${formatPower(stats.maxPowerW)}</td></tr>
+<tr><td>${formatPower(stats.medianPowerW)}</td><td>${formatPower(stats.averagePowerW)}</td><td${isDev ? ' title="' + stats.maxPowerW + ' W"' : ''}>${formatPower(stats.maxPowerW)}</td></tr>
 </table>`
         + `</div>`;
     }
