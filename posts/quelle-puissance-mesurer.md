@@ -9,7 +9,7 @@ tags: ['post']
 Sur combien-consomme.fr, on parle beaucoup de puissance. Cet article vise à clarifier le lien entre puissance et consommation, indiquer quelles sont les différentes puissantes mesurables, et dans quels cas elles nous intéressent.
 <!-- excerpt -->
 
-### Consommation ou puissance
+## Consommation ou puissance
 
 La puissance indique la force électrique utilisée à un instant donné. Elle s'exprime en Watts (W) ou kilo Watts.
 
@@ -19,28 +19,30 @@ Exemple : 1 Wh est la quantité d'énergie consommée par un appareil utilisant 
 
 Attention : nous sommes habitués à dire "kilomètres heure" pour l'unité "km/h" qui est en réalité "kilomètres par heures" ; l'unité Watt-heures n'est pas "Watt par heure", mais plutôt "Watts pendant une heure".
 
-### Les différentes puissances
+## Les différentes puissances
 
-#### Puissance moyenne
+### Puissance moyenne
 
 La puissance moyenne est obtenue en mesurant la quantité d'énergie consommée et en la divisant par le temps écoulé.
 Elle nous intéresse quand on cherche combien coûte l'utilisation d'un appareil (par exemple, combien ça coûte de laisser la lumière allumée).
 
-#### Puissance maximale
+### Puissance maximale
 
 La puissance maximale est la puissance mesurée à un bref instant lors de l'utilisation d'un appareil. Pour les appareils dont la consommation est essentiellement due à un moteur électrique (par exemple un frigo), elle est typiquement atteinte lors du démarrage du moteur, qui consomme beaucoup pour démarrer puis consomme moins une fois sa vitesse de rotation souhaitée atteinte.
 
-La puissance maximale est importante pour dimensionner l'installation électrique (choix de la puissance de l'abonnement électrique, section des câbles, ...). Si l'on souhaite réaliser une installation autonome utilisant de l'énergie obtenue depuis des panneaux photovoltaïques, il faudra s'assurer de pouvoir fournir aux appareils la puissance maximale dont ils ont besoin.
+La puissance maximale est importante pour dimensionner l'installation électrique (choix de la puissance de l'abonnement électrique, section des câbles, ...).
 
-#### Puissance médiane
+Si l'on souhaite réaliser une installation autonome utilisant de l'électricité produite localement (panneaux photovoltaïques avec système de stockage, groupe électrogène, …) il faudra s'assurer de pouvoir fournir aux appareils la puissance maximale dont ils ont besoin. Si l'on souhaite juste optimiser son auto-consommation photovoltaïque sans rechercher l'autonomie énergétique, la puissance maximale reste intéressante, mais moins critique.
+
+### Puissance médiane
 
 En statistique, la médiane est obtenue en classant les valeurs d'une série de nombres par ordre croissant, et en prenant la valeur qui arrive au milieu de la série. Il y a ainsi dans la série autant de valeurs supérieures ou égales que de valeurs inférieures ou égales à la médiane.
 
 La puissance médiane est intéressante pour un appareil dont la puissance de démarrage est très différente de la puissance en fonctionnement en régime constant. 
 
-### Exemples
+## Exemples
 
-#### Congélateur
+### Congélateur
 
 La pompe d'un congélateur consomme beaucoup pendant quelques secondes lorsqu'elle démarre, puis a une consommation assez faible pendant plusieurs minutes.
 
@@ -48,9 +50,9 @@ Voici ce que ça donne sur <a href="{{ "congelateur.json.gz" | profilerLink }}?h
 
 {% profile "congelateur.json.gz" %}
 
-#### Four à micro-onde en mode décongélation.
+On constate ici une énorme différence entre les puissances médianes, moyennes et maximales. La puissance moyenne n'est proche d'aucune valeur du graphique.
 
-<!--<img src="/images/micro-ondes.jpg" alt="Photo de mon four à micro-ondes" width="512" height="384">-->
+### Four à micro-onde en mode décongélation.
 
 {% image "./images/micro-ondes.jpg" "Photo de mon four à micro-ondes" "512w" %}
 
@@ -59,3 +61,9 @@ Ce four fonctionne en tout ou rien : soit il chauffe, soit il ne chauffe pas. Po
 Voici ce que ça donne sur <a href="{{ "micro-ondes.json.gz" | profilerLink }}?hiddenLocalTracksByPid=0-1w6&markerSearch=Micro-onde&thread=0&v=10">un profil</a> de sa consommation :
 
 {% profile "micro-ondes.json.gz" %}
+
+Ici, la puissance moyenne est intéressante, elle correspond à la valeur qu'on pourrait retrouver sur des emballage d'aliments qui indiquent « Réchauffer au four à micro-onde à {{ 600 | W }} ».
+
+La puissance maximale, qui est la puissance utilisée lorsque le four chauffe, est celle qu'une installation photovoltaïque devrait fournir pour pouvoir couvrir la consommation électrique de ce four.
+
+Pour cet exemple, la puissance médiane n'a aucun intérêt.
