@@ -178,7 +178,8 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addTransform("nbsp", function (content) {
-    return content.replace(/ ([?:;])/g, nbsp + "$1");
+    return content.replace(/ ([?:;»])/g, nbsp + "$1")
+      .replace(/« /g, "«" + nbsp);
   });
 
   eleventyConfig.addFilter("limit", function(array, limit) {

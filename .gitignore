@@ -7,3 +7,6 @@ _site
 *.rej
 *~
 yarn.lock
+images/hotpot/
+images/future/
+profiles/future/
