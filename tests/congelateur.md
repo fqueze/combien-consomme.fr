@@ -32,7 +32,7 @@ On observe un comportement cyclique. Sur une journée, le même comportement se 
 
 ### Sur l'année
 
-Si on suppose que la consommation mesurée sur 24h ({{ 652 | Wh }}) est représentative, en extrapolant, on obtient {{ 652 | energyCostPerYear }} par an, ou {{ 652 | energyCostPerMonth }} par mois.
+Si on suppose que la consommation mesurée sur 24h ({{ 652 | Wh }}) est représentative, en extrapolant, on obtient {{ 652 |  Wh€PerYear }} par an, ou {{ 652 |  Wh€PerMonth }} par mois.
 
 ### En détails
 

@@ -42,7 +42,7 @@ Les consommations médianes, moyennes, et maximales sont proches les unes des au
 
 Le cycle a duré au total environ 1 heure 40, alors qu'initialement il était prévu pour durer 3 heures, comme on peut le voir sur la photo. Ceci s'expliquer car le sèche linge utilise une sonde d'humidité pour décider quand le linge est suffisamment sec pour qu'il puisse s'arrêter.
 
-La consommation et le coût totaux, {{ 789 | energyCost }}, sont très proches de la consommation et du coût de [la lessive qui a précédé]({{ '../machine-a-laver/' | url }}).
+La consommation et le coût totaux, {{ 789 |  Wh€ }}, sont très proches de la consommation et du coût de [la lessive qui a précédé]({{ '../machine-a-laver/' | url }}).
 
 ### En détail
 Regardons plus en détail la forme du profil, et décomposons les différentes phases.

@@ -206,15 +206,15 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter('W', formatPower);
   eleventyConfig.addFilter('Wh', formatEnergy);
-  eleventyConfig.addFilter('energyCostPerYear', function(energyWhPerDay) {
+  eleventyConfig.addFilter('Wh€PerYear', function(energyWhPerDay) {
     let energyWh = energyWhPerDay * 365.25;
     return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
   });
-  eleventyConfig.addFilter('energyCostPerMonth', function(energyWhPerDay) {
+  eleventyConfig.addFilter('Wh€PerMonth', function(energyWhPerDay) {
     let energyWh = energyWhPerDay * 365.25 / 12;
     return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
   });
-  eleventyConfig.addFilter('energyCost', function(energyWh) {
+  eleventyConfig.addFilter('Wh€', function(energyWh) {
     return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
   });
 

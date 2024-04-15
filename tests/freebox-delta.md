@@ -37,7 +37,7 @@ La consommation est assez stable toute la journée. Elle varie peu en fonction d
 
 ### Sur l'année
 
-Si on suppose que la consommation mesurée sur 24h ({{ 652 | Wh }}) est représentative, en extrapolant, on obtient {{ 652 | energyCostPerYear }} par an, ou {{ 652 | energyCostPerMonth }} par mois.
+Si on suppose que la consommation mesurée sur 24h ({{ 652 | Wh }}) est représentative, en extrapolant, on obtient {{ 652 |  Wh€PerYear }} par an, ou {{ 652 |  Wh€PerMonth }} par mois.
 
 Cette consommation d'énergie étant assez élevée, les utilisateurs qui n'utilisent pas internet tout le temps pourraient envisager de débrancher cette box lorsqu'elle ne sert pas. Par exemple pendant les vacances. Ou pendant la nuit en utilisant un programmateur.
 

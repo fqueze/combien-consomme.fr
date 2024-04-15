@@ -69,7 +69,7 @@ Lors de l'arrêt, on observe une consommation plus faible pendant environ 2 seco
 
 ### Sur un an
 
-Si on suppose qu'on tond la pelouse une douzaine de fois par an (avec une fréquence qui varie selon les saisons, les coupes étant plus rapprochées au printemps et plus espacées en été en cas de sécheresse), et qu'une tonte complète dure environ une heure, la consommation annuelle sera d'environ {{ 12000 | energyCost }}.
+Si on suppose qu'on tond la pelouse une douzaine de fois par an (avec une fréquence qui varie selon les saisons, les coupes étant plus rapprochées au printemps et plus espacées en été en cas de sécheresse), et qu'une tonte complète dure environ une heure, la consommation annuelle sera d'environ {{ 12000 |  Wh€ }}.
 
 <div id="plusloin">
 
