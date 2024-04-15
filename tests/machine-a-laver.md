@@ -86,10 +86,11 @@ Pour optimiser l'autoconsommation photovoltaïque, il faudra essayer de lancer l
 ## Pour aller plus loin
 
 Pour comprendre de façon plus détaillée la consommation d'une machine à laver, on pourrait :
-- mesurer la consommation pour les différents programmes de la machine (ça sera le sujet pour d'autres tests !)
+- mesurer la consommation pour les différents programmes de la machine (ce sera le sujet d'autres tests !)
 - observer l'impact du choix de la température sur la durée de la période de chauffe.
 - observer l'impact de différentes vitesses d'essorage.
 - réaliser un enregistrement vidéo du cycle de lessive, et l'utiliser pour identifier finement toutes les phases du cycle de lavage sur un profil.
 - comparer avec d'autres modèles de lave-linge (autres marques, modèles plus ou moins anciens) pour voir ce qui est universel et ce qui est spécifique au modèle testé ici.
+- enregistrer également la consommation d'eau.
 - [s'intéresser au séchage]({{ "../seche-linge-a-pompe-a-chaleur/" | url }}) !
 </div>
