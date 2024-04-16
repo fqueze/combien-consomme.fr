@@ -251,6 +251,33 @@ module.exports = function (eleventyConfig) {
     return Image.generateHTML(metadata, imageAttributes);
   });
 
+  eleventyConfig.addLiquidTag("test", function (liquidEngine) {
+    return {
+      parse(tagToken, remainingTokens = []) {
+        let input = tagToken.args;
+        let index = input.indexOf(" ");
+        if (index != -1) {
+          this.slug = input.slice(0, index);
+          this.label = input.slice(index + 1);
+        } else {
+          this.slug = input;
+        }
+      },
+      async render(ctx) {
+        const tests = ctx.environments.collections.test;
+        const test = tests.find(t => t.fileSlug == this.slug);
+        if (!test) {
+          throw new Error(`No ${this.slug} test`);
+        }
+        if (this.label) {
+          return `[${this.label}](${test.url} "${test.data.pagetitle}")`;
+        }
+
+        return test.url;
+      },
+    };
+  });
+
   eleventyConfig.addShortcode("profile", async function(profile, options) {
     options = options ? JSON.parse(options) : {};
     const graphHeight = 120;

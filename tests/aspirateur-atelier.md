@@ -15,9 +15,9 @@ Un aspirateur puissant pour nettoyer lors d'un chantier, ou pour le bricolage. �
 
 Il s'agit ici d'un aspirateur Kärcher Eau et Poussières WD3 qui sert dans le garage, ou lors de travaux dans la maison.
 
-Occasionnellement, il peut aussi aspirer de l'eau, par exemple pour dégivrer [un congélateur coffre](../congelateur/).
+Occasionnellement, il peut aussi aspirer de l'eau, par exemple pour dégivrer {% test congelateur un congélateur coffre %}.
 
-Pour le nettoyage du quotidien, [un robot](../roomba-i3-plus/) est plus efficace et moins bruyant.
+Pour le nettoyage du quotidien, {% test roomba-i3-plus un robot %} est plus efficace et moins bruyant.
 
 ### Méthode de mesure
 

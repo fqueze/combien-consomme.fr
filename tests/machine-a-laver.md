@@ -115,5 +115,5 @@ Pour comprendre de façon plus détaillée la consommation d'une machine à lave
 - réaliser un enregistrement vidéo du cycle de lessive, et l'utiliser pour identifier finement toutes les phases du cycle de lavage sur un profil.
 - comparer avec d'autres modèles de lave-linge (autres marques, modèles plus ou moins anciens) pour voir ce qui est universel et ce qui est spécifique au modèle testé ici.
 - enregistrer également la consommation d'eau.
-- [s'intéresser au séchage]({{ "../seche-linge-a-pompe-a-chaleur/" | url }}) !
+- {% test seche-linge-a-pompe-a-chaleur s'intéresser au séchage %} !
 </div>

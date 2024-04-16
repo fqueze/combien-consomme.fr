@@ -65,7 +65,7 @@ Je l'ai laissée tourner quelques secondes à vide sur le trottoir pour qu'elle 
 
 Ici, la consommation après le démarrage est très stable, à environ {{ 900 | W }}. C'est presque une ligne horizontale pendant 9 secondes sur le graphique.
 
-Lors de l'arrêt, on observe une consommation plus faible pendant environ 2 secondes, similaire à ce qui avait été observé pour [l'aspirateur d'atelier]({{ " /tests/aspirateur-atelier/" | url }}).
+Lors de l'arrêt, on observe une consommation plus faible pendant environ 2 secondes, similaire à ce qui avait été observé pour {% test aspirateur-atelier l'aspirateur d'atelier %}.
 
 ### Sur un an
 

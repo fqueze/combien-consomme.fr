@@ -15,7 +15,7 @@ Le sèche-linge, un appareil qui chauffe, fait partie des gros consommateurs d'�
 
 Le sèche-linge utilisé pour ce test est un modèle Samsung récent, équipé d'une pompe à chaleur. D'après l'étiquette énergétique affichée sur les documents commerciaux, c'est un modèle ayant une très bonne efficacité énergétique. Eh oui, comme on l'a acheté neuf, on a pris ce qui nous paraissait le mieux !
 
-Il a de nombreux programmes, mais la plupart du temps on ne se casse pas trop la tête. On sort le linge de la [machine à laver]({{ '../machine-a-laver' | url }}), on met le coton très humide au sèche-linge, et le synthétique va sécher naturellement sur un tancarville.
+Il a de nombreux programmes, mais la plupart du temps on ne se casse pas trop la tête. On sort le linge de la {% test machine-a-laver machine à laver %}, on met le coton très humide au sèche-linge, et le synthétique va sécher naturellement sur un tancarville.
 
 Notre sèche-linge tourne donc presque toujours sur le programme « coton ». C'est ce que nous testerons aujourd'hui.
 
@@ -45,7 +45,7 @@ Le cycle a duré au total environ 1 heure 40, alors qu'initialement il était pr
 
 Ceci s'explique car le sèche-linge utilise une sonde d'humidité pour décider quand le linge est suffisamment sec pour qu'il puisse s'arrêter.
 
-La consommation et le coût totaux, {{ 789 |  Wh€ }}, sont très proches de la consommation et du coût de [la lessive qui a précédé]({{ '../machine-a-laver/' | url }}).
+La consommation et le coût totaux, {{ 789 |  Wh€ }}, sont très proches de la consommation et du coût de {% test machine-a-laver la lessive qui a précédé %}.
 
 ### En détail
 Regardons plus en détail la forme du profil, et décomposons les différentes phases.
@@ -95,7 +95,7 @@ La consommation totale du séchage est élevée, mais elle est bien répartie su
 
 Pour comprendre de façon plus détaillée la consommation d'un sèche-linge, on pourrait :
 - mesurer la consommation des différents programmes de ce sèche-linge ;
-- observer l'impact du choix de la vitesse d'essorage de [la machine à laver]({{ "../machine-a-laver/" | url }}) sur la consommation du séchage ;
+- observer l'impact du choix de la vitesse d'essorage de {% test machine-a-laver la machine à laver %} sur la consommation du séchage ;
 - comparer avec d'autres modèles de sèche-linge :
   - un modèle à condensation sans pompe à chaleur ;
   - un modèle à évacuation, qui jete beaucoup d'air chaud à l'extérieur.
