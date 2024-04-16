@@ -21,7 +21,7 @@ Pour le nettoyage du quotidien, {% test roomba-i3-plus un robot %} est plus effi
 
 ### Méthode de mesure
 
-L'aspirateur est branché sur [une prise connectée Shelly Plus PlugS]({{ '/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/' | url }}) qui permet de mesurer sa consommation.
+L'aspirateur est branché sur {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %} qui permet de mesurer sa consommation.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
 

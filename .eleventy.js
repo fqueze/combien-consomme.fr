@@ -278,6 +278,33 @@ module.exports = function (eleventyConfig) {
     };
   });
 
+  eleventyConfig.addLiquidTag("post", function (liquidEngine) {
+    return {
+      parse(tagToken, remainingTokens = []) {
+        let input = tagToken.args;
+        let index = input.indexOf(" ");
+        if (index != -1) {
+          this.slug = input.slice(0, index);
+          this.label = input.slice(index + 1);
+        } else {
+          this.slug = input;
+        }
+      },
+      async render(ctx) {
+        const posts = ctx.environments.collections.post;
+        const post = posts.find(t => t.fileSlug == this.slug);
+        if (!post) {
+          throw new Error(`No ${this.slug} article`);
+        }
+        if (this.label) {
+          return `[${this.label}](${post.url} "${post.data.pagetitle}")`;
+        }
+
+        return post.url;
+      },
+    };
+  });
+
   eleventyConfig.addShortcode("profile", async function(profile, options) {
     options = options ? JSON.parse(options) : {};
     const graphHeight = 120;

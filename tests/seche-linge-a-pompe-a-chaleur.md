@@ -23,7 +23,7 @@ Notre sèche-linge tourne donc presque toujours sur le programme « coton ». C'
 
 Le sèche-linge est branché sur une prise de courant qui a une ligne dédiée allant jusqu'au tableau électrique.
 
-[Le tableau électrique contient un module Shelly EM]({{ '/posts/mesurer-la-consommation-avec-shelly-em/' | url }}) qui mesure la consommation sur les lignes dédiées au lave-linge et au sèche-linge.
+{% post mesurer-la-consommation-avec-shelly-em Le tableau électrique contient un module Shelly EM %} qui mesure la consommation sur les lignes dédiées au lave-linge et au sèche-linge.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
 

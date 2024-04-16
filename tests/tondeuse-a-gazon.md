@@ -19,7 +19,7 @@ Ce n'est ni un modèle très haut de gamme, ni le premier prix.
 
 ### Méthode de mesure
 
-La tondeuse est branchée sur [une prise connectée Shelly Plus PlugS]({{ '/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/' | url }}) qui permet de mesurer sa consommation.
+La tondeuse est branchée sur {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %} qui permet de mesurer sa consommation.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
 

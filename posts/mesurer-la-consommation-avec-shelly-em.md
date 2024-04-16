@@ -11,7 +11,7 @@ Le tableau électrique est un point central de l'installation électrique d'une 
 
 ## Pourquoi mesurer dans le tableau
 
-Pour les appareils branchés sur une simple prise de courant, et qui consomment peu (moins de 10A), il est facile de [mesurer la consommation à l'aide d'une prise connectée](../mesurer-la-consommation-avec-shelly-plus-plug-s). Dans d'autres cas, c'est inadapté :
+Pour les appareils branchés sur une simple prise de courant, et qui consomment peu (moins de 10A), il est facile de {% post mesurer-la-consommation-avec-shelly-plus-plug-s mesurer la consommation à l'aide d'une prise connectée %}. Dans d'autres cas, c'est inadapté :
 - pour un appareil ayant une forte consommation (cuisinière, ...), il faut des fils électriques de grosse section, et une simple prise connectée surchaufferait ;
 - pour certains appareils dont le fonctionnement est critique, on n'a pas forcément envie de dépendre du bon fonctionnement d'un petit gadget électronique dont la fiabilité n'égale pas celle d'un simple morceau de fil. C'est le cas pour moi par exemple pour le congélateur.
 - pour mesurer la consommation d'une zone complète de la maison, ou même la consommation totale de la maison.

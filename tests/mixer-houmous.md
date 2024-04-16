@@ -21,7 +21,7 @@ Dans notre saladier se trouvent des pois chiches préalablement cuits, du tahin,
 
 ### Méthode de mesure
 
-Le mixeur est branché sur [une prise connectée Shelly Plus PlugS]({{ '/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/' | url }}) qui permet de mesurer sa consommation.
+Le mixeur est branché sur {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %} qui permet de mesurer sa consommation.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
 
