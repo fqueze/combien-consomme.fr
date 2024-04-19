@@ -4,6 +4,8 @@ const fs = require("fs");
 const zlib = require('zlib');
 const {parser} = require('stream-json');
 const CleanCSS = require("clean-css");
+const PurgeCSS = require("purgecss").PurgeCSS;
+const purgeHtml = require("purgecss-from-html");
 const htmlmin = require("html-minifier");
 const Image = require("@11ty/eleventy-img");
 
@@ -164,22 +166,45 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("profiles");
 
-  eleventyConfig.addTransform("htmlmin", function (content) {
+  eleventyConfig.addTransform("htmlmin", async function(content) {
     // Prior to Eleventy 2.0: use this.outputPath instead
     if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
-      let minified = htmlmin.minify(content, {
-	removeComments: true,
-	collapseWhitespace: true,
+      content = content.replace(/ ([?:;»])/g, nbsp + "$1")
+        .replace(/« /g, "«" + nbsp);
+
+      let css = require("fs").readFileSync("_includes/theme.css", {
+        encoding: "utf-8",
       });
-      return minified;
+      let purgeResult = await new PurgeCSS().purge({
+        extractors: [
+          {
+            extractor: purgeHtml,
+            extensions: ["html"],
+          },
+        ],
+        content: [
+          {
+            raw: content,
+            extension: "html",
+          },
+        ],
+        css: [
+          {
+            raw: css,
+          },
+        ],
+      });
+
+      css = new CleanCSS({}).minify(purgeResult[0].css).styles;
+      content = content.replace("</head>", `<style>${css}</style></head>`);
+
+      content = htmlmin.minify(content, {
+        removeComments: true,
+        collapseWhitespace: true,
+      });
     }
 
     return content;
-  });
-
-  eleventyConfig.addTransform("nbsp", function (content) {
-    return content.replace(/ ([?:;»])/g, nbsp + "$1")
-      .replace(/« /g, "«" + nbsp);
   });
 
   eleventyConfig.addFilter("limit", function(array, limit) {

@@ -19,6 +19,8 @@
     "clean-css": "^5.3.3",
     "html-minifier": "^4.0.0",
     "moment": "^2.30.1",
+    "purgecss": "^6.0.0",
+    "purgecss-from-html": "^6.0.0",
     "sharp": "^0.33.2",
     "stream-json": "^1.8.0"
   }
