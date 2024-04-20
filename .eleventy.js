@@ -171,7 +171,8 @@ module.exports = function (eleventyConfig) {
     // Prior to Eleventy 2.0: use this.outputPath instead
     if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
       content = content.replace(/ ([?:;»])/g, nbsp + "$1")
-        .replace(/« /g, "«" + nbsp);
+        .replace(/« /g, "«" + nbsp)
+        .replace(/'/g, "’");
 
       let css = require("fs").readFileSync("_includes/theme.css", {
         encoding: "utf-8",
