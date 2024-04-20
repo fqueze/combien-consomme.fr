@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Bai Jamjuree';
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: url(/fonts/BaiJamjuree.woff) format('woff2');
+}
+@font-face {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: optional;
+  src: url(/fonts/NunitoSans.woff) format('woff');
+}
+
 * { box-sizing: border-box; }
 html, body {
   font-family: Nunito Sans, Inter, X-LocaleSpecific, sans-serif;

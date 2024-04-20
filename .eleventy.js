@@ -163,6 +163,7 @@ function profilerLink(profile) {
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("CNAME");
+  eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("profiles");
 
