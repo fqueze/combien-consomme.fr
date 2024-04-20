@@ -12,7 +12,7 @@ pagedesc: À quelles questions combien-consomme.fr répond, pour quelle raison i
 <div id="Introduction">
 <div>
 
-L'idée de ce site est venue d'une simple recherche sur internet. On se demandait combien consomme une yaourtière, combien ça coûte en électricité de faire ses yaourts, et si c'est rentable, à la fois en euros, et en CO2 de faire ses yaourt soi-même plutôt que de les acheter.
+L'idée de ce site est venue d'une simple recherche sur internet. On se demandait combien consomme une yaourtière, combien ça coûte en électricité de faire ses yaourts, et si c'est rentable, à la fois en euros, et en CO<sub>2</sub> de faire ses yaourt soi-même plutôt que de les acheter.
 
 La réponse trouvée était absurde. La yaourtière dont il était question avait une puissance indiquée de 400W. L'auteur du contenu expliquant la consommation avait multiplié cette consommation (qui je suppose était une consommation maximum au démarrage) par la durée (une nuit) pour faire les yaourts, et était arrivé à une estimation très élevée du coût de l'électricité utilisée pour faire ses propres yaourts. Aucun recul critique bien évidemment sur les chiffres avancés, alors que la quantité d'énergie annoncée (plusieurs kWh !) aurait fait largement bouillir le lait des yaourts...
 
