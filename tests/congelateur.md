@@ -10,18 +10,14 @@ Un gros congélateur permet de conserver une grande quantité de nourriture pend
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
-
+{% intro "congel.jpg" "Gros congélateur coffre" %}
 Ce congélateur est assez récent, et d'après l'étiquettage, c'était le modèle le moins énergivore du magasin malgré sa grande taille, lorsque je l'ai acheté il y a environ 2ans.
 
 ### Méthode de mesure
 
 Un enregistreur Shelly EM avec une pince ampèremétrique est installé dans le tableau électrique sur la ligne électrique allant vers la prise sur laquelle est branché le congélateur.
 La valeur de la puissance instantanée mesurée est collectée et enregistrée une fois par seconde.
-</div>
-{% image "./images/congel.jpg" "Gros congélateur coffre" "512w" 512 %}
-</div>
+{% endintro %}
 
 ## Consommation
 

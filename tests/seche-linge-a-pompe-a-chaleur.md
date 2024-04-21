@@ -10,9 +10,7 @@ Le sèche-linge, un appareil qui chauffe, fait partie des gros consommateurs d'�
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
-
+{% intro "seche-linge.jpg" "Sèche-linge Samsung" %}
 Le sèche-linge utilisé pour ce test est un modèle Samsung récent, équipé d'une pompe à chaleur. D'après l'étiquette énergétique affichée sur les documents commerciaux, c'est un modèle ayant une très bonne efficacité énergétique. Eh oui, comme on l'a acheté neuf, on a pris ce qui nous paraissait le mieux !
 
 Il a de nombreux programmes, mais la plupart du temps on ne se casse pas trop la tête. On sort le linge de la {% test machine-a-laver machine à laver %}, on met le coton très humide au sèche-linge, et le synthétique va sécher naturellement sur un tancarville.
@@ -26,10 +24,7 @@ Le sèche-linge est branché sur une prise de courant qui a une ligne dédiée a
 {% post mesurer-la-consommation-avec-shelly-em Le tableau électrique contient un module Shelly EM %} qui mesure la consommation sur les lignes dédiées au lave-linge et au sèche-linge.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
-
-</div>
-{% image "./images/seche-linge.jpg" "Sèche-linge Samsung" "512w" 512 %}
-</div>
+{% endintro %}
 
 ## Consommation
 

@@ -10,16 +10,13 @@ Une connexion internet rapide comme la fibre, mais pour quel coût énergétique
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
+{% intro "freebox-delta.jpg" "Freebox Delta (server)" %}
 Il s'agit ici uniquement du serveur de la Freebox Delta (abonnement Delta S, donc offre sans la partie vidéo).
 
 Cette box, haut de gamme lors de sa sortie, a plein de fonctionnalités intéressantes. Par exemple, elle peut faire tourner des machines virtuelles, des disques pour un stockage réseau, etc...
 
 Elle n'est par contre pas la plus sobre en énergie. Le nouveau modèle sorti récemment (Freebox Ultra) est annoncé comme plus économe.
-</div>
-{% image "./images/freebox-delta.jpg" "Freebox Delta (server)" "512w" 512 %}
-</div>
+{% endintro %}
 
 ### Méthode de mesure
 

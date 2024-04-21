@@ -10,9 +10,7 @@ Pour réchauffer le lait maternel, l'indispensable chauffe biberon. Combien cons
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
-
+{% intro "chauffe-biberon.jpg" "Un chauffe biberon BEABA Bib'secondes" %}
 Le modèle testé est un chauffe biberon BEABA Bib'secondes. Une petite quantité d'eau est chauffée jusqu'à ébulition par une résistance électrique, de façon à ce que de la vapeur d'eau passe le long du biberon. Le biberon est ainsi chauffé rapidement par le contact avec de la vapeur d'eau à 100°C.
 
 Le chauffage s'arrête avec une minuterie, dont la durée est réglable pour tenir compte de la quantité de lait à réchauffer et de sa température initiale.
@@ -20,10 +18,7 @@ Le chauffage s'arrête avec une minuterie, dont la durée est réglable pour ten
 ### Méthode de mesure
 
 Une prise connectée Shelly Plug S est branchée entre le chauffe biberon et la prise murale. La valeur de la puissance instantanée mesurée est collectée et enregistrée une fois par seconde, par un ordinateur qui relève les données. La transmission des données se faisant par wifi, la cadence d'enregistrement peut avoir quelques irrégularités.
-</div>
-{% image "./images/chauffe-biberon.jpg" "Un chauffe biberon BEABA Bib'secondes" "512w" 512 %}
-
-</div>
+{% endintro %}
 
 ## Consommation
 

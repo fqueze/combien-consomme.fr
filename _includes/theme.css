@@ -134,21 +134,21 @@ header li > a {
   cursor: pointer;
 }
 
-#Introduction {
+#intro {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
 }
 
 @media (min-width: 992px) {
-  #Introduction > * {
+  #intro > * {
     flex: 0 0 auto;
     width: 50% !important;
   }
-  #Introduction > :first-child {
+  #intro > :first-child {
     padding-right: 1.2rem;
   }
-  #Introduction > img {
+  #intro > img {
     padding-left: 1.2rem;
   }
 }
@@ -168,7 +168,7 @@ div > h2 {
 p {
   margin-top: 0;
 }
-#Introduction img {
+#intro img {
   border-radius: 8px;
   width: 100%;
 }

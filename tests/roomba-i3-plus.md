@@ -10,9 +10,7 @@ Un aspirateur connecté est très pratique, mais quelle consommation supplément
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
-
+{% intro "roomba-i3plus.jpg" "Aspirateur robot Roomba i3 plus, avec sa tour de vidage, branché sur une prise connectée Shelly Plus Plug S" %}
 Il s'agit ici d'un aspirateur robot Roomba i3 plus. L'i3 est un modèle d'entrée de gamme de la famille Roomba i.
 
 Le « plus » dans le nom du modèle indique qu'il est livré avec une tour de vidage, qui est un deuxième aspirateur qui fait partie de la base de recharge, et transfère les poussières du petit bac à poussières de l'aspirateur vers un sac de stockage n'ayant besoin d'être vidé ou remplacé que toutes les quelques semaines.
@@ -22,10 +20,7 @@ Le « plus » dans le nom du modèle indique qu'il est livré avec une tour de v
 L'aspirateur est branché sur {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %} qui permet de mesurer sa consommation.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
-
-</div>
-{% image "./images/roomba-i3plus.jpg" "Aspirateur robot Roomba i3 plus, avec sa tour de vidage, branché sur une prise connectée Shelly Plus Plug S" "512w" 512 %}
-</div>
+{% endintro %}
 
 ## Consommation
 

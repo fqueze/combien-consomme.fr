@@ -10,14 +10,9 @@ Une prise connectée est un moyen très simple d'enregistrer un profil de la con
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
-
+{% intro "shellyplusplugs.jpg" "Shelly Plus Plug S allumée, avec un chargeur d'ordinateur branché dessus" %}
 Cette prise se connecte au Wifi.
-</div>
-
-{% image "./images/shellyplusplugs.jpg" "Shelly Plus Plug S allumée, avec un chargeur d'ordinateur branché dessus" "512w" 512 %}
-</div>
+{% endintro %}
 
 TODO
 

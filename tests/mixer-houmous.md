@@ -10,9 +10,7 @@ Avec le retour des beaux jours, on ressort le houmous et ses bâtonnets de carot
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
-
+{% intro "mixer-houmous.jpg" "Un saladier contenant un houmous prêt à mixer, et un mixeur 1000W branché sur une prise connectée Shelly" %}
 Nous utilisons ici un mixeur plongeant Moulinex quickchef, 10 vitesses, 1000 W.
 
 C'est un modèle plutôt haut de gamme, qui peut mixer bien plus qu'une simple soupe. Mixer des noix de cajou ne lui fait pas peur.
@@ -24,10 +22,7 @@ Dans notre saladier se trouvent des pois chiches préalablement cuits, du tahin,
 Le mixeur est branché sur {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %} qui permet de mesurer sa consommation.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
-
-</div>
-{% image "./images/mixer-houmous.jpg" "Un saladier contenant un houmous prêt à mixer, et un mixeur 1000W branché sur une prise connectée Shelly" "512w" 512 %}
-</div>
+{% endintro %}
 
 ## Consommation
 

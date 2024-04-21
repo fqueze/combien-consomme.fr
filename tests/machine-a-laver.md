@@ -10,9 +10,7 @@ Le lave-linge fait partie des gros consommateurs d'eau et d'énergie d'une maiso
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
-
+{% intro "lave-linge.jpg" "lave-linge Samsung" %}
 La machine à laver utilisée pour ce test est un modèle Samsung de 7kg. Ni très récente (on l'a achetée d'occasion !), ni très ancienne.
 
 Il y a de nombreux programmes, mais sans bien connaître les différences entre les différents programmes, on a tendence à l'utiliser le plus souvent sur le programme "quotidien" à 40°C. C'est ce que nous testerons aujourd'hui.
@@ -24,10 +22,7 @@ Le lave-linge est branché sur une prise de courant qui a une ligne dédiée all
 {% post mesurer-la-consommation-avec-shelly-em Le tableau électrique contient un module Shelly EM %} qui mesure la consommation sur les lignes dédiées au lave-linge et au sèche-linge.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
-
-</div>
-{% image "./images/lave-linge.jpg" "lave-linge Samsung" "512w" 512 %}
-</div>
+{% endintro %}
 
 ## Consommation
 

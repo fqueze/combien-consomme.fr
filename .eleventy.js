@@ -161,6 +161,32 @@ function profilerLink(profile) {
   return profilerUrl + "/from-url/" + encodeURIComponent(new URL("profiles/" + profile, baseUrl).href);
 }
 
+async function image(src, alt, sizes, width, lazy = true) {
+  const imageOptions = {
+    formats: ["avif", "jpeg", "svg"],
+    svgShortCircuit: true,
+    outputDir: "./_site/img/"
+  };
+  if (width) {
+    imageOptions.widths = [width];
+  }
+  let metadata = await Image(src, imageOptions);
+
+  let imageAttributes = {
+    alt,
+    sizes,
+  };
+  if (lazy) {
+    imageAttributes.loading = "lazy";
+    imageAttributes.decoding =  "async";
+  } else {
+    imageAttributes.decoding =  "sync";
+  }
+
+  // You bet we throw an error on a missing alt (alt="" works okay)
+  return Image.generateHTML(metadata, imageAttributes);
+}
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("fonts");
@@ -245,6 +271,7 @@ module.exports = function (eleventyConfig) {
     return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
   });
 
+  // Used for meta og:image and twitter:image
   eleventyConfig.addShortcode("img", async function(src) {
     const imageOptions = {
       formats: ["jpeg"],
@@ -256,26 +283,13 @@ module.exports = function (eleventyConfig) {
     return metadata.jpeg[0].url;
   });
 
-  eleventyConfig.addShortcode("image", async function(src, alt, sizes, width) {
-    const imageOptions = {
-      formats: ["avif", "jpeg", "svg"],
-      svgShortCircuit: true,
-      outputDir: "./_site/img/"
-    };
-    if (width) {
-      imageOptions.widths = [width];
-    }
-    let metadata = await Image(src, imageOptions);
+  eleventyConfig.addShortcode("image", async function(src, alt, sizes, width, lazy = true) {
+    return image(src, alt, sizes, width, lazy);
+  });
 
-    let imageAttributes = {
-      alt,
-      sizes,
-      loading: "lazy",
-      decoding: "async",
-    };
-
-    // You bet we throw an error on a missing alt (alt="" works okay)
-    return Image.generateHTML(metadata, imageAttributes);
+  eleventyConfig.addPairedShortcode("intro", async function(content, filename, alt) {
+    let img = await image("./images/" + filename, alt, "512w", 512, false);
+    return `<div id="intro"><div>${content}</div>${img}</div>`;
   });
 
   eleventyConfig.addLiquidTag("test", function (liquidEngine) {

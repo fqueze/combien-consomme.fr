@@ -10,9 +10,7 @@ Un aspirateur puissant pour nettoyer lors d'un chantier, ou pour le bricolage. �
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
-
+{% intro "aspirateur-karsher.jpg" "Aspirateur Kärcher Eau et Poussières WD3" %}
 Il s'agit ici d'un aspirateur Kärcher Eau et Poussières WD3 qui sert dans le garage, ou lors de travaux dans la maison.
 
 Occasionnellement, il peut aussi aspirer de l'eau, par exemple pour dégivrer {% test congelateur un congélateur coffre %}.
@@ -24,10 +22,7 @@ Pour le nettoyage du quotidien, {% test roomba-i3-plus un robot %} est plus effi
 L'aspirateur est branché sur {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %} qui permet de mesurer sa consommation.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
-
-</div>
-{% image "./images/aspirateur-karsher.jpg" "Aspirateur Kärcher Eau et Poussières WD3" "512w" 512 %}
-</div>
+{% endintro %}
 
 ## Consommation
 

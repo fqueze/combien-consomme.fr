@@ -15,7 +15,7 @@ pagedesc: Pour chaque objet testé, une description de l'objet et de la méthode
 
 {% for test in tests %}
   <article class="list">
-    <a href="{{ test.url | url }}">{% image "./images/" + test.data.img, "Image représentant " + test.data.title, "192w", 192 %}</a>
+    <a href="{{ test.url | url }}">{% image "./images/" + test.data.img, "Image représentant " + test.data.title, "192w", 192, false if loop.first else true %}</a>
     <h1>
       <a href="{{ test.url | url }}">{{ test.data.pagetitle }}</a>
     </h1>

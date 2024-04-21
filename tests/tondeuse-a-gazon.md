@@ -10,9 +10,7 @@ Quelle est la consommation d'une tondeuse à gazon électrique ? Combien ça co�
 <!-- excerpt -->
 
 ## Le matériel
-<div id="Introduction">
-<div>
-
+{% intro "tondeuse.jpg" "Photo de la tondeuse, dans la pelouse déjà tondue, entourée de fleurs oranges" %}
 Il s'agit ici d'une tondeuse à gazon Bosch Rotak 43 (1800 W, diamètre de coupe 43 cm, Bac de 50 L).
 
 Ce n'est ni un modèle très haut de gamme, ni le premier prix.
@@ -22,10 +20,7 @@ Ce n'est ni un modèle très haut de gamme, ni le premier prix.
 La tondeuse est branchée sur {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %} qui permet de mesurer sa consommation.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
-
-</div>
-{% image "./images/tondeuse.jpg" "Photo de la tondeuse, dans la pelouse déjà tondue, entourée de fleurs oranges" "512w" 512 %}
-</div>
+{% endintro %}
 
 ## Consommation
 
