@@ -84,14 +84,11 @@ La consommation maximale pendant la phase de chauffe se limite ici à {{ 442 | W
 
 La consommation totale du séchage est élevée, mais elle est bien répartie sur tout le cycle de séchage, ce qui fait qu'il est assez facile d'utiliser une électricité auto-produite pour sécher son linge avec un sèche-linge d'une efficacité similaire à celui testé, même si la puissance totale de l'installation photovoltaïque est limitée ou si quelques nuages passent dans le ciel.
 
-<div id="plusloin">
-
-## Pour aller plus loin
-
+{% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'un sèche-linge, on pourrait :
 - mesurer la consommation des différents programmes de ce sèche-linge ;
 - observer l'impact du choix de la vitesse d'essorage de {% test machine-a-laver la machine à laver %} sur la consommation du séchage ;
 - comparer avec d'autres modèles de sèche-linge :
   - un modèle à condensation sans pompe à chaleur ;
   - un modèle à évacuation, qui jete beaucoup d'air chaud à l'extérieur.
-</div>
+{% endplusloin %}

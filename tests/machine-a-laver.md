@@ -99,10 +99,7 @@ La consommation élevée de la phase de chauffe ne dure pas très longtemps, et 
 
 Pour optimiser l'autoconsommation photovoltaïque, il faudra essayer de lancer la machine quand il y a du soleil, et qu'on espère que le ciel restera dégagé pendant une vingtaine de minutes. Il faudra également s'abstenir de lancer un autre apareil énergivore (plaques de cuisson, four, ...) pendant le début du cycle de lessive. Un bon moment pour lancer sa lessive sera donc le début d'après-midi, juste après le repas, quand on n'a plus de plat à réchauffer ou cuire.
 
-<div id="plusloin">
-
-## Pour aller plus loin
-
+{% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'une machine à laver, on pourrait :
 - mesurer la consommation pour les différents programmes de la machine (ce sera le sujet d'autres tests !)
 - observer l'impact du choix de la température sur la durée de la période de chauffe.
@@ -111,4 +108,4 @@ Pour comprendre de façon plus détaillée la consommation d'une machine à lave
 - comparer avec d'autres modèles de lave-linge (autres marques, modèles plus ou moins anciens) pour voir ce qui est universel et ce qui est spécifique au modèle testé ici.
 - enregistrer également la consommation d'eau.
 - {% test seche-linge-a-pompe-a-chaleur s'intéresser au séchage %} !
-</div>
+{% endplusloin %}

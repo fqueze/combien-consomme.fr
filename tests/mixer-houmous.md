@@ -55,12 +55,9 @@ La consommation ici mesurée pendant un peu moins de 3 minutes est très faible,
 En supposant que la mesure réalisée ici est correcte (ou du moins que l'ordre de grandeur est bon), on peut extrapoler la consommation sur un an :
 {% # (0.00856 * 24 * 3600 / 163) = 4.537 %}{{ 4.537 |  Wh€PerYear }}. C'est à la fois peu, et énorme vu le peu d'utilité de garder cette lumière allumée tout le temps dans sa cuisine pour juste avoir à ne pas brancher et débrancher son mixeur.
 
-<div id="plusloin">
-
-## Pour aller plus loin
-
+{% plusloin %}
 On pourrait mesurer :
 - la consommation de la cuisson des pois chiches ; elle est probablement bien plus élevée que celle du mixage, il serait pertinent de la mesurer.
 - la consommation en veille avec un enregistreur plus précis.
 - la consommation du même mixeur avec d'autres aliments plus durs (noix de cajou) ou plus mou (une soupe bien cuite).
-</div>
+{% endplusloin %}

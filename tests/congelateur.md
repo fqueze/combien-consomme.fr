@@ -44,12 +44,9 @@ Zoomons maintenant sur la consommation après le pic :
 
 La consommation est à peu près stable sur toute la période de fonctionnement. On observe une consommation d'environ {{ 80 | W }} pendant environ 1 minutes 30, ensuite la consommation décroit lentement, passant de {{ 74 | W }} à {{ 68 | W }}, avant de s'arrêter complètement. Je ne sais pas ce qui explique ces légères variations.
 
-<div id="plusloin">
-
-## Pour aller plus loin
-
+{% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'un congélateur, on pourrait mesurer :
 - l'impact de l'ouverture du congélateur sur la consommation. Par exemple, la consommation sur la journée augmente-t-elle plus si on ouvre plusieurs fois quelques secondes, ou si on ouvre une fois une minute ?
 - l'impact du givre sur la consommation. Profiler la consommation avant et après dégivrage pourrait donner cette information.
 - l'impact de la température extérieure. On pourrait comparer un profil en hiver (quand la maison est chauffée, mais la buanderie ne dépasse pas 18°C) avec un profil en pleine canicule (la température dans la maison dépassant alors largement 25°C).
-</div>
+{% endplusloin %}

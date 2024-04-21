@@ -292,6 +292,10 @@ module.exports = function (eleventyConfig) {
     return `<div id="intro"><div>${content}</div>${img}</div>`;
   });
 
+  eleventyConfig.addPairedShortcode("plusloin", function(content) {
+    return `<div id="plusloin"><h2>Pour aller plus loin</h2>${content}</div>`;
+  });
+
   eleventyConfig.addLiquidTag("test", function (liquidEngine) {
     return {
       parse(tagToken, remainingTokens = []) {

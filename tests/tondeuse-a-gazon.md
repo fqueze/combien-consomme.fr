@@ -66,12 +66,9 @@ Lors de l'arrêt, on observe une consommation plus faible pendant environ 2 seco
 
 Si on suppose qu'on tond la pelouse une douzaine de fois par an (avec une fréquence qui varie selon les saisons, les coupes étant plus rapprochées au printemps et plus espacées en été en cas de sécheresse), et qu'une tonte complète dure environ une heure, la consommation annuelle sera d'environ {{ 12000 |  Wh€ }}.
 
-<div id="plusloin">
-
-## Pour aller plus loin
-
+{% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cette tondeuse, on pourrait :
 - comparer la consommation quand l'herbe est bien sèche, et quand elle est un peu humide (et cause des bourrages).
 - mesurer plus soigneusement la hauteur de l'herbe qui va être coupée.
 - mesurer la consommation en utilisant le bac de récupération d'herbe, pour voir si la consommation change significativement entre un bac vide et un bac plein.
-</div>
+{% endplusloin %}

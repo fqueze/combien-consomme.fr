@@ -49,13 +49,9 @@ Cette fois ci, au cours du test j'ai bouché le tuyau une première fois pendant
 
 Je m'attendais à ce que le moteur force et que la consommation augmente pendant ces périodes, mais en réalité il se passe le contraire : la consommation diminue quand il n'y a pas d'air qui passe dans le tuyau, avec une consommation minimale mesurée à {{ 981 | W }}.
 
-
-<div id="plusloin">
-
-## Pour aller plus loin
-
+{% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cet aspirateur, on pourrait mesurer :
 - la consommation lorsque le filtre est propre, ou très encrassé.
 - l'évolution de la consommation pendant une longue période, quand le moteur chauffe.
 - si l'aspiration de liquide ou de poussière a une influence sur la consommation (pour aspirer du liquide, il faut retirer le filtre en papier).
-</div>
+{% endplusloin %}

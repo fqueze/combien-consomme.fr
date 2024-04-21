@@ -50,11 +50,8 @@ C'est bien moins que le prix d'achat neuf du chauffe biberon. Mais un tout petit
 
 La consommation n'étant pas nulle au repos, il ne faudra pas oublier de débrancher le chauffe biberon quand il aura perdu son utilité, ou lorsqu'on part en vacances.
 
-<div id="plusloin">
-
-## Pour aller plus loin
-
+{% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de ce chauffe biberon, on pourrait :
 - mesurer la consommation avec un taux d'échantillonage plus élevé (50Hz au lieu de 1Hz), de façon à voir des détails, comme par exemple l'impact de la sonnerie qui retentit lorsque la chauffe s'arrête.
 - mesurer avec différents réglages de la minuterie.
-</div>
+{% endplusloin %}
