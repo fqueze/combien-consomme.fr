@@ -43,7 +43,7 @@ function toPrecisionIfNotInt(number) {
 }
 
 function formatPower(powerW) {
-  if (powerW < 1) {
+  if (powerW < 1 && powerW > 0) {
     return toPrecisionIfNotInt(powerW * 1000) + nbsp + "mW";
   }
 
@@ -55,7 +55,7 @@ function formatPower(powerW) {
 }
 
 function formatEnergy(energyWh) {
-  if (energyWh < 1) {
+  if (energyWh < 1 && energyWh > 0) {
     return toPrecisionIfNotInt(energyWh * 1000) + nbsp + "mWh";
   }
 
@@ -196,7 +196,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addTransform("htmlmin", async function(content) {
     // Prior to Eleventy 2.0: use this.outputPath instead
     if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
-      content = content.replace(/ ([?:;»])/g, nbsp + "$1")
+      content = content.replace(/ ([!?:;»])/g, nbsp + "$1")
         .replace(/« /g, "«" + nbsp)
         .replace(/'/g, "’");
 
@@ -293,7 +293,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addPairedShortcode("plusloin", function(content) {
-    return `<div id="plusloin"><h2>Pour aller plus loin</h2>${content}</div>`;
+    return `<div id="plusloin"><h2>Pour aller plus loin</h2>\n${content}</div>`;
   });
 
   eleventyConfig.addLiquidTag("test", function (liquidEngine) {
