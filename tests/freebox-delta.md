@@ -20,7 +20,7 @@ Elle n'est par contre pas la plus sobre en énergie. Le nouveau modèle sorti r�
 
 ### Méthode de mesure
 
-Un enregistreur Shelly EM avec une pince ampèremétrique est installé dans le tableau électrique sur la ligne électrique allant vers mon bureau. La valeur de la puissance instantanée mesurée est collectée et enregistrée une fois par seconde.
+Un {% post mesurer-la-consommation-avec-shelly-em enregistreur Shelly EM avec une pince ampèremétrique est installé dans le tableau électrique %} sur la ligne électrique allant vers les prises de courant de mon bureau. La valeur de la puissance instantanée mesurée est collectée et enregistrée une fois par seconde.
 
 L'enregistrement correspond à un jour où je ne travaillais pas, et donc les autres appareils de mon bureau étaient débranchés.
 

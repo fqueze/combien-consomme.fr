@@ -15,7 +15,7 @@ Ce congélateur est assez récent, et d'après l'étiquettage, c'était le modè
 
 ### Méthode de mesure
 
-Un enregistreur Shelly EM avec une pince ampèremétrique est installé dans le tableau électrique sur la ligne électrique allant vers la prise sur laquelle est branché le congélateur.
+Un {% post mesurer-la-consommation-avec-shelly-em enregistreur Shelly EM avec une pince ampèremétrique est installé dans le tableau électrique %} sur la ligne électrique allant vers la prise sur laquelle est branché le congélateur.
 La valeur de la puissance instantanée mesurée est collectée et enregistrée une fois par seconde.
 {% endintro %}
 
