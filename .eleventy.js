@@ -40,7 +40,7 @@ function formatDuration(timeMs) {
 }
 
 function toPrecisionIfNotInt(number) {
-  return Math.round(number) == number ? number : number.toPrecision(3);
+  return Math.round(number) == number ? number : number.toPrecision(3).replace(/\./, ",");
 }
 
 function formatPower(powerW) {
@@ -68,10 +68,16 @@ function formatEnergy(energyWh) {
 }
 
 function formatCost(energyWh) {
+  function fixed(number) {
+    return number.toLocaleString("fr", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
   let costEuro = energyWh * pricePerKWh / 1000;
   let formattedValue = costEuro < 1 ?
-      (costEuro * 100).toFixed(2) + nbsp + "c€"
-    : costEuro.toFixed(2) + nbsp + "€";
+      fixed(costEuro * 100) + nbsp + "c€"
+    : fixed(costEuro) + nbsp + "€";
   return `<span title="${priceTooltip}">${formattedValue}</span>`;
 }
 
