@@ -199,7 +199,8 @@ module.exports = function (eleventyConfig) {
     if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
       content = content.replace(/ ([!?:;»])/g, nbsp + "$1")
         .replace(/« /g, "«" + nbsp)
-        .replace(/'/g, "’");
+        .replace(/'/g, "’")
+        .replace(/\.\.\./g, "…");
 
       let css = require("fs").readFileSync("_includes/theme.css", {
         encoding: "utf-8",
