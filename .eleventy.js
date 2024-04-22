@@ -8,6 +8,7 @@ const PurgeCSS = require("purgecss").PurgeCSS;
 const purgeHtml = require("purgecss-from-html");
 const htmlmin = require("html-minifier");
 const Image = require("@11ty/eleventy-img");
+const UglifyJS = require("uglify-js");
 
 const isDev = process.env.ELEVENTY_ENV === 'dev';
 const baseUrl = isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr';
@@ -253,6 +254,16 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("cssmin", function(code) {
     return new CleanCSS({}).minify(code).styles;
+  });
+
+  eleventyConfig.addFilter("jsmin", function(code) {
+    let minified = UglifyJS.minify(code);
+    if (minified.error) {
+      console.log("UglifyJS error: ", minified.error);
+      return code;
+    }
+
+    return minified.code;
   });
 
   eleventyConfig.addFilter('profilerLink', profilerLink);
