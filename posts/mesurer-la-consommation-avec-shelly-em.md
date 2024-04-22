@@ -29,7 +29,7 @@ J'ai mesuré :
 - mon bureau : étant en télétravail, j'étais curieux de savoir quelle partie de la consommation de la maison est due à mon activité professionnelle
 - les panneaux solaires que j'ai installé sur le mur de la maison orienté au sud.
 - {% test machine-a-laver la machine à laver %} et {% test seche-linge-a-pompe-a-chaleur le sèche-linge %} (c'est la pince dans laquelle passent 2 fils rouges). Avoir ces deux appareils mesurés en même temps ne gêne pas mes mesures car les deux appareils fonctionnent rarement en même temps : on utilise typiquement le sèche-linge quand la machine a fini et est éteinte.
-- la chaudière : c'est intéressant de voir quand elle se déclanche, la consommation du circulateur d'eau des radiateurs, la consommation au repos, ...
+- la chaudière : c'est intéressant de voir quand elle se déclenche, la consommation du circulateur d'eau des radiateurs, la consommation au repos, ...
 - le congélateur
 - le fil de grosse section partant vers le tableau électrique secondaire du premier étage de la maison.
 
@@ -37,7 +37,7 @@ J'ai mesuré :
 
 Ces modules communiquent en wifi. Une application pour smartphone est disponible pour visualiser simplement les données, mais cela implique d'envoyer toutes les données dans le cloud sur des serveurs gérés par le fabriquant. Pour des raisons de vie privée, je préfère que les données détaillées de consommation ne quittent pas la maison, et j'utilise plutôt les API locales. Il est possible d'accéder aux données avec une API HTTP, ou d'utiliser le protocole MQTT.
 
-Dans mon cas, les données sont collectées par un ordinateur où tourne un serveur MQTT, et quelque scripts pour logguer les données. D'autres scripts me permettent ensuite de visualiser les données au format du [Firefox Profiler](https://profiler.firefox.com).
+Dans mon cas, les données sont collectées par un ordinateur où tourne un serveur MQTT, et quelque scripts pour loguer les données. D'autres scripts me permettent ensuite de visualiser les données au format du [Firefox Profiler](https://profiler.firefox.com).
 
 ### Exemple
 

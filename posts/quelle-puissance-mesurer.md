@@ -56,7 +56,7 @@ On constate ici une énorme différence entre les puissances médianes, moyennes
 
 {% image "./images/micro-ondes.jpg" "Photo de mon four à micro-ondes" "512w" %}
 
-Ce four fonctionne en tout ou rien : soit il chauffe, soit il ne chauffe pas. Pour réduire la puisance (moyenne !) de chauffe, il chauffe pendant quelques secondes, puis ne fait "rien" (juste l'éclairage et le plateau tournant fonctionnent) pendant quelques secondes, avant de reprendre un cycle de chauffe.
+Ce four fonctionne en tout ou rien : soit il chauffe, soit il ne chauffe pas. Pour réduire la puissance (moyenne !) de chauffe, il chauffe pendant quelques secondes, puis ne fait "rien" (juste l'éclairage et le plateau tournant fonctionnent) pendant quelques secondes, avant de reprendre un cycle de chauffe.
 
 Voici ce que ça donne sur <a href="{{ "micro-ondes.json.gz" | profilerLink }}?hiddenLocalTracksByPid=0-1w6&markerSearch=Micro-onde&thread=0&v=10">un profil</a> de sa consommation :
 

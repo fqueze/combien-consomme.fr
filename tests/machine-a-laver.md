@@ -13,7 +13,7 @@ Le lave-linge fait partie des gros consommateurs d'eau et d'énergie d'une maiso
 {% intro "lave-linge.jpg" "lave-linge Samsung" %}
 La machine à laver utilisée pour ce test est un modèle Samsung de 7kg. Ni très récente (on l'a achetée d'occasion !), ni très ancienne.
 
-Il y a de nombreux programmes, mais sans bien connaître les différences entre les différents programmes, on a tendence à l'utiliser le plus souvent sur le programme "quotidien" à 40°C. C'est ce que nous testerons aujourd'hui.
+Il y a de nombreux programmes, mais sans bien connaître les différences entre les différents programmes, on a tendance à l'utiliser le plus souvent sur le programme "quotidien" à 40°C. C'est ce que nous testerons aujourd'hui.
 
 ### Méthode de mesure
 
@@ -57,7 +57,7 @@ Regardons cette phase de chauffage de plus près :
 
 {% profile "lave-linge-40-quotidien.json.gz" '{"name": "Phase de chauffage à 40°C", "range": "492618m967669"}' %}
 
-La courbe est presque plate pendant 50s (pendant lesquelle la machine ne fait probablement que remplir le tambour d'eau chaude), puis on observe un comportement cyclique. On peut supposer que la machine continue à chauffer de l'eau tout en faisant tourner le tambour.
+La courbe est presque plate pendant 50s (pendant lesquelles la machine ne fait probablement que remplir le tambour d'eau chaude), puis on observe un comportement cyclique. On peut supposer que la machine continue à chauffer de l'eau tout en faisant tourner le tambour.
 
 Pendant les 16 minutes de chauffage, la machine a consommé {{ 618 | Wh }}, soit environ 84% de l'énergie totale consommée pour toute la lessive {{ 736 | Wh }}.
 
@@ -86,7 +86,7 @@ La consommation maximale ({{ 847 | W }}) de cette phase est assez élevée.
 Voici un profil d'une autre lessive :
 {% profile "lave-linge-prelavage.json.gz" '{"name": "Lessive avec prélavage"}' %}
 
-Je ne me souviens plus exactement du programme utilisé, mais on peut observer qu'il y a 2 phases de chauffe, indicant qu'il y a eu un prélavage.
+Je ne me souviens plus exactement du programme utilisé, mais on peut observer qu'il y a 2 phases de chauffe, indiquant qu'il y a eu un prélavage.
 La première phase de chauffe dure 8 minutes, la deuxième 10. C'est moins que les 16 minutes observées précédemment, donc je suppose que la température était moins élevée.
 
 {% profile "lave-linge-prelavage.json.gz" '{"name": "Essorage", "range": "5240522m413150"}' %}
@@ -97,7 +97,7 @@ La consommation totale et la puissance maximale pendant l'essorage sont moins é
 
 La consommation élevée de la phase de chauffe ne dure pas très longtemps, et peut-être couverte par la production d'une installation photovoltaïque typique de 3kWc.
 
-Pour optimiser l'autoconsommation photovoltaïque, il faudra essayer de lancer la machine quand il y a du soleil, et qu'on espère que le ciel restera dégagé pendant une vingtaine de minutes. Il faudra également s'abstenir de lancer un autre apareil énergivore (plaques de cuisson, four, ...) pendant le début du cycle de lessive. Un bon moment pour lancer sa lessive sera donc le début d'après-midi, juste après le repas, quand on n'a plus de plat à réchauffer ou cuire.
+Pour optimiser l'autoconsommation photovoltaïque, il faudra essayer de lancer la machine quand il y a du soleil, et qu'on espère que le ciel restera dégagé pendant une vingtaine de minutes. Il faudra également s'abstenir de lancer un autre appareil énergivore (plaques de cuisson, four, ...) pendant le début du cycle de lessive. Un bon moment pour lancer sa lessive sera donc le début d'après-midi, juste après le repas, quand on n'a plus de plat à réchauffer ou cuire.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'une machine à laver, on pourrait :

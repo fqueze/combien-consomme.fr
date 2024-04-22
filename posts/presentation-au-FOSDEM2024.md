@@ -11,7 +11,7 @@ J'ai eu l'occasion de présenter mes mesures de consommation dans la salle consa
 
 ### Le FOSDEM
 
-Le FOSDEM est un grand rassemblement de dévelopeurs de logiciels libres qui a lieu tous les ans en février à Bruxelles. De nombreuses conférences permettent d'apprendre des choses sur des sujets très divers liés de près ou d'un peu plus loin au logiciel libre.
+Le FOSDEM est un grand rassemblement de développeurs de logiciels libres qui a lieu tous les ans en février à Bruxelles. De nombreuses conférences permettent d'apprendre des choses sur des sujets très divers liés de près ou d'un peu plus loin au logiciel libre.
 
 ### La salle énergie
 

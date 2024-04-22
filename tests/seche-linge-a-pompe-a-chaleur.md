@@ -30,8 +30,8 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 
 ### Sur un cycle complet
 
-Voici le profil d'un sèchage :
-{% profile "seche-linge-coton.json.gz" '{"name": "Un sèchage au programme « coton »"}' %}
+Voici le profil d'un séchage :
+{% profile "seche-linge-coton.json.gz" '{"name": "Un séchage au programme « coton »"}' %}
 
 Les consommations médianes, moyennes, et maximales sont proches les unes des autres.
 
@@ -70,11 +70,11 @@ L'évolution du taux d'humidité et de la température du linge au cours du cycl
 ### Un cycle plus court
 
 Voici un autre profil de séchage :
-{% profile "seche-linge-cycle-court.json.gz" '{"name": "Un sèchage plus court"}' %}
+{% profile "seche-linge-cycle-court.json.gz" '{"name": "Un séchage plus court"}' %}
 
 Les phases de démarrage et d'arrêt du cycle ressemblent beaucoup à celles du profil étudié précédemment. Sur la phase de chauffage, on peut observer un pic de démarrage à {{ 1346.2 | W }}, qui n'est pas surprenant pour un démarrage de moteur électrique (rotation du tambour).
 
-Je ne me souviens plus exactement si c'était un séchage sur le programme synthétique, ou si j'ai relancé un cycle après avoir trouvé quelques vêtements encore humides à la fin d'un précédent cycle, mais on peut constater que ce cycle n'a duré que 40 inutes, et a utilisé beaucoup moins d'énergie ({{ 248 | Wh }}, contre {{ 789 | Wh }} pour le cycle étudié précédemment ; 3,2 fois moins).
+Je ne me souviens plus exactement si c'était un séchage sur le programme synthétique, ou si j'ai relancé un cycle après avoir trouvé quelques vêtements encore humides à la fin d'un précédent cycle, mais on peut constater que ce cycle n'a duré que 40 minutes, et a utilisé beaucoup moins d'énergie ({{ 248 | Wh }}, contre {{ 789 | Wh }} pour le cycle étudié précédemment ; 3,2 fois moins).
 
 {% profile "seche-linge-cycle-court.json.gz" '{"name": "Phase de chauffe", "range": "134552m2216151"}' %}
 
@@ -90,5 +90,5 @@ Pour comprendre de façon plus détaillée la consommation d'un sèche-linge, on
 - observer l'impact du choix de la vitesse d'essorage de {% test machine-a-laver la machine à laver %} sur la consommation du séchage ;
 - comparer avec d'autres modèles de sèche-linge :
   - un modèle à condensation sans pompe à chaleur ;
-  - un modèle à évacuation, qui jete beaucoup d'air chaud à l'extérieur.
+  - un modèle à évacuation, qui jette beaucoup d'air chaud à l'extérieur.
 {% endplusloin %}

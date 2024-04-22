@@ -11,7 +11,7 @@ Pour réchauffer le lait maternel, l'indispensable chauffe biberon. Combien cons
 
 ## Le matériel
 {% intro "chauffe-biberon.jpg" "Un chauffe biberon BEABA Bib'secondes" %}
-Le modèle testé est un chauffe biberon BEABA Bib'secondes. Une petite quantité d'eau est chauffée jusqu'à ébulition par une résistance électrique, de façon à ce que de la vapeur d'eau passe le long du biberon. Le biberon est ainsi chauffé rapidement par le contact avec de la vapeur d'eau à 100°C.
+Le modèle testé est un chauffe biberon BEABA Bib'secondes. Une petite quantité d'eau est chauffée jusqu'à ébullition par une résistance électrique, de façon à ce que de la vapeur d'eau passe le long du biberon. Le biberon est ainsi chauffé rapidement par le contact avec de la vapeur d'eau à 100°C.
 
 Le chauffage s'arrête avec une minuterie, dont la durée est réglable pour tenir compte de la quantité de lait à réchauffer et de sa température initiale.
 
@@ -40,7 +40,7 @@ Regardons les consommations mesurées :
 Regardons maintenant de plus près ce qu'il se passe lors d'une utilisation :
 {% profile "chauffe-biberon.json.gz" '{"name": "Une utilisation du chauffe biberon", "range": "29253226m120173"}' %}
 
-Le réchauffage dure ici 1 minute et 55 secondes. La consommation est maximale à environ {{ 420 | W }} pendant 1 minute et 50 secondes, puis descent entre 70 et {{ 90 | W }} pendant environ 5 secondes, avant de revenir à l'état de repos.
+Le réchauffage dure ici 1 minute et 55 secondes. La consommation est maximale à environ {{ 420 | W }} pendant 1 minute et 50 secondes, puis descend entre 70 et {{ 90 | W }} pendant environ 5 secondes, avant de revenir à l'état de repos.
    
 ### Pour un bébé
 
@@ -52,6 +52,6 @@ La consommation n'étant pas nulle au repos, il ne faudra pas oublier de débran
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de ce chauffe biberon, on pourrait :
-- mesurer la consommation avec un taux d'échantillonage plus élevé (50Hz au lieu de 1Hz), de façon à voir des détails, comme par exemple l'impact de la sonnerie qui retentit lorsque la chauffe s'arrête.
+- mesurer la consommation avec un taux d'échantillonnage plus élevé (50Hz au lieu de 1Hz), de façon à voir des détails, comme par exemple l'impact de la sonnerie qui retentit lorsque la chauffe s'arrête.
 - mesurer avec différents réglages de la minuterie.
 {% endplusloin %}

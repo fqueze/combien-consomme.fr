@@ -39,7 +39,7 @@ Si on suppose que la consommation mesurée sur 24h ({{ 652 | Wh }}) est représe
 Cette consommation d'énergie étant assez élevée, les utilisateurs qui n'utilisent pas internet tout le temps pourraient envisager de débrancher cette box lorsqu'elle ne sert pas. Par exemple pendant les vacances. Ou pendant la nuit en utilisant un programmateur.
 
 {% plusloin %}
-Pour comprendre de façon plus détaillée la consommation de cette freebox, on pourrait mesurer :
+Pour comprendre de façon plus détaillée la consommation de cette Freebox, on pourrait mesurer :
 - la consommation lors du démarrage.
 - l'impact de différents composants. On pourrait désactiver les machines virtuelles, retirer le disque dur amovible, désactiver le wifi.
 - l'impact de l'utilisation : on pourrait faire pendant quelques minutes un test de débit internet, et voir si cela augmente significativement la consommation.
