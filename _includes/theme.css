@@ -406,9 +406,13 @@ article.list > h1 {
   padding: 0;
 }
 #np > * {
-  width: 50%;
   display: inline-flex;
   vertical-align: top;
+}
+@media (min-width: 576px) {
+  #np > * {
+    width: 50%;
+  }
 }
 #np > a {
   padding: 4px;
