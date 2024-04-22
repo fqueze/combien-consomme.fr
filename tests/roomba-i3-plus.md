@@ -90,6 +90,8 @@ Si l'on prend en compte les passages à la base pour le vidage du bac de poussi�
 
 Il est donc très possible que la consommation lors du nettoyage, même en utilisant la tour de vidage, soit inférieure à la consommation de veille, qui était estimée à {{ 45 | Wh€PerYear }} par an.
 
+Quoi qu'il en soit, le coût de la consommation électrique d'un tel aspirateur reste très inférieur au prix d'achat, même d'occasion.
+
 {% plusloin %}
 On pourrait :
 - aspirer plus de pièces, ce qui augmenterait le temps passé par le robot à faire des aller retour sans aspirer pour aller vider le bac à la base. On verrait ainsi l'influence de la circulation sans aspiration sur la consommation
