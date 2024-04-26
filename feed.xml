@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://combien-consomme.fr">
+<title>combien-consomme.fr</title>
+<subtitle>Visualiser les consommations électriques.</subtitle>
+<link href="https://combien-consomme.fr/feed.xml" rel="self"/>
+<link href="https://combien-consomme.fr"/>
+<updated>2024-04-26T21:43:45Z</updated>
+<id>https://combien-consomme.fr</id>
+<author>
+<name>Florian Quèze</name>
+<email>florian@combien-consomme.fr</email>
+</author>
+<entry>
+ <title>un sèche-linge avec pompe à chaleur</title>
+ <link href="https://combien-consomme.fr/tests/seche-linge-a-pompe-a-chaleur/"/>
+ <updated>2024-04-15T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/seche-linge-a-pompe-a-chaleur/</id>
+ <summary xml:lang="fr" type="html">Le sèche-linge, un appareil qui chauffe, fait partie des gros consommateurs d&#39;énergie d&#39;une maison. Au point qu&#39;il est même souvent recommandé d&#39;étendre son linge sur une corde lorsque la météo le permet. Mythe ou réalité ?</summary>
+</entry>
+<entry>
+ <title>une machine à laver</title>
+ <link href="https://combien-consomme.fr/tests/machine-a-laver/"/>
+ <updated>2024-04-15T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/machine-a-laver/</id>
+ <summary xml:lang="fr" type="html">Le lave-linge fait partie des gros consommateurs d&#39;eau et d&#39;énergie d&#39;une maison. Comment se répartit sa consommation au fil du temps ? Combien coûte une lessive en électricité ?</summary>
+</entry>
+<entry>
+ <title>une tondeuse à gazon</title>
+ <link href="https://combien-consomme.fr/tests/tondeuse-a-gazon/"/>
+ <updated>2024-04-13T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/tondeuse-a-gazon/</id>
+ <summary xml:lang="fr" type="html">Quelle est la consommation d&#39;une tondeuse à gazon électrique ? Combien ça coûte en électricité de tondre sa pelouse ? Est-ce que la consommation varie avec la hauteur de l&#39;herbe ? Regardons ça !</summary>
+</entry>
+<entry>
+ <title>la préparation d&#39;un houmous</title>
+ <link href="https://combien-consomme.fr/tests/mixer-houmous/"/>
+ <updated>2024-04-13T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/mixer-houmous/</id>
+ <summary xml:lang="fr" type="html">Avec le retour des beaux jours, on ressort le houmous et ses bâtonnets de carottes pour l&#39;apéritif. Mais combien consomme la préparation du houmous ?</summary>
+</entry>
+<entry>
+ <title>un chauffe biberon</title>
+ <link href="https://combien-consomme.fr/tests/chauffe-biberon/"/>
+ <updated>2024-04-11T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/chauffe-biberon/</id>
+ <summary xml:lang="fr" type="html">Pour réchauffer le lait maternel, l&#39;indispensable chauffe biberon. Combien consomme-t-il ?</summary>
+</entry>
+<entry>
+ <title>un aspirateur d&#39;atelier</title>
+ <link href="https://combien-consomme.fr/tests/aspirateur-atelier/"/>
+ <updated>2024-04-11T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/aspirateur-atelier/</id>
+ <summary xml:lang="fr" type="html">Un aspirateur puissant pour nettoyer lors d&#39;un chantier, ou pour le bricolage. À quoi ressemble sa consommation ?</summary>
+</entry>
+<entry>
+ <title>une Freebox Delta</title>
+ <link href="https://combien-consomme.fr/tests/freebox-delta/"/>
+ <updated>2024-04-10T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/freebox-delta/</id>
+ <summary xml:lang="fr" type="html">Une connexion internet rapide comme la fibre, mais pour quel coût énergétique ?</summary>
+</entry>
+<entry>
+ <title>un congélateur</title>
+ <link href="https://combien-consomme.fr/tests/congelateur/"/>
+ <updated>2024-04-10T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/congelateur/</id>
+ <summary xml:lang="fr" type="html">Un gros congélateur permet de conserver une grande quantité de nourriture pendant des mois. Quel est le coût de revient ?</summary>
+</entry>
+<entry>
+ <title>Mesurer la consommation avec un module Shelly EM</title>
+ <link href="https://combien-consomme.fr/posts/mesurer-la-consommation-avec-shelly-em/"/>
+ <updated>2024-04-10T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/posts/mesurer-la-consommation-avec-shelly-em/</id>
+ <summary xml:lang="fr" type="html">Le tableau électrique est un point central de l&#39;installation électrique d&#39;une maison, où il est pratique de faire des mesures.</summary>
+</entry>
+<entry>
+ <title>un aspirateur robot Roomba i3 plus</title>
+ <link href="https://combien-consomme.fr/tests/roomba-i3-plus/"/>
+ <updated>2024-03-26T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/roomba-i3-plus/</id>
+ <summary xml:lang="fr" type="html">Un aspirateur connecté est très pratique, mais quelle consommation supplémentaire cause-t-il ?</summary>
+</entry>
+<entry>
+ <title>un four à micro-ondes</title>
+ <link href="https://combien-consomme.fr/tests/four-a-micro-ondes/"/>
+ <updated>2024-03-26T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/four-a-micro-ondes/</id>
+ <summary xml:lang="fr" type="html">Les fours à micro-ondes sont très présents dans nos cuisines. A quoi ressemble leurs consommations ?</summary>
+</entry>
+<entry>
+ <title>Présentation au FOSDEM sur l&#39;utilisation du Firefox Profiler pour profiler l&#39;énergie de ma maison</title>
+ <link href="https://combien-consomme.fr/posts/presentation-au-FOSDEM2024/"/>
+ <updated>2024-03-26T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/posts/presentation-au-FOSDEM2024/</id>
+ <summary xml:lang="fr" type="html">J&#39;ai eu l&#39;occasion de présenter mes mesures de consommation dans la salle consacrée à l&#39;énergie. Cet article partage la vidéo de la conférence.</summary>
+</entry>
+<entry>
+ <title>Mesurer la consommation avec une prise connectée Shelly Plus Plug S</title>
+ <link href="https://combien-consomme.fr/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/"/>
+ <updated>2024-03-26T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/</id>
+ <summary xml:lang="fr" type="html">Une prise connectée est un moyen très simple d&#39;enregistrer un profil de la consommation d&#39;un appareil. Voyons comment faire avec une prise Shelly Plus Plug S.</summary>
+</entry>
+<entry>
+ <title>Quelle puissance mesurer ?</title>
+ <link href="https://combien-consomme.fr/posts/quelle-puissance-mesurer/"/>
+ <updated>2024-02-10T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/posts/quelle-puissance-mesurer/</id>
+ <summary xml:lang="fr" type="html">Sur combien-consomme.fr, on parle beaucoup de puissance. Cet article vise à clarifier le lien entre puissance et consommation, indiquer quelles sont les différentes puissantes mesurables, et dans quels cas elles nous intéressent.</summary>
+</entry>
+</feed>
