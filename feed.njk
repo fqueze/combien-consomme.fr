@@ -1,0 +1,36 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+metadata:
+  title: combien-consomme.fr
+  subtitle: Visualiser les consommations électriques.
+  author:
+    name: Florian Quèze
+    email: florian@combien-consomme.fr
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ site.url }}">
+<title>{{ metadata.title }}</title>
+<subtitle>{{ metadata.subtitle }}</subtitle>
+<link href="{{ permalink | absoluteUrl(site.url) }}" rel="self"/>
+<link href="{{ site.url }}"/>
+<updated>{{
+  collections.posts | getNewestCollectionItemDate | dateToRfc3339
+}}</updated>
+<id>{{ site.url }}</id>
+<author>
+<name>{{ metadata.author.name }}</name>
+<email>{{ metadata.author.email }}</email>
+</author>
+{%- for post in collections.testsAndPosts | reverse | limit(20) %}{%- set absolutePostUrl = post.url | absoluteUrl(site.url) %}
+<entry>
+ <title>{{ post.data.title }}</title>
+ <link href="{{ absolutePostUrl }}"/>
+ <updated>{{ post.date | dateToRfc3339 }}</updated>
+ <id>{{ absolutePostUrl }}</id>
+ <summary xml:lang="{{ site.language }}" type="html">{{
+   post.page.excerpt | trim | htmlToAbsoluteUrls(absolutePostUrl)
+ }}</summary>
+</entry>
+{%- endfor %}
+</feed>

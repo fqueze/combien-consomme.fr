@@ -9,6 +9,7 @@ const purgeHtml = require("purgecss-from-html");
 const htmlmin = require("html-minifier");
 const Image = require("@11ty/eleventy-img");
 const UglifyJS = require("uglify-js");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 const isDev = process.env.ELEVENTY_ENV === 'dev';
 const baseUrl = isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr';
@@ -199,6 +200,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("profiles");
+
+  eleventyConfig.addCollection("testsAndPosts", function(collectionApi) {
+    return collectionApi.getFilteredByGlob(["posts/*.md", "tests/*.md"]);
+  });
+
+  eleventyConfig.addPlugin(pluginRss);
 
   eleventyConfig.addTransform("htmlmin", async function(content) {
     // Prior to Eleventy 2.0: use this.outputPath instead

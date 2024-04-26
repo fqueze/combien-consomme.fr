@@ -18,6 +18,9 @@
     <meta name="twitter:image" content="{% img img | url %}">
 {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% if linkFeed %}
+    <link rel="alternate" type="application/atom+xml" href="{{ '/feed.xml' | url }}" title="Tous les contenus de combien-consomme.fr">
+{% endif %}
 {#
     <meta name="msapplication-config" content="/browserconfig.xml"><link rel="manifest" href="/site.webmanifest">
 
