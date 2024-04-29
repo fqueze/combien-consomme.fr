@@ -52,18 +52,18 @@ Voici ce que ça donne sur <a href="{{ "congelateur.json.gz" | profilerLink }}?h
 
 On constate ici une énorme différence entre les puissances médianes, moyennes et maximales. La puissance moyenne n'est proche d'aucune valeur du graphique.
 
-### Four à micro-onde en mode décongélation.
+### {% test four-a-micro-ondes Four à micro-onde %} en mode décongélation
 
 {% image "./images/micro-ondes.jpg" "Photo de mon four à micro-ondes" "512w" %}
 
-Ce four fonctionne en tout ou rien : soit il chauffe, soit il ne chauffe pas. Pour réduire la puissance (moyenne !) de chauffe, il chauffe pendant quelques secondes, puis ne fait "rien" (juste l'éclairage et le plateau tournant fonctionnent) pendant quelques secondes, avant de reprendre un cycle de chauffe.
+Ce four fonctionne en tout ou rien : soit il chauffe, soit il ne chauffe pas. Pour réduire la puissance (moyenne !) de chauffe lorsqu'il est en mode décongélation, il chauffe pendant quelques secondes, puis ne fait "rien" (juste l'éclairage, la ventilation et le plateau tournant fonctionnent) pendant quelques secondes, avant de reprendre un cycle de chauffe.
 
-Voici ce que ça donne sur <a href="{{ "micro-ondes.json.gz" | profilerLink }}?hiddenLocalTracksByPid=0-1w6&markerSearch=Micro-onde&thread=0&v=10">un profil</a> de sa consommation :
+Voici ce que ça donne sur un profil de sa consommation :
 
-{% profile "micro-ondes.json.gz" %}
+{% profile "micro-ondes.json.gz" '{"name": "Four à micro-ondes en mode décongelation", "range": "114562m291240"}' %}
 
 Ici, la puissance moyenne est intéressante, elle correspond à la valeur qu'on pourrait retrouver sur des emballage d'aliments qui indiquent « Réchauffer au four à micro-onde à {{ 600 | W }} ».
 
 La puissance maximale, qui est la puissance utilisée lorsque le four chauffe, est celle qu'une installation photovoltaïque devrait fournir pour pouvoir couvrir la consommation électrique de ce four.
 
-Pour cet exemple, la puissance médiane n'a aucun intérêt.
+Pour cet exemple, la puissance médiane n'a pas grand intérêt.
