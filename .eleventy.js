@@ -1,15 +1,13 @@
-const moment = require('moment');
-
-const fs = require("fs");
-const zlib = require('zlib');
-const {parser} = require('stream-json');
-const CleanCSS = require("clean-css");
-const PurgeCSS = require("purgecss").PurgeCSS;
-const purgeHtml = require("purgecss-from-html");
-const htmlmin = require("html-minifier");
-const Image = require("@11ty/eleventy-img");
-const UglifyJS = require("uglify-js");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
+import moment from 'moment';
+import fs from 'fs';
+import zlib from 'zlib';
+import CleanCSS from "clean-css";
+import {PurgeCSS} from "purgecss";
+import purgeHtml from "purgecss-from-html";
+import htmlmin from "html-minifier";
+import Image from "@11ty/eleventy-img";
+import UglifyJS from "uglify-js";
+import pluginRss from "@11ty/eleventy-plugin-rss";
 
 const isDev = process.env.ELEVENTY_ENV === 'dev';
 const baseUrl = isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr';
@@ -197,7 +195,7 @@ async function image(src, alt, sizes, width, lazy = true) {
   return Image.generateHTML(metadata, imageAttributes);
 }
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("img");
@@ -217,7 +215,7 @@ module.exports = function (eleventyConfig) {
         .replace(/'/g, "’")
         .replace(/\.\.\./g, "…");
 
-      let css = require("fs").readFileSync("_includes/theme.css", {
+      let css = fs.readFileSync("_includes/theme.css", {
         encoding: "utf-8",
       });
       let purgeResult = await new PurgeCSS().purge({
@@ -558,4 +556,4 @@ module.exports = function (eleventyConfig) {
       next();
     }],
   });
-};
+}
