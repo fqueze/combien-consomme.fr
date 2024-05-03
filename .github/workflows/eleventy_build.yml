@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
-      - run: npm run build
+      - run: PROFILE=stdout npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
