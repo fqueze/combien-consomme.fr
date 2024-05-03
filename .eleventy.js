@@ -152,10 +152,13 @@ function getStatsFromCounterSamples(profile, samples, range = "", keepAllSamples
     powerValues.splice(-removeCount, removeCount);
   }
   let values = powerValues.slice();
-  powerValues.sort((a, b) => a - b);
+  powerValues.sort(function compare(a, b) { return a - b; });
 
   let durationMs = Math.min(end, time(lastSample)) - time(firstSample);
-  let energyWh = samples.count.slice(firstSample, lastSample + 1).reduce((acc, val) => acc + val) / 1e12;
+  let energyWh = samples.count.slice(firstSample, lastSample + 1).reduce(function sampleReducer(acc, val) {
+    return acc + val;
+  }) / 1e12;
+
   let stats = {
     durationMs, energyWh,
     medianPowerW: powerValues[Math.floor(powerValues.length / 2)],
@@ -201,13 +204,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("profiles");
 
-  eleventyConfig.addCollection("testsAndPosts", function(collectionApi) {
+  eleventyConfig.addCollection("testsAndPosts", function testsAndPostsCollection(collectionApi) {
     return collectionApi.getFilteredByGlob(["posts/*.md", "tests/*.md"]);
   });
 
   eleventyConfig.addPlugin(pluginRss);
 
-  eleventyConfig.addTransform("htmlmin", async function(content) {
+  eleventyConfig.addTransform("htmlmin", async function htmlMinTransform(content) {
     // Prior to Eleventy 2.0: use this.outputPath instead
     if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
       content = content.replace(/ ([!?:;»])/g, nbsp + "$1")
@@ -375,7 +378,7 @@ module.exports = function (eleventyConfig) {
     };
   });
 
-  eleventyConfig.addShortcode("profile", async function(profile, options) {
+  eleventyConfig.addShortcode("profile", async function profileShortcode(profile, options) {
     options = options ? JSON.parse(options) : {};
     const graphHeight = 120;
     const graphWidth = 2400;
@@ -503,9 +506,11 @@ module.exports = function (eleventyConfig) {
       if (values.length == 0) {
         throw new Error(`No sample in range, profile: ${profile}, options=${JSON.stringify(options)}`);
       }
-      let graph = values.map((v, i) => ({
-        x: (samples.time[firstSample + i] - samples.time[firstSample]) / stats.durationMs,
-        y: v / stats.maxPowerW}));
+      let graph = values.map(function xAndYFromValues(v, i) {
+        return ({
+          x: (samples.time[firstSample + i] - samples.time[firstSample]) / stats.durationMs,
+          y: v / stats.maxPowerW});
+      });
       let svg = `<div><svg viewBox="0 0 ${graphWidth} ${graphHeight}">`
           + `<path d="${makeSVGPath(graph)}"/>`
           + `</svg></div>`;
