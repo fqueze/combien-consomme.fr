@@ -1,3 +1,4 @@
+import Profiler from '11ty-fx-profiler';
 import moment from 'moment';
 import fs from 'fs';
 import zlib from 'zlib';
@@ -196,6 +197,8 @@ async function image(src, alt, sizes, width, lazy = true) {
 }
 
 export default function (eleventyConfig) {
+  Profiler(eleventyConfig);
+
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("img");

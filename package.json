@@ -9,6 +9,7 @@
     "build": "npx eleventy",
     "serve": "ELEVENTY_ENV=dev npx eleventy --serve",
     "debug": "DEBUG=* npx eleventy",
+    "bench": "PROFILE=open npx eleventy",
     "profile": "node --cpu-prof --cpu-prof-name 11ty.nodeprofile node_modules/.bin/eleventy && samply load 11ty.nodeprofile",
     "samply": "samply record node --perf-basic-prof node_modules/.bin/eleventy"
   },
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@11ty/eleventy-img": "^4.0.2",
+    "11ty-fx-profiler": "^1.0.0",
     "clean-css": "^5.3.3",
     "html-minifier": "^4.0.0",
     "moment": "^2.30.1",
