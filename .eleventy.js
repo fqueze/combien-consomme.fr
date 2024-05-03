@@ -106,7 +106,7 @@ function getStatsFromCounterSamples(profile, samples, range = "", keepAllSamples
   let start = -Infinity;
   let end = Infinity;
   if (range) {
-    [v1, v2] = range.split("m");
+    let [v1, v2] = range.split("m");
     if (v1) {
       start = parseInt(v1);
     }
@@ -142,8 +142,7 @@ function getStatsFromCounterSamples(profile, samples, range = "", keepAllSamples
     if (samples.count[i] || keepAllSamples) {
       lastSample = i;
     }
-    power = Math.round(samples.count[i] / ((i == 0 ? profile.meta.interval : (samples.time[i] - samples.time[i - 1])) / 3600)) / 1e9;
-    powerValues.push(power);
+    powerValues.push(Math.round(samples.count[i] / ((i == 0 ? profile.meta.interval : (samples.time[i] - samples.time[i - 1])) / 3600)) / 1e9);
   }
 
   // Remove trailing 0s that could affect the median.
