@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-04-26T21:43:45Z</updated>
+<updated>2024-05-03T19:03:34Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une meuleuse d&#39;angle pour couper du carrelage</title>
+ <link href="https://combien-consomme.fr/tests/meuleuse-d&#39;angle-carrelage/"/>
+ <updated>2024-05-03T19:03:27Z</updated>
+ <id>https://combien-consomme.fr/tests/meuleuse-d&#39;angle-carrelage/</id>
+ <summary xml:lang="fr" type="html">Quelle est la consommation d&#39;une meuleuse d&#39;angle pour couper un morceau de carrelage ? Sauf si on fait régulièrement des travaux de carrelage, c&#39;est une opération peu fréquente ; mais combien ça consomme ?</summary>
+</entry>
 <entry>
  <title>un sèche-linge avec pompe à chaleur</title>
  <link href="https://combien-consomme.fr/tests/seche-linge-a-pompe-a-chaleur/"/>
@@ -85,7 +92,7 @@
  <link href="https://combien-consomme.fr/tests/four-a-micro-ondes/"/>
  <updated>2024-03-26T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/four-a-micro-ondes/</id>
- <summary xml:lang="fr" type="html">Les fours à micro-ondes sont très présents dans nos cuisines. A quoi ressemble leurs consommations ?</summary>
+ <summary xml:lang="fr" type="html">Les fours à micro-ondes sont très présents dans nos cuisines. A quoi ressemblent leurs consommations ?</summary>
 </entry>
 <entry>
  <title>Présentation au FOSDEM sur l&#39;utilisation du Firefox Profiler pour profiler l&#39;énergie de ma maison</title>
