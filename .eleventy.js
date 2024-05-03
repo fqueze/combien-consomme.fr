@@ -21,6 +21,8 @@ const priceTooltip = `Tarif EDF option Base (Février 2024), ${pricePerKWh} € 
 
 const nbsp = "&nbsp;";
 
+var UserBenchmarks;
+
 function formatDuration(timeMs) {
   let result = "";
   let timeS = timeMs / 1000;
@@ -82,6 +84,9 @@ function formatCost(energyWh) {
 }
 
 async function loadProfile(profile) {
+  const b = UserBenchmarks.get("> profile > load: " + profile);
+  b.before();
+
   function streamToString (stream) {
     const buffers = [];
     return new Promise((resolve, reject) => {
@@ -90,11 +95,18 @@ async function loadProfile(profile) {
       stream.on('end', () => resolve(Buffer.concat(buffers).toString('utf8')));
     });
   }
-  return JSON.parse(await streamToString(fs.createReadStream('./profiles/' + profile)
-                                           .pipe(zlib.createGunzip())));
+  let rv = JSON.parse(await streamToString(fs.createReadStream('./profiles/' + profile)
+                                             .pipe(zlib.createGunzip())));
+
+  b.after();
+  return rv
 }
 
-function getStatsFromCounterSamples(profile, samples, range = "", keepAllSamples = false) {
+function getStatsFromCounterSamples(profileStringId, profile, samples, range = "",
+                                    keepAllSamples = false) {
+  const b = UserBenchmarks.get("> profile > stats: " + profileStringId);
+  b.before();
+
   const profilingStartTime = profile.meta.profilingStartTime || 0;
   function time(i) {
     return Math.max(0, samples.time[i] - profilingStartTime);
@@ -163,6 +175,8 @@ function getStatsFromCounterSamples(profile, samples, range = "", keepAllSamples
     maxPowerW: powerValues[powerValues.length - 1],
     averagePowerW: energyWh / (durationMs / 3600000)
   };
+
+  b.after();
   return {stats, firstSample, lastSample, values};
 }
 
@@ -171,6 +185,9 @@ function profilerLink(profile) {
 }
 
 async function image(src, alt, sizes, width, lazy = true) {
+  const b = UserBenchmarks.get("> image > " + src + (width ? " (" + width + "px)" : ""));
+  b.before();
+
   const imageOptions = {
     formats: ["avif", "jpeg", "svg"],
     svgShortCircuit: true,
@@ -193,11 +210,16 @@ async function image(src, alt, sizes, width, lazy = true) {
   }
 
   // You bet we throw an error on a missing alt (alt="" works okay)
-  return Image.generateHTML(metadata, imageAttributes);
+  let rv = Image.generateHTML(metadata, imageAttributes);
+
+  b.after();
+  return rv;
 }
 
 export default function (eleventyConfig) {
   Profiler(eleventyConfig);
+  // Start the category name with a space so it sorts before "Aggregate".
+  UserBenchmarks = eleventyConfig.benchmarkManager.get(" User");
 
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("fonts");
@@ -210,17 +232,23 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPlugin(pluginRss);
 
+  const fullCss = fs.readFileSync("_includes/theme.css", {
+    encoding: "utf-8",
+  });
   eleventyConfig.addTransform("htmlmin", async function htmlMinTransform(content) {
     // Prior to Eleventy 2.0: use this.outputPath instead
     if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
+      const b = UserBenchmarks.get("> htmlmin > " + this.page.outputPath);
+      b.before();
+
       content = content.replace(/ ([!?:;»])/g, nbsp + "$1")
         .replace(/« /g, "«" + nbsp)
         .replace(/'/g, "’")
         .replace(/\.\.\./g, "…");
 
-      let css = fs.readFileSync("_includes/theme.css", {
-        encoding: "utf-8",
-      });
+      let bCss = UserBenchmarks.get("> htmlmin > PurgeCSS: " + this.page.outputPath);
+      bCss.before();
+
       let purgeResult = await new PurgeCSS().purge({
         extractors: [
           {
@@ -236,18 +264,21 @@ export default function (eleventyConfig) {
         ],
         css: [
           {
-            raw: css,
+            raw: fullCss,
           },
         ],
       });
+      bCss.after();
 
-      css = new CleanCSS({}).minify(purgeResult[0].css).styles;
-      content = content.replace("</head>", `<style>${css}</style></head>`);
+      const cleanCss = new CleanCSS({}).minify(purgeResult[0].css).styles;
+      content = content.replace("</head>", `<style>${cleanCss}</style></head>`);
 
       content = htmlmin.minify(content, {
         removeComments: true,
         collapseWhitespace: true,
       });
+
+      b.after();
     }
 
     return content;
@@ -273,7 +304,7 @@ export default function (eleventyConfig) {
     return new CleanCSS({}).minify(code).styles;
   });
 
-  eleventyConfig.addFilter("jsmin", function(code) {
+  eleventyConfig.addFilter("jsmin", function jsmin(code) {
     let minified = UglifyJS.minify(code);
     if (minified.error) {
       console.log("UglifyJS error: ", minified.error);
@@ -301,6 +332,9 @@ export default function (eleventyConfig) {
 
   // Used for meta og:image and twitter:image
   eleventyConfig.addShortcode("img", async function(src) {
+    const b = UserBenchmarks.get("> img > " + src);
+    b.before();
+
     const imageOptions = {
       formats: ["jpeg"],
       outputDir: "./_site/img/",
@@ -308,6 +342,8 @@ export default function (eleventyConfig) {
     };
 
     let metadata = await Image("./images/" + src, imageOptions);
+
+    b.after();
     return metadata.jpeg[0].url;
   });
 
@@ -379,11 +415,18 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addShortcode("profile", async function profileShortcode(profile, options) {
+    const profileStringId = profile + (options ? " " + options : "");
+    const b = UserBenchmarks.get("> profile > " + profileStringId);
+    b.before();
+
     options = options ? JSON.parse(options) : {};
     const graphHeight = 120;
     const graphWidth = 2400;
     const halfStrokeWidth = 3;
     function makeSVGPath(graph) {
+      const b = UserBenchmarks.get("> profile > SVG path: " + profileStringId);
+      b.before();
+
       let lastLetter = "";
       function letter(l) {
         if (l == lastLetter) {
@@ -474,6 +517,7 @@ export default function (eleventyConfig) {
       // Move down to ${graphHeight} to ensure the filled area is correct.
       appendShorterV(graphHeight);
 
+      b.after();
       return path;
     }      
 
@@ -499,7 +543,8 @@ export default function (eleventyConfig) {
       result += `<div class="profile">`
     }
     for (let {name, description, samples} of counters) {
-      let {stats, firstSample, lastSample, values} = getStatsFromCounterSamples({meta}, samples, options.range, multiCounters);
+      let {stats, firstSample, lastSample, values} =
+        getStatsFromCounterSamples(profileStringId, {meta}, samples, options.range, multiCounters);
       if (options.debug) {
         console.log(profile, options, stats);
       }
@@ -542,6 +587,7 @@ export default function (eleventyConfig) {
       result += `</div>`;
     }
 
+    b.after();
     return result;
   });
 
