@@ -19,7 +19,7 @@ Elle m'a servi une fois pour faire une saignée dans un mur en briques pour y in
 
 ### Méthode de mesure
 
-La tondeuse est branchée sur {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %} qui permet de mesurer sa consommation.
+La meuleuse est branchée sur {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %} qui permet de mesurer sa consommation.
 
 La puissance instantanée est collectée et enregistrée une fois par seconde.
 {% endintro %}
@@ -53,7 +53,7 @@ Le pic de démarrage est plus visible ici, et la consommation maximale mesurée 
 {% image "./images/meuleuse-etiquette.jpg" "Etiquette de la meuleuse d'angle Parkside PWS 125 B2" "512w" 512 %}
 
 
-### A vide
+### À vide
 
 Avant de commencer mes coupes, j'ai d'abord allumé pendant un bref instant la meuleuse pour vérifier qu'elle était bien branchée, et qu'elle fonctionnait correctement. Bien sûr, ça se voit sur mon enregistrement !
 
