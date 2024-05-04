@@ -2,7 +2,7 @@
   font-family: 'Bai Jamjuree';
   font-style: normal;
   font-weight: 400;
-  font-display: optional;
+  font-display: block;
   src: url(/fonts/BaiJamjuree.woff) format('woff2');
 }
 @font-face {
