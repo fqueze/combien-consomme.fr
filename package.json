@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx eleventy",
-    "serve": "ELEVENTY_ENV=dev npx eleventy --serve",
+    "serve": "ELEVENTY_ENV=dev npx eleventy --serve --incremental",
     "debug": "DEBUG=* npx eleventy",
     "bench": "PROFILE=open npx eleventy",
     "profile": "node --cpu-prof --cpu-prof-name 11ty.nodeprofile node_modules/.bin/eleventy && samply load 11ty.nodeprofile",

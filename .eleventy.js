@@ -231,6 +231,7 @@ export default function (eleventyConfig) {
   // Start the category name with a space so it sorts before "Aggregate".
   UserBenchmarks = eleventyConfig.benchmarkManager.get(" User");
 
+  eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("img");
