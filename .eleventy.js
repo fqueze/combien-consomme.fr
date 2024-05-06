@@ -83,7 +83,13 @@ function formatCost(energyWh) {
   return `<span title="${priceTooltip}">${formattedValue}</span>`;
 }
 
+const profileCache = new Map();
+
 async function loadProfile(profile) {
+  if (profileCache.has(profile)) {
+    return profileCache.get(profile);
+  }
+
   const b = UserBenchmarks.get("> profile > load: " + profile);
   b.before();
 
@@ -95,11 +101,15 @@ async function loadProfile(profile) {
       stream.on('end', () => resolve(Buffer.concat(buffers).toString('utf8')));
     });
   }
-  let rv = JSON.parse(await streamToString(fs.createReadStream('./profiles/' + profile)
-                                             .pipe(zlib.createGunzip())));
 
-  b.after();
-  return rv
+  let promise = new Promise(async function(resolve) {
+    let rv = JSON.parse(await streamToString(fs.createReadStream('./profiles/' + profile)
+                                               .pipe(zlib.createGunzip())));
+    b.after();
+    resolve(rv);
+  });
+  profileCache.set(profile, promise);
+  return promise;
 }
 
 function getStatsFromCounterSamples(profileStringId, profile, samples, range = "",
