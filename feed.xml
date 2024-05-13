@@ -4,7 +4,7 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-05-06T22:01:51Z</updated>
+<updated>2024-05-13T19:16:14Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
@@ -13,7 +13,7 @@
 <entry>
  <title>une meuleuse d&#39;angle pour couper du carrelage</title>
  <link href="https://combien-consomme.fr/tests/meuleuse-d&#39;angle-carrelage/"/>
- <updated>2024-05-06T22:01:45Z</updated>
+ <updated>2024-05-13T19:16:08Z</updated>
  <id>https://combien-consomme.fr/tests/meuleuse-d&#39;angle-carrelage/</id>
  <summary xml:lang="fr" type="html">Quelle est la consommation d&#39;une meuleuse d&#39;angle pour couper un morceau de carrelage ? Sauf si on fait régulièrement des travaux de carrelage, c&#39;est une opération peu fréquente ; mais combien ça consomme ?</summary>
 </entry>
@@ -29,7 +29,7 @@
  <link href="https://combien-consomme.fr/tests/machine-a-laver/"/>
  <updated>2024-04-15T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/machine-a-laver/</id>
- <summary xml:lang="fr" type="html">Le lave-linge fait partie des gros consommateurs d&#39;eau et d&#39;énergie d&#39;une maison. Comment se répartit sa consommation au fil du temps ? Combien coûte une lessive en électricité ?</summary>
+ <summary xml:lang="fr" type="html">Le lave-linge fait partie des gros consommateurs d&#39;eau et d&#39;énergie d&#39;une maison. Comment se répartit sa consommation au fil du temps ? Le lave-linge consomme-t-il plus pendant le chauffage ou l&#39;essorage ? Combien coûte une lessive en électricité ?</summary>
 </entry>
 <entry>
  <title>une tondeuse à gazon</title>
