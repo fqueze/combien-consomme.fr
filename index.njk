@@ -32,7 +32,7 @@ linkFeed: true
   <h2><a href="{{ '/tests/' | url }}">Objets testés</a></h2>
   <div>
 {% for test in collections.test | reverse | limit(6) %}
-    <a href="{{ test.url | url }}" title="{{ test.data.pagetitle }}">{% image "./images/" + test.data.img, "Image représentant " + test.data.title, "392w", 392 %}</a>
+    <a href="{{ test.url | url }}"><h3>{{ test.data.pagetitle }}</h3>{% image "./images/" + test.data.img, "Image représentant " + test.data.title, "392w", 392 %}</a>
 {% endfor %}
   </div>
 </div>
