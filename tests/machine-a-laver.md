@@ -6,7 +6,7 @@ date: 2024-04-15
 tags: ['test']
 ---
 
-Le lave-linge fait partie des gros consommateurs d'eau et d'énergie d'une maison. Comment se répartit sa consommation au fil du temps ? Combien coûte une lessive en électricité ?
+Le lave-linge fait partie des gros consommateurs d'eau et d'énergie d'une maison. Comment se répartit sa consommation au fil du temps ? Le lave-linge consomme-t-il plus pendant le chauffage ou l'essorage ? Combien coûte une lessive en électricité ?
 <!-- excerpt -->
 
 ## Le matériel
@@ -92,6 +92,18 @@ La première phase de chauffe dure 8 minutes, la deuxième 10. C'est moins que l
 {% profile "lave-linge-prelavage.json.gz" '{"name": "Essorage", "range": "5240522m413150"}' %}
 
 La consommation totale et la puissance maximale pendant l'essorage sont moins élevées. Peut-être un essorage à 1200 tr/min au lieu de 1400 ?
+
+### Chauffage à 30°C au lieu de 40°C
+
+Puisque le chauffage de l'eau domine la consommation électrique d'une lessive, regardons l'impact sur la consommation lorsqu'on réduit la température. Voici un profil d'une lessive au programme « Quotidien » mais réglé cette fois à 30°C :
+
+{% profile "lave-linge-30-quotidien.json.gz" '{"name": "Une lessive au programme « quotidien » à 30°C"}' %}
+
+Le profil est très similaire à celui de la lessive au programme « quotidien » à 40°C, mais la durée totale est un peu plus courte, et le temps de chauffage de l'eau est très réduit :
+
+{% profile "lave-linge-30-quotidien.json.gz" '{"name": "Chauffage lors d\'un lavage à 30°C", "range": "396822m362759"}' %}
+
+Le chauffage dure 6 minutes au lieu de 16, avec une consommation de {{ 230 | Wh }} au lieu de {{ 618 | Wh }} (réduction de 63%). La consommation pour la totalité de la lessive passe de {{ 736 | Wh€ }} à {{ 348 | Wh€ }}, soit une réduction de 53%.
 
 ### Conseils pour l'autoconsommation photovoltaïque
 
