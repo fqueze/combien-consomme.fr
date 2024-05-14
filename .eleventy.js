@@ -254,7 +254,7 @@ export default function (eleventyConfig) {
 
       content = content.replace(/ ([!?:;»])/g, nbsp + "$1")
         .replace(/« /g, "«" + nbsp)
-        .replace(/'/g, "’")
+        .replace(/([^-].)'/g, "$1’") // avoid replacing ' in urls where spaces are replaced with -.
         .replace(/\.\.\./g, "…");
 
       let bCss = UserBenchmarks.get("> htmlmin > PurgeCSS: " + this.page.outputPath);
@@ -367,8 +367,8 @@ export default function (eleventyConfig) {
     return `<div id="intro"><div>${content}</div>${img}</div>`;
   });
 
-  eleventyConfig.addPairedShortcode("plusloin", function(content) {
-    return `<div id="plusloin"><h2>Pour aller plus loin</h2>\n${content}</div>`;
+  eleventyConfig.addPairedShortcode("plusloin", function(content, title="Pour aller plus loin") {
+    return `<div id="plusloin"><h2>${title}</h2>\n${content}</div>`;
   });
 
   eleventyConfig.addLiquidTag("test", function (liquidEngine) {
