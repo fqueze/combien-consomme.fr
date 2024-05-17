@@ -2,6 +2,7 @@
 layout: test-layout.njk 
 title: une meuleuse d'angle pour couper du carrelage
 img: meuleuse.jpg
+date: 2024-04-28
 tags: ['test']
 ---
 
