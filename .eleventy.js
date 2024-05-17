@@ -30,7 +30,11 @@ function formatDuration(timeMs) {
     result = Math.round(timeS % 60) + "s";
     let timeMin = Math.floor(timeS / 60);
     if (timeMin > 60) {
-      result = Math.floor(timeMin / 60) + "h" + (timeMin % 60) + "min";
+      result = Math.floor(timeMin / 60) + "h";
+      let min = timeMin % 60;
+      if (min) {
+        result += min + "min";
+      }
     } else {
       result = timeMin + "min" + result;
     }
@@ -78,9 +82,13 @@ function formatCost(energyWh) {
   }
   let costEuro = energyWh * pricePerKWh / 1000;
   let formattedValue = costEuro < 1 ?
-      fixed(costEuro * 100) + nbsp + "c€"
+      (costEuro < 0.0001 ? "&lt; " + fixed(0.01) : fixed(costEuro * 100)) + nbsp + "c€"
     : fixed(costEuro) + nbsp + "€";
-  return `<span title="${priceTooltip}">${formattedValue}</span>`;
+  let tooltip = priceTooltip;
+  if (isDev) {
+    tooltip = costEuro + "€ — " + tooltip;
+  }
+  return `<span title="${tooltip}">${formattedValue}</span>`;
 }
 
 const profileCache = new Map();
