@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-05-17T21:46:06Z</updated>
+<updated>2024-05-18T21:46:12Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un ouvre-boîtes électrique</title>
+ <link href="https://combien-consomme.fr/tests/ouvre-boites-electrique/"/>
+ <updated>2024-05-18T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/ouvre-boites-electrique/</id>
+ <summary xml:lang="fr" type="html">Mamie en avait un et ça avait l&#39;air trop bien ! Maman n&#39;en voulait pas ; il paraît que c&#39;était inutile et consommait de l&#39;électricité pour rien. Combien maman a-t-elle économisé en ouvrant ses boîtes de conserve à la main ?</summary>
+</entry>
 <entry>
  <title>un hydropulseur dentaire</title>
  <link href="https://combien-consomme.fr/tests/hydropulseur-dentaire/"/>
