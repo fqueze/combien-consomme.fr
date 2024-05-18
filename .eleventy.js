@@ -348,6 +348,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('Wh€', function(energyWh) {
     return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
   });
+  eleventyConfig.addFilter('countPer€', function(energyWh, euro = 1) {
+    return Math.round(euro / (energyWh / 1000 * pricePerKWh));
+  });
 
   // Used for meta og:image and twitter:image
   eleventyConfig.addShortcode("img", async function(src) {
