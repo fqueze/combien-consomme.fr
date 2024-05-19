@@ -73,17 +73,21 @@ function formatEnergy(energyWh) {
   return toPrecisionIfNotInt(energyWh) + nbsp + "Wh";
 }
 
-function formatCost(energyWh) {
+function formatEuro(costEuro) {
   function fixed(number) {
     return number.toLocaleString("fr", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
   }
-  let costEuro = energyWh * pricePerKWh / 1000;
-  let formattedValue = costEuro < 1 ?
+  return costEuro < 1 ?
       (costEuro < 0.0001 ? "&lt; " + fixed(0.01) : fixed(costEuro * 100)) + nbsp + "c€"
     : fixed(costEuro) + nbsp + "€";
+}
+
+function formatCost(energyWh) {
+  let costEuro = energyWh * pricePerKWh / 1000;
+  let formattedValue = formatEuro(costEuro);
   let tooltip = priceTooltip;
   if (isDev) {
     tooltip = costEuro + "€ — " + tooltip;
@@ -335,6 +339,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addFilter('profilerLink', profilerLink);
 
+  eleventyConfig.addFilter('€', formatEuro);
   eleventyConfig.addFilter('W', formatPower);
   eleventyConfig.addFilter('Wh', formatEnergy);
   eleventyConfig.addFilter('Wh€PerYear', function(energyWhPerDay) {
