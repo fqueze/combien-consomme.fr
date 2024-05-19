@@ -28,17 +28,18 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 Commençons par regarder le profil d'une utilisation typique :
 {% profile "hydropulseur.json.gz" '{"name": "Une utilisation normale", "range": "30738628m44128"}' %}
 
-Utilisation à force 4 pendant une 40aine de secondes. Juste le temps pour nettoyer rapidement tous les espaces interdentaires. On voit la puissance mesurée qui augmente au démarrage pendant quelques secondes avant de se stabiliser jusqu'à l'arrêt. Le coût total en électricité est négligeable.
+Utilisation à force 4 pendant une 40aine de secondes. Juste le temps pour nettoyer rapidement tous les espaces interdentaires. On voit la puissance mesurée qui augmente au démarrage pendant quelques secondes avant de se stabiliser jusqu'à l'arrêt. Le coût total en électricité est négligeable (il faudrait {{ 0.149 | countPer€: 0.01 }} lavages de ce type pour dépenser un centime d'euro en électricité).
 
 Voici un profil d'une utilisation plus longue :
 {% profile "hydropulseur.json.gz" '{"name": "Cuve complète (600mL) force 4", "range": "421873m145428"}' %}
 
-Ici la cuve (de 600mL) était entièrement pleine, et l'hydropulseur est resté en fonctionnement pendant plus de 2 minutes jusqu'à ce qu'elle soit vide. Au bout de 2min10s, la cuve était vide, et le moteur a changé de bruit. 
+Ici la cuve (de 600mL) était entièrement pleine, et l'hydropulseur est resté en fonctionnement pendant plus de 2 minutes jusqu'à ce qu'elle soit vide.
+La consommation mesurée pour le vidage total de la cuve est de {{ 0.523 | Wh }} ; il faudrait {{ 0.523 | countPer€: 0.01 }} vidages complets de la cuve pour dépenser un centime d'euro en électricité.
 
-Zoomons sur la fin lorsque la cuve s'est vidée :
+Au bout de 2min10s, lorsque la cuve s'est vidée, le moteur a changé de bruit :
 {% profile "hydropulseur.json.gz" '{"name": "Lorsque la cuve devient vide", "range": "552945m14356"}' %}
 
-On observe une baisse de la puissance consommée, passant en 2 secondes de {{ 13.8 | W }} à {{ 6.4 | W }}.
+On observe une baisse de la puissance consommée, passant en 2 secondes de {{ 13.8 | W }} à {{ 6.4 | W }}. La puissance reste ensuite stable jusqu'à l'arrêt de l'appareil.
 
 ### Impact des réglages
 
