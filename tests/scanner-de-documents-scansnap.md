@@ -127,15 +127,16 @@ Si on laisse le scanner branché au secteur et éteint indéfiniment, cette cons
 ### Ouverture pour retirer un bourrage
 
 Il est possible d'ouvrir le scanner, par exemple pour extraire une feuille qui aurait été mal insérée et se serait chiffonnée à l'intérieur de l'appareil :
+
 {% image "./images/scansnap-ouvert.jpg" "Scanner ouvert pour retirer un bourrage de papier" "512w" 512 %}
 
 {% profile "scansnap.json.gz" '{"name": "Baisse de consommation lors de l\'ouverture", "range": "12264m32135"}' %}
 
-Pendant que le scanner est ouvert, les lampes sont éteintes, ce qui réduit sensiblement la consomation, mais la consommation mesurée, {{ 9.3 | W }}, reste nettement supérieure à la consommation en veille. Je n'ai pas d'idée pour expliquer cette différence.
+Pendant que le scanner est ouvert, les lampes sont éteintes, ce qui réduit sensiblement la consommation, mais la consommation mesurée, {{ 9.3 | W }}, reste nettement supérieure à la consommation en veille. Je n'ai pas d'idée pour expliquer cette différence.
 
 ## Conclusions
 
-- La consommation d'énergie pour une numérisation est insignificante comparée à la consommation quand le scanner reste en attente de fonctionnement (pendant 14 minutes avant de passer en veille).
+- La consommation d'énergie pour une numérisation est insignifiante comparée à la consommation quand le scanner reste en attente de fonctionnement (pendant 14 minutes avant de passer en veille).
 - La consommation en veille est élevée ; éteindre (en refermant le couvercle) ou débrancher le scanner après usage est une bonne idée.
 
 {% plusloin %}
