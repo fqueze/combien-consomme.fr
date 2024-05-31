@@ -25,28 +25,34 @@ var UserBenchmarks;
 
 function formatDuration(timeMs) {
   let result = "";
-  let timeS = timeMs / 1000;
-  if (timeS > 60) {
-    result = Math.round(timeS % 60) + "s";
+  let timeS = Math.round(timeMs / 1000);
+  if (timeS >= 60) {
     let timeMin = Math.floor(timeS / 60);
-    if (timeMin > 60) {
+    if (timeMin >= 60) {
       result = Math.floor(timeMin / 60) + "h";
       let min = timeMin % 60;
       if (min) {
         result += min + "min";
       }
     } else {
-      result = timeMin + "min" + result;
+      let sec = timeS % 60;
+      result = timeMin + "min";
+      if (sec) {
+        result += sec + "s";
+      }
     }
   } else {
-    result = Math.round(timeS) + "s";
+    result = timeS + "s";
   }
 
   return result;
 }
 
 function toPrecisionIfNotInt(number) {
-  return Math.round(number) == number ? number : number.toPrecision(3).replace(/\./, ",");
+  // Because of floating point representations, we can get numbers like
+  // 8.000000000000007. Treat them as if they were integers.
+  let isAlmostInt = Math.round(number) == Math.round(number * 1000) / 1000;
+  return isAlmostInt ? Math.round(number) : number.toPrecision(3).replace(/\./, ",");
 }
 
 function formatPower(powerW) {
@@ -75,9 +81,10 @@ function formatEnergy(energyWh) {
 
 function formatEuro(costEuro) {
   function fixed(number) {
+    let fractionDigits = Math.round(number) == number ? 0 : 2;
     return number.toLocaleString("fr", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
+      minimumFractionDigits: fractionDigits,
+      maximumFractionDigits: fractionDigits,
     });
   }
   return costEuro < 1 ?
