@@ -274,6 +274,7 @@ export default function (eleventyConfig) {
       content = content.replace(/ ([!?:;»])/g, nbsp + "$1")
         .replace(/« /g, "«" + nbsp)
         .replace(/([^-].)'/g, "$1’") // avoid replacing ' in urls where spaces are replaced with -.
+        .replace(/oe/g, "œ")
         .replace(/\.\.\./g, "…");
 
       let bCss = UserBenchmarks.get("> htmlmin > PurgeCSS: " + this.page.outputPath);
@@ -388,6 +389,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addPairedShortcode("intro", async function(content, filename, alt) {
     let img = await image("./images/" + filename, alt, "512w", 512, false);
     return `<div id="intro"><div>${content}</div>${img}</div>`;
+  });
+
+  eleventyConfig.addPairedShortcode("tldr", function(content, title="En résumé") {
+    return `<div id="tldr"><h2>${title}</h2>\n${content}</div>`;
   });
 
   eleventyConfig.addPairedShortcode("plusloin", function(content, title="Pour aller plus loin") {

@@ -54,7 +54,7 @@ html, body {
   }
 }
 
-body > *, #plusloin {
+body > *, #plusloin, #tldr {
   padding-bottom: 48px;
   padding-left: 24px;
   padding-right: 24px;
@@ -72,7 +72,7 @@ body > *, #plusloin {
 }
 
 @media (min-width: 768px) {
-  body > *, #plusloin {
+  body > *, #plusloin, #tldr {
     padding-bottom: 64px;
     padding-left: 72px;
     padding-right: 72px;
@@ -181,7 +181,7 @@ p {
   width: 100%;
 }
 
-#Articles, #plusloin {
+#Articles, #plusloin, #tldr {
   background-color: #f3f4f6;
   color: #374151 !important;
 }
