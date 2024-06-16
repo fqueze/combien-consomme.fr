@@ -54,11 +54,16 @@ html, body {
   }
 }
 
-body > *, #plusloin, #tldr {
-  padding-bottom: 48px;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 48px;
+#tldr {
+  padding: 24px;
+}
+
+#tldr > p:last-of-type {
+  margin-bottom: 0;
+}
+
+body > *, #plusloin {
+  padding: 48px 24px;
 }
 #Footer {
   padding-top: 0;
@@ -72,11 +77,11 @@ body > *, #plusloin, #tldr {
 }
 
 @media (min-width: 768px) {
-  body > *, #plusloin, #tldr {
-    padding-bottom: 64px;
-    padding-left: 72px;
-    padding-right: 72px;
-    padding-top: 64px;
+  body > *, #plusloin {
+    padding: 64px 72px;
+  }
+  #tldr {
+    padding: 32px;
   }
   #Footer {
     padding-top: 0;
