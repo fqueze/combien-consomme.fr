@@ -9,6 +9,14 @@ tags: ['test']
 Faire ses yaourts soi-même c'est sympa, mais on se demande souvent si c'est rentable financièrement. On peut facilement comparer les prix des yaourts et du lait, mais qu'en est-il de la consommation électrique de la yaourtière ?
 <!-- excerpt -->
 
+{% tldr %}
+La consommation électrique de la cuisson d'une fournée de yaourts ne coûte que quelques centimes, et est proportionnelle à la durée de cuisson : {{ 119 | Wh€ }} pour 8h, {{ 147 | Wh€ }} pour 10h, {{ 178 | Wh€ }} pour 12h.
+
+La yaourtière continue de consommer de l'électricité quand elle a fini la cuisson, mais cette consommation est très faible. Il faudrait laisser la yaourtière branchée {{ 0.0902 | divided_by: 3 | countPer€: 0.01 | divided_by: 24 | round }} jours pour dépenser 1 centime d'électricité.
+
+Le facteur principal pour décider s'il est rentable de faire ses yaourts soi-même est le prix d'achat du lait comparé au prix d'achat des yaourts déjà faits.
+{% endtldr %}
+
 ## Le matériel
 {% intro "yaourtiere.jpg" "Yaourtière Seb Classic" %}
 
@@ -62,7 +70,9 @@ Par défaut, le programme sélectionné est le programme intermédiaire de 10 he
 
 ### Programme de 12 heures
 
-En extrapolant, on peut supposer qu'une cuisson de 12 heures consommerait {{ 119 | times: 1.5 | Wh€ }}.
+{% profile "yaourts-12h.json.gz" '{"name": "Yaourts cuits pendant 12h", "range": "89817m43208672"}' %}
+
+Une cuisson de 12 heures consomme {{ 178 | Wh }}, ce qui est très proche de ce qu'on aurait obtenu en multipliant la consommation d'une cuisson de 8h ({{ 119 | Wh }}) par 1,5 ({{ 119 | times: 1.5 | Wh }}). Cela confirme que la consommation est proportionnelle au temps de cuisson.
 
 ### Lorsque la cuisson est finie
 
@@ -84,14 +94,10 @@ La consommation électrique par yaourt est respectivement de {{ 119 | divided_by
 
 À notre enseigne de courses habituelles, le litre de lait entier est actuellement affiché à {{ 1.13 | € }}, ce qui coûte donc {{ 1.13 | divided_by: 7 | € }} par yaourt produit. C'est beaucoup plus que le coût de l'électricité !
 
-
 Note : les calculs de cette section ont été faits en divisant les coûts par 7 car 7 yaourts sont produits, mais comme on a utilisé un yaourt existant pour servir de base, il pourrait aussi être pertinent de diviser par 6 plutôt que par 7, car à la fin de l'opération il n'y a que 6 yaourts de plus qu'au début.
 
-
-
-
 {% plusloin %}
-Pour comprendre de façon plus détaillée la consommation de cette yaourtière, on pourrait :
-- vérifier que la consommation du programme 12 heures est bien conforme à celle qui a été estimée.
+Pour comprendre de façon plus détaillée la consommation d'une yaourtière, on pourrait :
 - utiliser un appareil de mesure plus précis pour enregistrer la consommation à la fin de la cuisson.
+- tester d'autres modèles de yaourtière plus modernes pour voir si certains disposent d'un thermostat qui causerait une variation de la consommation en fonction de la température ambiante de la pièce.
 {% endplusloin %}
