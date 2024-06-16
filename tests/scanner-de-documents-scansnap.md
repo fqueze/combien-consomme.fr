@@ -9,6 +9,12 @@ tags: ['test']
 Combien consomme la numérisation d'un document ? Et le scanner quand il attend, ou reste branché en permanence ? Mesurons !
 <!-- excerpt -->
 
+{% tldr %}
+La consommation d'énergie pour une numérisation ({{ 0.008 | Wh }}) est insignifiante comparée à la consommation quand le scanner reste allumé pendant 14 minutes avant de passer en veille : {{ 4.55 | Wh€ }}.
+
+La consommation en veille est élevée lorsque le couvercle reste ouvert : {{ 17.2 | times: 6 | Wh€PerYear }} par an. Si l'on referme le couvercle après usage, la consommation en veille chute à {{ 1.21 | times: 6 | Wh€PerYear }} par an. Bien sûr, si on débranche la prise elle tombe à 0.
+{% endtldr %}
+
 ## Le matériel
 {% intro "scansnapS1500M.jpg" "Scanner de documents recto-verso Fujitsu ScanSnap S1500M" %}
 
@@ -133,11 +139,6 @@ Il est possible d'ouvrir le scanner, par exemple pour extraire une feuille qui a
 {% profile "scansnap.json.gz" '{"name": "Baisse de consommation lors de l\'ouverture", "range": "12264m32135"}' %}
 
 Pendant que le scanner est ouvert, les lampes sont éteintes, ce qui réduit sensiblement la consommation, mais la consommation mesurée, {{ 9.3 | W }}, reste nettement supérieure à la consommation en veille. Je n'ai pas d'idée pour expliquer cette différence.
-
-## Conclusions
-
-- La consommation d'énergie pour une numérisation est insignifiante comparée à la consommation quand le scanner reste en attente de fonctionnement (pendant 14 minutes avant de passer en veille).
-- La consommation en veille est élevée ; éteindre (en refermant le couvercle) ou débrancher le scanner après usage est une bonne idée.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de ce scanner, on pourrait :
