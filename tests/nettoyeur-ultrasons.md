@@ -18,7 +18,7 @@ Il est souhaitable de débrancher le nettoyeur une fois son utilisation terminé
 ## Le matériel
 {% intro "nettoyeur-ultrasons.jpg" "Nettoyeur à ultrason en plastique, dont le capôt est ouvert, contenant de l'eau et une paire de lunettes." %}
 
-L'appareil testé est un nettoyeur à ultrasons bas de gamme, probablement acheté initialement sur un site asiatique, que j'ai récupéré pour quelques euros à la braderie de Lille. Il dispose d'une petite cuve, d'une taille suffisante pour y nettoyer une paire de lunettes.
+L'appareil testé est un nettoyeur à ultrasons bas de gamme (modèle CD-2820), probablement acheté initialement sur un site asiatique, que j'ai acquis pour quelques euros à la braderie de Lille. Il dispose d'une petite cuve, d'une taille suffisante pour y nettoyer une paire de lunettes.
 
 Il y a deux boutons, l'un permettant de démarrer un programme de nettoyage, l'autre permettant de sélectionner le programme « 5 », « 3 » ou « 1.5 », correspondant au temps de nettoyage en minutes. Le numéro du programme sélectionné est rétro-éclairé en rouge.
 
@@ -46,13 +46,13 @@ Regardons en détail ces différentes parties de l'enregistrement.
 
 Le nettoyeur dispose de 3 programmes, testons les un par un.
 
-{% image "./images/nettoyeur-ultrasons-durées.jpg" "Éclairage lorsque la porte de garage vient d'être manoeuvrée" "512w" 512 %}
+{% image "./images/nettoyeur-ultrasons-durées.jpg" "Photo du nettoyeur à ultrasons montrant les 3 programmes possibles" "512w" 512 %}
 
 {% profile "nettoyeur-ultrasons.json.gz" '{"name": "Nettoyage de 5 minutes", "range": "398515m300651"}' %}
 
 Lors du premier nettoyage de 5 minutes, {{ 3.18 | Wh€ }} ont été consommés. La puissance maximale mesurée, {{ 40.3 | W }} est inférieure à la puissance maximale de {{ 50 | W }} indiquée sur l'étiquette :
 
-{% image "./images/nettoyeur-ultrasons-etiquette.jpg" "Etiquette du nettoyeur à ultrasion CD-2820, indiquant une puissance maximale de 50 W" "512w" 512 %}
+{% image "./images/nettoyeur-ultrasons-etiquette.jpg" "Etiquette du nettoyeur à ultrasons CD-2820, indiquant une puissance maximale de 50 W" "512w" 512 %}
 
 La puissance moyenne est proche de la puissance maximale. On observe que la puissance diminue au fil du temps.
 
