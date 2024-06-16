@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-06-14T09:26:29Z</updated>
+<updated>2024-06-16T14:48:21Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un nettoyeur à ultrasons</title>
+ <link href="https://combien-consomme.fr/tests/nettoyeur-ultrasons/"/>
+ <updated>2024-06-16T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/nettoyeur-ultrasons/</id>
+ <summary xml:lang="fr" type="html">Combien coûte l&#39;utilisation d&#39;un nettoyeur à ultrasons ?</summary>
+</entry>
 <entry>
  <title>une porte de garage basculante</title>
  <link href="https://combien-consomme.fr/tests/motorisation-porte-de-garage-basculante/"/>
@@ -142,12 +149,5 @@
  <updated>2024-03-26T00:00:00Z</updated>
  <id>https://combien-consomme.fr/posts/presentation-au-FOSDEM2024/</id>
  <summary xml:lang="fr" type="html">J&#39;ai eu l&#39;occasion de présenter mes mesures de consommation dans la salle consacrée à l&#39;énergie. Cet article partage la vidéo de la conférence.</summary>
-</entry>
-<entry>
- <title>Quelle puissance mesurer ?</title>
- <link href="https://combien-consomme.fr/posts/quelle-puissance-mesurer/"/>
- <updated>2024-02-10T00:00:00Z</updated>
- <id>https://combien-consomme.fr/posts/quelle-puissance-mesurer/</id>
- <summary xml:lang="fr" type="html">Sur combien-consomme.fr, on parle beaucoup de puissance. Cet article vise à clarifier le lien entre puissance et consommation, indiquer quelles sont les différentes puissantes mesurables, et dans quels cas elles nous intéressent.</summary>
 </entry>
 </feed>
