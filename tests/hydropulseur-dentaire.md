@@ -9,6 +9,14 @@ tags: ['test']
 Un hydropulseur permet de nettoyer efficacement les endroits même les plus inaccessibles entre les dents. Son utilisation entraîne-t-elle un coût significatif ?
 <!-- excerpt -->
 
+{% tldr %}
+L'hydropulseur consomme peu d'énergie : il faut {{ 0.149 | countPer€: 0.01 }} lavages de 40 secondes, ou {{ 0.523 | countPer€: 0.01 }} vidages complets de la cuve pour dépenser 1 centime en électricité.
+
+Laisser l'hydropulseur branché toute l'année quand on ne s'en sert pas consommera {{ 0.621 | Wh€PerYear }} par an.
+
+Le coût de l'électricité utilisée est négligeable par rapport au coût d'achat de l'appareil.
+{% endtldr %}
+
 ## Le matériel
 {% intro "hydropulseur.jpg" "Hydropulseur dentaire Oral B Braun branché sur une prise connectée Shelly Plus PlugS" %}
 

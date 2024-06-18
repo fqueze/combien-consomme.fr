@@ -9,6 +9,12 @@ tags: ['test']
 Mamie en avait un et ça avait l'air trop bien ! Maman n'en voulait pas ; il paraît que c'était inutile et consommait de l'électricité pour rien. Combien maman a-t-elle économisé en ouvrant ses boîtes de conserve à la main ?
 <!-- excerpt -->
 
+{% tldr %}
+Ouvrir une boîte de conserve consomme {{ 0.19 | Wh }}, pour un coût négligeable : pour dépenser un centime en électricité, il faudrait ouvrir {{ 0.19 | countPer€: 0.01 }} boîtes.
+
+Même s'il reste branché tout le temps, l'ouvre-boîtes ne consomme rien lorsqu'on ne s'en sert pas. Il ne contient pas d'électronique.
+{% endtldr %}
+
 ## Le matériel
 {% intro "ouvre-boites.jpg" "Ouvre-boîtes électrique Moulinex datant des années 70, branché sur une prise Shelly Plus Plug S" %}
 Nous avons ici un ouvre-boîtes Moulinex Type 343.2.00 de 85W déniché pour un euro symbolique dans un marché aux puces. Un objet un peu désuet tout droit sorti de la cuisine idéale des années 70.

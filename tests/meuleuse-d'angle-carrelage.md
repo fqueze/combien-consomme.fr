@@ -9,6 +9,12 @@ tags: ['test']
 Quelle est la consommation d'une meuleuse d'angle pour couper un morceau de carrelage ? Sauf si on fait régulièrement des travaux de carrelage, c'est une opération peu fréquente ; mais combien ça consomme ?
 <!-- excerpt -->
 
+{% tldr %}
+La coupe de deux petits morceaux de carrelage a consommé {{ 74.2 | Wh€ }}, pour 10 minutes d'utilisation intermittente de la meuleuse d'angle.
+
+L'usure du disque coûte probablement plus que l'électricité consommée.
+{% endtldr %}
+
 ## Le matériel
 {% intro "meuleuse.jpg" "Photo de la meuleuse, à côté d'un étau contenant un morceau de carrelage" %}
 
