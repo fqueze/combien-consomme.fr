@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-06-18T15:16:49Z</updated>
+<updated>2024-07-05T07:54:57Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un ordinateur portable Dell XPS 15 pouces</title>
+ <link href="https://combien-consomme.fr/tests/ordinateur-portable-dell-xps-15/"/>
+ <updated>2024-07-05T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/ordinateur-portable-dell-xps-15/</id>
+ <summary xml:lang="fr" type="html">Combien consomme la charge d&#39;une batterie d&#39;ordinateur portable ? Et le chargeur lorsqu&#39;on le laisse branché ? Et l&#39;ordinateur lorsqu&#39;on s&#39;en sert... ou pas ?</summary>
+</entry>
 <entry>
  <title>un nettoyeur à ultrasons</title>
  <link href="https://combien-consomme.fr/tests/nettoyeur-ultrasons/"/>
@@ -142,12 +149,5 @@
  <updated>2024-03-26T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/four-a-micro-ondes/</id>
  <summary xml:lang="fr" type="html">Les fours à micro-ondes sont très présents dans nos cuisines. A quoi ressemblent leurs consommations ?</summary>
-</entry>
-<entry>
- <title>Présentation au FOSDEM sur l&#39;utilisation du Firefox Profiler pour profiler l&#39;énergie de ma maison</title>
- <link href="https://combien-consomme.fr/posts/presentation-au-FOSDEM2024/"/>
- <updated>2024-03-26T00:00:00Z</updated>
- <id>https://combien-consomme.fr/posts/presentation-au-FOSDEM2024/</id>
- <summary xml:lang="fr" type="html">J&#39;ai eu l&#39;occasion de présenter mes mesures de consommation dans la salle consacrée à l&#39;énergie. Cet article partage la vidéo de la conférence.</summary>
 </entry>
 </feed>
