@@ -29,10 +29,19 @@ function formatDuration(timeMs) {
   if (timeS >= 60) {
     let timeMin = Math.floor(timeS / 60);
     if (timeMin >= 60) {
-      result = Math.floor(timeMin / 60) + "h";
-      let min = timeMin % 60;
-      if (min) {
-        result += min + "min";
+      let timeHours = Math.floor(timeMin / 60);
+      if (timeHours >= 24) {
+        result = Math.floor(timeHours / 24) + "j";
+        let hour = timeHours % 24;
+        if (hour) {
+          result += hour + "h";
+        }
+      } else {
+        result = timeHours + "h";
+        let min = timeMin % 60;
+        if (min) {
+          result += min + "min";
+        }
       }
     } else {
       let sec = timeS % 60;
