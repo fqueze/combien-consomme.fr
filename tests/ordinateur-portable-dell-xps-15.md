@@ -94,14 +94,14 @@ On observe maintenant une consommation moyenne de {{ 0.857 | W }}, soit {{ 0.857
 ### Consommation maximale 
 
 Sous l'ordinateur des inscriptions indiquent ses caractéristiques électriques :  
-{% image "./images/dell-xps15-dessous.jpg" "Photo du nettoyeur à ultrasons montrant les 3 programmes possibles" "512w" 512 %}
+{% image "./images/dell-xps15-dessous.jpg" "Photo du dessous de l'ordinateur Dell XPS 15 pouces" "512w" 512 %}
 
 Si on regarde de plus près :  
-{% image "./images/dell-xps15-etiquette.jpg" "Photo du nettoyeur à ultrasons montrant les 3 programmes possibles" "512w" 512 %}  
+{% image "./images/dell-xps15-etiquette.jpg" "Zoom sur les caractéristiques techniques indiquées sous l'ordinateur" "512w" 512 %}
 On peut lire « 20V 4.5A/6.5A » ce qui correspond à {{ 20 |times: 4.5 | W }} ou {{ 20 |times: 6.5| W }}, deux modèles de chargeur pouvant être compatibles avec cet ordinateur.
 
 Ici, le chargeur utilisé est un modèle de {{ 130 | W }} :  
-{% image "./images/dell-xps15-chargeur.jpg" "Photo du nettoyeur à ultrasons montrant les 3 programmes possibles" "512w" 512 %}&nbsp;{% image "./images/dell-xps15-chargeur-etiquette.jpg" "Photo du nettoyeur à ultrasons montrant les 3 programmes possibles" "512w" 512 %}
+{% image "./images/dell-xps15-chargeur.jpg" "Photo du chargeur de l'ordinateur portable Dell" "512w" 512 %}&nbsp;{% image "./images/dell-xps15-chargeur-etiquette.jpg" "Zoom sur les caractéristiques techniques indiquées sous le chargeur" "512w" 512 %}
 
 Ces {{ 130 | W }} sont donc la puissance maximale qui peut être consommée lorsque l'ordinateur est branché au secteur.
 
