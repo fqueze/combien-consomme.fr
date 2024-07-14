@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-07-05T07:54:57Z</updated>
+<updated>2024-07-14T19:37:57Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un broyeur WC</title>
+ <link href="https://combien-consomme.fr/tests/broyeur-wc/"/>
+ <updated>2024-07-14T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/broyeur-wc/</id>
+ <summary xml:lang="fr" type="html">Combien consomme l&#39;utilisation d&#39;un broyeur WC ? Consomme-t-il plus lorsqu&#39;on ne s&#39;en sert pas ?</summary>
+</entry>
 <entry>
  <title>un ordinateur portable Dell XPS 15 pouces</title>
  <link href="https://combien-consomme.fr/tests/ordinateur-portable-dell-xps-15/"/>
@@ -142,12 +149,5 @@
  <updated>2024-03-26T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/roomba-i3-plus/</id>
  <summary xml:lang="fr" type="html">Un aspirateur connecté est très pratique, mais quelle consommation supplémentaire cause-t-il ?</summary>
-</entry>
-<entry>
- <title>un four à micro-ondes</title>
- <link href="https://combien-consomme.fr/tests/four-a-micro-ondes/"/>
- <updated>2024-03-26T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/four-a-micro-ondes/</id>
- <summary xml:lang="fr" type="html">Les fours à micro-ondes sont très présents dans nos cuisines. A quoi ressemblent leurs consommations ?</summary>
 </entry>
 </feed>
