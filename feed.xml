@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-08-06T20:28:58Z</updated>
+<updated>2024-08-06T21:35:12Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un destructeur d&#39;insectes</title>
+ <link href="https://combien-consomme.fr/tests/destructeur-insectes/"/>
+ <updated>2024-08-07T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/destructeur-insectes/</id>
+ <summary xml:lang="fr" type="html">Combien consomme l&#39;utilisation d&#39;une lampe destructeur d&#39;insectes ?</summary>
+</entry>
 <entry>
  <title>une imprimante HP LaserJet Pro</title>
  <link href="https://combien-consomme.fr/tests/imprimante-laserjet-pro/"/>
@@ -142,12 +149,5 @@
  <updated>2024-04-10T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/congelateur/</id>
  <summary xml:lang="fr" type="html">Un gros congélateur permet de conserver une grande quantité de nourriture pendant des mois. Quel est le coût de revient ?</summary>
-</entry>
-<entry>
- <title>Mesurer la consommation avec un module Shelly EM</title>
- <link href="https://combien-consomme.fr/posts/mesurer-la-consommation-avec-shelly-em/"/>
- <updated>2024-04-10T00:00:00Z</updated>
- <id>https://combien-consomme.fr/posts/mesurer-la-consommation-avec-shelly-em/</id>
- <summary xml:lang="fr" type="html">Le tableau électrique est un point central de l&#39;installation électrique d&#39;une maison, où il est pratique de faire des mesures.</summary>
 </entry>
 </feed>
