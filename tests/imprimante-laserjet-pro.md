@@ -11,7 +11,7 @@ Combien consomme une imprimante laser professionnelle quand elle imprime ? Et qu
 
 {% tldr %}
 - L'impression d'une seule page consomme {{ 2.44 | Wh }}. Il faudrait imprimer {{ 2.44 | countPer€: 0.01 }} pages pour dépenser 1 centimes d'euro en électricité.
-- La consommation par page diminue significativement lorsque les pages sont imprimées à la suite. Cela s'explique car le gros de la consommation correspond au préchauffage de l'imprimante pour atteindre la température de fonctionnement.
+- La consommation par page diminue significativement lorsque les pages sont imprimées à la suite. Cela s'explique car le gros de la consommation correspond au préchauffage de l'imprimante pour atteindre sa température de fonctionnement.
 - La consommation lorsque l'imprimante reste en éveil pendant 5 minutes après la dernière impression avant de passer en veille n'est pas négligeable. Si l'on est certain d'avoir fini d'utiliser l'imprimante, l'éteindre immédiatement est une bonne idée.
 - Laisser l'imprimante en veille tout le temps consommerait {{ 14 |times: 3| Wh€PerYear }} par an (puissance moyenne de {{ 1.75 | W }}).
 {% endtldr %}
@@ -59,7 +59,7 @@ Voici un profil de cette séquence :
 Si on décompose :
 - {{ 0.099 | Wh }} ont été consommés lors du branchement, pendant une période d'activité de 8 secondes, avec une puissance maximale mesurée à {{ 178 | W }}.
 - {{ 0.79 | Wh }} ont été consommés lorsque l'imprimante a été allumée, en 17 secondes. Un pic de consommation à {{ 812 | W }} a été observé.
-- {{ 1.39 | Wh }} ont été consommés pendant les 5 minutes et 28 secondes qui ont suivi, avant que l'imprimante ne passe en veille. La consommation moyenne a été de {{ 15.3 | W }} pendant cette période. On remarquera cette attente avant de passer en veille consomme nettement plus d'énergie que l'allumage de l'imprimante.
+- {{ 1.39 | Wh }} ont été consommés pendant les 5 minutes et 28 secondes qui ont suivi, avant que l'imprimante ne passe en veille. La consommation moyenne a été de {{ 15.3 | W }} pendant cette période. On remarquera que cette attente avant de passer en veille consomme nettement plus d'énergie que l'allumage de l'imprimante.
 
 ### Impression
 
