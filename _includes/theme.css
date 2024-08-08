@@ -139,18 +139,20 @@ header li > a {
   cursor: pointer;
 }
 
-#intro {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-}
+@media (min-width: 576px) {
+  #intro {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-#intro > * {
-  flex: 0 0 auto;
-  width: 66%;
-}
-#intro > picture {
-  width: 33%;
+  #intro > * {
+    flex: 0 0 auto;
+    width: 66%;
+  }
+  #intro > picture {
+    width: 33%;
+  }
 }
 
 @media (min-width: 992px) {
@@ -166,9 +168,17 @@ header li > a {
 }
 
 h1 {
-  font-size: 3.25rem;
-  line-height: 3.9rem;
+  font-size: 2.5rem;
+  line-height: 3rem;
 }
+
+@media (min-width: 450px) {
+  h1 {
+    font-size: 3.25rem;
+    line-height: 3.9rem;
+  }
+}
+
 h2 {
   font-size: 1.95rem;
   line-height: 2.56rem;
