@@ -6,7 +6,7 @@ eleventyComputed:
 ---
 <article>
 <h1>{{ pagetitle }}</h1>
-<time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time> 
+<p><time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time> — {{ content | timeToRead }} de lecture</p>
 {{ content | safe }}
 </article>
 {% set previous = collections.test | getPreviousCollectionItem(page) %}

@@ -9,6 +9,7 @@ import htmlmin from "html-minifier";
 import Image from "@11ty/eleventy-img";
 import UglifyJS from "uglify-js";
 import pluginRss from "@11ty/eleventy-plugin-rss";
+import timeToRead from "eleventy-plugin-time-to-read";
 
 const isDev = process.env.ELEVENTY_ENV === 'dev';
 const baseUrl = isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr';
@@ -270,6 +271,7 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(timeToRead, {language: 'fr'});
 
   const fullCss = fs.readFileSync("_includes/theme.css", {
     encoding: "utf-8",

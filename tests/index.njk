@@ -19,7 +19,7 @@ pagedesc: Pour chaque objet testé, une description de l'objet et de la méthode
     <h1>
       <a href="{{ test.url | url }}">{{ test.data.pagetitle }}</a>
     </h1>
-    <time datetime="{{ test.date | dateIso }}">{{ test.date | dateReadable }}</time>
+    <p><time datetime="{{ test.date | dateIso }}">{{ test.date | dateReadable }}</time> — {{ test | timeToRead }} de lecture</p>
     <p>{{ test.page.excerpt }}</p>
    </article>
 {% endfor %}
