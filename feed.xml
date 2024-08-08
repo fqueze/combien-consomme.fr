@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-08-06T21:35:12Z</updated>
+<updated>2024-08-08T10:28:34Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une fontaine pour animaux de compagnie</title>
+ <link href="https://combien-consomme.fr/tests/fontaine-chat/"/>
+ <updated>2024-08-08T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/fontaine-chat/</id>
+ <summary xml:lang="fr" type="html">Une fontaine permet à votre fidèle compagnon d&#39;avoir une eau filtrée et toujours en mouvement, pour s&#39;hydrater avec plaisir. Combien consomme ce petit bonheur offert à votre chat ou chien ?</summary>
+</entry>
 <entry>
  <title>un destructeur d&#39;insectes</title>
  <link href="https://combien-consomme.fr/tests/destructeur-insectes/"/>
@@ -142,12 +149,5 @@
  <updated>2024-04-10T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/freebox-delta/</id>
  <summary xml:lang="fr" type="html">Une connexion internet rapide comme la fibre, mais pour quel coût énergétique ?</summary>
-</entry>
-<entry>
- <title>un congélateur</title>
- <link href="https://combien-consomme.fr/tests/congelateur/"/>
- <updated>2024-04-10T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/congelateur/</id>
- <summary xml:lang="fr" type="html">Un gros congélateur permet de conserver une grande quantité de nourriture pendant des mois. Quel est le coût de revient ?</summary>
 </entry>
 </feed>
