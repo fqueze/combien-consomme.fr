@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-08-08T22:08:05Z</updated>
+<updated>2024-09-01T20:24:39Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une machine à pain</title>
+ <link href="https://combien-consomme.fr/tests/machine-a-pain/"/>
+ <updated>2024-09-01T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/machine-a-pain/</id>
+ <summary xml:lang="fr" type="html">Une machine à pain permet de créer des pains délicieux et variés, avec une texture et un goût qui feront la joie de vos sens. Mais combien consomme ce petit plaisir offert à votre famille ou vos invités ?</summary>
+</entry>
 <entry>
  <title>une fontaine pour animaux de compagnie</title>
  <link href="https://combien-consomme.fr/tests/fontaine-chat/"/>
@@ -142,12 +149,5 @@
  <updated>2024-04-11T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/aspirateur-atelier/</id>
  <summary xml:lang="fr" type="html">Un aspirateur puissant pour nettoyer lors d&#39;un chantier, ou pour le bricolage. À quoi ressemble sa consommation ?</summary>
-</entry>
-<entry>
- <title>une Freebox Delta</title>
- <link href="https://combien-consomme.fr/tests/freebox-delta/"/>
- <updated>2024-04-10T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/freebox-delta/</id>
- <summary xml:lang="fr" type="html">Une connexion internet rapide comme la fibre, mais pour quel coût énergétique ?</summary>
 </entry>
 </feed>
