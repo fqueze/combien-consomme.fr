@@ -10,3 +10,4 @@ yarn.lock
 images/hotpot/
 images/future/
 profiles/future/
+audio/*
