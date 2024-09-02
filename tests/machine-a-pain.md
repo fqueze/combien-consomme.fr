@@ -185,8 +185,8 @@ Voyons maintenant un dernier enregistrement de la réalisation d'un pain :
 {% profile "machine-a-pain-complet-maintien-au-chaud.json.gz" '{"name": "Pain à la farine de blé complète — maintien au chaud en fin de cuisson", "range": ""}' %}
 
 C'est à nouveau un pain complet, notre enregistrement est donc très similaire au précédent. La différence est que, cette fois, à la fin de la cuisson on n'a pas arrêté la machine à pain et qu'elle est donc passée dans le mode de maintien au chaud.
-Le maintien au chaud est prévu pour que le pain réalisé la nuit soit chaud à l'heure du petit déjeuner.
-On voit donc l'utilisation de la résistance sur la fin enregistrement.
+Le maintien au chaud est prévu pour que le pain réalisé la nuit soit chaud à l'heure du petit-déjeuner.
+On voit donc l'utilisation de la résistance sur la fin de l'enregistrement.
 
 La consommation électrique pour ce pain —{{ 329 | Wh€ }}, est {{ 329 | divided_by: 292 |minus: 1 | times: 100|round }}% plus élevée que celle mesurée pour le pain complet sans maintien au chaud.
 
@@ -210,11 +210,13 @@ Même si le prix d'achat des ingrédients nécessaires à la réalisation du pai
 
 La consommation électrique mesurée pour produire nos pains a varié de {{ 265 | Wh€ }} à {{ 329 | Wh€ }}. En supposant un prix d'achat neuf de 90 €, cela nous donne une fourchette de {{ 329 | countPer€: 90}} à {{ 265 | countPer€: 90 }} pains à réaliser pour que le coût de l'électricité égale celui de la machine.
 
+Pour une maison équipée de panneaux photovoltaïques, si le pain n'est pas destiné à être consommé au petit-déjeuner, on pourra optimiser l'auto-consommation en produisant son pain en journée plutôt que la nuit. On jettera éventuellement un coup d'oeil à la météo pour s'assurer que la dernière heure du cycle (celle pendant laquelle aura lieu la cuisson) se produira à un moment où le ciel ne sera pas totalement couvert.
+
 #### Usage quotidien
 
 Si nous supposons que cette machine est utilisée tous les jours
-pour avoir chaque matin du pain frais au petit déjeuner,
-la consommation annuelle sera comprise entre {{ 265 | Wh€PerYear }} et {{ 329 | Wh€PerYear }}. La consommation électrique peut donc dépasser le prix d'achat de la machine en seulement {{ 329 | times: 365.2475 | countPer€: 90}} à {{ 265 | times: 365.2475 | countPer€: 90}} ans. 
+pour avoir chaque matin du pain frais au petit-déjeuner,
+la consommation annuelle sera comprise entre {{ 265 | Wh€PerYear }} et {{ 329 | Wh€PerYear }}. La consommation électrique peut donc dépasser le prix d'achat de la machine en seulement {{ 329 | times: 365.2475 | countPer€: 90}} à {{ 265 | times: 365.2475 | countPer€: 90}} ans.
 
 #### Usage occasionnel
 
