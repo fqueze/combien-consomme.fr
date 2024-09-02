@@ -127,7 +127,7 @@ Le profil présenté correspond à la compilation du navigateur web [Mozilla Fir
 
 Les variations de consommation pendant la période où le processeur est utilisé au maximum de ses capacités correspondent initialement à l'augmentation temporaire de la fréquence d'horloge (fonction [turbo boost](https://en.wikipedia.org/wiki/Intel_Turbo_Boost)) jusqu'à ce que la température du processeur augmente. Ensuite la fréquence (et la puissance) diminuent pour laisser le processeur refroidir un peu, puis réaugmente avant de finalement se stabiliser, suivant l'algorithme <abbr title="Running Average Power Limit">RAPL</abbr>.
 
-Pendant cette compilation, {{ 31.6 | Wh }} ont été consommés, soit {{ 31.6 | divided_by: 86 | times: 100 | round}}% de la capacité de la batterie consommés en moins d'une demi-heure.
+Pendant cette compilation, {{ 31.6 | Wh }} ont été consommés, soit {{ 31.6 | percent: 86 }} de la capacité de la batterie consommés en moins d'une demi-heure.
 
 #### Utilisation interactive
 

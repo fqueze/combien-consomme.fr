@@ -72,12 +72,12 @@ En se basant sur ces mesures, pour consommer 1 centime d'électricité, il faudr
 Comme nous avons constaté que la puissance mesurée diminue au fur et à mesure des utilisations, il est probable que l'échauffement du moteur change sa consommation. Regardons ce que l'on mesure si on relance d'autres nettoyages de 5 minutes :
 {% profile "nettoyeur-ultrasons.json.gz" '{"name": "Deuxième nettoyage de 5 minutes", "range": "1232462m304851"}' %}
 
-Un nettoyage de 5 minutes lancé après les 3 tests précédents consomme {{ 2.83 | Wh€ }}, soit {{ 2.83 | divided_by: 3.18 | minus: 1 |times: -100 | round}}% de moins que le premier nettoyage de 5 minutes.
+Un nettoyage de 5 minutes lancé après les 3 tests précédents consomme {{ 2.83 | Wh€ }}, soit {{ 2.83 | percentLess: 3.18 }} de moins que le premier nettoyage de 5 minutes.
 
 Voyons maintenant ce qui se passe si on laisse refroidir un peu le nettoyeur. J'ai laissé le nettoyeur en attente pendant un peu plus de 2 heures puis ai lancé un nouveau nettoyage de 5 minutes :
 {% profile "nettoyeur-ultrasons.json.gz" '{"name": "Troisième nettoyage de 5 minutes après 2 heures d\'attente", "range": "9275426m303787"}' %}
 
-La consommation de {{ 3.02 | Wh€ }} est {{ 3.02 | divided_by: 3.18 | minus: 1 |times: -100 | round}}% inférieure à celle du premier nettoyage de 5 minutes, mais {{ 3.18 | divided_by: 2.83 | minus: 1 |times: 100 | round}}% supérieure à celle du nettoyage de 5 minutes effectué avant de laisser refroidir.
+La consommation de {{ 3.02 | Wh€ }} est {{ 3.02 | percentLess: 3.18 }} inférieure à celle du premier nettoyage de 5 minutes, mais {{ 3.18 | percentMore: 2.83 }} supérieure à celle du nettoyage de 5 minutes effectué avant de laisser refroidir.
 
 ### Consommation en attente
 

@@ -12,10 +12,10 @@ Le lave-linge fait partie des gros consommateurs d'eau et d'énergie d'une maiso
 {% tldr %}
 La consommation annuelle du lave linge sera comprise entre {{ 736 |times: 50 | Wh€ }} pour une personne seule réalisant 50 lessives par an et {{ 736 | Wh€PerYear }} pour une famille utilisant la machine à laver tous les jours.
 
-La consommation électrique de la machine à laver est dominée par le chauffage de l'eau ({{ 618 | divided_by: 736 | times: 100 |round}}% de la consommation pour un chauffage à 40°C ; {{ 738 | divided_by: 835 | times: 100 |round}}% à 60°C).
-Faire passer la température de lavage de 40 à 30°C réduit la consommation électrique de {{ 348 | divided_by: 736 | minus: 1 | times: -100 |round}}%.
+La consommation électrique de la machine à laver est dominée par le chauffage de l'eau ({{ 618 | percent: 736 }} de la consommation pour un chauffage à 40°C ; {{ 738 | percent: 835 }} à 60°C).
+Faire passer la température de lavage de 40 à 30°C réduit la consommation électrique de {{ 348 | percentLess: 736 }}.
 
-L'essorage, deuxième plus gros consommateur, ne représente que {{ 49.8 | divided_by: 736 | times: 100 |round}}% de l'énergie consommée pour toute la lessive. On peut réduire la consommation de l'essorage en essorant moins vite, mais si le linge sera séché dans un {% test seche-linge-a-pompe-a-chaleur sèche linge %}, réduire l'efficacité de l'essorage risque d'augmenter beaucoup la consommation d'énergie lors du séchage.
+L'essorage, deuxième plus gros consommateur, ne représente que {{ 49.8 | percent: 736 }} de l'énergie consommée pour toute la lessive. On peut réduire la consommation de l'essorage en essorant moins vite, mais si le linge sera séché dans un {% test seche-linge-a-pompe-a-chaleur sèche linge %}, réduire l'efficacité de l'essorage risque d'augmenter beaucoup la consommation d'énergie lors du séchage.
 
 Pour les familles auto-consommant leur électricité photovoltaïque, il est souhaitable de lancer la machine lorsqu'il y a du soleil.
 {% endtldr %}
@@ -70,7 +70,7 @@ Regardons cette phase de chauffage de plus près :
 
 La courbe est presque plate pendant 50s (pendant lesquelles la machine ne fait probablement que remplir le tambour d'eau chaude), puis on observe un comportement cyclique. On peut supposer que la machine continue à chauffer de l'eau tout en faisant tourner le tambour.
 
-Pendant les 16 minutes de chauffage, la machine a consommé {{ 618 | Wh }}, soit environ {{ 618 | divided_by: 736 | times: 100 |round}}% de l'énergie totale consommée pour toute la lessive ({{ 736 | Wh }}).
+Pendant les 16 minutes de chauffage, la machine a consommé {{ 618 | Wh }}, soit environ {{ 618 | percent: 736 }} de l'énergie totale consommée pour toute la lessive ({{ 736 | Wh }}).
 
 Regardons maintenant ce qu'il se passe avant la phase de chauffage :
 
@@ -90,7 +90,7 @@ Une partie ayant une consommation plus élevée près de la fin attire mon atten
 
 Je pense reconnaître ici la phase d'essorage, avec le tambour qui entre en rotation, accélère, puis maintient sa rotation à une vitesse constante pendant un certain temps, avant d'accélérer par paliers, pour finalement atteindre la vitesse maximum pendant un peu plus d'une minute.
 
-La consommation maximale ({{ 847 | W }}) de cette phase est assez élevée. Cette phase d'essorage consomme {{ 49.8 | divided_by: 736 | times: 100 |round}}% de l'énergie consommée pour toute la lessive.
+La consommation maximale ({{ 847 | W }}) de cette phase est assez élevée. Cette phase d'essorage consomme {{ 49.8 | percent: 736 }} de l'énergie consommée pour toute la lessive.
 
 ### Sur une lessive avec prélavage
 
@@ -114,29 +114,29 @@ Le profil est très similaire à celui de la lessive au programme « quotidien �
 
 {% profile "lave-linge-30-quotidien.json.gz" '{"name": "Chauffage lors d\'un lavage à 30°C", "range": "396822m362759"}' %}
 
-Le chauffage dure 6 minutes au lieu de 16, avec une consommation de {{ 230 | Wh }} au lieu de {{ 618 | Wh }} (réduction de {{ 230 | divided_by: 618 | minus: 1 | times: -100 |round}}%). La consommation pour la totalité de la lessive passe de {{ 736 | Wh€ }} à {{ 348 | Wh€ }}, soit une réduction de {{ 348 | divided_by: 736 | minus: 1 | times: -100 |round}}%.
+Le chauffage dure 6 minutes au lieu de 16, avec une consommation de {{ 230 | Wh }} au lieu de {{ 618 | Wh }} (réduction de {{ 230 | percentLess: 618}}). La consommation pour la totalité de la lessive passe de {{ 736 | Wh€ }} à {{ 348 | Wh€ }}, soit une réduction de {{ 348 | percentLess: 736 }}.
 
-À 30°C, le chauffage représente {{ 230 | divided_by: 348 | times: 100 |round}}% de la consommation électrique de la lessive.
+À 30°C, le chauffage représente {{ 230 | percent: 348 }} de la consommation électrique de la lessive.
 
 ### Chauffage à 60°C au lieu de 40°C
 
 Regardons maintenant ce qu'il se passe lorsque la température est réglée à 60°C :
 {% profile "lave-linge-60-quotidien.json.gz" '{"name": "Une lessive au programme « quotidien » à 60°C"}' %}
 
-La consommation totale passe à {{ 835 | Wh }}, soit {{ 835 | divided_by: 736 | minus: 1 | times: 100 |round }}% de plus que pour le même programme à 40°C.
+La consommation totale passe à {{ 835 | Wh }}, soit {{ 835 | percentMore: 736 }} de plus que pour le même programme à 40°C.
 
 La période de chauffage dure maintenant 19 minutes :
 {% profile "lave-linge-60-quotidien.json.gz" '{"name": "Une lessive au programme « quotidien » à 60°C", "range": "434157m1141439"}' %}
 
-La consommation du chauffage passe de {{ 618 | Wh }} à {{ 738 | Wh }}, soit une augmentation de {{ 738 | divided_by: 618 | minus: 1 | times: 100 |round }}% par rapport au chauffage à 40°C.
+La consommation du chauffage passe de {{ 618 | Wh }} à {{ 738 | Wh }}, soit une augmentation de {{ 738 | percentMore: 618 }} par rapport au chauffage à 40°C.
 
-À 60°C, le chauffage représente {{ 738 | divided_by: 835 | times: 100 |round}}% de la consommation électrique de la lessive.
+À 60°C, le chauffage représente {{ 738 | percent: 835 }} de la consommation électrique de la lessive.
 
 ### Programme « 15' Express »
 
 {% profile "lave-linge-15min-express-et-rincage.json.gz" '{"name": "Une lessive au programme « 15\' Express »", "range": "100839m814471"}' %}
 
-Ce programme dure encore moins que les 15 minutes annoncées. La consommation d'électricité, {{ 16.5 | Wh }}, est réduite de {{ 16.5 | divided_by: 736 | minus: 1 | times: -100 |round }}% par rapport au programme « Quotidien » à 40°C, mais le linge est-il propre ? Ce programme est probablement réservé au lavage immédiat d'un vêtement sur lequel quelque chose vient d'être renversé et n'a pas eu le temps de sécher dessus.
+Ce programme dure encore moins que les 15 minutes annoncées. La consommation d'électricité, {{ 16.5 | Wh }}, est réduite de {{ 16.5 | percentLess: 736 }} par rapport au programme « Quotidien » à 40°C, mais le linge est-il propre ? Ce programme est probablement réservé au lavage immédiat d'un vêtement sur lequel quelque chose vient d'être renversé et n'a pas eu le temps de sécher dessus.
 
 ### Rinçage et essorage
 

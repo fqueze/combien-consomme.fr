@@ -12,9 +12,9 @@ Une machine à pain permet de créer des pains délicieux et variés, avec une t
 {% tldr %}
 - Utilisée quotidiennement, la machine à pain consomme entre {{ 265 | Wh€PerYear }} et {{ 329 | Wh€PerYear }} par an.
 - Réaliser un pain consomme entre {{ 265 | Wh€ }} et {{ 329 | Wh€ }} ; c'est peu comparé au prix des ingrédients.
-- La cuisson représente la majorité de la consommation d'énergie ({{ 216 | divided_by: 265 | times: 100|round }}%), suivie par le pétrissage ({{ 31.2 | divided_by: 265 | times: 100|round }}%).
-- Un pain à la farine de blé complète consomme {{ 292 | divided_by: 265 |minus: 1 | times: 100|round }}% de plus qu'un pain à la farine blanche.
-- La fonction de maintien au chaud à la fin du programme augmente également la consommation de {{ 329 | divided_by: 292 |minus: 1 | times: 100|round }}%.
+- La cuisson représente la majorité de la consommation d'énergie ({{ 216 | percent: 265}}), suivie par le pétrissage ({{ 31.2 | percent: 265 }}).
+- Un pain à la farine de blé complète consomme {{ 292 | percentMore: 265 }} de plus qu'un pain à la farine blanche.
+- La fonction de maintien au chaud à la fin du programme augmente également la consommation de {{ 329 | percentMore: 292 }}.
 {% endtldr %}
 
 ## Le matériel
@@ -89,7 +89,7 @@ Regardons maintenant étape par étape.
 Zoomons d'abord sur la phase du pétrissage :
 {% profile "machine-a-pain-normal.json.gz" '{"name":"Pétrissage","range":"272530m1799869"}' %}
 
-Cette phase dure environ 30 minutes, et a consommé {{ 31.2 | Wh }}. C'est {{ 31.2 | divided_by: 265 | times: 100|round }}% de l'énergie utilisée pour réaliser ce pain.
+Cette phase dure environ 30 minutes, et a consommé {{ 31.2 | Wh }}. C'est {{ 31.2 | percent: 265 }} de l'énergie utilisée pour réaliser ce pain.
 
 Là encore, on peut décomposer. Zoomons plus sur les 5 premières minutes :
 {% profile "machine-a-pain-normal.json.gz" '{"name":"Pétrissage — zoom sur le début","range":"272530m312872"}' %}
@@ -137,7 +137,7 @@ On voit deux fois le chauffage pendant 5 secondes, pour une puissance moyenne d'
 Regardons maintenant la phase de cuisson :
 {% profile "machine-a-pain-normal.json.gz" '{"name":"Cuisson","range":"8906998m2893524"}' %}
 
-Cette cuisson dure un peu moins de 50 minutes, et a consommé {{ 216 | Wh }}. C'est {{ 216 | divided_by: 265 | times: 100|round }}% de l'énergie utilisée pour la totalité de la réalisation de ce pain ({{ 265 | Wh }}).
+Cette cuisson dure un peu moins de 50 minutes, et a consommé {{ 216 | Wh }}. C'est {{ 216 | percent: 265 }} de l'énergie utilisée pour la totalité de la réalisation de ce pain ({{ 265 | Wh }}).
 
 Pendant la phase de cuisson, seule la résistance est utilisée, et nous voyons à nouveau que la puissance de chauffage a été modulée en chauffant un certain nombre de secondes toutes les 30 secondes.
 Ce motif se répétant toutes les 30 secondes est parfois interrompu : on peut supposer qu'un thermostat arrête le chauffage lorsque la température de cuisson désirée est atteinte et le relance lorsque la température est redescendue.
@@ -157,7 +157,7 @@ Et si on zoome plus encore…
 Regardons maintenant l'enregistrement de la réalisation d'un pain complet :
 {% profile "machine-a-pain-complet.json.gz" '{"name": "Pain à la farine de blé complète", "range": ""}' %}
 
-La consommation totale mesurée — {{ 292 | Wh€ }}, est {{ 292 | divided_by: 265 |minus: 1 | times: 100|round }}% plus élevée que celle mesurée pour le pain blanc.
+La consommation totale mesurée — {{ 292 | Wh€ }}, est {{ 292 | percentMore: 265 }} plus élevée que celle mesurée pour le pain blanc.
 
 L'enregistrement ressemble beaucoup à celui du pain normal, mais il y a une différence notable au début du cycle qui explique la consommation plus élevée : le cycle du pain complet commence par une séquence de préchauffage des ingrédients.
 
@@ -188,7 +188,7 @@ C'est à nouveau un pain complet, notre enregistrement est donc très similaire 
 Le maintien au chaud est prévu pour que le pain réalisé la nuit soit chaud à l'heure du petit-déjeuner.
 On voit donc l'utilisation de la résistance sur la fin de l'enregistrement.
 
-La consommation électrique pour ce pain —{{ 329 | Wh€ }}, est {{ 329 | divided_by: 292 |minus: 1 | times: 100|round }}% plus élevée que celle mesurée pour le pain complet sans maintien au chaud.
+La consommation électrique pour ce pain —{{ 329 | Wh€ }}, est {{ 329 | percentMore: 292 }} plus élevée que celle mesurée pour le pain complet sans maintien au chaud.
 
 
 Si on zoome sur la fin de l'enregistrement, on voit qu'il y a d'abord un temps d'attente

@@ -11,7 +11,7 @@ Combien consomme l'utilisation d'un broyeur WC ? Consomme-t-il plus lorsqu'on ne
 
 {% tldr %}
 - Pour une utilisation typique par un foyer de deux personnes, la consommation annuelle d'électricité de ce broyeur sera de {{ 14.9 | Wh€PerYear }}.
-- La consommation en attente représente {{ 0.435 | times: 24 | divided_by: 14.9 |times: 100|round }}% de la consommation totale.
+- La consommation en attente représente {{ 0.435 | times: 24 | percent: 14.9 }} de la consommation totale.
 - La consommation électrique lorsque la chasse est tirée ne représente pas un coût important. Il faut tirer {{ 0.505 | countPer€: 0.01 }} petites ou {{ 1.14 | countPer€: 0.01 }} grosses chasses d'eau pour dépenser un centime d'euro.
 - La consommation électrique de ce broyeur est négligeable comparée à son coût d'achat.
 {% endtldr %}
@@ -73,7 +73,7 @@ La consommation moyenne mesurée est de {{ 0.435 | W }}, ce qui correspond sur u
 
 ### Sur un an
 
-Sur le profil du broyeur sur une journée complète, il avait été utilisé 6 fois (2 chasses « grosse goutte » et 4 chasses « petite goutte »), ce qui semble correspondre à un usage normal pour un logement où vivent deux personnes. La consommation totale dans la journée était de {{ 14.9 | Wh€ }}, dont {{ 0.435 | times: 24 | Wh }} ({{ 0.435 | times: 24 | divided_by: 14.9 |times: 100|round }}%) pour la consommation en attente.
+Sur le profil du broyeur sur une journée complète, il avait été utilisé 6 fois (2 chasses « grosse goutte » et 4 chasses « petite goutte »), ce qui semble correspondre à un usage normal pour un logement où vivent deux personnes. La consommation totale dans la journée était de {{ 14.9 | Wh€ }}, dont {{ 0.435 | times: 24 | Wh }} ({{ 0.435 | times: 24 | percent: 14.9 }}) pour la consommation en attente.
 
 Si on extrapole la consommation à toute une année, {{ 14.9 | Wh€PerYear }} seront consommés. C'est négligeable comparé à l'investissement pour l'installation d'un tel broyeur (dont le prix public hors pose est d'environ 1000 €).
 

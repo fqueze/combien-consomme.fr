@@ -106,7 +106,7 @@ Lorsque l'imprimante vient de finir une impression, elle reste prête à imprime
 
 {% profile "laserjet-pro-M452dn.json.gz" '{"name": "Mise en veille après 5 minutes", "range": "834377m359515"}' %}
 
-Pendant ces 5 minutes, la puissance consommée est d'environ {{ 15 | W }}. {{ 1.26 | Wh }} sont consommés ici pendant ces 5 minutes, ce qui représente {{ 1.26 | divided_by: 2.44 | times: 100|round }}% de l'énergie nécessaire pour imprimer une page.
+Pendant ces 5 minutes, la puissance consommée est d'environ {{ 15 | W }}. {{ 1.26 | Wh }} sont consommés ici pendant ces 5 minutes, ce qui représente {{ 1.26 | percent: 2.44 }} de l'énergie nécessaire pour imprimer une page.
 
 Une fois ces 5 minutes passées, l'imprimante passe en veille. Voici un enregistrement de 8 heures du comportement de l'imprimante lorsqu'elle est en veille :
 {% profile "laserjet-pro-M452dn-idle.json.gz" '{"name": "En veille pendant 8h", "range": "m28800547"}' %}
