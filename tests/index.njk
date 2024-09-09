@@ -2,7 +2,7 @@
 layout: base-layout.njk
 pagination:
   data: collections.test
-  size: 100
+  size: 10
   reverse: true
   alias: tests
 pagetitle: Tous les tests d'objets
@@ -23,3 +23,10 @@ pagedesc: Pour chaque objet testé, une description de l'objet et de la méthode
     <p>{{ test.page.excerpt }}</p>
    </article>
 {% endfor %}
+{% if pagination.hrefs.length > 1 %}
+<nav id="pages">
+  {% if pagination.href.previous %}<a href="{{ pagination.href.previous }}"><span>‹</span><div>Page précédente</div></a>{% else %}<div></div>{% endif %}
+  <a><div>page {{ pagination.pageNumber + 1 }} sur {{ pagination.hrefs.length }}</div></a>
+  {% if pagination.href.next %}<a href="{{ pagination.href.next }}"><div>Page suivante</div><span>›</span></a>{% else %}<div></div>{% endif %}
+</nav>
+{% endif %}

@@ -87,7 +87,7 @@ body > *, #plusloin {
     padding-top: 0;
     margin-top: 64px;
   }
-  #np {
+  #np, #pages {
     margin-left: 72px;
     margin-right: 72px;
   }
@@ -466,12 +466,12 @@ article.list > h1 {
 }
 
 /* np = next/previous */
-#np {
+#np, #pages {
   background-color: #042f2e;
   color: #e5e7eb !important;
   padding: 0;
 }
-#np > * {
+#np > *, #pages > * {
   display: inline-flex;
   vertical-align: top;
 }
@@ -480,14 +480,27 @@ article.list > h1 {
     width: 50%;
   }
 }
-#np > a {
+#pages > * {
+  width: 33.33%;
+  width: calc(100%/3);
+  text-align: center;
+  vertical-align: middle;
+}
+#np > a, #pages > a {
   padding: 4px;
   color: #e5e7eb !important;
   text-decoration: none;
-  font-size: 1.3rem;
   line-height: 1.5rem;
 }
-#np > a:hover {
+#np > a {
+  font-size: 1.3rem;
+}
+@media (min-width: 450px) {
+  #pages > a {
+    font-size: 1.3rem;
+  }
+}
+#np > a:hover, #pages > a[href]:hover {
   background-color: #064e3b !important;
 }
 #np > a > picture {
@@ -503,11 +516,23 @@ article.list > h1 {
   aspect-ratio: 1;
   object-fit: cover;
 }
-#np > a > div {
+#np > a > div, #pages > a > div {
   flex: auto;
   padding: .1em 2px;
 }
-#np > a > span {
+#np > a > span, #pages > a > span {
   font-size: 6rem;
   margin: 1rem 4px;
+}
+@media (max-width: 449px) {
+  #pages > a > span {
+    font-size: 4rem;
+  }
+}
+#pages > a > span {
+  line-height: 4px;
+  height: 1rem;
+}
+#pages > a > div {
+  margin: auto;
 }
