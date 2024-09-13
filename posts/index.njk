@@ -16,9 +16,9 @@ pagedesc: Ici, on expliquera les méthodes utilisées pour mesurer la consommati
 {% for post in posts %}
   <article class="list">
     <a href="{{ post.url | url }}">{% if post.data.img %}{% image "./images/" + post.data.img, "Image représentant l'article " + post.data.title, "192w", 192, false if loop.first else true  %}{% else %}{% image "./images/hp-missing.png", "Image générique", "192w", 192, false if loop.first else true %}{% endif %}</a>
-    <h1>
+    <h3>
       <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-    </h1>
+    </h3>
     <p><time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time> — {{ post | timeToRead }} de lecture</p>
     <p>{{ post.page.excerpt }}</p>
   </article>

@@ -16,9 +16,9 @@ pagedesc: Pour chaque objet testé, une description de l'objet et de la méthode
 {% for test in tests %}
   <article class="list">
     <a href="{{ test.url | url }}">{% image "./images/" + test.data.img, "Image représentant " + test.data.title, "192w", 192, false if loop.first else true %}</a>
-    <h1>
+    <h3>
       <a href="{{ test.url | url }}">{{ test.data.pagetitle }}</a>
-    </h1>
+    </h3>
     <p><time datetime="{{ test.date | dateIso }}">{{ test.date | dateReadable }}</time> — {{ test | timeToRead }} de lecture</p>
     <p>{{ test.page.excerpt }}</p>
    </article>

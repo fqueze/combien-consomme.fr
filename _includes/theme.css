@@ -450,15 +450,19 @@ article.list > a > picture {
   overflow: hidden;
   height: 100%;
   display:block;
+  max-width: 33%;
+  margin-right: 24px;
 }
 article.list > a > picture > img,
 article.list > time {
   display: block;
 }
-article.list > p,
-article.list > h1,
-article.list > time {
-  padding-left: 224px;
+@media (min-width: 768px) {
+  article.list > p,
+  article.list > h3,
+  article.list > time {
+    padding-left: 224px;
+  }
 }
 article.list > h1 {
   font-size: 2rem;
