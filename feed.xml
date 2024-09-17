@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-09-13T20:03:18Z</updated>
+<updated>2024-09-17T21:06:39Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un robot Rapetout</title>
+ <link href="https://combien-consomme.fr/tests/robot-rapetout/"/>
+ <updated>2024-09-17T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/robot-rapetout/</id>
+ <summary xml:lang="fr" type="html">Le robot « Rapetout », tout droit sorti des années 90, permet de râper des aliments directement au dessus de l&#39;assiette. Combien consomme ce râpage au plus près de l&#39;assiette ?</summary>
+</entry>
 <entry>
  <title>une machine à pain</title>
  <link href="https://combien-consomme.fr/tests/machine-a-pain/"/>
@@ -142,12 +149,5 @@
  <updated>2024-04-11T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/chauffe-biberon/</id>
  <summary xml:lang="fr" type="html">Pour réchauffer le lait maternel, l&#39;indispensable chauffe biberon. Combien consomme-t-il ?</summary>
-</entry>
-<entry>
- <title>un aspirateur d&#39;atelier</title>
- <link href="https://combien-consomme.fr/tests/aspirateur-atelier/"/>
- <updated>2024-04-11T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/aspirateur-atelier/</id>
- <summary xml:lang="fr" type="html">Un aspirateur puissant pour nettoyer lors d&#39;un chantier, ou pour le bricolage. À quoi ressemble sa consommation ?</summary>
 </entry>
 </feed>
