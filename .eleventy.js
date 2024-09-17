@@ -131,9 +131,33 @@ async function loadProfile(profile) {
     });
   }
 
+  function unserializeSamples({ timeDeltas, time, ...restOfSamples }) {
+    let lastTime = 0;
+    return {
+      time: time || (timeDeltas).map(delta => {
+        lastTime = lastTime + delta;
+        return lastTime;
+      }),
+      ...restOfSamples,
+    };
+  }
+
   let promise = new Promise(async function(resolve) {
     let rv = JSON.parse(await streamToString(fs.createReadStream('./profiles/' + profile)
                                                .pipe(zlib.createGunzip())));
+
+    // Undo differential timestamp compression.
+    let {counters, ...restOfProfile} = rv;
+    rv = {
+      ...restOfProfile,
+      counters: counters.map(({ samples, ...restOfCounter }) => {
+        return {
+          ...restOfCounter,
+          samples: unserializeSamples(samples),
+        };
+      })
+    };
+
     b.after();
     resolve(rv);
   });
