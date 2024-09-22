@@ -191,7 +191,7 @@ div > h2 {
 p {
   margin-top: 0;
 }
-#intro img {
+#intro > picture > img {
   border-radius: 8px;
   width: 100%;
 }
