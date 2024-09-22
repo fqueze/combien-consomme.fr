@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-09-17T21:06:39Z</updated>
+<updated>2024-09-22T20:23:19Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un couteau électrique</title>
+ <link href="https://combien-consomme.fr/tests/couteau-electrique/"/>
+ <updated>2024-09-22T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/couteau-electrique/</id>
+ <summary xml:lang="fr" type="html">Mémé l&#39;a eu pour la fête des mères. En vrai, c&#39;était toujours Pépé qui s&#39;en servait. Le bruit caractéristique du couteau électrique indiquait qu&#39;on allait passer à table dans quelques instants. Pépé aurait-il fait une économie s&#39;il avait demandé à la boulangerie qu&#39;on lui serve le pain déjà tranché ?</summary>
+</entry>
 <entry>
  <title>un robot Rapetout</title>
  <link href="https://combien-consomme.fr/tests/robot-rapetout/"/>
@@ -142,12 +149,5 @@
  <updated>2024-04-13T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/mixer-houmous/</id>
  <summary xml:lang="fr" type="html">Avec le retour des beaux jours, on ressort le houmous et ses bâtonnets de carottes pour l&#39;apéritif. Mais combien consomme la préparation du houmous ?</summary>
-</entry>
-<entry>
- <title>un chauffe biberon</title>
- <link href="https://combien-consomme.fr/tests/chauffe-biberon/"/>
- <updated>2024-04-11T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/chauffe-biberon/</id>
- <summary xml:lang="fr" type="html">Pour réchauffer le lait maternel, l&#39;indispensable chauffe biberon. Combien consomme-t-il ?</summary>
 </entry>
 </feed>
