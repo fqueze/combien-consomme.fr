@@ -474,6 +474,7 @@ article.list > h1 {
   background-color: #042f2e;
   color: #e5e7eb !important;
   padding: 0;
+  clear: both;
 }
 #np > *, #pages > * {
   display: inline-flex;
