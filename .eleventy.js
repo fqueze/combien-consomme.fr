@@ -58,11 +58,13 @@ function formatDuration(timeMs) {
   return result;
 }
 
-function toPrecisionIfNotInt(number) {
+function toPrecisionIfNotInt(number, decimalSeparator = ",") {
   // Because of floating point representations, we can get numbers like
   // 8.000000000000007. Treat them as if they were integers.
   let isAlmostInt = Math.round(number) == Math.round(number * 1000) / 1000;
-  return isAlmostInt ? Math.round(number) : number.toPrecision(3).replace(/\./, ",");
+  return isAlmostInt ? Math.round(number)
+                     : number.toPrecision(3).replace(/\./,
+                                                     decimalSeparator);
 }
 
 function formatPower(powerW) {
@@ -77,6 +79,10 @@ function formatPower(powerW) {
   return toPrecisionIfNotInt(powerW) + nbsp + "W";
 }
 
+function roundPower(powerW) {
+  return toPrecisionIfNotInt(powerW, ".");
+}
+
 function formatEnergy(energyWh) {
   if (energyWh < 1 && energyWh > 0) {
     return toPrecisionIfNotInt(energyWh * 1000) + nbsp + "mWh";
@@ -87,6 +93,10 @@ function formatEnergy(energyWh) {
   }
 
   return toPrecisionIfNotInt(energyWh) + nbsp + "Wh";
+}
+
+function roundEnergy(energyWh) {
+  return toPrecisionIfNotInt(energyWh, ".");
 }
 
 function formatEuro(costEuro) {
@@ -655,12 +665,12 @@ export default function (eleventyConfig) {
         + svg
         + profileDescription
         + `<table>
-<tr><th>Consommation</th><td>${formatEnergy(stats.energyWh)} — ${formatCost(stats.energyWh)}</td></tr>
+<tr><th>Consommation</th><td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundEnergy(stats.energyWh) + ' | Wh }}&quot;)" title="' + stats.energyWh + ' Wh"' : ''}>${formatEnergy(stats.energyWh)} — ${formatCost(stats.energyWh)}</td></tr>
 <tr><th>Durée</th><td>${formatDuration(stats.durationMs)}</td></tr>
 </table>
 <table class="power">
 <tr><th rowspan="2"><a href="/posts/quelle-puissance-mesurer/">Puissance</a></th><td>médiane</td><td>moyenne</td><td>maximale</td></tr>
-<tr><td${isDev ? ' title="' + stats.medianPowerW + ' W"' : ''}>${formatPower(stats.medianPowerW)}</td><td${isDev ? ' title="' + stats.averagePowerW + ' W"' : ''}>${formatPower(stats.averagePowerW)}</td><td${isDev ? ' title="' + stats.maxPowerW + ' W"' : ''}>${formatPower(stats.maxPowerW)}</td></tr>
+<tr><td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.medianPowerW) + ' | W }}&quot;)" title="' + stats.medianPowerW + ' W"' : ''}>${formatPower(stats.medianPowerW)}</td><td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.averagePowerW) + ' | W }}&quot;)" title="' + stats.averagePowerW + ' W"' : ''}>${formatPower(stats.averagePowerW)}</td><td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.maxPowerW) + ' | W }}&quot;)" title="' + stats.maxPowerW + ' W"' : ''}>${formatPower(stats.maxPowerW)}</td></tr>
 </table>`
         + `</div>`;
     }
