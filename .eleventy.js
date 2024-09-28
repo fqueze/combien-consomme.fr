@@ -349,10 +349,12 @@ export default function (eleventyConfig) {
       const cleanCss = new CleanCSS({}).minify(purgeResult[0].css).styles;
       content = content.replace("</head>", `<style>${cleanCss}</style></head>`);
 
-      content = htmlmin.minify(content, {
-        removeComments: true,
-        collapseWhitespace: true,
-      });
+      if (!process.env.NO_MINIFY) {
+        content = htmlmin.minify(content, {
+          removeComments: true,
+          collapseWhitespace: true,
+        });
+      }
 
       b.after();
     }
