@@ -144,7 +144,7 @@ async function loadProfile(profile) {
   function unserializeSamples({ timeDeltas, time, ...restOfSamples }) {
     let lastTime = 0;
     return {
-      time: time || (timeDeltas).map(delta => {
+      time: time || (timeDeltas).map(function unserializeTime(delta) {
         lastTime = lastTime + delta;
         return lastTime;
       }),
@@ -152,7 +152,7 @@ async function loadProfile(profile) {
     };
   }
 
-  let promise = new Promise(async function(resolve) {
+  let promise = new Promise(async function unserializeProfile(resolve) {
     let rv = JSON.parse(await streamToString(fs.createReadStream('./profiles/' + profile)
                                                .pipe(zlib.createGunzip())));
 
@@ -160,7 +160,7 @@ async function loadProfile(profile) {
     let {counters, ...restOfProfile} = rv;
     rv = {
       ...restOfProfile,
-      counters: counters.map(({ samples, ...restOfCounter }) => {
+      counters: counters.map(function unserializeCounter({ samples, ...restOfCounter }) {
         return {
           ...restOfCounter,
           samples: unserializeSamples(samples),
