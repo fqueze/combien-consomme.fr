@@ -12,7 +12,7 @@ Combien consomme l'utilisation d'une lampe destructeur d'insectes ?
 {% tldr %}
 - Sur une nuit, le destructeur d'insectes a consommé {{ 124 | Wh€ }}.
 - Utiliser le destructeur d'insectes toutes les nuits consomme {{ 142 | Wh€PerMonth }} par mois.
-- L'utiliser tout le temps consomme {{ 11.5 | times: 24 | Wh€PerMonth }} par mois.
+- L'utiliser tout le temps consomme {{ 11.5 | W€PerMonth }} par mois.
 - L'utilisation nocturne sur un été consomme {{ 142 | times: 3 | Wh€PerMonth }}.
 {% endtldr %}
 
@@ -48,12 +48,12 @@ On observe sur cet enregistrement :
 - les consommations médiane et moyenne sont mesurées à {{ 11.5 | W }} (puissance nettement inférieure à l'indication sur l'étiquette, mais proche de celle du descriptif) ;
 - l'électrocution d'insectes ne cause pas une surconsommation assez forte pour être visible.
 
-Pour une nuit de 12 heures et 22 minutes, la consommation totale mesurée est de {{ 142 | Wh€ }}. Si le destructeur d'insectes avait fonctionné toute la journée, il aurait consommé {{ 11.5 | times: 24 | Wh€ }}.
+Pour une nuit de 12 heures et 22 minutes, la consommation totale mesurée est de {{ 142 | Wh€ }}. Si le destructeur d'insectes avait fonctionné toute la journée, il aurait consommé {{ 11.5 | W€PerDay }}.
 
 ### Sur un mois
 Si le destructeur d'insectes est utilisé toutes les nuits pendant un mois, {{ 142 | Wh€PerMonth }} seront consommés.
 
-S'il est utilisé 24 heures sur 24 pendant un mois, {{ 11.5 | times: 24 | Wh€PerMonth }} seront consommés.
+S'il est utilisé 24 heures sur 24 pendant un mois, {{ 11.5 | W€PerMonth }} seront consommés.
 
 ### Sur un été
 

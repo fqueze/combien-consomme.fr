@@ -12,7 +12,7 @@ Pour réchauffer le lait maternel, l'indispensable chauffe biberon. Combien cons
 {% tldr %}
 - Réchauffer un biberon pendant 2 minutes consomme {{ 13.1 | Wh€ }}.
 - {{ 88.3 | Wh€PerYear }} seront consommés en 1 an de tire-allaitement pour réchauffer les biberons.
-- Laisser le chauffe-biberon branché même quand il n'est pas utilisé occasionnera une consommation inutile de {{ 0.460 | times: 24 | Wh€PerYear }} par an.
+- Laisser le chauffe-biberon branché même quand il n'est pas utilisé occasionnera une consommation inutile de {{ 0.460 | W€PerYear }} par an.
 
 {% endtldr %}
 
@@ -51,7 +51,7 @@ Le réchauffage dure ici 1 minute et 55 secondes. La consommation est maximale �
 
 ### En attente
 
-Comme indiqué précédemment, le chauffe biberon consomme {{ 0.460 | W }} au repos. S'il reste branché tout le temps, cela représente {{ 0.460 | times: 24 | Wh€ }} sur une journée, ou {{ 0.460 | times: 24 | Wh€PerYear }} par an.
+Comme indiqué précédemment, le chauffe biberon consomme {{ 0.460 | W }} au repos. S'il reste branché tout le temps, cela représente {{ 0.460 | W€PerDay }} sur une journée, ou {{ 0.460 | W€PerYear }} par an.
 
 C'est {{ 0.460 | times: 24 | percent: 88.3 }} de la consommation mesurée sur une journée qui est inutile ; une consommation équivalente à chauffer pour rien pendant {{ 3600 | times: 24 | times: 0.460 | divided_by: 420 | s }} chaque jour.
 

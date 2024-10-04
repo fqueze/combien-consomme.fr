@@ -12,9 +12,9 @@ Combien consomme la charge d'une batterie d'ordinateur portable ? Et le chargeur
 {% tldr %}
 - Charger la batterie lorsqu'elle est vide consomme {{ 87.4 | Wh€ }}. La charger entièrement tous les jours consommerait {{ 87.4 | Wh€PerYear }} par an.
 - Pendant l'utilisation, la consommation moyenne varie de {{ 11 | W }} pour une utilisation modérée à {{ 76 | W }} pour une utilisation intensive du processeur.
-- Laisser l'ordinateur tout le temps branché lorsqu'il est éteint consomme entre {{ 0.351 | times: 24 | Wh€PerYear }} et {{ 0.857 | times: 24 | Wh€PerYear }} par an.
-- Laisser le chargeur branché lorsque l'ordinateur n'est pas connecté consomme environ {{ 0.00973 | times: 24 | Wh€PerYear }} par an. C'est négligeable, et ce n'est pas là qu'on pourra faire de vraies économies d'énergie.
-- La consommation moyenne en veille dépend beaucoup des paramètres d'alimentation choisis, et a varié lors du test de {{ 0.979 | W }} à {{ 4.73 | W }}. Laisser l'ordinateur tout le temps en veille consommerait de {{ 0.979 | times: 24 | Wh€PerYear }} à {{ 4.73 | times: 24 | Wh€PerYear }} par an. Il est  préférable de l'éteindre lorsqu'on ne s'en sert pas.
+- Laisser l'ordinateur tout le temps branché lorsqu'il est éteint consomme entre {{ 0.351 | W€PerYear }} et {{ 0.857 | W€PerYear }} par an.
+- Laisser le chargeur branché lorsque l'ordinateur n'est pas connecté consomme environ {{ 0.00973 | W€PerYear }} par an. C'est négligeable, et ce n'est pas là qu'on pourra faire de vraies économies d'énergie.
+- La consommation moyenne en veille dépend beaucoup des paramètres d'alimentation choisis, et a varié lors du test de {{ 0.979 | W }} à {{ 4.73 | W }}. Laisser l'ordinateur tout le temps en veille consommerait de {{ 0.979 | W€PerYear }} à {{ 4.73 | W€PerYear }} par an. Il est  préférable de l'éteindre lorsqu'on ne s'en sert pas.
 {% endtldr %}
 
 ## Le matériel
@@ -70,7 +70,7 @@ Si l'on suppose que chaque jour l'ordinateur portable est utilisé sur batterie 
 Voici un zoom sur la consommation une fois que la charge de la batterie a été terminée :
 {% profile "dell-xps15.json.gz" '{"name": "Chargeur laissé branché après la charge", "range": "8797019m41372663"}' %}
 
-Lorsque la batterie est complètement chargée, la puissance consommée par le chargeur diminue énormément mais n'est pas nulle. La précision de l'appareil de mesure utilisé n'est pas suffisante pour voir parfaitement ce qui se passe, mais on peut quand même constater une consommation moyenne de {{ 0.351 | W }}. Si l'ordinateur restait branché au chargeur une année complète après la fin de la charge, {{ 0.351 | times: 24 | Wh€PerYear }} seraient consommés.
+Lorsque la batterie est complètement chargée, la puissance consommée par le chargeur diminue énormément mais n'est pas nulle. La précision de l'appareil de mesure utilisé n'est pas suffisante pour voir parfaitement ce qui se passe, mais on peut quand même constater une consommation moyenne de {{ 0.351 | W }}. Si l'ordinateur restait branché au chargeur une année complète après la fin de la charge, {{ 0.351 | W€PerYear }} seraient consommés.
 
 #### Ordinateur débranché du chargeur
 
@@ -84,12 +84,12 @@ Une fois l'ordinateur rebranché au chargeur, la consommation est supérieure à
 Regardons plus précisément la consommation lorsque l'ordinateur n'est pas branché au chargeur :
 {% profile "dell-xps15.json.gz" '{"name": "Chargeur débranché", "range": "50470890m21585370"}' %}
 
-La consommation moyenne est ici descendue à {{ 0.00973 | W }}, ce qui représente une consommation de {{ 0.00973 | times: 24 | Wh€PerYear }} par an si le chargeur reste tout le temps branché.
+La consommation moyenne est ici descendue à {{ 0.00973 | W }}, ce qui représente une consommation de {{ 0.00973 | W€PerYear }} par an si le chargeur reste tout le temps branché.
 
 Lorsque le chargeur a été rebranché, la consommation a curieusement été plus élevée qu'avant qu'il ne soit débranché :
 {% profile "dell-xps15.json.gz" '{"name": "Chargeur rebranché", "range": "73786675m86636070"}' %}
 
-On observe maintenant une consommation moyenne de {{ 0.857 | W }}, soit {{ 0.857 | times: 24 | Wh€PerYear }}.
+On observe maintenant une consommation moyenne de {{ 0.857 | W }}, soit {{ 0.857 | W€PerYear }}.
 
 ### Consommation maximale 
 
@@ -147,7 +147,7 @@ La puissance médiane est tombée à {{ 3.1 | W }}, mais on remarque de nombreux
 - la consommation est montée à {{ 14 | W }} (en moyenne) pendant environ 20 minutes toutes les 6 heures ;
 - en zoomant plus sur le profil, on observe que la consommation monte à {{ 6 | W }} pendant une seconde toutes les minutes.
 
-Tous ces pics révèlent des activités de l'ordinateur, alors qu'en tant qu'utilisateur, je me serais attendu à ce qu'il soit totalement inactif. Si l'ordinateur restait toute une année dans ce mode de veille, cela consommerait {{ 4.24 | times: 24 | Wh€PerYear }}. Toutes les {{ 4.24 | countPer€: 0.01 }} heures, un centime d'électricité est dépensé lorsque l'ordinateur est dans ce mode de veille.
+Tous ces pics révèlent des activités de l'ordinateur, alors qu'en tant qu'utilisateur, je me serais attendu à ce qu'il soit totalement inactif. Si l'ordinateur restait toute une année dans ce mode de veille, cela consommerait {{ 4.24 | W€PerYear }}. Toutes les {{ 4.24 | countPer€: 0.01 }} heures, un centime d'électricité est dépensé lorsque l'ordinateur est dans ce mode de veille.
 
 J'ai plus tard observé que ce mode de veille qui consomme beaucoup d'énergie semble lié à l'utilisation du mode de gestion de l'alimentation « performances maximales ».
 
@@ -174,7 +174,7 @@ On observe :
 - la puissance médiane est tombée à {{ 1 | W }} ;
 - les pics de consommations, à environ {{ 7 | W }} ont maintenant lieu toutes les 28 minutes. Ils n'affectent que très peu la consommation moyenne.
 
-Si l'ordinateur restait dans ce mode de veille pendant une année complète, il consommerait {{ 0.978 | times: 24 | Wh€PerYear }}. Dit autrement, il faudrait laisser l'ordinateur dans ce mode de veille pendant {{ 0.978 | countPer€: 0.01 }} heures pour dépenser un centime d'électricité.
+Si l'ordinateur restait dans ce mode de veille pendant une année complète, il consommerait {{ 0.978 | W€PerYear }}. Dit autrement, il faudrait laisser l'ordinateur dans ce mode de veille pendant {{ 0.978 | countPer€: 0.01 }} heures pour dépenser un centime d'électricité.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'ordinateurs portables, on pourrait :

@@ -69,7 +69,7 @@ On observe cette fois-ci une puissance maximale de {{ 364 | W }}, ce qui reste l
 Voici un enregistrement pendant 8 heures où les WC n'ont pas été utilisés :
 {% profile "broyeur-wc.json.gz" '{"name": "En attente", "range": "m28813408"}' %}
 
-La consommation moyenne mesurée est de {{ 0.435 | W }}, ce qui correspond sur une journée complète à {{ 0.435 | times: 24 | Wh€ }}. Pour que cette consommation  en attente soit inférieure à la consommation en utilisation, il faudrait tirer au moins {{ 0.435 | times: 24 | divided_by: 0.505 | round }} chasses « petite goutte » ou {{ 0.435 | times: 24 | divided_by: 1.14 | round }} chasses « grosse goutte ».
+La consommation moyenne mesurée est de {{ 0.435 | W }}, ce qui correspond sur une journée complète à {{ 0.435 | W€PerDay }}. Pour que cette consommation  en attente soit inférieure à la consommation en utilisation, il faudrait tirer au moins {{ 0.435 | times: 24 | divided_by: 0.505 | round }} chasses « petite goutte » ou {{ 0.435 | times: 24 | divided_by: 1.14 | round }} chasses « grosse goutte ».
 
 ### Sur un an
 

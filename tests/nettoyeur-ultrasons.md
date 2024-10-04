@@ -12,7 +12,7 @@ Combien coûte l'utilisation d'un nettoyeur à ultrasons ?
 {% tldr %}
 L'utilisation du nettoyeur à ultrasons consomme peu d'énergie car sa durée de fonctionnement est brève : il faudrait effectuer {{ 3.18 | countPer€: 0.01 }} nettoyages de 5 minutes pour consommer 1 centime d'électricité.
 
-Il est souhaitable de débrancher le nettoyeur une fois son utilisation terminée, car sa consommation en attente peut facilement dépasser celle en utilisation. S'il reste branché tout le temps, il consommera {{ 2.4 | times: 24 | Wh€PerYear }} par an.
+Il est souhaitable de débrancher le nettoyeur une fois son utilisation terminée, car sa consommation en attente peut facilement dépasser celle en utilisation. S'il reste branché tout le temps, il consommera {{ 2.4 | W€PerYear }} par an.
 {% endtldr %}
 
 ## Le matériel
@@ -84,7 +84,7 @@ La consommation de {{ 3.02 | Wh€ }} est {{ 3.02 | percentLess: 3.18 }} inféri
 Pour finir, regardons la consommation du nettoyeur lors qu'il est en attente :
 {% profile "nettoyeur-ultrasons.json.gz" '{"name": "En attente pendant 1h", "range": "4669334m3624585"}' %}
 
-Une mesure d'une heure nous indique une puissance moyenne et médiane de {{ 2.4 | W }}. Si l'appareil reste branché en attente, cela représente {{ 2.4 | times: 24 | Wh€ }} par jour (l'équivalent de {{ 2.4 | times: 24 | divided_by: 3.18 | round }} nettoyages de 5 minutes), ou {{ 2.4 | times: 24 | Wh€PerYear }} par an. Il sera donc souhaitable de débrancher le nettoyeur lorsque son utilisation est terminée.
+Une mesure d'une heure nous indique une puissance moyenne et médiane de {{ 2.4 | W }}. Si l'appareil reste branché en attente, cela représente {{ 2.4 | W€PerDay }} par jour (l'équivalent de {{ 2.4 | times: 24 | divided_by: 3.18 | round }} nettoyages de 5 minutes), ou {{ 2.4 | W€PerYear }} par an. Il sera donc souhaitable de débrancher le nettoyeur lorsque son utilisation est terminée.
 
 
 {% plusloin %}
