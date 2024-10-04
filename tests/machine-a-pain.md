@@ -216,7 +216,7 @@ Pour une maison équipée de panneaux photovoltaïques, si le pain n'est pas des
 
 Si nous supposons que cette machine est utilisée tous les jours
 pour avoir chaque matin du pain frais au petit-déjeuner,
-la consommation annuelle sera comprise entre {{ 265 | Wh€PerYear }} et {{ 329 | Wh€PerYear }}. La consommation électrique peut donc dépasser le prix d'achat de la machine en seulement {{ 329 | times: 365.2475 | countPer€: 90}} à {{ 265 | times: 365.2475 | countPer€: 90}} ans.
+la consommation annuelle sera comprise entre {{ 265 | Wh€PerYear }} et {{ 329 | Wh€PerYear }}. La consommation électrique peut donc dépasser le prix d'achat de la machine en seulement {{ 329 | times: 365.2425 | countPer€: 90}} à {{ 265 | times: 365.2425 | countPer€: 90}} ans.
 
 #### Usage occasionnel
 

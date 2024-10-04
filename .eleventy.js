@@ -122,6 +122,10 @@ function formatCost(energyWh) {
   return `<span title="${tooltip}">${formattedValue}</span>`;
 }
 
+function formatEnergyCost(energyWh) {
+  return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
+}
+
 const profileCache = new Map();
 
 async function loadProfile(profile) {
@@ -404,21 +408,22 @@ export default function (eleventyConfig) {
     return Math.round((val1 / val2 - 1) * -100) + "%";
   });
 
+  const daysPerYear = 365.2425;
   eleventyConfig.addFilter('s', s => formatDuration(s * 1000));
   eleventyConfig.addFilter('€', formatEuro);
   eleventyConfig.addFilter('W', formatPower);
   eleventyConfig.addFilter('Wh', formatEnergy);
-  eleventyConfig.addFilter('Wh€PerYear', function(energyWhPerDay) {
-    let energyWh = energyWhPerDay * 365.25;
-    return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
-  });
-  eleventyConfig.addFilter('Wh€PerMonth', function(energyWhPerDay) {
-    let energyWh = energyWhPerDay * 365.25 / 12;
-    return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
-  });
-  eleventyConfig.addFilter('Wh€', function(energyWh) {
-    return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
-  });
+  eleventyConfig.addFilter('W€PerYear', powerW =>
+    formatEnergyCost(powerW * 24 * daysPerYear));
+  eleventyConfig.addFilter('W€PerMonth', powerW =>
+    formatEnergyCost(powerW * 24 * daysPerYear / 12));
+  eleventyConfig.addFilter('W€PerDay', powerW =>
+    formatEnergyCost(powerW * 24));
+  eleventyConfig.addFilter('Wh€PerYear', energyWhPerDay =>
+    formatEnergyCost(energyWhPerDay * daysPerYear));
+  eleventyConfig.addFilter('Wh€PerMonth', energyWhPerDay =>
+    formatEnergyCost(energyWhPerDay * daysPerYear / 12));
+  eleventyConfig.addFilter('Wh€', formatEnergyCost);
   eleventyConfig.addFilter('countPer€', function(energyWh, euro = 1) {
     return Math.round(euro / (energyWh / 1000 * pricePerKWh));
   });
