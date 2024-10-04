@@ -70,7 +70,7 @@ Si l'on suppose que chaque jour l'ordinateur portable est utilisé sur batterie 
 Voici un zoom sur la consommation une fois que la charge de la batterie a été terminée :
 {% profile "dell-xps15.json.gz" '{"name": "Chargeur laissé branché après la charge", "range": "8797019m41372663"}' %}
 
-Lorsque la batterie est complètement chargée, la puissance consommée par le chargeur diminue énormément mais n'est pas nulle. La précision de l'appareil de mesure utilisé n'est pas suffisante pour voir parfaitement ce qui se passe, mais on peut quand même constater une consommation moyenne de {{ 0.351 | W }}. Si l'ordinateur restait branché au chargeur une année complète avant la fin de la charge, {{ 0.351 | times: 24 | Wh€PerYear }} seraient consommés.
+Lorsque la batterie est complètement chargée, la puissance consommée par le chargeur diminue énormément mais n'est pas nulle. La précision de l'appareil de mesure utilisé n'est pas suffisante pour voir parfaitement ce qui se passe, mais on peut quand même constater une consommation moyenne de {{ 0.351 | W }}. Si l'ordinateur restait branché au chargeur une année complète après la fin de la charge, {{ 0.351 | times: 24 | Wh€PerYear }} seraient consommés.
 
 #### Ordinateur débranché du chargeur
 
