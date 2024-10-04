@@ -10,7 +10,7 @@ Mémé l'a eu pour la fête des mères. En vrai, c'était toujours Pépé qui s'
 <!-- excerpt -->
 
 {% tldr %}
-- Une famille découpant 12 tranches de pain à croute dure par jour consommerait {{ 0.952 | divided_by: 4 |times: 12 | Wh€PerYear }} par an avec un tel couteau électrique.
+- Une famille découpant 12 tranches de pain à croute dure par jour consommerait {{ 0.952 | divided_by: 4 | times: 12 | Wh€PerYear }} par an avec un tel couteau électrique.
 - Découper une tranche de pain consomme entre {{ 0.065 | Wh }} et {{ 0.952 | divided_by: 4 | Wh }}. C'est très peu — il faudrait découper {{ 0.952 | divided_by: 4 | countPer€: 0.01 }} à {{ 0.0652 | countPer€: 0.01 }} tranches de pain pour dépenser un centime en électricité.
 - Trancher un pain à la croute dure peut consommer plus de 3 fois plus d'électricité que trancher un pain mou.
 - La puissance consommée peut dépasser de {{ 92.9 | percentMore: 60 }} la puissance indiquée sous l'appareil lors de la découpe d'un aliment dur.
@@ -83,13 +83,13 @@ Il y en a bien 4 !
 
 La forme de l'enregistrement est un peu différente : on voit qu'il y a des petits pics dans la puissance mesurée pour la découpe de chaque tranche. On peut supposer que chacun d'eux correspond à un moment où le moteur a forcé un peu pour découper un morceau de croute un peu plus dur.
 
-Les puissances maximale ({{ 76.6 | W }}) et médiane {{ 66.7 | W }} mesurées dépassent toutes les deux la [puissance nominale](https://fr.wikipedia.org/wiki/Puissance_nominale "Puissance nominale sur Wikipedia") de {{ 60 | W }}. L'énergie consommée pour 4 tranches ({{ 0.952 | Wh }}) correspond à {{ 0.952 | divided_by: 4 | Wh }} par tranche. C'est environ {{ 0.952 | divided_by: 4 | divided_by: 0.0682 |round: 1 }} fois plus que pour découper une tranche de pain de mie ! Il ne faudrait couper "que" {{ 0.952 | divided_by: 4 | countPer€: 0.01 }} tranches de ce pain au maïs pour dépenser un centime.
+Les puissances maximale ({{ 76.6 | W }}) et médiane {{ 66.7 | W }} mesurées dépassent toutes les deux la [puissance nominale](https://fr.wikipedia.org/wiki/Puissance_nominale "Puissance nominale sur Wikipedia") de {{ 60 | W }}. L'énergie consommée pour 4 tranches ({{ 0.952 | Wh }}) correspond à {{ 0.952 | divided_by: 4 | Wh }} par tranche. C'est environ {{ 0.952 | divided_by: 4 | divided_by: 0.0682 | round: 1 }} fois plus que pour découper une tranche de pain de mie ! Il ne faudrait couper "que" {{ 0.952 | divided_by: 4 | countPer€: 0.01 }} tranches de ce pain au maïs pour dépenser un centime.
 
 La découpe de chaque tranche a duré 12 à 17 secondes, et cette augmentation de durée de coupe (+{{ 17 | percentMore: 5 }}) contribue beaucoup plus à l'augmentation de la consommation d'énergie que l'augmentation de la puissance mesurée (+{{ 66.7 | percentMore: 55.6 }}).
 
 #### Consommation sur un an
 
-En supposant qu'une famille mange de ce pain tous les jours et s'en coupe une douzaine de tranches quotidiennement, la consommation mensuelle serait de {{ 0.952 | divided_by: 4 |times: 12 | Wh€PerMonth }} par mois, ou {{ 0.952 | divided_by: 4 |times: 12 | Wh€PerYear }} par an.
+En supposant qu'une famille mange de ce pain tous les jours et s'en coupe une douzaine de tranches quotidiennement, la consommation mensuelle serait de {{ 0.952 | divided_by: 4 | times: 12 | Wh€PerMonth }} par mois, ou {{ 0.952 | divided_by: 4 | times: 12 | Wh€PerYear }} par an.
 
 ### Pain rassis
 
@@ -102,7 +102,7 @@ la tranche a fini en petits morceaux !
 Regardons tout de même les mesures de consommation :
 {% profile "couteau-electrique.json.gz" '{"name":"Tentative de découpe de pain rassis","range":"995983m56019"}' %}
 
-L'opération a duré plus de 50 secondes, et la consommation s'envole : {{ 1.15 | Wh }}. C'est autant que pour couper {{ 1.15 | divided_by: 0.0682 |round }} tranches de pain de mie !
+L'opération a duré plus de 50 secondes, et la consommation s'envole : {{ 1.15 | Wh }}. C'est autant que pour couper {{ 1.15 | divided_by: 0.0682 | round }} tranches de pain de mie !
 
 Les puissances maximale ({{ 92.9 | W }}) et médiane ({{ 78.9 | W }}) sont respectivement {{ 92.9 | percentMore: 60 }} et {{ 78.9 | percentMore: 60 }} supérieures à la puissance nominale.
 

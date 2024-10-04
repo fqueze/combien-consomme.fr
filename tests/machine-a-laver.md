@@ -10,7 +10,7 @@ Le lave-linge fait partie des gros consommateurs d'eau et d'énergie d'une maiso
 <!-- excerpt -->
 
 {% tldr %}
-La consommation annuelle du lave linge sera comprise entre {{ 736 |times: 50 | Wh€ }} pour une personne seule réalisant 50 lessives par an et {{ 736 | Wh€PerYear }} pour une famille utilisant la machine à laver tous les jours.
+La consommation annuelle du lave linge sera comprise entre {{ 736 | times: 50 | Wh€ }} pour une personne seule réalisant 50 lessives par an et {{ 736 | Wh€PerYear }} pour une famille utilisant la machine à laver tous les jours.
 
 La consommation électrique de la machine à laver est dominée par le chauffage de l'eau ({{ 618 | percent: 736 }} de la consommation pour un chauffage à 40°C ; {{ 738 | percent: 835 }} à 60°C).
 Faire passer la température de lavage de 40 à 30°C réduit la consommation électrique de {{ 348 | percentLess: 736 }}.
@@ -114,7 +114,7 @@ Le profil est très similaire à celui de la lessive au programme « quotidien �
 
 {% profile "lave-linge-30-quotidien.json.gz" '{"name": "Chauffage lors d\'un lavage à 30°C", "range": "396822m362759"}' %}
 
-Le chauffage dure 6 minutes au lieu de 16, avec une consommation de {{ 230 | Wh }} au lieu de {{ 618 | Wh }} (réduction de {{ 230 | percentLess: 618}}). La consommation pour la totalité de la lessive passe de {{ 736 | Wh€ }} à {{ 348 | Wh€ }}, soit une réduction de {{ 348 | percentLess: 736 }}.
+Le chauffage dure 6 minutes au lieu de 16, avec une consommation de {{ 230 | Wh }} au lieu de {{ 618 | Wh }} (réduction de {{ 230 | percentLess: 618 }}). La consommation pour la totalité de la lessive passe de {{ 736 | Wh€ }} à {{ 348 | Wh€ }}, soit une réduction de {{ 348 | percentLess: 736 }}.
 
 À 30°C, le chauffage représente {{ 230 | percent: 348 }} de la consommation électrique de la lessive.
 
@@ -152,7 +152,7 @@ On peut retrouver cette forme dans les profils des lavages analysés précédemm
 
 ### Consommation sur un an
 
-Si l'on suppose que la lessive au programme « Quotidien » 40°C analysée initialement est la plus courante et qu'on extrapole, le coût annuel en électricité sera de {{ 736 |times: 50 | Wh€ }} pour une personne seule réalisant 50 lessives par an. Pour une famille nombreuse utilisant la machine à laver une fois par jour, la consommation annuelle sera de {{ 736 | Wh€PerYear }}.
+Si l'on suppose que la lessive au programme « Quotidien » 40°C analysée initialement est la plus courante et qu'on extrapole, le coût annuel en électricité sera de {{ 736 | times: 50 | Wh€ }} pour une personne seule réalisant 50 lessives par an. Pour une famille nombreuse utilisant la machine à laver une fois par jour, la consommation annuelle sera de {{ 736 | Wh€PerYear }}.
 
 ### Conseils pour l'autoconsommation photovoltaïque
 

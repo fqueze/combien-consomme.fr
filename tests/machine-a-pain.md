@@ -12,7 +12,7 @@ Une machine à pain permet de créer des pains délicieux et variés, avec une t
 {% tldr %}
 - Utilisée quotidiennement, la machine à pain consomme entre {{ 265 | Wh€PerYear }} et {{ 329 | Wh€PerYear }} par an.
 - Réaliser un pain consomme entre {{ 265 | Wh€ }} et {{ 329 | Wh€ }} ; c'est peu comparé au prix des ingrédients.
-- La cuisson représente la majorité de la consommation d'énergie ({{ 216 | percent: 265}}), suivie par le pétrissage ({{ 31.2 | percent: 265 }}).
+- La cuisson représente la majorité de la consommation d'énergie ({{ 216 | percent: 265 }}), suivie par le pétrissage ({{ 31.2 | percent: 265 }}).
 - Un pain à la farine de blé complète consomme {{ 292 | percentMore: 265 }} de plus qu'un pain à la farine blanche.
 - La fonction de maintien au chaud à la fin du programme augmente également la consommation de {{ 329 | percentMore: 292 }}.
 {% endtldr %}
@@ -208,7 +208,7 @@ La première séquence de chauffage, d'une puissance moyenne d'à peu près {{ 3
 
 Même si le prix d'achat des ingrédients nécessaires à la réalisation du pain sera largement supérieur au prix de l'électricité utilisée, estimons l'impact de l'utilisation de la machine à pain sur les factures d'électricité.
 
-La consommation électrique mesurée pour produire nos pains a varié de {{ 265 | Wh€ }} à {{ 329 | Wh€ }}. En supposant un prix d'achat neuf de 90 €, cela nous donne une fourchette de {{ 329 | countPer€: 90}} à {{ 265 | countPer€: 90 }} pains à réaliser pour que le coût de l'électricité égale celui de la machine.
+La consommation électrique mesurée pour produire nos pains a varié de {{ 265 | Wh€ }} à {{ 329 | Wh€ }}. En supposant un prix d'achat neuf de 90 €, cela nous donne une fourchette de {{ 329 | countPer€: 90 }} à {{ 265 | countPer€: 90 }} pains à réaliser pour que le coût de l'électricité égale celui de la machine.
 
 Pour une maison équipée de panneaux photovoltaïques, si le pain n'est pas destiné à être consommé au petit-déjeuner, on pourra optimiser l'auto-consommation en produisant son pain en journée plutôt que la nuit. On jettera éventuellement un coup d'oeil à la météo pour s'assurer que la dernière heure du cycle (celle pendant laquelle aura lieu la cuisson) se produira à un moment où le ciel ne sera pas totalement couvert.
 
@@ -216,7 +216,7 @@ Pour une maison équipée de panneaux photovoltaïques, si le pain n'est pas des
 
 Si nous supposons que cette machine est utilisée tous les jours
 pour avoir chaque matin du pain frais au petit-déjeuner,
-la consommation annuelle sera comprise entre {{ 265 | Wh€PerYear }} et {{ 329 | Wh€PerYear }}. La consommation électrique peut donc dépasser le prix d'achat de la machine en seulement {{ 329 | times: 365.2425 | countPer€: 90}} à {{ 265 | times: 365.2425 | countPer€: 90}} ans.
+la consommation annuelle sera comprise entre {{ 265 | Wh€PerYear }} et {{ 329 | Wh€PerYear }}. La consommation électrique peut donc dépasser le prix d'achat de la machine en seulement {{ 329 | times: 365.2425 | countPer€: 90 }} à {{ 265 | times: 365.2425 | countPer€: 90 }} ans.
 
 #### Usage occasionnel
 

@@ -13,7 +13,7 @@ Combien consomme une imprimante laser professionnelle quand elle imprime ? Et qu
 - L'impression d'une seule page consomme {{ 2.44 | Wh }}. Il faudrait imprimer {{ 2.44 | countPer€: 0.01 }} pages pour dépenser 1 centimes d'euro en électricité.
 - La consommation par page diminue significativement lorsque les pages sont imprimées à la suite. Cela s'explique car le gros de la consommation correspond au préchauffage de l'imprimante pour atteindre sa température de fonctionnement.
 - La consommation lorsque l'imprimante reste en éveil pendant 5 minutes après la dernière impression avant de passer en veille n'est pas négligeable. Si l'on est certain d'avoir fini d'utiliser l'imprimante, l'éteindre immédiatement est une bonne idée.
-- Laisser l'imprimante en veille tout le temps consommerait {{ 14 |times: 3| Wh€PerYear }} par an (puissance moyenne de {{ 1.75 | W }}).
+- Laisser l'imprimante en veille tout le temps consommerait {{ 14 | times: 3 | Wh€PerYear }} par an (puissance moyenne de {{ 1.75 | W }}).
 {% endtldr %}
 
 ## Le matériel
@@ -111,7 +111,7 @@ Pendant ces 5 minutes, la puissance consommée est d'environ {{ 15 | W }}. {{ 1.
 Une fois ces 5 minutes passées, l'imprimante passe en veille. Voici un enregistrement de 8 heures du comportement de l'imprimante lorsqu'elle est en veille :
 {% profile "laserjet-pro-M452dn-idle.json.gz" '{"name": "En veille pendant 8h", "range": "m28800547"}' %}
 
-On observe une puissance moyenne d'{{ 1.75 | W }}, légèrement inférieure à la puissance médiane de {{ 2 | W }}. Si l'imprimante reste allumée en veille tout le temps, {{ 14 |times: 3| Wh€ }} seront consommés par jour, ce qui représente {{ 14 |times: 3| Wh€PerYear }} par an.
+On observe une puissance moyenne d'{{ 1.75 | W }}, légèrement inférieure à la puissance médiane de {{ 2 | W }}. Si l'imprimante reste allumée en veille tout le temps, {{ 14 | times: 3 | Wh€ }} seront consommés par jour, ce qui représente {{ 14 | times: 3 | Wh€PerYear }} par an.
 
 Si on zoome sur ce profil, on peut observer que l'imprimante alterne entre une consommation d'environ {{ 2 | W }} et une consommation d'environ {{ 0.7 | W }} :
 
@@ -143,7 +143,7 @@ Le redémarrage complet (sortie de veille, arrêt, démarrage) a consommé {{ 0.
 Une fois éteinte, l'imprimante a une consommation très faible. Voici un enregistrement d'une journée complète :
 {% profile "laserjet-pro-M452dn-idle.json.gz" '{"name": "Éteinte", "range": "32257422m88087578"}' %}
 
-La consommation mesurée est de {{ 0.0108 | Wh}}, avec une puissance moyenne de {{ 0.00045 | W }}. C'est négligeable : il faudrait laisser l'imprimante branchée et éteinte pendant {{ 0.0108 | countPer€: 0.01 | divided_by: 365.2425 |round }} ans pour dépenser 1 centime d'électricité. Difficile de dire si ces valeurs sont réalistes, on a probablement largement dépassé la précision de la prise connectée utilisée comme appareil de mesure.
+La consommation mesurée est de {{ 0.0108 | Wh }}, avec une puissance moyenne de {{ 0.00045 | W }}. C'est négligeable : il faudrait laisser l'imprimante branchée et éteinte pendant {{ 0.0108 | countPer€: 0.01 | divided_by: 365.2425 | round }} ans pour dépenser 1 centime d'électricité. Difficile de dire si ces valeurs sont réalistes, on a probablement largement dépassé la précision de la prise connectée utilisée comme appareil de mesure.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cette imprimante laser, on pourrait :

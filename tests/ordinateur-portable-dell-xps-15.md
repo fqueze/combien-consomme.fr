@@ -12,7 +12,7 @@ Combien consomme la charge d'une batterie d'ordinateur portable ? Et le chargeur
 {% tldr %}
 - Charger la batterie lorsqu'elle est vide consomme {{ 87.4 | Wh€ }}. La charger entièrement tous les jours consommerait {{ 87.4 | Wh€PerYear }} par an.
 - Pendant l'utilisation, la consommation moyenne varie de {{ 11 | W }} pour une utilisation modérée à {{ 76 | W }} pour une utilisation intensive du processeur.
-- Laisser l'ordinateur tout le temps branché lorsqu'il est éteint consomme entre {{ 0.351 | times: 24 | Wh€PerYear }} et {{ 0.857 |times: 24 | Wh€PerYear }} par an.
+- Laisser l'ordinateur tout le temps branché lorsqu'il est éteint consomme entre {{ 0.351 | times: 24 | Wh€PerYear }} et {{ 0.857 | times: 24 | Wh€PerYear }} par an.
 - Laisser le chargeur branché lorsque l'ordinateur n'est pas connecté consomme environ {{ 0.00973 | times: 24 | Wh€PerYear }} par an. C'est négligeable, et ce n'est pas là qu'on pourra faire de vraies économies d'énergie.
 - La consommation moyenne en veille dépend beaucoup des paramètres d'alimentation choisis, et a varié lors du test de {{ 0.979 | W }} à {{ 4.73 | W }}. Laisser l'ordinateur tout le temps en veille consommerait de {{ 0.979 | times: 24 | Wh€PerYear }} à {{ 4.73 | times: 24 | Wh€PerYear }} par an. Il est  préférable de l'éteindre lorsqu'on ne s'en sert pas.
 {% endtldr %}
@@ -22,7 +22,7 @@ Combien consomme la charge d'une batterie d'ordinateur portable ? Et le chargeur
 
 L'ordinateur portable testé est un modèle Dell 15 pouces de la série XPS, fabriqué en 2022. C'est un modèle haut de gamme, destiné à un usage professionnel.
 
-Son processeur a une puissance de base de {{ 45 |W }}, qui peut brièvement monter à {{ 115 | W }} (fonction turbo boost). Il est fourni avec un chargeur {{ 130 | W }} et contient une batterie de {{ 86 | Wh }}.
+Son processeur a une puissance de base de {{ 45 | W }}, qui peut brièvement monter à {{ 115 | W }} (fonction turbo boost). Il est fourni avec un chargeur {{ 130 | W }} et contient une batterie de {{ 86 | Wh }}.
 
 Le système d'exploitation est Windows 11. Toutes les mises à jour sont installées.
 
@@ -60,7 +60,7 @@ La puissance consommée augmente ensuite très lentement pour atteindre un maxim
 
 Ensuite, la charge se poursuit plus lentement pendant 1h9, avec une puissance consommée qui décroît régulièrement jusqu'à {{ 6.4 | W }}, pour une consommation totale de {{ 24.5 | Wh }} pendant cette phase.
 
-Au total pendant la charge, {{ 84 | Wh }} ont été consommés. Sachant que l'ordinateur a d'abord été utilisé pendant 4min20 pendant lesquelles il chargeait également et la charge pendant cette période ayant été d'une puissance d'environ {{ 47 | W }}, on peut ajouter {{ 47 |times: 260 | divided_by: 3600 | Wh }}, ce qui amène la consommation totale à {{ 47 |times: 260 | divided_by: 3600 | plus: 84 | Wh€ }}. La batterie ayant une capacité annoncée de {{ 86 | Wh }}, on peut supposer soit que la batterie était moins vide qu'annoncée par l'ordinateur (très probable car laisser la batterie se vider entièrement nuit à sa durée de vie), soit que les pertes liées au chargeur étaient très faibles (mais c'est peu probable car il était un peu chaud).
+Au total pendant la charge, {{ 84 | Wh }} ont été consommés. Sachant que l'ordinateur a d'abord été utilisé pendant 4min20 pendant lesquelles il chargeait également et la charge pendant cette période ayant été d'une puissance d'environ {{ 47 | W }}, on peut ajouter {{ 47 | times: 260 | divided_by: 3600 | Wh }}, ce qui amène la consommation totale à {{ 47 | times: 260 | divided_by: 3600 | plus: 84 | Wh€ }}. La batterie ayant une capacité annoncée de {{ 86 | Wh }}, on peut supposer soit que la batterie était moins vide qu'annoncée par l'ordinateur (très probable car laisser la batterie se vider entièrement nuit à sa durée de vie), soit que les pertes liées au chargeur étaient très faibles (mais c'est peu probable car il était un peu chaud).
 
 Si l'on suppose que chaque jour l'ordinateur portable est utilisé sur batterie jusqu'à ce qu'elle soit vide, puis qu'il est rechargé entièrement, la consommation annuelle sera de {{ 87.4 | Wh€PerYear }}.
 
@@ -89,7 +89,7 @@ La consommation moyenne est ici descendue à {{ 0.00973 | W }}, ce qui représen
 Lorsque le chargeur a été rebranché, la consommation a curieusement été plus élevée qu'avant qu'il ne soit débranché :
 {% profile "dell-xps15.json.gz" '{"name": "Chargeur rebranché", "range": "73786675m86636070"}' %}
 
-On observe maintenant une consommation moyenne de {{ 0.857 | W }}, soit {{ 0.857 |times: 24 | Wh€PerYear }}.
+On observe maintenant une consommation moyenne de {{ 0.857 | W }}, soit {{ 0.857 | times: 24 | Wh€PerYear }}.
 
 ### Consommation maximale 
 
@@ -98,7 +98,7 @@ Sous l'ordinateur des inscriptions indiquent ses caractéristiques électriques 
 
 Si on regarde de plus près :  
 {% image "./images/dell-xps15-etiquette.jpg" "Zoom sur les caractéristiques techniques indiquées sous l'ordinateur" "512w" 512 %}
-On peut lire « 20V 4.5A/6.5A » ce qui correspond à {{ 20 |times: 4.5 | W }} ou {{ 20 |times: 6.5| W }}, deux modèles de chargeur pouvant être compatibles avec cet ordinateur.
+On peut lire « 20V 4.5A/6.5A » ce qui correspond à {{ 20 | times: 4.5 | W }} ou {{ 20 | times: 6.5 | W }}, deux modèles de chargeur pouvant être compatibles avec cet ordinateur.
 
 Ici, le chargeur utilisé est un modèle de {{ 130 | W }} :  
 {% image "./images/dell-xps15-chargeur.jpg" "Photo du chargeur de l'ordinateur portable Dell" "512w" 512 %}&nbsp;{% image "./images/dell-xps15-chargeur-etiquette.jpg" "Zoom sur les caractéristiques techniques indiquées sous le chargeur" "512w" 512 %}

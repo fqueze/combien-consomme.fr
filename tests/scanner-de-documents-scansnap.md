@@ -22,7 +22,7 @@ Il s'agit ici d'un [scanner de documents](https://fr.wikipedia.org/wiki/Scanner_
 
 C'est un modèle professionnel qui permet de numériser automatiquement une pile de documents (jusqu'à 50 feuilles), des deux côtés, et permet aussi de numériser des tous petits documents, par exemple des tickets de caisse. Pratique pour dématérialiser des archives, ou pour préparer une note de frais. On voit fréquemment ce genre de scanners (en plus moderne) dans les pharmacies pour numériser les ordonnances.
 
-Ce scanner était assez cher lorsqu'il était neuf. Il a maintenant plus de 10 ans (date de fabrication : mars 2010), et je l'ai adopté pour {{10 | € }} dans un marché aux puces. Le plastique est un peu jauni, j'ai dû lui faire un gros nettoyage pour le remettre en état de marche, et il a besoin d'être connecté par un câble USB (alors que les modèles plus récents fonctionnent sans fil), mais il peut encore rendre bien des services !
+Ce scanner était assez cher lorsqu'il était neuf. Il a maintenant plus de 10 ans (date de fabrication : mars 2010), et je l'ai adopté pour {{ 10 | € }} dans un marché aux puces. Le plastique est un peu jauni, j'ai dû lui faire un gros nettoyage pour le remettre en état de marche, et il a besoin d'être connecté par un câble USB (alors que les modèles plus récents fonctionnent sans fil), mais il peut encore rendre bien des services !
 
 ### Méthode de mesure
 
