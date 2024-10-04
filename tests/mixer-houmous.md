@@ -9,6 +9,12 @@ tags: ['test']
 Avec le retour des beaux jours, on ressort le houmous et ses bâtonnets de carottes pour l'apéritif. Mais combien consomme la préparation du houmous ?
 <!-- excerpt -->
 
+{% tldr %}
+- La puissance maximale mesurée ({{ 348 | W }}) est très inférieure à la puissance maximale du mixeur — {{ 1000 | W }}. Probablement car les pois chiches cuits sont un aliment assez mou.
+- La puissance consommée diminue au cours du mixage, à mesure que la résistance rencontrée par la lame se réduit.
+- Le mixeur consomme {{ 0.189 | W }} en veille, soit {{ 0.189 |times: 24 | Wh€PerYear}} par an s'il reste branché tout le temps.
+{% endtldr %}
+
 ## Le matériel
 {% intro "mixer-houmous.jpg" "Un saladier contenant un houmous prêt à mixer, et un mixeur 1000W branché sur une prise connectée Shelly" %}
 Nous utilisons ici un mixeur plongeant Moulinex quickchef, 10 vitesses, 1000 W.
@@ -53,7 +59,7 @@ En capturant le profil du mixage de houmous, nous avons remarqué que la consomm
 La consommation ici mesurée pendant un peu moins de 3 minutes est très faible, et d'ailleurs la forme du profil est ici à prendre avec des pincettes, car nous atteignons les limites de la précision de la prise connectée utilisée pour les mesures. La consommation est probablement assez constante, et les pics sont liés à la méthode de mesure.
 
 En supposant que la mesure réalisée ici est correcte (ou du moins que l'ordre de grandeur est bon), on peut extrapoler la consommation sur un an :
-{% # (0.00856 * 24 * 3600 / 163) = 4.537 %}{{ 4.537 |  Wh€PerYear }}. C'est à la fois peu, et énorme vu le peu d'utilité de garder cette lumière allumée tout le temps dans sa cuisine pour juste avoir à ne pas brancher et débrancher son mixeur.
+{{ 0.189 |times: 24 | Wh€PerYear}}. C'est à la fois peu, et énorme vu le peu d'utilité de garder cette lumière allumée tout le temps dans sa cuisine pour juste avoir à ne pas brancher et débrancher son mixeur.
 
 {% plusloin %}
 On pourrait mesurer :

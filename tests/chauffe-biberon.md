@@ -9,6 +9,13 @@ tags: ['test']
 Pour réchauffer le lait maternel, l'indispensable chauffe biberon. Combien consomme-t-il ?
 <!-- excerpt -->
 
+{% tldr %}
+- Réchauffer un biberon pendant 2 minutes consomme {{ 13.1 | Wh€ }}.
+- {{ 88.3 | Wh€PerYear }} seront consommés en 1 an de tire-allaitement pour réchauffer les biberons.
+- Laisser le chauffe-biberon branché même quand il n'est pas utilisé occasionnera une consommation inutile de {{ 0.460 | times: 24 | Wh€PerYear }} par an.
+
+{% endtldr %}
+
 ## Le matériel
 {% intro "chauffe-biberon.jpg" "Un chauffe biberon BEABA Bib'secondes" %}
 Le modèle testé est un chauffe biberon BEABA Bib'secondes. Une petite quantité d'eau est chauffée jusqu'à ébullition par une résistance électrique, de façon à ce que de la vapeur d'eau passe le long du biberon. Le biberon est ainsi chauffé rapidement par le contact avec de la vapeur d'eau à 100°C.
@@ -41,10 +48,16 @@ Regardons maintenant de plus près ce qu'il se passe lors d'une utilisation :
 {% profile "chauffe-biberon.json.gz" '{"name": "Une utilisation du chauffe biberon", "range": "29253226m120173"}' %}
 
 Le réchauffage dure ici 1 minute et 55 secondes. La consommation est maximale à environ {{ 420 | W }} pendant 1 minute et 50 secondes, puis descend entre 70 et {{ 90 | W }} pendant environ 5 secondes, avant de revenir à l'état de repos.
-   
+
+### En attente
+
+Comme indiqué précédemment, le chauffe biberon consomme {{ 0.460 | W }} au repos. S'il reste branché tout le temps, cela représente {{ 0.460 | times: 24 | Wh€ }} sur une journée, ou {{ 0.460 | times: 24 | Wh€PerYear }} par an.
+
+C'est {{ 0.460 | times: 24 | percent: 88.3 }} de la consommation mesurée sur une journée qui est inutile ; une consommation équivalente à chauffer pour rien pendant {{ 3600 | times: 24 | times: 0.460 | divided_by: 420 | s }} chaque jour.
+
 ### Pour un bébé
 
-Si on suppose que la consommation mesurée sur 24h ({{ 88.3 | Wh }}) est représentative, en extrapolant et en supposant que le tire-allaitement dure environ 1 an (d'abord en allaitement exclusif, puis en allaitement mixte mais avec de plus gros biberons), on obtient {{ 88.3 |  Wh€PerYear }} au total.
+Si on suppose que la consommation mesurée sur 24h ({{ 88.3 | Wh }}) est représentative, en extrapolant et en supposant que le tire-allaitement dure environ 1 an (d'abord en allaitement exclusif, puis en allaitement mixte mais avec de plus gros biberons), on obtient {{ 88.3 | Wh€PerYear }} au total.
 
 C'est bien moins que le prix d'achat neuf du chauffe biberon. Mais un tout petit peu plus que ce que j'ai payé le chauffe biberon d'occasion.
 

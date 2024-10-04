@@ -404,6 +404,7 @@ export default function (eleventyConfig) {
     return Math.round((val1 / val2 - 1) * -100) + "%";
   });
 
+  eleventyConfig.addFilter('s', s => formatDuration(s * 1000));
   eleventyConfig.addFilter('€', formatEuro);
   eleventyConfig.addFilter('W', formatPower);
   eleventyConfig.addFilter('Wh', formatEnergy);

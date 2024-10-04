@@ -9,6 +9,12 @@ tags: ['test']
 Quelle est la consommation d'une tondeuse à gazon électrique ? Combien ça coûte en électricité de tondre sa pelouse ? Est-ce que la consommation varie avec la hauteur de l'herbe ? Regardons ça !
 <!-- excerpt -->
 
+{% tldr %}
+- Tondre pendant une heure une douzaine de fois par an consomme {{ 12000 | Wh€ }}.
+- La consommation augmente d'environ 10% lorsque l'herbe est très haute, comparé à la tonte d'une herbe plus régulière.
+- La puissance indiquée sur l'étiquette de la tondeuse — {{ 1800 | W }} — n'est atteinte que lorsque le moteur force (bourrage, …). Lors de l'utilisation normale, la puissance mesurée est très inférieure — environ {{ 1100 | W }}.
+{% endtldr %}
+
 ## Le matériel
 {% intro "tondeuse.jpg" "Photo de la tondeuse, dans la pelouse déjà tondue, entourée de fleurs oranges" %}
 Il s'agit ici d'une tondeuse à gazon Bosch Rotak 43 (1800 W, diamètre de coupe 43 cm, Bac de 50 L).

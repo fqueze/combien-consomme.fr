@@ -9,6 +9,12 @@ tags: ['test']
 Le sèche-linge, un appareil qui chauffe, fait partie des gros consommateurs d'énergie d'une maison. Au point qu'il est même souvent recommandé d'étendre son linge sur une corde lorsque la météo le permet. Mythe ou réalité ?
 <!-- excerpt -->
 
+{% tldr %}
+- Un cycle de séchage d'1h40 consomme {{ 789 |  Wh€ }} — c'est à peine plus que la consommation du {% test machine-a-laver lavage à 40°C %} qui l'a précédé.
+- La puissance mesurée est entre {{ 400 | W }} et {{ 500 | W }} pendant presque toute la durée du cycle. C'est peu pour un appareil qui chauffe. C'est probablement grâce à la pompe à chaleur. Un sèche-linge d'une technologie plus ancienne consommerait beaucoup plus.
+- Il est assez facile d'alimenter ce sèche-linge avec de l'électricité produite par des panneaux photovoltaïques en toiture.
+{% endtldr %}
+
 ## Le matériel
 {% intro "seche-linge.jpg" "Sèche-linge Samsung" %}
 Le sèche-linge utilisé pour ce test est un modèle Samsung récent, équipé d'une pompe à chaleur. D'après l'étiquette énergétique affichée sur les documents commerciaux, c'est un modèle ayant une très bonne efficacité énergétique. Eh oui, comme on l'a acheté neuf, on a pris ce qui nous paraissait le mieux !
@@ -35,7 +41,7 @@ Voici le profil d'un séchage :
 
 Les consommations médianes, moyennes, et maximales sont proches les unes des autres.
 
-Le cycle a duré au total environ 1 heure 40, alors qu'initialement il était prévu pour durer 3h10, comme on peut le voir sur la photo :
+Le cycle a duré au total environ 1 heure 40, alors qu'initialement il était prévu pour durer 3h10, comme on peut le voir sur la photo :  
 {% image "./images/seche-linge-programme.jpg" "Programme sélectionné : coton, durée prévue 3:10" "512w" 512 %}
 
 Ceci s'explique car le sèche-linge utilise une sonde d'humidité pour décider quand le linge est suffisamment sec pour qu'il puisse s'arrêter.
