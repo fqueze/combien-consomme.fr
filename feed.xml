@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-12-08T21:40:05Z</updated>
+<updated>2024-12-18T23:14:02Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une machine de traitement de l&#39;apnée du sommeil</title>
+ <link href="https://combien-consomme.fr/tests/machine-apnee-sommeil/"/>
+ <updated>2024-12-19T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/machine-apnee-sommeil/</id>
+ <summary xml:lang="fr" type="html">Cette machine améliore la respiration nocturne et réduit les apnées. Combien consomme-t-elle pour réaliser ce petit miracle ?</summary>
+</entry>
 <entry>
  <title>une raclette à deux</title>
  <link href="https://combien-consomme.fr/tests/raclette-a-deux/"/>
@@ -142,12 +149,5 @@
  <updated>2024-04-15T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/machine-a-laver/</id>
  <summary xml:lang="fr" type="html">Le lave-linge fait partie des gros consommateurs d&#39;eau et d&#39;énergie d&#39;une maison. Comment se répartit sa consommation au fil du temps ? Le lave-linge consomme-t-il plus pendant le chauffage ou l&#39;essorage ? Combien coûte une lessive en électricité ?</summary>
-</entry>
-<entry>
- <title>une tondeuse à gazon</title>
- <link href="https://combien-consomme.fr/tests/tondeuse-a-gazon/"/>
- <updated>2024-04-13T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/tondeuse-a-gazon/</id>
- <summary xml:lang="fr" type="html">Quelle est la consommation d&#39;une tondeuse à gazon électrique ? Combien ça coûte en électricité de tondre sa pelouse ? Est-ce que la consommation varie avec la hauteur de l&#39;herbe ? Regardons ça !</summary>
 </entry>
 </feed>
