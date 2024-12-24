@@ -95,9 +95,9 @@ En supposant qu'une famille mange de ce pain tous les jours et s'en coupe une do
 
 Réalisons maintenant un dernier test de découpe, poussant le moteur à ses limites : nous allons maintenant tenter de trancher un morceau de pain rassis qui avait été conservé pour le transformer un jour en pudding.
 
-Une seule tranche a été coupée, en insistant longtemps, et avec un résultat médiocre :
+Une seule tranche a été coupée, en insistant longtemps, et avec un résultat médiocre :  
 {% image "./images/couteau-electrique-pain-rassis.jpg" "Couteau électrique à côté d'un morceau de pain et d'une tranche de pain en miettes" "500w" 500 %}  
-la tranche a fini en petits morceaux !
+La tranche a fini en petits morceaux !
 
 Regardons tout de même les mesures de consommation :
 {% profile "couteau-electrique.json.gz" '{"name":"Tentative de découpe de pain rassis","range":"995983m56019"}' %}

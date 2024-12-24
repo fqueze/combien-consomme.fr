@@ -43,7 +43,7 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 #### L'étiquette
 
 L'étiquette sous la machine nous apprend très peu de choses sur sa consommation :  
-{% image "./images/machine-apnee-sommeil-etiquette.jpg" "TODO" "500w" 500 %}
+{% image "./images/machine-apnee-sommeil-etiquette.jpg" "Etiquette sous la machine, indiquant « prisma SMART max Typ: WM090TD 24V »" "500w" 500 %}
 
 On a une indication de tension — 24 V — mais aucune indication de puissance.
 
@@ -51,7 +51,7 @@ On a une indication de tension — 24 V — mais aucune indication de puissance.
 
 L'étiquette sous l'adaptateur secteur révèle plus d'informations :
 
-{% image "./images/machine-apnee-sommeil-transfo.jpg" "TODO" "300w" 300 %}
+{% image "./images/machine-apnee-sommeil-transfo.jpg" "Etiquette sous l'adapateur secteur, indiquant « Skynet MODEL: ELK-A069 AC INPUT 100-240V-2-1A DC OUTPUT 24V 2.5A »" "300w" 300 %}
 
 « AC INPUT 100-240V-2-1A » nous indique que l'adaptateur secteur peut en entrée recevoir un courant alternatif jusqu'à 2 ampères à 100 volts (soit {{ 200 | W }}) ou 1 ampère à 240 volts (soit {{ 240 | W }}).
 
@@ -60,7 +60,7 @@ Ces valeurs semblent excessivement élevées compte tenu des valeurs de sortie :
 #### La documentation commerciale
 
 La brochure commerciale du fabricant nous donne plus d'indications :  
-{% image "./images/machine-apnee-sommeil-caracteristiques.png" "TODO" "500w" 500 %}
+{% image "./images/machine-apnee-sommeil-caracteristiques.png" "Consommation électrique 240V 100V : en service (traitement) : 0,16A 0,36A en veille (standby) : 0,035A 0,061A" "500w" 500 %}
 
 Une consommation de 0,16 ampères en fonctionnement et 0,035 ampères en veille pour une tension de 240 volts, cela correspond à {{ 0.16 | times: 240 | W }} en fonctionnement, et {{ 0.035 | times: 240 | W }} en veille. Les valeurs de 0,36 ampères et 0,061 ampères à 100 volts correspondent à {{ 0.36 | times: 100 | W }} en fonctionnement et {{ 0.061 | times: 100 | W }} en veille.
 
@@ -78,7 +78,7 @@ Lors du tout premier démarrage, nous pouvons observer un gros pic de consommati
 
 Ensuite, nous observons une consommation d'approximativement 4,6 W qui varie un peu pendant que l'appareil se connecte :
 
-{% image "./images/machine-apnee-sommeil-connect.jpg" "TODO" "500w" 500 %}
+{% image "./images/machine-apnee-sommeil-connect.jpg" "Écran de la machine indiquant « connEct »" "500w" 500 %}
 
 Au bout d'un peu plus de deux minutes, la puissance mesurée descend lorsque l'écran se met en veille.
 
