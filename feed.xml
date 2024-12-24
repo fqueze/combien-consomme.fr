@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-12-18T23:14:02Z</updated>
+<updated>2024-12-24T19:38:44Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une « moulinette S » de Moulinex</title>
+ <link href="https://combien-consomme.fr/tests/moulinette-s/"/>
+ <updated>2024-12-24T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/moulinette-s/</id>
+ <summary xml:lang="fr" type="html">Maman l&#39;a achetée pour hacher la viande quand j&#39;étais petit. Mamie l&#39;a également utilisée quand elle n&#39;avait plus beaucoup de dents. Quelle est la consommation de ce vénérable mixeur qui reprend encore parfois du service ?</summary>
+</entry>
 <entry>
  <title>une machine de traitement de l&#39;apnée du sommeil</title>
  <link href="https://combien-consomme.fr/tests/machine-apnee-sommeil/"/>
@@ -142,12 +149,5 @@
  <updated>2024-04-15T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/seche-linge-a-pompe-a-chaleur/</id>
  <summary xml:lang="fr" type="html">Le sèche-linge, un appareil qui chauffe, fait partie des gros consommateurs d&#39;énergie d&#39;une maison. Au point qu&#39;il est même souvent recommandé d&#39;étendre son linge sur une corde lorsque la météo le permet. Mythe ou réalité ?</summary>
-</entry>
-<entry>
- <title>une machine à laver</title>
- <link href="https://combien-consomme.fr/tests/machine-a-laver/"/>
- <updated>2024-04-15T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/machine-a-laver/</id>
- <summary xml:lang="fr" type="html">Le lave-linge fait partie des gros consommateurs d&#39;eau et d&#39;énergie d&#39;une maison. Comment se répartit sa consommation au fil du temps ? Le lave-linge consomme-t-il plus pendant le chauffage ou l&#39;essorage ? Combien coûte une lessive en électricité ?</summary>
 </entry>
 </feed>
