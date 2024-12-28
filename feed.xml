@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-12-25T22:53:10Z</updated>
+<updated>2024-12-28T11:37:38Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une pompe de relevage de condensats Sanicondens Eco</title>
+ <link href="https://combien-consomme.fr/tests/pompe-de-relevage-de-condensats-sanicondens-eco/"/>
+ <updated>2024-12-27T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/pompe-de-relevage-de-condensats-sanicondens-eco/</id>
+ <summary xml:lang="fr" type="html">Le plombier a installé le cumulus dans un endroit où l&#39;évacuation naturelle de l&#39;eau sortant du groupe sécurité est impossible. Quelle erreur ! Grâce à l&#39;installation d&#39;une pompe de relevage, il ne sera plus nécessaire de vider un seau d&#39;eau une fois par semaine. Ce changement impactera-t-il la facture d&#39;électricité ?</summary>
+</entry>
 <entry>
  <title>une guirlande électrique</title>
  <link href="https://combien-consomme.fr/tests/guirlande-electrique/"/>
@@ -142,12 +149,5 @@
  <updated>2024-05-14T00:00:00Z</updated>
  <id>https://combien-consomme.fr/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/</id>
  <summary xml:lang="fr" type="html">Une prise connectée est un moyen très simple d&#39;enregistrer un profil de la consommation d&#39;un appareil. Voyons comment faire avec une prise Shelly Plus Plug S.</summary>
-</entry>
-<entry>
- <title>une meuleuse d&#39;angle pour couper du carrelage</title>
- <link href="https://combien-consomme.fr/tests/meuleuse-d&#39;angle-carrelage/"/>
- <updated>2024-04-28T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/meuleuse-d&#39;angle-carrelage/</id>
- <summary xml:lang="fr" type="html">Quelle est la consommation d&#39;une meuleuse d&#39;angle pour couper un morceau de carrelage ? Sauf si on fait régulièrement des travaux de carrelage, c&#39;est une opération peu fréquente ; mais combien ça consomme ?</summary>
 </entry>
 </feed>
