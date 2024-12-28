@@ -425,7 +425,7 @@ export default function (eleventyConfig) {
     formatEnergyCost(energyWhPerDay * daysPerYear / 12));
   eleventyConfig.addFilter('Wh€', formatEnergyCost);
   eleventyConfig.addFilter('countPer€', function(energyWh, euro = 1) {
-    return Math.round(euro / (energyWh / 1000 * pricePerKWh));
+    return Math.round(euro / (energyWh / 1000 * pricePerKWh)).toLocaleString("fr-FR");
   });
 
   // Used for meta og:image and twitter:image
