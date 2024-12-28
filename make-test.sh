@@ -1,7 +1,9 @@
 #!/bin/bash
 
+## Example usage: ./make-test.sh "un aspirateur à roulettes"
+
 shortname=`echo "$1"|sed 's/^une //;s/^un //'`
-filename=`echo "$shortname"|tr "àéèêëîïôö " "aeeeeiioo-"`
+filename=`echo "$shortname"|tr "àéèêëîïôöç " "aeeeeiiooc-"`
 testname="tests/$filename.md"
 e=`echo "$1"|sed 's/^une.*/e/;s/^un.*//'`
 if [ "$e" = "e" ]
