@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2024-12-28T11:37:38Z</updated>
+<updated>2025-01-02T16:15:04Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un lecteur de DVD Thomson THD300</title>
+ <link href="https://combien-consomme.fr/tests/lecteur-dvd-thomson-thd300/"/>
+ <updated>2025-01-02T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/lecteur-dvd-thomson-thd300/</id>
+ <summary xml:lang="fr" type="html">Rien de tel qu&#39;un lecteur de DVD pour revoir en famille un chef-d&#39;oeuvre du 7ième art. Quelle est la consommation électrique de ce petit plaisir partagé ?</summary>
+</entry>
 <entry>
  <title>une pompe de relevage de condensats Sanicondens Eco</title>
  <link href="https://combien-consomme.fr/tests/pompe-de-relevage-de-condensats-sanicondens-eco/"/>
@@ -142,12 +149,5 @@
  <updated>2024-05-16T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/hydropulseur-dentaire/</id>
  <summary xml:lang="fr" type="html">Un hydropulseur permet de nettoyer efficacement les endroits même les plus inaccessibles entre les dents. Son utilisation entraîne-t-elle un coût significatif ?</summary>
-</entry>
-<entry>
- <title>Mesurer la consommation avec une prise connectée Shelly Plus Plug S</title>
- <link href="https://combien-consomme.fr/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/"/>
- <updated>2024-05-14T00:00:00Z</updated>
- <id>https://combien-consomme.fr/posts/mesurer-la-consommation-avec-shelly-plus-plug-s/</id>
- <summary xml:lang="fr" type="html">Une prise connectée est un moyen très simple d&#39;enregistrer un profil de la consommation d&#39;un appareil. Voyons comment faire avec une prise Shelly Plus Plug S.</summary>
 </entry>
 </feed>
