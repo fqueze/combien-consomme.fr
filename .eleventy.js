@@ -100,16 +100,16 @@ function roundEnergy(energyWh) {
 }
 
 function formatEuro(costEuro) {
-  function fixed(number) {
-    let fractionDigits = Math.round(number) == number ? 0 : 2;
+  function fixed(number, maxDigits = 2) {
+    let fractionDigits = Math.round(number) == number ? 0 : maxDigits;
     return number.toLocaleString("fr", {
       minimumFractionDigits: fractionDigits,
       maximumFractionDigits: fractionDigits,
     });
   }
-  return costEuro < 1 ?
-      (costEuro < 0.0001 ? "&lt; " + fixed(0.01) : fixed(costEuro * 100)) + nbsp + "c€"
-    : fixed(costEuro) + nbsp + "€";
+  return (costEuro < 0.1 ?
+          (costEuro < 0.001 ? "&lt; " + fixed(0.001, 3) : fixed(costEuro, 3))
+          : fixed(costEuro)) + nbsp + "€";
 }
 
 function formatCost(energyWh) {
