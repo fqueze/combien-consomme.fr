@@ -2,7 +2,7 @@
 layout: test-layout.njk 
 title: une Freebox Mini 4K
 img: freebox-mini4k.jpg
-date: 2025-01-25
+date: 2025-02-04
 tags: ['test']
 ---
 
