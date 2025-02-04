@@ -43,4 +43,5 @@ Pour comprendre de façon plus détaillée la consommation de cette Freebox, on 
 - la consommation lors du démarrage.
 - l'impact de différents composants. On pourrait désactiver les machines virtuelles, retirer le disque dur amovible, désactiver le wifi.
 - l'impact de l'utilisation : on pourrait faire pendant quelques minutes un test de débit internet, et voir si cela augmente significativement la consommation.
+- comparer à la consommation d’autres modèles de Freebox (par exemple à la {% test freebox-mini4k Freebox Mini 4K %}).
 {% endplusloin %}

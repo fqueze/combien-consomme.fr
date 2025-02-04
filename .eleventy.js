@@ -427,6 +427,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('countPer€', function(energyWh, euro = 1) {
     return Math.round(euro / (energyWh / 1000 * pricePerKWh)).toLocaleString("fr-FR");
   });
+  eleventyConfig.addFilter('countHPer€', function(energyWh, euro = 1) {
+    return formatDuration(euro / (energyWh / 1000 * pricePerKWh) * 3600 * 1000);
+  });
 
   // Used for meta og:image and twitter:image
   eleventyConfig.addShortcode("img", async function(src) {
