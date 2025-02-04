@@ -4,7 +4,7 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-02-04T19:05:30Z</updated>
+<updated>2025-02-04T19:06:05Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
@@ -13,7 +13,7 @@
 <entry>
  <title>une Freebox Mini 4K</title>
  <link href="https://combien-consomme.fr/tests/freebox-mini4k/"/>
- <updated>2025-01-25T00:00:00Z</updated>
+ <updated>2025-02-04T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/freebox-mini4k/</id>
  <summary xml:lang="fr" type="html">Arrivée à la maison en même temps que la fibre, on a vite fait d&#39;oublier qu&#39;elle reste tout le temps allumée, mais sa consommation n&#39;est peut-être pas à négliger. Combien consomme la Freebox Mini 4K ?</summary>
 </entry>
