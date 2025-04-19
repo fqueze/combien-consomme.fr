@@ -12,7 +12,7 @@ Faire ses yaourts soi-même c'est sympa, mais on se demande souvent si c'est ren
 {% tldr %}
 La consommation électrique de la cuisson d'une fournée de yaourts ne coûte que quelques centimes, et est proportionnelle à la durée de cuisson : {{ 119 | Wh€ }} pour 8h, {{ 147 | Wh€ }} pour 10h, {{ 178 | Wh€ }} pour 12h.
 
-La yaourtière continue de consommer de l'électricité quand elle a fini la cuisson, mais cette consommation est très faible. Il faudrait laisser la yaourtière branchée {{ 0.0902 | divided_by: 3 | countPer€: 0.01 | divided_by: 24 | round }} jours pour dépenser 1 centime d'électricité.
+La yaourtière continue de consommer de l'électricité quand elle a fini la cuisson, mais cette consommation est très faible. Il faudrait laisser la yaourtière branchée {{ 0.0902 | times: 8 | countPer€: 0.01 }} jours pour dépenser 1 centime d'électricité.
 
 Le facteur principal pour décider s'il est rentable de faire ses yaourts soi-même est le prix d'achat du lait comparé au prix d'achat des yaourts déjà faits.
 {% endtldr %}
@@ -86,7 +86,7 @@ Comme déjà mentionné, lorsque la cuisson est terminée, la consommation de la
 
 La puissance consommée est trop faible pour être mesurée de façon fiable parla prise connectée Shelly, et l'enregistrement indique donc une alternance entre des valeurs à 0 et des valeurs à {{ 0.1 | W }}. La consommation moyenne sur cette période est de {{ 0.0301 | W }}. C'est trop faible pour convertir le coût de cette consommation en euros ou même en centimes d'euros.
 
-Pour se donner une idée, pour dépenser 1 centime d'euro en électricité en laissant branchée la yaourtière à la fin de la cuisson, il faudrait la laisser branchée {{ 0.0902 | divided_by: 3 | countPer€: 0.01 | divided_by: 24 | round }} jours ! Dit autrement, si elle ne sert qu'une fois et reste branchée ensuite toute l'année, la consommation annuelle sera de {{ 0.0902 | times: 8 | Wh€PerYear }}.
+Pour se donner une idée, pour dépenser 1 centime d'euro en électricité en laissant branchée la yaourtière à la fin de la cuisson, il faudrait la laisser branchée {{ 0.0902 | times: 8 | countPer€: 0.01 | round }} jours ! Dit autrement, si elle ne sert qu'une fois et reste branchée ensuite toute l'année, la consommation annuelle sera de {{ 0.0902 | times: 8 | Wh€PerYear }}.
 
 ## Rentabilité
 
@@ -99,5 +99,5 @@ Note : les calculs de cette section ont été faits en divisant les coûts par 7
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'une yaourtière, on pourrait :
 - utiliser un appareil de mesure plus précis pour enregistrer la consommation à la fin de la cuisson.
-- tester d'autres modèles de yaourtière plus modernes pour voir si certains disposent d'un thermostat qui causerait une variation de la consommation en fonction de la température ambiante de la pièce.
+- tester d'autres modèles de {% test yaourtiere-seb-multi-delices yaourtière plus modernes %} disposant d'un thermostat qui causerait une variation de la consommation en fonction de la température ambiante de la pièce.
 {% endplusloin %}

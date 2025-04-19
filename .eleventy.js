@@ -67,6 +67,10 @@ function toPrecisionIfNotInt(number, decimalSeparator = ",") {
                                                      decimalSeparator);
 }
 
+function formatVoltage(voltageV) {
+  return toPrecisionIfNotInt(voltageV) + nbsp + "V";
+}
+
 function formatPower(powerW) {
   if (powerW < 1 && powerW > 0) {
     return toPrecisionIfNotInt(powerW * 1000) + nbsp + "mW";
@@ -411,6 +415,7 @@ export default function (eleventyConfig) {
   const daysPerYear = 365.2425;
   eleventyConfig.addFilter('s', s => formatDuration(s * 1000));
   eleventyConfig.addFilter('€', formatEuro);
+  eleventyConfig.addFilter('V', formatVoltage);
   eleventyConfig.addFilter('W', formatPower);
   eleventyConfig.addFilter('Wh', formatEnergy);
   eleventyConfig.addFilter('W€PerYear', powerW =>
