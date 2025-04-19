@@ -106,7 +106,7 @@ Regardons maintenant la consommation de la yaourtière après la fin de la cuiss
 
 La puissance moyenne en veille relevée à {{ 0.211 | W }} est très proche de la moyenne relevée précédemment entre les périodes de chauffe. On peut supposer que cette consommation en veille est due aux pertes dans la conversion du courant alternatif du secteur en courant continu de faible tension utilisé pour alimenter l'électronique, qui reste sous tension tout le temps. L'électronique elle-même et l'afficheur ont probablement des consommations très faibles.
 
-Si cette yaourtière reste branchée en permanence sans jamais être utilisée, sa consommation en veille représentera 1 centime tous les {{ 0.211 | times: 12 | countPer€: 0.01 | round }} jours, ou {{ 0.211 | W€PerMonth }} par mois — {{ 0.211 | W€PerYear }} par an.
+Si cette yaourtière reste branchée en permanence sans jamais être utilisée, sa consommation en veille représentera 1 centime tous les {{ 0.211 | times: 12 | countPer€: 0.01 }} jours, ou {{ 0.211 | W€PerMonth }} par mois — {{ 0.211 | W€PerYear }} par an.
 
 ### Consommation annuelle
 

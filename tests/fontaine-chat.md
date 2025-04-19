@@ -12,7 +12,7 @@ Une fontaine permet à votre fidèle compagnon d'avoir une eau filtrée et toujo
 {% tldr %}
 - La consommation annuelle de la fontaine testée s'élève à {{ 6.65 | times: 8 | Wh€PerYear }}.
 - La puissance moyenne mesurée est de {{ 2.21 | W }}.
-- Il faudrait plus de {{ 6.65 | times: 8 | countPer€: 35.99 | divided_by: 365.2425 | floor }} ans d'utilisation continue pour dépenser plus en électricité que le prix d'achat.
+- Il faudrait plus de {{ 6.65 | times: 8 | times: 365.2425 | countPer€: 35.99 }} ans d'utilisation continue pour dépenser plus en électricité que le prix d'achat.
 {% endtldr %}
 
 ## Le matériel
@@ -53,7 +53,7 @@ Si on extrapole :
 - sur un mois, la consommation serait de {{ 6.65 | times: 8 | Wh€PerMonth }}.
 - sur un an, la consommation serait de {{ 6.65 | times: 8 | Wh€PerYear }}.
 
-Le prix indiqué sur le site du fabriquant pour cette fontaine étant de 35,99 euros, pour dépenser autant d'électricité que le prix d'achat, il faudrait utiliser la fontaine en continu pendant plus de  {{ 6.65 | times: 8 | countPer€: 35.99 | divided_by: 365.2425 | floor }} ans. Si la fontaine dure aussi longtemps, il est probable que les consommables (filtres à remplacer toutes les 2 à 6 semaines) coûteront beaucoup plus cher que l'électricité.
+Le prix indiqué sur le site du fabriquant pour cette fontaine étant de 35,99 euros, pour dépenser autant d'électricité que le prix d'achat, il faudrait utiliser la fontaine en continu pendant plus de {{ 6.65 | times: 8 | times: 365.2425 | countPer€: 35.99 }} ans. Si la fontaine dure aussi longtemps, il est probable que les consommables (filtres à remplacer toutes les 2 à 6 semaines) coûteront beaucoup plus cher que l'électricité.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cette fontaine pour animaux, on pourrait :

@@ -86,7 +86,7 @@ Comme déjà mentionné, lorsque la cuisson est terminée, la consommation de la
 
 La puissance consommée est trop faible pour être mesurée de façon fiable parla prise connectée Shelly, et l'enregistrement indique donc une alternance entre des valeurs à 0 et des valeurs à {{ 0.1 | W }}. La consommation moyenne sur cette période est de {{ 0.0301 | W }}. C'est trop faible pour convertir le coût de cette consommation en euros ou même en centimes d'euros.
 
-Pour se donner une idée, pour dépenser 1 centime d'euro en électricité en laissant branchée la yaourtière à la fin de la cuisson, il faudrait la laisser branchée {{ 0.0902 | times: 8 | countPer€: 0.01 | round }} jours ! Dit autrement, si elle ne sert qu'une fois et reste branchée ensuite toute l'année, la consommation annuelle sera de {{ 0.0902 | times: 8 | Wh€PerYear }}.
+Pour se donner une idée, pour dépenser 1 centime d'euro en électricité en laissant branchée la yaourtière à la fin de la cuisson, il faudrait la laisser branchée {{ 0.0902 | times: 8 | countPer€: 0.01 }} jours ! Dit autrement, si elle ne sert qu'une fois et reste branchée ensuite toute l'année, la consommation annuelle sera de {{ 0.0902 | times: 8 | Wh€PerYear }}.
 
 ## Rentabilité
 

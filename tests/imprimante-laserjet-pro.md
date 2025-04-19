@@ -143,7 +143,7 @@ Le redémarrage complet (sortie de veille, arrêt, démarrage) a consommé {{ 0.
 Une fois éteinte, l'imprimante a une consommation très faible. Voici un enregistrement d'une journée complète :
 {% profile "laserjet-pro-M452dn-idle.json.gz" '{"name": "Éteinte", "range": "32257422m88087578"}' %}
 
-La consommation mesurée est de {{ 0.0108 | Wh }}, avec une puissance moyenne de {{ 0.00045 | W }}. C'est négligeable : il faudrait laisser l'imprimante branchée et éteinte pendant {{ 0.0108 | countPer€: 0.01 | divided_by: 365.2425 | round }} ans pour dépenser 1 centime d'électricité. Difficile de dire si ces valeurs sont réalistes, on a probablement largement dépassé la précision de la prise connectée utilisée comme appareil de mesure.
+La consommation mesurée est de {{ 0.0108 | Wh }}, avec une puissance moyenne de {{ 0.00045 | W }}. C'est négligeable : il faudrait laisser l'imprimante branchée et éteinte pendant {{ 0.0108 | times: 365.2425 | countPer€: 0.01 }} ans pour dépenser 1 centime d'électricité. Difficile de dire si ces valeurs sont réalistes, on a probablement largement dépassé la précision de la prise connectée utilisée comme appareil de mesure.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cette imprimante laser, on pourrait :
