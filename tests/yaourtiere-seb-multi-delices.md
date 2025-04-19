@@ -2,7 +2,7 @@
 layout: test-layout.njk 
 title: une yaourtière SEB Multi delices
 img: yaourtiere-seb-multi-delices.jpg
-date: 2025-04-12
+date: 2025-04-19
 tags: ['test']
 ---
 
