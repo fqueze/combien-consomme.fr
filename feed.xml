@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-02-04T19:06:05Z</updated>
+<updated>2025-04-19T15:53:48Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une yaourtière SEB Multi delices</title>
+ <link href="https://combien-consomme.fr/tests/yaourtiere-seb-multi-delices/"/>
+ <updated>2025-04-19T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/yaourtiere-seb-multi-delices/</id>
+ <summary xml:lang="fr" type="html">Fini les yaourtières de grand-mère qui ne contenaient qu&#39;une simple résistance, place au modèle électronique du 21ième siècle ! Cela change-t-il la quantité d&#39;énergie consommée pour faire des yaourts ?</summary>
+</entry>
 <entry>
  <title>une Freebox Mini 4K</title>
  <link href="https://combien-consomme.fr/tests/freebox-mini4k/"/>
@@ -142,12 +149,5 @@
  <updated>2024-05-19T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/yaourtiere/</id>
  <summary xml:lang="fr" type="html">Faire ses yaourts soi-même c&#39;est sympa, mais on se demande souvent si c&#39;est rentable financièrement. On peut facilement comparer les prix des yaourts et du lait, mais qu&#39;en est-il de la consommation électrique de la yaourtière ?</summary>
-</entry>
-<entry>
- <title>un ouvre-boîtes électrique</title>
- <link href="https://combien-consomme.fr/tests/ouvre-boites-electrique/"/>
- <updated>2024-05-18T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/ouvre-boites-electrique/</id>
- <summary xml:lang="fr" type="html">Mamie en avait un et ça avait l&#39;air trop bien ! Maman n&#39;en voulait pas ; il paraît que c&#39;était inutile et consommait de l&#39;électricité pour rien. Combien maman a-t-elle économisé en ouvrant ses boîtes de conserve à la main ?</summary>
 </entry>
 </feed>
