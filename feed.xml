@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-04-19T15:53:48Z</updated>
+<updated>2025-05-30T20:58:43Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un carillon filaire</title>
+ <link href="https://combien-consomme.fr/tests/carillon-filaire/"/>
+ <updated>2025-05-30T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/carillon-filaire/</id>
+ <summary xml:lang="fr" type="html">Une sonnette près de la porte d&#39;entrée, c’est simple, pratique, et… toujours branché. Ce petit appareil consomme-t-il beaucoup ?</summary>
+</entry>
 <entry>
  <title>une yaourtière SEB Multi delices</title>
  <link href="https://combien-consomme.fr/tests/yaourtiere-seb-multi-delices/"/>
@@ -142,12 +149,5 @@
  <updated>2024-05-31T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/scanner-de-documents-scansnap/</id>
  <summary xml:lang="fr" type="html">Combien consomme la numérisation d&#39;un document ? Et le scanner quand il attend, ou reste branché en permanence ? Mesurons !</summary>
-</entry>
-<entry>
- <title>une yaourtière</title>
- <link href="https://combien-consomme.fr/tests/yaourtiere/"/>
- <updated>2024-05-19T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/yaourtiere/</id>
- <summary xml:lang="fr" type="html">Faire ses yaourts soi-même c&#39;est sympa, mais on se demande souvent si c&#39;est rentable financièrement. On peut facilement comparer les prix des yaourts et du lait, mais qu&#39;en est-il de la consommation électrique de la yaourtière ?</summary>
 </entry>
 </feed>
