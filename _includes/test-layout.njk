@@ -12,6 +12,5 @@ eleventyComputed:
 {% set previous = collections.test | getPreviousCollectionItem(page) %}
 {% set next = collections.test | getNextCollectionItem(page) %}
 <div id="np">
-  {% if previous %}<a href="{{ previous.url | url }}"><span title="Test précédent">‹</span>{% image "./images/" + previous.data.img, "Image représentant " + previous.data.title, "64w", 64 %}<div>{{ previous.data.pagetitle }}</div></a>{%else %}<div></div>{% endif %}
-  {% if next %}<a href="{{ next.url | url }}">{% image "./images/" + next.data.img, "Image représentant " + next.data.title, "64w", 64 %}<div>{{ next.data.pagetitle }}</div><span title="Test suivant">›</span></a>{% endif %}
+{% if previous %}<a href="{{ previous.url | url }}"><span title="Test précédent">‹</span>{% image "./images/" + previous.data.img, "Image représentant " + previous.data.title, "64w", 64 %}<div>{{ previous.data.pagetitle }}</div></a>{%else %}<div></div>{% endif %}{% if next %}<a href="{{ next.url | url }}">{% image "./images/" + next.data.img, "Image représentant " + next.data.title, "64w", 64 %}<div>{{ next.data.pagetitle }}</div><span title="Test suivant">›</span></a>{% endif %}
 </div>

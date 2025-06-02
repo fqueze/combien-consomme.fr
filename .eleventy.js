@@ -704,7 +704,11 @@ export default function (eleventyConfig) {
 </table>
 <table class="power">
 <tr><th rowspan="2"><a href="/posts/quelle-puissance-mesurer/">Puissance</a></th><td>médiane</td><td>moyenne</td><td>maximale</td></tr>
-<tr><td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.medianPowerW) + ' | W }}&quot;)" title="' + stats.medianPowerW + ' W"' : ''}>${formatPower(stats.medianPowerW)}</td><td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.averagePowerW) + ' | W }}&quot;)" title="' + stats.averagePowerW + ' W"' : ''}>${formatPower(stats.averagePowerW)}</td><td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.maxPowerW) + ' | W }}&quot;)" title="' + stats.maxPowerW + ' W"' : ''}>${formatPower(stats.maxPowerW)}</td></tr>
+<tr>
+<td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.medianPowerW) + ' | W }}&quot;)" title="' + stats.medianPowerW + ' W"' : ''}>${formatPower(stats.medianPowerW)}</td>
+<td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.averagePowerW) + ' | W }}&quot;)" title="' + stats.averagePowerW + ' W"' : ''}>${formatPower(stats.averagePowerW)}</td>
+<td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.maxPowerW) + ' | W }}&quot;)" title="' + stats.maxPowerW + ' W"' : ''}>${formatPower(stats.maxPowerW)}</td>
+</tr>
 </table>`
         + `</div>`;
     }
