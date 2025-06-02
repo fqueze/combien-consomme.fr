@@ -207,13 +207,18 @@ function getStatsFromCounterSamples(profileStringId, profile, samples, range = "
     }
   }
 
+  let extraZeros = 0;
   for (let i = 0; i < samples.length; ++i) {
     if (time(i) < start) {
       continue;
     }
     if (time(i) > end) {
       if (powerValues[powerValues.length - 1] == 0) {
-        // If the last sample was 0W, continue drawing until  the end of the specified range.
+        // If the last sample was 0W, continue drawing until the end of the specified range.
+        let missingZeros = Math.round((end - time(i - 1)) / profile.meta.interval) - 1;
+        if (missingZeros >= 1) {
+          extraZeros += missingZeros;
+        }
         lastSample = i;
         powerValues.push(0);
       }
@@ -234,6 +239,16 @@ function getStatsFromCounterSamples(profileStringId, profile, samples, range = "
     if (samples.count[i] || keepAllSamples) {
       lastSample = i;
     }
+
+    if (!keepAllSamples && i > 0 &&
+        samples.count[i] == 0 && samples.count[i - 1] == 0 &&
+        (end !== Infinity || i < samples.length - 1)) {
+      let missingZeros = Math.round((samples.time[i] - samples.time[i - 1]) / profile.meta.interval - 1);
+      if (missingZeros >= 1) {
+        extraZeros += missingZeros;
+      }
+    }
+
     powerValues.push(Math.round(samples.count[i] / ((i == 0 ? profile.meta.interval : (samples.time[i] - samples.time[i - 1])) / 3600)) / 1e9);
   }
 
@@ -243,6 +258,9 @@ function getStatsFromCounterSamples(profileStringId, profile, samples, range = "
     powerValues.splice(-removeCount, removeCount);
   }
   let values = powerValues.slice();
+  if (extraZeros) {
+    powerValues = powerValues.concat(Array(extraZeros).fill(0));
+  }
   powerValues.sort(function compare(a, b) { return a - b; });
 
   let durationMs = Math.min(end, time(lastSample)) - time(firstSample);
