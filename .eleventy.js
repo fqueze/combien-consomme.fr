@@ -436,6 +436,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('V', formatVoltage);
   eleventyConfig.addFilter('W', formatPower);
   eleventyConfig.addFilter('Wh', formatEnergy);
+  eleventyConfig.addFilter('PerYear', WhPerDay =>
+    WhPerDay * daysPerYear);
+  eleventyConfig.addFilter('PerMonth', WhPerDay =>
+    WhPerDay * daysPerYear / 12);
   eleventyConfig.addFilter('W€PerYear', powerW =>
     formatEnergyCost(powerW * 24 * daysPerYear));
   eleventyConfig.addFilter('W€PerMonth', powerW =>
