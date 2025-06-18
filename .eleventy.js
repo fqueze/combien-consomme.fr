@@ -52,7 +52,7 @@ function formatDuration(timeMs) {
       }
     }
   } else {
-    result = timeS + "s";
+    result = timeMs < 1000 ? Math.round(timeMs) + "ms" : timeS + "s";
   }
 
   return result;
