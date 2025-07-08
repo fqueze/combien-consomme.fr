@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-06-18T22:40:51Z</updated>
+<updated>2025-07-08T22:04:23Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un ventilateur de table Carrefour Home 3 vitesses</title>
+ <link href="https://combien-consomme.fr/tests/ventilateur-carrefour-home/"/>
+ <updated>2025-07-08T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/ventilateur-carrefour-home/</id>
+ <summary xml:lang="fr" type="html">Un ventilateur peut rendre la chaleur estivale plus supportable. Ce modèle Carrefour Home promet 3 vitesses et une puissance de 40 W. Quelle est sa consommation réelle ?</summary>
+</entry>
 <entry>
  <title>Mesurer la consommation avec un wattmètre USB-C AVHzY C3</title>
  <link href="https://combien-consomme.fr/posts/mesurer-la-consommation-avec-un-wattmetre-usb/"/>
@@ -142,12 +149,5 @@
  <updated>2024-07-05T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/ordinateur-portable-dell-xps-15/</id>
  <summary xml:lang="fr" type="html">Combien consomme la charge d&#39;une batterie d&#39;ordinateur portable ? Et le chargeur lorsqu&#39;on le laisse branché ? Et l&#39;ordinateur lorsqu&#39;on s&#39;en sert... ou pas ?</summary>
-</entry>
-<entry>
- <title>un nettoyeur à ultrasons</title>
- <link href="https://combien-consomme.fr/tests/nettoyeur-ultrasons/"/>
- <updated>2024-06-16T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/nettoyeur-ultrasons/</id>
- <summary xml:lang="fr" type="html">Combien coûte l&#39;utilisation d&#39;un nettoyeur à ultrasons ?</summary>
 </entry>
 </feed>
