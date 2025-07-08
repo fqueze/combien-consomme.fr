@@ -46,7 +46,7 @@ La puissance augmente avec la vitesse. Le bruit émis augmente aussi, ce qui est
 
 Sur nos deux enregistrements, après un bref pic de consommation correspondant au démarrage du moteur électrique, la puissance mesurée se stabilise.
 - À la vitesse 1, ce ventilateur consomme environ {{ 19 | W }}.
-- À la vitesse 2, la puissance mesurée monte à environ {{ 30 | W }}.
+- À la vitesse 2, la puissance mesurée monte à environ {{ 30 | W }} ({{ 30 | percentMore: 19 }} de plus).
 
 C'est proche, mais légèrement supérieur à la valeur de {{ 28 | W }} indiquée sur l'étiquette.
 La tension du secteur était d'environ {{ 244 | V }} pendant les mesures, et les petites variations de tension semblent avoir entraîné de petites variations dans la puissance mesurée. Il est possible que la puissance de {{ 28 | W }} indiquée sur l'étiquette soit mesurée lorsque que la tension est de {{ 220 | V }}.
@@ -113,7 +113,7 @@ Avec une consommation moyenne d'environ {{ 29 | W }} à la vitesse maximum, ce v
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'un ventilateur, on pourrait comparer avec des ventilateurs :
-- d'autres marques ;
+- d'{% test ventilateur-carrefour-home autres marques %} ;
 - de différents diamètres ;
 - plus ou moins anciens ;
 - ayant de l'électronique et une télécommande.
