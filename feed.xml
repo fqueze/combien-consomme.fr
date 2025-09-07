@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-07-08T22:04:23Z</updated>
+<updated>2025-09-07T22:08:01Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un sèche-linge à évacuation</title>
+ <link href="https://combien-consomme.fr/tests/seche-linge-a-evacuation/"/>
+ <updated>2025-09-08T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/seche-linge-a-evacuation/</id>
+ <summary xml:lang="fr" type="html">Le sèche-linge à évacuation, une technologie ancienne, évacue l&#39;air chaud et humide vers l&#39;extérieur. Cette technologie simple est-elle énergivore ?</summary>
+</entry>
 <entry>
  <title>un ventilateur de table Carrefour Home 3 vitesses</title>
  <link href="https://combien-consomme.fr/tests/ventilateur-carrefour-home/"/>
@@ -142,12 +149,5 @@
  <updated>2024-07-14T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/broyeur-wc/</id>
  <summary xml:lang="fr" type="html">Combien consomme l&#39;utilisation d&#39;un broyeur WC ? Consomme-t-il plus lorsqu&#39;on ne s&#39;en sert pas ?</summary>
-</entry>
-<entry>
- <title>un ordinateur portable Dell XPS 15 pouces</title>
- <link href="https://combien-consomme.fr/tests/ordinateur-portable-dell-xps-15/"/>
- <updated>2024-07-05T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/ordinateur-portable-dell-xps-15/</id>
- <summary xml:lang="fr" type="html">Combien consomme la charge d&#39;une batterie d&#39;ordinateur portable ? Et le chargeur lorsqu&#39;on le laisse branché ? Et l&#39;ordinateur lorsqu&#39;on s&#39;en sert... ou pas ?</summary>
 </entry>
 </feed>
