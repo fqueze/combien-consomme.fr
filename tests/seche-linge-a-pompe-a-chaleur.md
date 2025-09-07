@@ -96,5 +96,5 @@ Pour comprendre de façon plus détaillée la consommation d'un sèche-linge, on
 - observer l'impact du choix de la vitesse d'essorage de {% test machine-a-laver la machine à laver %} sur la consommation du séchage ;
 - comparer avec d'autres modèles de sèche-linge :
   - un modèle à condensation sans pompe à chaleur ;
-  - un modèle à évacuation, qui jette beaucoup d'air chaud à l'extérieur.
+  - {% test seche-linge-a-evacuation un modèle à évacuation %}, qui jette beaucoup d'air chaud à l'extérieur.
 {% endplusloin %}
