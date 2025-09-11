@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-09-07T22:08:01Z</updated>
+<updated>2025-09-11T23:06:05Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>Toutes les multiprises ne se valent pas</title>
+ <link href="https://combien-consomme.fr/posts/multiprises/"/>
+ <updated>2025-09-11T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/posts/multiprises/</id>
+ <summary xml:lang="fr" type="html">On entend souvent dire que les multiprises peuvent être dangereuses, et pourtant on en a tous chez nous. Mythe ou réalité ? Regardons à l&#39;intérieur...</summary>
+</entry>
 <entry>
  <title>un sèche-linge à évacuation</title>
  <link href="https://combien-consomme.fr/tests/seche-linge-a-evacuation/"/>
@@ -142,12 +149,5 @@
  <updated>2024-08-06T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/imprimante-laserjet-pro/</id>
  <summary xml:lang="fr" type="html">Combien consomme une imprimante laser professionnelle quand elle imprime ? Et quand on ne s&#39;en sert pas ?</summary>
-</entry>
-<entry>
- <title>un broyeur WC</title>
- <link href="https://combien-consomme.fr/tests/broyeur-wc/"/>
- <updated>2024-07-14T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/broyeur-wc/</id>
- <summary xml:lang="fr" type="html">Combien consomme l&#39;utilisation d&#39;un broyeur WC ? Consomme-t-il plus lorsqu&#39;on ne s&#39;en sert pas ?</summary>
 </entry>
 </feed>
