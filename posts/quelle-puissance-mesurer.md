@@ -6,7 +6,7 @@ img: hp-wattmeter.png
 tags: ['post']
 ---
 
-Sur combien-consomme.fr, on parle beaucoup de puissance. Cet article vise à clarifier le lien entre puissance et consommation, indiquer quelles sont les différentes puissantes mesurables, et dans quels cas elles nous intéressent.
+Sur combien-consomme.fr, on parle beaucoup de puissance. Cet article vise à clarifier le lien entre puissance et consommation, indiquer quelles sont les différentes puissances mesurables, et dans quels cas elles nous intéressent.
 <!-- excerpt -->
 
 ## Consommation ou puissance
@@ -17,7 +17,7 @@ La consommation électrique correspond à une quantité d'énergie utilisée. C'
 
 Exemple : 1 Wh est la quantité d'énergie consommée par un appareil utilisant une puissance d'1 W pendant une heure, ou d'un appareil utilisant une puissance de 60 W pendant 1 minute, ou d'un appareil consommant 3,6 kW pendant une seconde.
 
-Attention : nous sommes habitués à dire "kilomètres heure" pour l'unité "km/h" qui est en réalité "kilomètres par heures" ; l'unité Watt-heures n'est pas "Watt par heure", mais plutôt "Watts pendant une heure".
+Attention : nous sommes habitués à dire "kilomètres-heure" pour l'unité "km/h" qui est en réalité "kilomètres par heure" ; l'unité Watt-heures n'est pas "Watt par heure", mais plutôt "Watts pendant une heure".
 
 ## Les différentes puissances
 
@@ -62,7 +62,7 @@ Voici ce que ça donne sur un profil de sa consommation :
 
 {% profile "micro-ondes.json.gz" '{"name": "Four à micro-ondes en mode décongelation", "range": "114562m291240"}' %}
 
-Ici, la puissance moyenne est intéressante, elle correspond à la valeur qu'on pourrait retrouver sur des emballage d'aliments qui indiquent « Réchauffer au four à micro-onde à {{ 600 | W }} ».
+Ici, la puissance moyenne est intéressante, elle correspond à la valeur qu'on pourrait retrouver sur des emballages d'aliments qui indiquent « Réchauffer au four à micro-onde à {{ 600 | W }} ».
 
 La puissance maximale, qui est la puissance utilisée lorsque le four chauffe, est celle qu'une installation photovoltaïque devrait fournir pour pouvoir couvrir la consommation électrique de ce four.
 

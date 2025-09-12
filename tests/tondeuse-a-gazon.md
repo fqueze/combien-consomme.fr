@@ -42,7 +42,7 @@ Regardons maintenant en excluant le pic de démarrage :
 
 La consommation maximale mesurée ({{ 1853.9 | W }}) est maintenant très proche de la puissance indiquée sur l'étiquette :
 
-{% image "./images/tondeuse-etiquette.jpg" "Etiquette de la tondeuse Bosch Rotak 43" "512w" 512 %}
+{% image "./images/tondeuse-etiquette.jpg" "Étiquette de la tondeuse Bosch Rotak 43" "512w" 512 %}
 
 On remarque sur le graphique que la consommation varie beaucoup d'un instant à un autre. Les creux à {{ 0 | W }} correspondent évidemment à des moments où la tondeuse était arrêtée car je déplaçais la rallonge. Les pics correspondent aux moments où le moteur forçait en rencontrant des herbes plus hautes, voire à des moments où la tondeuse se bloquait presque (le moteur ralentissait) avec un bourrage d'herbe, et où j'ai dû incliner la tondeuse pour que l'herbe s'évacue par les côtés.
 

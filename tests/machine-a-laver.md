@@ -10,12 +10,12 @@ Le lave-linge fait partie des gros consommateurs d'eau et d'énergie d'une maiso
 <!-- excerpt -->
 
 {% tldr %}
-La consommation annuelle du lave linge sera comprise entre {{ 736 | times: 50 | Wh€ }} pour une personne seule réalisant 50 lessives par an et {{ 736 | Wh€PerYear }} pour une famille utilisant la machine à laver tous les jours.
+La consommation annuelle du lave-linge sera comprise entre {{ 736 | times: 50 | Wh€ }} pour une personne seule réalisant 50 lessives par an et {{ 736 | Wh€PerYear }} pour une famille utilisant la machine à laver tous les jours.
 
 La consommation électrique de la machine à laver est dominée par le chauffage de l'eau ({{ 618 | percent: 736 }} de la consommation pour un chauffage à 40°C ; {{ 738 | percent: 835 }} à 60°C).
 Faire passer la température de lavage de 40 à 30°C réduit la consommation électrique de {{ 348 | percentLess: 736 }}.
 
-L'essorage, deuxième plus gros consommateur, ne représente que {{ 49.8 | percent: 736 }} de l'énergie consommée pour toute la lessive. On peut réduire la consommation de l'essorage en essorant moins vite, mais si le linge sera séché dans un {% test seche-linge-a-pompe-a-chaleur sèche linge %}, réduire l'efficacité de l'essorage risque d'augmenter beaucoup la consommation d'énergie lors du séchage.
+L'essorage, deuxième plus gros consommateur, ne représente que {{ 49.8 | percent: 736 }} de l'énergie consommée pour toute la lessive. On peut réduire la consommation de l'essorage en essorant moins vite, mais si le linge sera séché dans un {% test seche-linge-a-pompe-a-chaleur sèche-linge %}, réduire l'efficacité de l'essorage risque d'augmenter beaucoup la consommation d'énergie lors du séchage.
 
 Pour les familles auto-consommant leur électricité photovoltaïque, il est souhaitable de lancer la machine lorsqu'il y a du soleil.
 {% endtldr %}
@@ -62,7 +62,7 @@ Plusieurs observations à la vue de ce profil :
 - une phase de quelques minutes a une consommation beaucoup plus élevée que les autres. On peut deviner que c'est la partie de la lessive pendant laquelle la machine chauffe de l'eau.
 - la durée totale du cycle avant que la consommation ne devienne nulle a été d'1h15. Si on retire les 2 dernières minutes où la consommation était inférieure à {{ 3 | W }}, il reste 1h13, soit 10 minutes de plus que le temps qui était prévu au démarrage.
 
-#### En détails
+#### En détail
 
 Regardons cette phase de chauffage de plus près :
 

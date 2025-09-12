@@ -10,12 +10,12 @@ Le sèche-linge à évacuation, une technologie ancienne, évacue l'air chaud et
 <!-- excerpt -->
 
 {% tldr %}
-- Utilisé environ 2 fois par semaines, ce sèche-linge consommera {{ 1732.56 | times: 100 | Wh€ }} par an.
+- Utilisé environ 2 fois par semaine, ce sèche-linge consommera {{ 1732.56 | times: 100 | Wh€ }} par an.
 - Un cycle de séchage intensif pour du linge bien essoré consomme {{ 1732.56 | Wh€ }}.
 - Un {% test seche-linge-a-pompe-a-chaleur sèche-linge avec pompe à chaleur %} consomme {{ 789 | percentLess: 1732.56 }} moins.
 - La puissance est d'environ {{ 3300 | W }} pendant la phase de chauffage. C'est beaucoup plus qu'un modèle avec pompe à chaleur, et ça complique l'autoconsommation photovoltaïque.
 - L'air chaud évacué à l'extérieur représente une perte d'énergie importante, surtout en hiver.
-- Si ce vieux modèle fonctionne encore, son remplacement est financièrement peu pertinent, il faudrait plus de 10ans pour faire une économie.
+- Si ce vieux modèle fonctionne encore, son remplacement est financièrement peu pertinent, il faudrait plus de 10 ans pour faire une économie.
 {% endtldr %}
 
 ## Le matériel
@@ -26,13 +26,13 @@ Le sèche-linge « Miele De Luxe-Electronic T 366 » utilisé pour ce test est u
 
 Une résistance électrique est utilisée pour chauffer l'air, qui est ensuite expulsé vers l'extérieur du logement, chargé d'humidité. En sortant, l'air emporte la chaleur avec lui.
 
-Arrivé dans la famille pour accélérer le séchage des vêtements de bébé lorsque mamie est devenue maman, ce vénérable sèche linge des années 80 est toujours là.
+Arrivé dans la famille pour accélérer le séchage des vêtements de bébé lorsque mamie est devenue maman, ce vénérable sèche-linge des années 80 est toujours là.
 
 {% endintro %}
 
 ### Méthode de mesure
 
-La consommation de ce vieux sèche-linge entraînant un courant supérieur aux 12 A supportés par {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %}, et le tableau électrique de mamie n'étant pas équipé d'{% post mesurer-la-consommation-avec-shelly-em un enregisteur sur la ligne dédiée au sèche-linge %}, une solution alternative a été trouvée en plaçant un petit tableau électrique temporaire entre la prise murale dédiée au sèche linge et la prise du cordon d'alimentation du sèche-linge.
+La consommation de ce vieux sèche-linge entraînant un courant supérieur aux 12 A supportés par {% post mesurer-la-consommation-avec-shelly-plus-plug-s une prise connectée Shelly Plus PlugS %}, et le tableau électrique de mamie n'étant pas équipé d'{% post mesurer-la-consommation-avec-shelly-em un enregistreur sur la ligne dédiée au sèche-linge %}, une solution alternative a été trouvée en plaçant un petit tableau électrique temporaire entre la prise murale dédiée au sèche-linge et la prise du cordon d'alimentation du sèche-linge.
 
 {% image "./images/tableau-shelly-pro-en-50.jpg" "Module Shelly Pro EM-50 dans un petit tableau électrique de 6 modules" "300w" 300 %}
 
@@ -46,9 +46,9 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 
 ## Consommation
 
-### Informations fournies par le fabriquant
+### Informations fournies par le fabricant
 
-#### Etiquette
+#### Étiquette
 
 Commençons par regarder les informations sur l'étiquette se trouvant en bas à droite du tambour lorsque la porte est ouverte :  
 {% image "./images/seche-linge-a-evacuation-etiquette.jpg" "Étiquette énergétique du sèche-linge indiquant : « Miele Fabriqué en Allemagne Typ T366  Nr.10/8497964 220V~ 50Hz Chauffage  3000W Puiss.tot. 3300W Fusibles   16A Lampe max  15W Capacite jusqu a 4,5kg linge sec »" "300w" 300 %}
@@ -64,9 +64,9 @@ Commençons par regarder les informations sur l'étiquette se trouvant en bas à
 Ces inscriptions nous indiquent que pour un courant alternatif de {{ 220 | V }} à 50&nbsp;Hz, la puissance totale peut atteindre {{ 3300 | W }}, dont {{ 3000 | W }} pour le chauffage et {{ 15 | W }} pour l'ampoule assurant l'éclairage du tambour. L'appareil est protégé par un fusible de 16 Ampères.
 
 #### Manuel
-Le fabriquant fournit également une page entière de « *Conseils en matière d'économie d'énergie* » dans le manuel d'utilisation de l'appareil :
+Le fabricant fournit également une page entière de « *Conseils en matière d'économie d'énergie* » dans le manuel d'utilisation de l'appareil :
 > Vous économiserez l'énergie et pourrez même sécher une charge complète de machine de 5 kg en
-> - essorant bien le linge avant de le passer au sèche linge dans une machine à laver dotée d'une vitesse d'essorage d'au moins 850 tours/minute ou dans une essoreuse.  
+> - essorant bien le linge avant de le passer au sèche-linge dans une machine à laver dotée d'une vitesse d'essorage d'au moins 850 tours/minute ou dans une essoreuse.  
 Les consommations (valeurs approximatives) portées à toutes les pages de description des programmes vous indiqueront l'incidence d'un linge bien essoré sur la consommation d'électricité.
 > - posant la conduite d'évacuation, de façon que le sèche-linge ne puisse pas réaspirer l'air humide dégagé.
 > - évitant les charges beaucoup trop faibles par rapport aux capacités indiquées dans ce mode d'emploi.  
@@ -158,7 +158,7 @@ Je ne sais pas à quoi correspond cette consommation de {{ 2.40 | W }}, mais peu
 
 ### Un autre cycle avec moins de linge
 
-Un deuxième cycle de séchage a été enregistré. Réglages identiques, mais beaucoup moins de de linge dans le tambour.
+Un deuxième cycle de séchage a été enregistré. Réglages identiques, mais beaucoup moins de linge dans le tambour.
 
 Ce sèche-linge de grand-mère a retrouvé sa fonction initiale : sécher le linge de bébé, et bébé s'étant bien sali en jouant dans le jardin, mamie a fait une deuxième lessive peu après la précédente, ne contenant presque que du linge de bébé, beaucoup moins volumineux que le linge des adultes.
 
@@ -190,7 +190,7 @@ Quoi qu'il en soit, la consommation électrique de l'éclairage est négligeable
 
 ### Consommation annuelle
 
-Si l'on suppose que ce sèche linge est utilisé 100 fois par an, soit environ 2 fois par semaine, ce qui est réaliste pour une famille peu nombreuse, la consommation annuelle sera {{ 1732.56 | times: 100 | Wh€ }} par an.
+Si l'on suppose que ce sèche-linge est utilisé 100 fois par an, soit environ 2 fois par semaine, ce qui est réaliste pour une famille peu nombreuse, la consommation annuelle sera {{ 1732.56 | times: 100 | Wh€ }} par an.
 
 ### Faut-il le remplacer avant sa fin de vie naturelle ?
 
@@ -205,7 +205,7 @@ Si l'on souhaite rester sur un modèle Miele, les prix semblent commencer à {{ 
 
 En continuant de supposer que mamie utilise son sèche-linge environ 100 fois par an, il lui faudra donc {{ 1732.56 | minus: 789 | times: 100 | countPer€: 310 }} à {{ 1732.56 | minus: 789 | times: 100 | countPer€: 1300 }} ans pour rentabiliser un remplacement. Si le vieux modèle tient depuis près de 40 ans (avec une ou deux réparations), pas sûr que les modèles récents aient une telle longévité. Sauf si le vieux modèle se met à coûter cher en réparations, le remplacement pourrait n'être jamais amorti. On va donc conseiller à mamie de faire durer son vieux tromblon encore quelques années !
 
-Initialement, en comparant les consommations maximales des deux appareils, j'avais été choqué par la puissance maximale de {{ 3300 | W }} du sèche-linge ancien, très supérieure à la puissance médiane d'environ {{ 500 | W }} du modèle à pompe à chaleur. J'avais rapidement estimé que le vieux consommait {{ 3300 | divided_by: 500 }} fois plus, mais je n'avais pas remarqué que l'ancien ne chauffe pas tout le temps, alors que le récent chauffe tout au long du cycle, avec des cycles plus long.
+Initialement, en comparant les consommations maximales des deux appareils, j'avais été choqué par la puissance maximale de {{ 3300 | W }} du sèche-linge ancien, très supérieure à la puissance médiane d'environ {{ 500 | W }} du modèle à pompe à chaleur. J'avais rapidement estimé que le vieux consommait {{ 3300 | divided_by: 500 }} fois plus, mais je n'avais pas remarqué que l'ancien ne chauffe pas tout le temps, alors que le récent chauffe tout au long du cycle, avec des cycles plus longs.
 
 ### Impact thermique
 
@@ -213,9 +213,9 @@ Le sèche-linge à évacuation rejette de l'air chaud et humide à l'extérieur.
 
 ### Conseils pour l'autoconsommation photovoltaïque
 
-La forte puissance du sèche-linge à évacuation rend difficile son alimentation par des panneaux photovoltaïques. En effet, une installation photovoltaïque résidentielle classique de {{ 3000 | W }} crête produira rarement plus de {{ 2500 | W }}, alors que le sèche linge testé consomme {{ 3300 | W }} pendant toute la période de séchage intensif.
+La forte puissance du sèche-linge à évacuation rend difficile son alimentation par des panneaux photovoltaïques. En effet, une installation photovoltaïque résidentielle classique de {{ 3000 | W }} crête produira rarement plus de {{ 2500 | W }}, alors que le sèche-linge testé consomme {{ 3300 | W }} pendant toute la période de séchage intensif.
 
-On pourra tout de même essayer d'allumer le sèche linge en début d'après-midi un jour bien ensoleillé pour avoir plus de la moitié de la consommation du séchage couverte par la production photovoltaïque. Mais s'il fait vraiment beau et que la configuration du logement le permet, on pourrait aussi envisager d'étendre le linge en extérieur...
+On pourra tout de même essayer d'allumer le sèche-linge en début d'après-midi un jour bien ensoleillé pour avoir plus de la moitié de la consommation du séchage couverte par la production photovoltaïque. Mais s'il fait vraiment beau et que la configuration du logement le permet, on pourrait aussi envisager d'étendre le linge en extérieur...
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'un sèche-linge à évacuation, on pourrait :

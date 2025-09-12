@@ -34,11 +34,11 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 
 {% profile "mixer-houmous.json.gz" '{"name": "Mixage du houmous", "range": "194488m94817"}' %}
 
-Pour mixer, on procède par à coups. Ici, j'ai mis en marche le mixeur sur des plages de 3 à 5 secondes environ en déplaçant le mixeur à chaque fois pour mixer une autre zone.
+Pour mixer, on procède par à-coups. Ici, j'ai mis en marche le mixeur sur des plages de 3 à 5 secondes environ en déplaçant le mixeur à chaque fois pour mixer une autre zone.
 
 Les 20 premières secondes étaient moins régulières car j'essayais différents réglages de vitesse, qui finalement n'ont pas eu d'impact visible sur le profil.
 
-A chaque fois, nous observons un petit pic de consommation au redémarrage du mixeur, qui correspond au mixage de pois chiches encore entiers, puis on observe une décroissance de la consommation au cours des secondes suivantes, qui correspondent au mixage plus fin de pois chiches déjà broyés.
+À chaque fois, nous observons un petit pic de consommation au redémarrage du mixeur, qui correspond au mixage de pois chiches encore entiers, puis on observe une décroissance de la consommation au cours des secondes suivantes, qui correspondent au mixage plus fin de pois chiches déjà broyés.
 
 De manière plus générale, à mesure que le mixage avance, la résistance du houmous est plus faible, et la consommation diminue.
 
@@ -48,7 +48,7 @@ On constate d'ailleurs sur les 15 dernières secondes que la consommation est fo
 
 Comme les pois chiches sont fermes mais relativement mous au regard de ce que le mixeur peut mixer (rappelez vous, les noix de cajou !), et que la préparation contient beaucoup d'eau, la consommation maximale ({{ 348 | W }}) est loin de la puissance de 1000 W indiquée sur l'appareil :
 
-{% image "./images/mixer-etiquette.jpg" "Etiquette du mixeur" "512w" 512 %}
+{% image "./images/mixer-etiquette.jpg" "Étiquette du mixeur" "512w" 512 %}
 
 ### Consommation en veille
 
@@ -65,5 +65,5 @@ En supposant que la mesure réalisée ici est correcte (ou du moins que l'ordre 
 On pourrait mesurer :
 - la consommation de la cuisson des pois chiches ; elle est probablement bien plus élevée que celle du mixage, il serait pertinent de la mesurer.
 - la consommation en veille avec un enregistreur plus précis.
-- la consommation du même mixeur avec d'autres aliments plus durs (noix de cajou) ou plus mou (une soupe bien cuite).
+- la consommation du même mixeur avec d'autres aliments plus durs (noix de cajou) ou plus mous (une soupe bien cuite).
 {% endplusloin %}

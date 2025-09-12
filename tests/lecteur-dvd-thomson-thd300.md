@@ -6,7 +6,7 @@ date: 2025-01-02
 tags: ['test']
 ---
 
-Rien de tel qu'un lecteur de DVD pour revoir en famille un chef-d'oeuvre du 7ième art. Quelle est la consommation électrique de ce petit plaisir partagé ?
+Rien de tel qu'un lecteur de DVD pour revoir en famille un chef-d'œuvre du 7e art. Quelle est la consommation électrique de ce petit plaisir partagé ?
 <!-- excerpt -->
 
 {% tldr %}
@@ -34,7 +34,7 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 ## Consommation
 
 Combien consomme ce lecteur de DVD ? Commençons par regarder l'étiquette de caractéristiques techniques apposée à l'arrière de l'appareil :  
-{% image "./images/lecteur-dvd-thomson-thd300-etiquette.jpg" "Etiquette indiquant « THOMSON Model: THD300 DVD Player 100-240V~50/60Hz 10W USB: 5V 500mA »" "300w" 300 %}
+{% image "./images/lecteur-dvd-thomson-thd300-etiquette.jpg" "Étiquette indiquant « THOMSON Model: THD300 DVD Player 100-240V~50/60Hz 10W USB: 5V 500mA »" "300w" 300 %}
 
 Cette étiquette indique une consommation (probablement maximale) de {{ 10 | W }}.
 
@@ -46,7 +46,7 @@ Le manuel d'utilisation indique pour sa part :
 
 ### Visionnage d'un film
 
-Nous avons profité du re-visionnage en famille d'un film culte déjà vu et revu de nombreuses fois pour effectuer notre tests. Lorsque le lecteur de DVD est en allumé, les boutons de commandes sont rétro-éclairés en bleu :  
+Nous avons profité du re-visionnage en famille d'un film culte déjà vu et revu de nombreuses fois pour effectuer notre test. Lorsque le lecteur de DVD est en allumé, les boutons de commandes sont rétro-éclairés en bleu :  
 {% image "./images/lecteur-dvd-thomson-thd300-en-marche.jpg" "Lecteur de DVD Thomson THD300 en fonctionnement — bouton éclairé en bleu" "500w" 500 %}
 
 Voici l'enregistrement de la consommation du lecteur DVD pendant la lecture du film :
@@ -83,7 +83,7 @@ Pour dépenser 1 centime d'électricité, il faudrait laisser l'appareil en veil
 
 ### Allumage, chargement du disque
 
-Regardons maintenant l'évolution de la puissance consommée lors des moments particuliers où les moteurs électriques démarrent et s'arrêtent, c'est à dire lorsque l'appareil est allumé, et qu'un disque y est inséré.
+Regardons maintenant l'évolution de la puissance consommée lors des moments particuliers où les moteurs électriques démarrent et s'arrêtent, c'est-à-dire lorsque l'appareil est allumé, et qu'un disque y est inséré.
 
 {% image "./images/lecteur-dvd-thomson-thd300-ouvert.jpg" "Lecteur de DVD Thomson THD300 en veille — tiroir ouvert" "500w" 500 %}
 

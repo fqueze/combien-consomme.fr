@@ -6,7 +6,7 @@ date: 2024-03-26
 tags: ['test']
 ---
 
-Les fours à micro-ondes sont très présents dans nos cuisines. A quoi ressemblent leurs consommations ?
+Les fours à micro-ondes sont très présents dans nos cuisines. À quoi ressemblent leurs consommations ?
 <!-- excerpt -->
 
 ## Le matériel
@@ -16,7 +16,7 @@ Le four à micro-ondes testé est un four Thompson M2201G datant des années 90.
 
 ### Méthode de mesure
 
-Le four à micro-onde est branché sur une prise de courant de la cuisine. Le seul autre appareil alimenté par cette ligne électrique est le réfrigérateur.
+Le four à micro-ondes est branché sur une prise de courant de la cuisine. Le seul autre appareil alimenté par cette ligne électrique est le réfrigérateur.
 
 {% post mesurer-la-consommation-avec-shelly-em Le tableau électrique contient un module Shelly Pro 3EM %} qui mesure (entre autre) la consommation sur la ligne dédiée à ces deux prises. Lorsque le moteur du frigo ne tourne pas, les mesures de consommations obtenues indiquent donc la consommation du four à micro-ondes.
 
@@ -45,7 +45,7 @@ Le four chauffant 5 secondes toutes les 30 secondes, on s'attendrait à une puis
 
 ## Consommation des autres modes
 
-Testons maintenant le comportement pour toutes les autres positions du bouton dé réglage :
+Testons maintenant le comportement pour toutes les autres positions du bouton de réglage :
 
 {% image "./images/micro-ondes-boutons.jpg" "Boutons de commandes du four à micro-ondes" "256w" 256 %}
 

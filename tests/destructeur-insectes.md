@@ -35,7 +35,7 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 ## Consommation
 
 Même si la description de l'appareil indique une puissance de 12 Watts, l'étiquette listant ses caractéristiques techniques indique une puissance de {{ 18.5 | W }} :  
-{% image "./images/destructeur-insectes-etiquette.jpg" "Photo de l'étiquette montrant les catactéristiques techniques du destructeur d'insectes" "300w" 300 %}  
+{% image "./images/destructeur-insectes-etiquette.jpg" "Photo de l'étiquette montrant les caractéristiques techniques du destructeur d'insectes" "300w" 300 %}
 
 ### Sur une nuit
 

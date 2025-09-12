@@ -23,7 +23,7 @@ Une machine à pain permet de créer des pains délicieux et variés, avec une t
 La [machine à pain](https://fr.wikipedia.org/wiki/Machine_%C3%A0_pain) était un objet [très à la mode dans les années 2000](https://www.750g.com/15-ans-apres-qu-est-devenue-la-machine-a-pain-a29194.htm) et encore un peu dans les années 2010.
 Maintenant, beaucoup ont fini dans un placard ou un grenier.
 
-Le modèle présenté ici, BM250 de la marque Kenwood, est un modèle du début des années 2010 qui était vendu aux environ 90 euros ; ce n'était donc ni le haut de gamme ni le tout premier prix. Elle a été récupérée à Emmaüs pour environ un sixième du prix du neuf et fonctionne encore très bien.
+Le modèle présenté ici, BM250 de la marque Kenwood, est un modèle du début des années 2010 qui était vendu aux environs de 90 euros ; ce n'était donc ni le haut de gamme ni le tout premier prix. Elle a été récupérée à Emmaüs pour environ un sixième du prix du neuf et fonctionne encore très bien.
 Nous avons donc pu tester sa consommation.
 
 ### Méthode de mesure
@@ -44,7 +44,7 @@ Une résistance de {{ 400 | W }} et un moteur d'environ {{ 50 | W }}.
 
 La résistance est le composant qui chauffe, et va servir à cuire le pain :  
 {% image "./images/machine-a-pain-resistance.jpg" "Photo de la machine à pain ouverte avec la cuve retirée, laissant apparaître la résistance" "500w" 500 %}  
-Sur cette photo de l'intérieur de la machine où la cuve à été retirée, on voit que la résistance est au fond de la machine, et entoure la base de la cuve.
+Sur cette photo de l'intérieur de la machine où la cuve a été retirée, on voit que la résistance est au fond de la machine, et entoure la base de la cuve.
 Au centre de la photo, nous pouvons également voir l'axe du moteur, qui va être employé pour pétrir la pâte à pain.
 
 {% image "./images/machine-a-pain-petrin.jpg" "Photo de la machine à pain ouverte, prête à être utilisée" "500w" 500 %}  

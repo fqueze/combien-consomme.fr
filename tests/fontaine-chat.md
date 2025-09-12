@@ -37,7 +37,7 @@ Les inscriptions (peu lisibles) sur le plastique sous la fontaine indiquent une 
 {% image "./images/fontaine-chat-etiquette.jpg" "Photo des caractéristiques techniques inscrites sous la fontaine" "500w" 500 %}  
 
 Le transformateur indique une puissance de sortie de {{ 2.4 | W }} :  
-{% image "./images/fontaine-chat-transfo.jpg" "Photo de l'étiquette montrant les catactéristiques techniques du destructeur d'insectes" "300w" 300 %}  
+{% image "./images/fontaine-chat-transfo.jpg" "Photo de l'étiquette montrant les caractéristiques techniques du transformateur" "300w" 300 %}
 
 Trois valeurs différentes ! Mesurons pour vérifier :
 {% profile "fontaine-chat.json.gz" '{"name": "Consommation de la fontaine à eau pour animaux pendant 3 heures", "range": ""}' %}
@@ -53,7 +53,7 @@ Si on extrapole :
 - sur un mois, la consommation serait de {{ 6.65 | times: 8 | Wh€PerMonth }}.
 - sur un an, la consommation serait de {{ 6.65 | times: 8 | Wh€PerYear }}.
 
-Le prix indiqué sur le site du fabriquant pour cette fontaine étant de 35,99 euros, pour dépenser autant d'électricité que le prix d'achat, il faudrait utiliser la fontaine en continu pendant plus de {{ 6.65 | times: 8 | times: 365.2425 | countPer€: 35.99 }} ans. Si la fontaine dure aussi longtemps, il est probable que les consommables (filtres à remplacer toutes les 2 à 6 semaines) coûteront beaucoup plus cher que l'électricité.
+Le prix indiqué sur le site du fabricant pour cette fontaine étant de 35,99 euros, pour dépenser autant d'électricité que le prix d'achat, il faudrait utiliser la fontaine en continu pendant plus de {{ 6.65 | times: 8 | times: 365.2425 | countPer€: 35.99 }} ans. Si la fontaine dure aussi longtemps, il est probable que les consommables (filtres à remplacer toutes les 2 à 6 semaines) coûteront beaucoup plus cher que l'électricité.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cette fontaine pour animaux, on pourrait :

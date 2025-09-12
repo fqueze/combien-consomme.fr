@@ -11,7 +11,7 @@ Un gros congélateur permet de conserver une grande quantité de nourriture pend
 
 ## Le matériel
 {% intro "congel.jpg" "Gros congélateur coffre" %}
-Ce congélateur est assez récent, et d'après l'étiquetage, c'était le modèle le moins énergivore du magasin malgré sa grande taille, lorsque je l'ai acheté il y a environ 2ans.
+Ce congélateur est assez récent, et d'après l'étiquetage, c'était le modèle le moins énergivore du magasin malgré sa grande taille, lorsque je l'ai acheté il y a environ 2 ans.
 
 ### Méthode de mesure
 

@@ -54,7 +54,7 @@ Zoom sur la cuisson :
 
 On observe une consommation assez uniforme, d'une puissance proche de {{ 15 | W }}. C'est un peu plus que les {{ 13 | W }} indiqués sur l'étiquette :
 
-{% image "./images/yaourtiere-etiquette.jpg" "Etiquette de la yaourtière SEB Classic YG100100" "512w" 512 %}
+{% image "./images/yaourtiere-etiquette.jpg" "Étiquette de la yaourtière SEB Classic YG100100" "512w" 512 %}
 
 ### Programme de 8 heures
 

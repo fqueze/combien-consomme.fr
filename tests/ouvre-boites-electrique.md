@@ -53,7 +53,7 @@ La puissance mesurée est ici nettement supérieure à celle mesurée à vide, c
 
 Ces puissances mesurées en fonctionnement sont toutes supérieures à la puissance de {{ 85 | W }} indiquée au dos de l'appareil :
 
-{% image "./images/ouvre-boites-etiquette.jpg" "Etiquette de l'ouvre-boîtes Moulinex Type 343.2.00" "512w" 512 %}
+{% image "./images/ouvre-boites-etiquette.jpg" "Étiquette de l'ouvre-boîtes Moulinex Type 343.2.00" "512w" 512 %}
 
 Cette consommation supérieure à la valeur indiquée par le fabricant s'explique peut-être par un manque de l'entretien de l'appareil qui a plusieurs dizaines d'années. Affûter la lame et lubrifier les pièces qui frottent ferait peut-être baisser la consommation.
 
@@ -67,7 +67,7 @@ L'ouvre-boîtes a ici fonctionné à vide pendant une minute complète. La puiss
 ### Prix de revient
 L'opération d'ouverture d'une boîte de pâtée a duré 6 secondes, pour une consommation électrique totale de {{ 0.19 | Wh }}. Le coût pour une boîte est négligeable : pour avoir dépensé un centime en électricité, il aurait fallu ouvrir {{ 0.19 | countPer€: 0.01 }} boîtes de pâtée ! C'est probablement à peu près le nombre de boîtes de conserve ouvertes en un an, et on peut donc estimer à un centime l'économie réalisée par an en utilisant un ouvre-boîtes manuel.
 
-Sauf pour un cuisinier faisant un usage quasi industriel de son ouvre-boîtes, ou si le coût de l'électricité augmentait énormément, il est peu probable d'ouvrir assez de boîtes de conserve en une vie pour que le coût en électricité de l'utilisation de cet appareil dépassé l'euro symbolique que j'ai investi pour l'acquérir. Et si l'appareil a été acheté neuf, le coût de fonctionnement est une erreur d'arrondi comparé au prix d'achat.
+Sauf pour un cuisinier faisant un usage quasi industriel de son ouvre-boîtes, ou si le coût de l'électricité augmentait énormément, il est peu probable d'ouvrir assez de boîtes de conserve en une vie pour que le coût en électricité de l'utilisation de cet appareil dépasse l'euro symbolique que j'ai investi pour l'acquérir. Et si l'appareil a été acheté neuf, le coût de fonctionnement est une erreur d'arrondi comparé au prix d'achat.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cet ouvre-boîtes, on pourrait :

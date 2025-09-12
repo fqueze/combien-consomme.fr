@@ -52,7 +52,7 @@ Le nettoyeur dispose de 3 programmes, testons les un par un.
 
 Lors du premier nettoyage de 5 minutes, {{ 3.18 | Wh€ }} ont été consommés. La puissance maximale mesurée, {{ 40.3 | W }} est inférieure à la puissance maximale de {{ 50 | W }} indiquée sur l'étiquette :
 
-{% image "./images/nettoyeur-ultrasons-etiquette.jpg" "Etiquette du nettoyeur à ultrasons CD-2820, indiquant une puissance maximale de 50 W" "512w" 512 %}
+{% image "./images/nettoyeur-ultrasons-etiquette.jpg" "Étiquette du nettoyeur à ultrasons CD-2820, indiquant une puissance maximale de 50 W" "512w" 512 %}
 
 La puissance moyenne est proche de la puissance maximale. On observe que la puissance diminue au fil du temps.
 

@@ -10,9 +10,9 @@ Mémé l'a eu pour la fête des mères. En vrai, c'était toujours Pépé qui s'
 <!-- excerpt -->
 
 {% tldr %}
-- Une famille découpant 12 tranches de pain à croute dure par jour consommerait {{ 0.952 | divided_by: 4 | times: 12 | Wh€PerYear }} par an avec un tel couteau électrique.
+- Une famille découpant 12 tranches de pain à croûte dure par jour consommerait {{ 0.952 | divided_by: 4 | times: 12 | Wh€PerYear }} par an avec un tel couteau électrique.
 - Découper une tranche de pain consomme entre {{ 0.065 | Wh }} et {{ 0.952 | divided_by: 4 | Wh }}. C'est très peu — il faudrait découper {{ 0.952 | divided_by: 4 | countPer€: 0.01 }} à {{ 0.0652 | countPer€: 0.01 }} tranches de pain pour dépenser un centime en électricité.
-- Trancher un pain à la croute dure peut consommer plus de 3 fois plus d'électricité que trancher un pain mou.
+- Trancher un pain à la croûte dure peut consommer plus de 3 fois plus d'électricité que trancher un pain mou.
 - La puissance consommée peut dépasser de {{ 92.9 | percentMore: 60 }} la puissance indiquée sous l'appareil lors de la découpe d'un aliment dur.
 {% endtldr %}
 
@@ -71,9 +71,9 @@ Notre pain de mie étant maintenant entièrement tranché, continuons notre test
 
 ### Pain au maïs
 
-Un morceau de pain au maïs sera maintenant découpé. Ce pain (très bon !) possède une croute nettement plus dure, qui demandera un peu plus d'effort au couteau électrique. Mesurons l'impact de cet effort supplémentaire sur la consommation mesurée.
+Un morceau de pain au maïs sera maintenant découpé. Ce pain (très bon !) possède une croûte nettement plus dure, qui demandera un peu plus d'effort au couteau électrique. Mesurons l'impact de cet effort supplémentaire sur la consommation mesurée.
 
-{% image "./images/couteau-electrique-pain-mais.jpg" "Un demi pain au maïs, la croute est bien cuite" "500w" 500 %}
+{% image "./images/couteau-electrique-pain-mais.jpg" "Un demi pain au maïs, la croûte est bien cuite" "500w" 500 %}
 
 Il est à nouveau possible de compter le nombre de tranches découpées en observant la forme de l'enregistrement :
 {% profile "couteau-electrique.json.gz" '{"name":"Découpe pain au maïs","range":"569873m65336"}' %}
@@ -81,7 +81,7 @@ Il est à nouveau possible de compter le nombre de tranches découpées en obser
 Il y en a bien 4 !  
 {% image "./images/couteau-electrique-pain-mais-4-tranches.jpg" "4 tranches de pain au maïs à côté du reste du pain au maïs non tranché, sur la planche à découper en bois" "500w" 500 %}
 
-La forme de l'enregistrement est un peu différente : on voit qu'il y a des petits pics dans la puissance mesurée pour la découpe de chaque tranche. On peut supposer que chacun d'eux correspond à un moment où le moteur a forcé un peu pour découper un morceau de croute un peu plus dur.
+La forme de l'enregistrement est un peu différente : on voit qu'il y a des petits pics dans la puissance mesurée pour la découpe de chaque tranche. On peut supposer que chacun d'eux correspond à un moment où le moteur a forcé un peu pour découper un morceau de croûte un peu plus dur.
 
 Les puissances maximale ({{ 76.6 | W }}) et médiane {{ 66.7 | W }} mesurées dépassent toutes les deux la [puissance nominale](https://fr.wikipedia.org/wiki/Puissance_nominale "Puissance nominale sur Wikipedia") de {{ 60 | W }}. L'énergie consommée pour 4 tranches ({{ 0.952 | Wh }}) correspond à {{ 0.952 | divided_by: 4 | Wh }} par tranche. C'est environ {{ 0.952 | divided_by: 4 | divided_by: 0.0682 | round: 1 }} fois plus que pour découper une tranche de pain de mie ! Il ne faudrait couper "que" {{ 0.952 | divided_by: 4 | countPer€: 0.01 }} tranches de ce pain au maïs pour dépenser un centime.
 

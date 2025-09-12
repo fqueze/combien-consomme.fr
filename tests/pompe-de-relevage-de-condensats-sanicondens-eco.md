@@ -34,7 +34,7 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 ### Indications du fabricant
 
 Une étiquette sur le dessus de l'appareil nous renseigne sur sa puissance :  
-{% image "./images/pompe-de-relevage-de-condensats-sanicondens-eco-etiquette.jpg" "Etiquette indiquant « Sanicondens ECO SFA TYPE : CD10 220-240 V 50-60 Hz 60 W IP24" "500w" 500 %}
+{% image "./images/pompe-de-relevage-de-condensats-sanicondens-eco-etiquette.jpg" "Étiquette indiquant « Sanicondens ECO SFA TYPE : CD10 220-240 V 50-60 Hz 60 W IP24" "500w" 500 %}
 
 On s'attend donc à une puissance en fonctionnement ou maximale de {{ 60 | W }}.
 

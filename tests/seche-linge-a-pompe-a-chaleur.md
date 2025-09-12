@@ -59,7 +59,7 @@ Le cycle de séchage semble démarrer par quelques rotations de tambour et proba
 
 #### Séchage
 
-Le séchage en lui même présente une consommation très régulière :
+Le séchage en lui-même présente une consommation très régulière :
 
 {% profile "seche-linge-coton.json.gz" '{"name": "Séchage", "range": "203192m5917975"}' %}
 

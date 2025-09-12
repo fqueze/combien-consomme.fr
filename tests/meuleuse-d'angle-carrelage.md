@@ -45,9 +45,9 @@ Pour chacune de ces brèves utilisations de la meuleuse, on observe d'abord un p
 
 ### Sur une deuxième coupe plus courte
 
-Cette fois ci, j'ai coupé un morceau qui ne faisait que 2 cm de large :
+Cette fois-ci, j'ai coupé un morceau qui ne faisait que 2 cm de large :
 
-{% image "./images/meuleuse-carrelage.jpg" "Meuleuse d'angle à côté d'un morceau de carrelage déjà couper, et d'un deuxième plus étroit dans l'étau" "512w" 512 %}
+{% image "./images/meuleuse-carrelage.jpg" "Meuleuse d'angle à côté d'un morceau de carrelage déjà coupé, et d'un deuxième plus étroit dans l'étau" "512w" 512 %}
 
 Voici le profil :
 
@@ -57,7 +57,7 @@ La durée totale de la coupe est nettement plus courte, ce qui n'est pas une sur
 
 Le pic de démarrage est plus visible ici, et la consommation maximale mesurée ({{ 1268.7 | W }}) est très proche de la puissance indiquée sur l'étiquette :
 
-{% image "./images/meuleuse-etiquette.jpg" "Etiquette de la meuleuse d'angle Parkside PWS 125 B2" "512w" 512 %}
+{% image "./images/meuleuse-etiquette.jpg" "Étiquette de la meuleuse d'angle Parkside PWS 125 B2" "512w" 512 %}
 
 
 ### À vide
@@ -74,7 +74,7 @@ Comme sur d'autres appareils à moteur électrique déjà testés ({% test tonde
 
 {% profile "meuleuse.json.gz" '{"name": "Coupe plus courte"}' %}
 
-La totalité de l'opération, avant de remettre ma meuleuse dans son placard, a duré une dizaine de minutes, et consommé {{ 74.2 | Wh€ }}. Même si je l'ai achetée d'occasion pour une somme modique, cette meuleuse ne me coutera probablement jamais plus que son prix d'achat en consommation électrique.
+La totalité de l'opération, avant de remettre ma meuleuse dans son placard, a duré une dizaine de minutes, et consommé {{ 74.2 | Wh€ }}. Même si je l'ai achetée d'occasion pour une somme modique, cette meuleuse ne me coûtera probablement jamais plus que son prix d'achat en consommation électrique.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cette meuleuse, on pourrait :

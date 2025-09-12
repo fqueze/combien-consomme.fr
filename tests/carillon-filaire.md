@@ -47,7 +47,7 @@ L'inscription « 30 VA » concerne la puissance apparente de l'appareil, mais ne
 
 L'inscription « 8V 1.0A » relevée précédemment sur le transfo indique que le marteau électrique peut recevoir une puissance jusqu'à {{ 8 | W }} en courant continu, mais cela ne prend pas en compte l'énergie perdue par le transfo.
 
-Les caractéristiques techniques données sur le site du fabriquant sont :
+Les caractéristiques techniques données sur le site du fabricant sont :
 > - Sonnerie 2 tons.
 > - Alimentation 230V.
 > - Consommation : 0,06 A – 14 W.
@@ -110,7 +110,7 @@ Ces 30 secondes de bruit on causé une surconsommation de {{ 0.0519 | minus: 0.0
 
 #### Appui continu
 
-Les instructions du fabriquant précisent :
+Les instructions du fabricant précisent :
 > « Ne pas utiliser le bouton d'appel de manière continue. La durée d'appel doit être inférieure à 20s. »
 
 Il n'en fallait pas plus pour me rendre curieux, et me donner envie d'appuyer 20 secondes en continu sur le bouton. Voici l'enregistrement :  
@@ -118,7 +118,7 @@ Il n'en fallait pas plus pour me rendre curieux, et me donner envie d'appuyer 20
 
 Lorsque j'ai enfoncé le bouton, l'une des deux plaques métalliques a été frappée, puis j'ai entendu un ronflement pendant que le bouton restait enfoncé, et finalement la deuxième plaque a été frappée lorsque j'ai relâché le bouton.
 
-La puissance maximale mesurée à {{ 12.4 | W }} nous donne une bonne indication de la puissance réellement consommée par l'appareil lors des tests précédents, pour lesquels le bouton était resté enfoncé moins de 2 secondes. Cette puissance maximale mesurée est proche des {{ 14 | W }} indiqués par le fabriquant.
+La puissance maximale mesurée à {{ 12.4 | W }} nous donne une bonne indication de la puissance réellement consommée par l'appareil lors des tests précédents, pour lesquels le bouton était resté enfoncé moins de 2 secondes. Cette puissance maximale mesurée est proche des {{ 14 | W }} indiqués par le fabricant.
 
 Vu la consommation plus élevée, on peut supposer que la limite de 20 secondes recommandée par le fabricant est pour éviter une surchauffe de l'appareil.
 

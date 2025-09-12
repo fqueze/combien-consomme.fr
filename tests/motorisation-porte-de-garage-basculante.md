@@ -50,7 +50,7 @@ Détaillons la consommation lors de ces différents événements.
 
 Lors de l'ouverture, on observe un pic de consommation lors du démarrage du moteur, suivi d'une consommation qui diminue puis ré-augmente, avec un maximum à {{ 80.8 | W }} avant de redescendre. Ce maximum est inférieur à la puissance de {{ 100 | W }} indiquée sur l'étiquette, qui serait peut-être atteint avec une porte plus lourde.
 
-{% image "./images/motorisation-porte-garage-came-etiquette.jpg" "Etiquette de la motorisation CAM V6000" "512w" 512 %}
+{% image "./images/motorisation-porte-garage-came-etiquette.jpg" "Étiquette de la motorisation CAM V6000" "512w" 512 %}
 
 Cette variation de consommation correspond à la variation de l'intensité de l'effort à fournir pour manoeuvrer la porte à différents points de sa course (on sent très bien ça lorsqu'on manipule une porte basculante manuellement).
 
@@ -67,7 +67,7 @@ Cette consommation en attente, {{ 101 | Wh€ }} par jour, représente {{ 101 | 
 
 Sur la durée du profil précédent où la porte était manipulée, la consommation en attente représente {{ 0.332 | Wh }}, la surconsommation réellement causée par la manipulation de la porte n'était donc que de {{ 0.900 | minus: 0.3323 | Wh }}. Il suffit de laisser la porte en attente pendant 8 minutes pour consommer autant d'énergie que lorsque la porte est ouverte puis fermée !
 
-Si l'on suppose que le garage contient un véhicule qui sort une fois par jour, chaque jours de l'année, (la porte est donc ouverte et fermée 2 fois par jour), la consommation totale annuelle liée à la manipulation de la porte serait de {{ 0.900 | minus: 0.3323 | times: 2 | Wh€PerYear }}. C'est 89 fois moins que la consommation en attente !
+Si l'on suppose que le garage contient un véhicule qui sort une fois par jour, chaque jour de l'année, (la porte est donc ouverte et fermée 2 fois par jour), la consommation totale annuelle liée à la manipulation de la porte serait de {{ 0.900 | minus: 0.3323 | times: 2 | Wh€PerYear }}. C'est 89 fois moins que la consommation en attente !
 
 ### Ouverture
 

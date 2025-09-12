@@ -64,7 +64,7 @@ Les données étant stockées sur l'ordinateur, il est possible de profiler la c
 
 ## Cas d'usage
 
-Ce type de wattmètre permet de mesurer précisément la consommation de nombreux petits appareils. cela peut-être soit des appareils alimentés de façon permanente en USB (ordinateur portable, répéteur wifi, ...), soit des appareils fonctionnant sur batterie et se rechargent en USB (par exemple un casque sans fil).
+Ce type de wattmètre permet de mesurer précisément la consommation de nombreux petits appareils. Cela peut être soit des appareils alimentés de façon permanente en USB (ordinateur portable, répéteur wifi, ...), soit des appareils fonctionnant sur batterie et se rechargent en USB (par exemple un casque sans fil).
 
 Il est même possible d'utiliser un tel wattmètre pour mesurer la consommation d'un logiciel fonctionnant sur un téléphone. Pour cela, il faudra d'abord s'assurer que la batterie du téléphone est chargée à 100%, puis exécuter l'action logicielle à mesurer. L'énergie que le téléphone consommera depuis la connexion USB correspondra alors à l'utilisation d'énergie du téléphone en temps réel. Cette méthode est par exemple utilisée pour mesurer la consommation énergétique de Firefox pour Android.
 

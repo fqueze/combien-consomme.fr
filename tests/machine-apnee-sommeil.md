@@ -16,7 +16,7 @@ Cette machine améliore la respiration nocturne et réduit les apnées. Combien 
 {% endtldr %}
 
 ## Le matériel
-{% intro "machine-apnee-sommeil.jpg" "Une machine de traitement de l'apnée sommeil prisma SMART max" %}
+{% intro "machine-apnee-sommeil.jpg" "Une machine de traitement de l'apnée du sommeil prisma SMART max" %}
 
 La machine testée est le modèle « prisma SMART max » de la marque allemande Löwenstein.
 Elle est ici associée à un humidificateur d'air « prismaAQUA » qui réchauffe et humidifie
@@ -43,7 +43,7 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 #### L'étiquette
 
 L'étiquette sous la machine nous apprend très peu de choses sur sa consommation :  
-{% image "./images/machine-apnee-sommeil-etiquette.jpg" "Etiquette sous la machine, indiquant « prisma SMART max Typ: WM090TD 24V »" "500w" 500 %}
+{% image "./images/machine-apnee-sommeil-etiquette.jpg" "Étiquette sous la machine, indiquant « prisma SMART max Typ: WM090TD 24V »" "500w" 500 %}
 
 On a une indication de tension — 24 V — mais aucune indication de puissance.
 
@@ -51,7 +51,7 @@ On a une indication de tension — 24 V — mais aucune indication de puissance.
 
 L'étiquette sous l'adaptateur secteur révèle plus d'informations :
 
-{% image "./images/machine-apnee-sommeil-transfo.jpg" "Etiquette sous l'adapateur secteur, indiquant « Skynet MODEL: ELK-A069 AC INPUT 100-240V-2-1A DC OUTPUT 24V 2.5A »" "300w" 300 %}
+{% image "./images/machine-apnee-sommeil-transfo.jpg" "Étiquette sous l'adaptateur secteur, indiquant « Skynet MODEL: ELK-A069 AC INPUT 100-240V-2-1A DC OUTPUT 24V 2.5A »" "300w" 300 %}
 
 « AC INPUT 100-240V-2-1A » nous indique que l'adaptateur secteur peut en entrée recevoir un courant alternatif jusqu'à 2 ampères à 100 volts (soit {{ 200 | W }}) ou 1 ampère à 240 volts (soit {{ 240 | W }}).
 

@@ -36,7 +36,7 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 Commençons par regarder le profil d'une utilisation typique :
 {% profile "hydropulseur.json.gz" '{"name": "Une utilisation normale", "range": "30738628m44128"}' %}
 
-Utilisation à force 4 pendant une 40aine de secondes. Juste le temps pour nettoyer rapidement tous les espaces interdentaires. On voit la puissance mesurée qui augmente au démarrage pendant quelques secondes avant de se stabiliser jusqu'à l'arrêt. Le coût total en électricité est négligeable (il faudrait {{ 0.149 | countPer€: 0.01 }} lavages de ce type pour dépenser un centime d'euro en électricité).
+Utilisation à force 4 pendant une quarantaine de secondes. Juste le temps pour nettoyer rapidement tous les espaces interdentaires. On voit la puissance mesurée qui augmente au démarrage pendant quelques secondes avant de se stabiliser jusqu'à l'arrêt. Le coût total en électricité est négligeable (il faudrait {{ 0.149 | countPer€: 0.01 }} lavages de ce type pour dépenser un centime d'euro en électricité).
 
 Voici un profil d'une utilisation plus longue :
 {% profile "hydropulseur.json.gz" '{"name": "Cuve complète (600mL) force 4", "range": "421873m145428"}' %}
@@ -55,7 +55,7 @@ Cet hydropulseur dispose de deux boutons :
 - un bouton sur le côté pouvant pivoter, gradué de 1 à 5, correspondant à la force du lavage des dents ;
 - un bouton coulissant sur la poignée qui forme un robinet permettant de bloquer le jet.
 
-{% image "./images/hydropulseur-boutons.jpg" "Etiquette de l'hydropulseur BRAUN" "300w" 300 %}
+{% image "./images/hydropulseur-boutons.jpg" "Boutons de l'hydropulseur BRAUN" "300w" 300 %}
 
 Actionner ces boutons change le bruit émis par le moteur, et donc change très probablement la consommation électrique de l'appareil. Vérifions, avec un profil où j'ai d'abord démarré l'hydropulseur à la force 1, puis progressivement augmenté la force. Lorsque la force était au maximum, j'ai fermé le robinet, et diminué progressivement la force :
 {% profile "hydropulseur.json.gz" '{"name": "Forces croissantes, puis décroissante avec le robinet fermé", "range": "677299m57359"}' %}
@@ -83,7 +83,7 @@ On peut ici lire les valeurs médianes de puissance pour avoir une idée de la c
 
 À la force maximale, la puissance passe de {{ 15.5 | W }} à {{ 18 | W }} lorsque le robinet est fermé. Cette valeur maximale de {{ 18 | W }} correspond d'ailleurs exactement à la valeur indiquée sous l'appareil :
 
-{% image "./images/hydropulseur-etiquette.jpg" "Etiquette de l'hydropulseur BRAUN" "512w" 512 %}
+{% image "./images/hydropulseur-etiquette.jpg" "Étiquette de l'hydropulseur BRAUN" "512w" 512 %}
 
 ### Sur une journée
 

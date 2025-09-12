@@ -46,7 +46,7 @@ Deux tranches de fromages sont chargées dans les poêlons, l'appareil est allum
 Prêt à déguster ! La cuisson des deux premières tranches a pris un peu plus de 8 minutes, et consommé {{ 41.7 | Wh€ }}.
 
 La consommation mesurée, {{ 305 | W }} en moyenne, est légèrement supérieure aux {{ 300 | W }} indiqués sur l'étiquette :  
-{% image "./images/raclette-a-deux-etiquette.jpg" "Etiquette de l'appareil essentiel b Raclette Duo Multiplug Green indiquant une puissance de 300W et une puissance totale de 1800W" "500w" 500 %}
+{% image "./images/raclette-a-deux-etiquette.jpg" "Étiquette de l'appareil essentiel b Raclette Duo Multiplug Green indiquant une puissance de 300W et une puissance totale de 1800W" "500w" 500 %}
 
 L'indication « Psum = 1800 W » correspond à la puissance maximale que l'appareil peut supporter lorsqu'il est chaîné à d'autres appareils du même modèle.
 

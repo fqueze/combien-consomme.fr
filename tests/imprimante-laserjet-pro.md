@@ -10,7 +10,7 @@ Combien consomme une imprimante laser professionnelle quand elle imprime ? Et qu
 <!-- excerpt -->
 
 {% tldr %}
-- L'impression d'une seule page consomme {{ 2.44 | Wh }}. Il faudrait imprimer {{ 2.44 | countPer€: 0.01 }} pages pour dépenser 1 centimes d'euro en électricité.
+- L'impression d'une seule page consomme {{ 2.44 | Wh }}. Il faudrait imprimer {{ 2.44 | countPer€: 0.01 }} pages pour dépenser 1 centime d'euro en électricité.
 - La consommation par page diminue significativement lorsque les pages sont imprimées à la suite. Cela s'explique car le gros de la consommation correspond au préchauffage de l'imprimante pour atteindre sa température de fonctionnement.
 - La consommation lorsque l'imprimante reste en éveil pendant 5 minutes après la dernière impression avant de passer en veille n'est pas négligeable. Si l'on est certain d'avoir fini d'utiliser l'imprimante, l'éteindre immédiatement est une bonne idée.
 - Laisser l'imprimante en veille tout le temps consommerait {{ 14 | times: 3 | Wh€PerYear }} par an (puissance moyenne de {{ 1.75 | W }}).
@@ -46,7 +46,7 @@ Regardons en détail ces différentes parties de l'enregistrement.
 
 ### Démarrage
 
-Lorsque l'imprimante est branchée (ou lorsque la multiprise sur laquelle elle est branchée est allumée), l'imprimante émets des sons pendant quelques secondes.
+Lorsque l'imprimante est branchée (ou lorsque la multiprise sur laquelle elle est branchée est allumée), l'imprimante émet des sons pendant quelques secondes.
 
 Lorsqu'elle est ensuite allumée, elle fait des bruits pendant un peu plus longtemps avant d'être prête à imprimer. Pendant ce temps, l'afficheur indique « Initialisation » :  
 {% image "./images/imprimante-laserjet-pro-M452dn-startup.jpg" "Photo de l'afficheur pendant le démarrage" "300w" 300 %}

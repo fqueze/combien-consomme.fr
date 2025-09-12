@@ -47,10 +47,10 @@ La consommation d'un FreePlug et du boîtier de raccordement à la fibre ont ég
 
 L'étiquette sous le boîtier « Server » ne donne aucune information sur les caractéristiques électriques de cet appareil :  
 
-{% image "./images/freebox-mini4k-server-etiquette.jpg" "Etiquette sous le boîtier « Server» indiquant « Freebox F-GW05LB 0-AN » mais pas d'information sur les caractéristiques électriques" "500w" 500 %}
+{% image "./images/freebox-mini4k-server-etiquette.jpg" "Étiquette sous le boîtier « Server » indiquant « Freebox F-GW05LB 0-AN » mais pas d'information sur les caractéristiques électriques" "500w" 500 %}
 
 On en apprend un peu plus en regardant l'étiquette sous le FreePlug qui sert d'adaptateur secteur :  
-{% image "./images/freebox-mini4k-freeplug-etiquette.jpg" "Etiquette sous le FreePlug indiquant « Freebox F-PL01D 1-EN » et « Input: 230VAC 50Hz 0.6A Output: +12VDC 2.5A »" "500w" 500 %}
+{% image "./images/freebox-mini4k-freeplug-etiquette.jpg" "Étiquette sous le FreePlug indiquant « Freebox F-PL01D 1-EN » et « Input: 230VAC 50Hz 0.6A Output: +12VDC 2.5A »" "500w" 500 %}
 
 Le courant alternatif d'entrée indiqué (Input: 230VAC 50Hz 0.6A), correspond à {{ 230 | times: 0.6 | W }}, ce qui semble énorme. Le courant continu de sortie (Output: +12VDC 2.5A), correspond à {{ 12 | times: 2.5 | W }}, ce qui est plus réaliste, mais semble encore beaucoup. C'est probablement la puissance maximale que le FreePlug peut délivrer aux équipements qui y sont branchés, mais pas une puissance réellement consommée en utilisation normale.
 
@@ -233,7 +233,7 @@ Ces variations sont tellement faibles qu'elles donnent l'impression que la plupa
 
 ### Sur un an
 
-Si l'on suppose une utilisation typique des services de la Freebox avec le boîtier Server qui reste tout le temps allumé, connecté à la fibre, et la télévision qui est utilisée 4h par jour (ce qui semble être la moyenne en France) avec le boîtier Player connecté en CPL et éteint lorqu'il n'est pas utilisé, on consommera :
+Si l'on suppose une utilisation typique des services de la Freebox avec le boîtier Server qui reste tout le temps allumé, connecté à la fibre, et la télévision qui est utilisée 4h par jour (ce qui semble être la moyenne en France) avec le boîtier Player connecté en CPL et éteint lorsqu'il n'est pas utilisé, on consommera :
 - {{ 17.1 | W }} 24h/24 pour le boîtier Server, soit {{ 17.1 | W€PerYear }} par an ;
 - {{ 8.3 | W }} 4 heures par jour pour le boîtier Player connecté par CPL, soit {{ 8.3 | times: 4 | Wh€PerYear }} par an.
 

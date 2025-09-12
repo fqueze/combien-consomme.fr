@@ -36,7 +36,7 @@ Voici une mesure de la consommation du broyeur sur une journée :
 {% profile "broyeur-wc.json.gz" '{"name": "Consommation du broyeur pendant une journée", "range": "823602m86414944"}' %}
 
 Sur cet enregistrement, on observe :
-- plusieurs pics de consommation, correspondants à chaque utilisation.
+- plusieurs pics de consommation, correspondant à chaque utilisation.
 - la consommation entre les utilisations est faible mais n'est pas nulle.
 
 ### En utilisation
@@ -62,7 +62,7 @@ La totalité de l'opération a consommé {{ 0.505 | Wh }}, il faudrait tirer la 
 Le fonctionnement lors du programme « grosse goutte » est très similaire à celui décrit précédemment, mais la cuve se remplit et se vide entièrement une fois de plus, ce qui porte la consommation totale de l'opération à {{ 1.14 | Wh }} (il faudrait tirer {{ 1.14 | countPer€: 0.01 }} grosses chasses d'eau pour dépenser un centime).
 
 On observe cette fois-ci une puissance maximale de {{ 364 | W }}, ce qui reste loin de la puissance de {{ 520 | W }} indiquée sur l'étiquette :  
-{% image "./images/broyeur-wc-etiquette.jpg" "Photo de l'étiquette montrant les catactéristiques techniques du broyeur Watermatic W30S" "512w" 512 %}  
+{% image "./images/broyeur-wc-etiquette.jpg" "Photo de l'étiquette montrant les caractéristiques techniques du broyeur Watermatic W30S" "512w" 512 %}
 
 ### En attente
 

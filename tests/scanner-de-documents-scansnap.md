@@ -58,13 +58,13 @@ Voici l'enregistrement de la consommation lors de la numérisation de 3 document
 
 La puissance maximale mesurée ici, {{ 30 | W }}, est légèrement inférieure à ce que l'étiquette derrière le scanner suggère :
 
-{% image "./images/scansnap-etiquette.jpg" "Etiquette du scanner ScanSnap S1500M" "512w" 512 %}
+{% image "./images/scansnap-etiquette.jpg" "Étiquette du scanner ScanSnap S1500M" "512w" 512 %}
 
 L'indication « 24V 1.5A » donne une puissance maximale en fonctionnement de {{ 24 | times: 1.5 | W }}. Peut-être serait-elle atteinte si les feuilles à faire passer dans le scanner étaient cartonnées et demandaient plus d'effort au moteur ?
 
 Pour chacune des numérisations la puissance consommée augmente à environ {{ 30 | W }} pendant une durée variable, reflétant la difficulté qu'a eu le scanner à faire entrer le document (une feuille bien plate passe plus facilement qu'une feuille froissée par exemple) :
 - Pour la première numérisation, pour laquelle le moteur a tourné plusieurs secondes avant que la feuille ne commence à rentrer, la consommation a été de {{ 0.108 | minus: 0.086 | Wh }}.
-- Pour la deuxième numérisation, pour laquelle le moteur a démarré, puis s'est presque arrêté (j'ai cru que le document n'allait pas être scanné et que j'aurai un message d'erreur indiquant qu'aucun document n'était présent dans le chargeur) avant de réussir à attraper la feuille, la consommation a été de {{ 0.098 | minus: 0.086 | Wh }}.
+- Pour la deuxième numérisation, pour laquelle le moteur a démarré, puis s'est presque arrêté (j'ai cru que le document n'allait pas être scanné et que j'aurais un message d'erreur indiquant qu'aucun document n'était présent dans le chargeur) avant de réussir à attraper la feuille, la consommation a été de {{ 0.098 | minus: 0.086 | Wh }}.
 - Pour la troisième numérisation qui s'est passée de façon parfaitement fluide, la consommation n'a été que de {{ 0.094 | minus: 0.086 | Wh }}.
 
 Les consommations indiquées ici sont la différence avec la consommation sur une même période lorsque le scanner est prêt à fonctionner mais ne fait rien. L'augmentation de la puissance consommée pendant la numérisation semble principalement due au fonctionnement du moteur qui déplace la feuille à l'intérieur du scanner.
@@ -124,7 +124,7 @@ On voit nettement que la consommation après avoir fermé le couvercle diminue, 
 
 La consommation semble toujours fluctuer, même si on atteint les limites de précision de ce que la prise connectée peut correctement mesurer. La consommation moyenne est descendue à {{ 0.302 | W }}, ce qui est probablement dû aux pertes du bloc d'alimentation.
 
-{% image "./images/scansnap-etiquette-transfo.jpg" "Etiquette du transfo du scanner ScanSnap S1500M" "512w" 512 %}
+{% image "./images/scansnap-etiquette-transfo.jpg" "Étiquette du transfo du scanner ScanSnap S1500M" "512w" 512 %}
 
 L'étiquette sur le bloc d'alimentation indique « INPUT 100-240V 1.5-0.9A » et « OUTPUT 24V 2.65A » ce qui indique une puissance maximale pouvant être délivrée au scanner de {{ 24 | times: 2.65 | W }}, mais aucune indication sur la consommation à vide, ce qui est bien dommage.
 
