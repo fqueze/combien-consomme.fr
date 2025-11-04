@@ -1,6 +1,7 @@
 import Profiler from '11ty-fx-profiler';
 import moment from 'moment';
 import fs from 'fs';
+import path from 'path';
 import zlib from 'zlib';
 import CleanCSS from "clean-css";
 import {PurgeCSS} from "purgecss";
@@ -10,6 +11,7 @@ import Image from "@11ty/eleventy-img";
 import UglifyJS from "uglify-js";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import timeToRead from "eleventy-plugin-time-to-read";
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const isDev = process.env.ELEVENTY_ENV === 'dev';
 const baseUrl = isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr';
@@ -132,12 +134,12 @@ function formatEnergyCost(energyWh) {
 
 const profileCache = new Map();
 
-async function loadProfile(profile) {
-  if (profileCache.has(profile)) {
-    return profileCache.get(profile);
+async function loadProfile(profilePath) {
+  if (profileCache.has(profilePath)) {
+    return profileCache.get(profilePath);
   }
 
-  const b = UserBenchmarks.get("> profile > load: " + profile);
+  const b = UserBenchmarks.get("> profile > load: " + profilePath);
   b.before();
 
   function streamToString (stream) {
@@ -161,7 +163,7 @@ async function loadProfile(profile) {
   }
 
   let promise = new Promise(async function unserializeProfile(resolve) {
-    let rv = JSON.parse(await streamToString(fs.createReadStream('./profiles/' + profile)
+    let rv = JSON.parse(await streamToString(fs.createReadStream(profilePath)
                                                .pipe(zlib.createGunzip())));
 
     // Undo differential timestamp compression.
@@ -179,7 +181,7 @@ async function loadProfile(profile) {
     b.after();
     resolve(rv);
   });
-  profileCache.set(profile, promise);
+  profileCache.set(profilePath, promise);
   return promise;
 }
 
@@ -279,8 +281,191 @@ function getStatsFromCounterSamples(profileStringId, profile, samples, range = "
   return {stats, firstSample, lastSample, values};
 }
 
-function profilerLink(profile) {
-  return profilerUrl + "/from-url/" + encodeURIComponent(new URL("profiles/" + profile, baseUrl).href);
+function profilerLink(profilePath) {
+  return profilerUrl + "/from-url/" + encodeURIComponent(new URL(profilePath, baseUrl).href);
+}
+
+async function profileShortcode(profile, options, userBenchmarks) {
+  const profileStringId = profile + (options ? " " + options : "");
+  const b = userBenchmarks.get("> profile > " + profileStringId);
+  b.before();
+
+  options = options ? JSON.parse(options) : {};
+  const graphHeight = 120;
+  const graphWidth = 2400;
+  const halfStrokeWidth = 3;
+  function makeSVGPath(graph) {
+    const b = userBenchmarks.get("> profile > SVG path: " + profileStringId);
+    b.before();
+
+    let lastLetter = "";
+    function letter(l) {
+      if (l == lastLetter) {
+        return "";
+      }
+      lastLetter = l;
+      return l;
+    }
+    let lastX = -2 * halfStrokeWidth;
+    let lastY = graphHeight;
+    let path = `${letter('M')}${lastX} ${lastY}`;
+    function append(cmd) {
+      if (/^\d/.test(cmd) && /\d$/.test(path)) {
+        path += " ";
+      }
+      path += cmd;
+    }
+    function appendShorterV(y) {
+      let v = `${lastLetter != 'v' ? 'v' : ''}${y - lastY}`;
+      let V = `${lastLetter != 'V' ? 'V' : ''}${y}`;
+      if (v.length <= V.length) {
+        append(v);
+        lastLetter = 'v';
+      } else {
+        append(V);
+        lastLetter = 'V';
+      }
+    }
+
+    let x = i => Math.max(halfStrokeWidth, Math.min(graph[i].x * graphWidth, graphWidth - halfStrokeWidth)).toFixed();
+    let y = i => graph[i].y == 0 ? graphHeight + halfStrokeWidth
+        : Math.max(halfStrokeWidth, (1 - graph[i].y) * graphHeight).toFixed();
+    // draw a first point the right height and x = -strokeWidth.
+    {
+      let yi = y(0);
+      appendShorterV(yi);
+      lastY = yi;
+    }
+    for (let i = 0; i < graph.length; ++i) {
+      let xi = x(i);
+      let yi = y(i);
+      if (xi == lastX && yi == lastY) {
+        continue;
+      }
+      if (yi == lastY) {
+        while (i + 1 < graph.length && y(i + 1) == lastY) {
+          xi = x(++i);
+        }
+        append(`${letter('h')}${xi - lastX}`);
+      } else {
+        if (xi == lastX) {
+          let ys = [yi];
+          let j = 1;
+          while (i + j < graph.length && x(i + j) == xi) {
+            ys.push(y(i + j));
+            j++;
+          }
+          let usefulYs = [];
+          let max = Math.max(...ys);
+          let min = Math.min(...ys);
+          let last = ys[ys.length - 1];
+          if (max != last && max > lastY) {
+            usefulYs.push(max);
+          }
+          if (min != last && min < lastY) {
+            usefulYs.push(min);
+          }
+          usefulYs.push(last);
+
+          i += j - 1;
+          for (let usefulY of usefulYs) {
+            yi = usefulY;
+            appendShorterV(yi);
+            lastY = yi;
+          }
+        } else {
+          append(`${letter('l')}${xi - lastX}`);
+          append(`${yi - lastY}`);
+        }
+      }
+      lastX = xi;
+      lastY = yi;
+    }
+
+    // draw a last point, at x = graphWidth + 2*strokeWidth, y = lastY
+    append(`${letter('h')}${(graphWidth + 2*halfStrokeWidth) - lastX}`);
+
+    // Move down to ${graphHeight} to ensure the filled area is correct.
+    appendShorterV(graphHeight);
+
+    b.after();
+    return path;
+  }
+
+  const basePath = options.path || './profiles/';
+  const profilePath = basePath + profile;
+  let {counters, meta} = await loadProfile(profilePath);
+
+  let profilerQuery = "";
+  let profilerQueryParams = [];
+  if (options.name) {
+    profilerQueryParams.push("profileName=" + options.name);
+  }
+  if (options.range) {
+    profilerQueryParams.push("range=" + options.range);
+    profilerQueryParams.push("v=10");
+  }
+  if (profilerQueryParams.length) {
+    profilerQuery = "?" + profilerQueryParams.join("&");
+  }
+  const profilerIcon = `<a class="profiler-link" target="_blank" title="Ouvrir dans le Firefox Profiler" href="${profilerLink(profilePath)}${profilerQuery}"></a>`;
+
+  let result = "";
+  let multiCounters = counters.length > 1;
+  if (multiCounters) {
+    result += `<div class="profile">`
+  }
+  for (let {name, description, samples} of counters) {
+    let {stats, firstSample, lastSample, values} =
+      getStatsFromCounterSamples(profileStringId, {meta}, samples, options.range, multiCounters);
+    if (options.debug) {
+      console.log(profile, options, stats);
+    }
+    if (values.length == 0) {
+      throw new Error(`No sample in range, profile: ${profile}, options=${JSON.stringify(options)}`);
+    }
+    let graph = values.map(function xAndYFromValues(v, i) {
+      return ({
+        x: (samples.time[firstSample + i] - samples.time[firstSample]) / stats.durationMs,
+        y: v / stats.maxPowerW});
+    });
+    let svg = `<div><svg viewBox="0 0 ${graphWidth} ${graphHeight}">`
+        + `<path d="${makeSVGPath(graph)}"/>`
+        + `</svg></div>`;
+    if (multiCounters) {
+      result += svg;
+      continue;
+    }
+
+    const profileDescription = options.name ?
+        `<p title="${name}, ${values.length} échantillons">${options.name}${profilerIcon}</p>`
+      : `<p>${name} : ${description}, ${values.length} échantillons.${profilerIcon}</p>`;
+    result += `<div class="profile">`
+      + svg
+      + profileDescription
+      + `<table>
+<tr><th>Consommation</th><td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundEnergy(stats.energyWh) + ' | Wh }}&quot;)" title="' + stats.energyWh + ' Wh"' : ''}>${formatEnergy(stats.energyWh)} — ${formatCost(stats.energyWh)}</td></tr>
+<tr><th>Durée</th><td>${formatDuration(stats.durationMs)}</td></tr>
+</table>
+<table class="power">
+<tr><th rowspan="2"><a href="/posts/quelle-puissance-mesurer/">Puissance</a></th><td>médiane</td><td>moyenne</td><td>maximale</td></tr>
+<tr>
+<td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.medianPowerW) + ' | W }}&quot;)" title="' + stats.medianPowerW + ' W"' : ''}>${formatPower(stats.medianPowerW)}</td>
+<td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.averagePowerW) + ' | W }}&quot;)" title="' + stats.averagePowerW + ' W"' : ''}>${formatPower(stats.averagePowerW)}</td>
+<td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.maxPowerW) + ' | W }}&quot;)" title="' + stats.maxPowerW + ' W"' : ''}>${formatPower(stats.maxPowerW)}</td>
+</tr>
+</table>`
+      + `</div>`;
+  }
+  if (multiCounters) {
+    result += options.name ?
+        `<p>${options.name}${profilerIcon}</p>`
+      : `<p>${counters.length} enregistrements.${profilerIcon}</p>`;
+    result += `</div>`;
+  }
+
+  b.after();
+  return result;
 }
 
 async function image(src, alt, sizes, width, lazy = true) {
@@ -315,6 +500,233 @@ async function image(src, alt, sizes, width, lazy = true) {
   return rv;
 }
 
+function setupDevMiddleware(middleware) {
+  // Helper functions for API responses
+  function sendJSON(res, statusCode, data) {
+    res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(data));
+  }
+
+  function loadDraftData(slug) {
+    const dataPath = `./draft/${slug}/data.json`;
+
+    if (fs.existsSync(dataPath)) {
+      try {
+        return JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+      } catch (error) {
+        // Invalid JSON, fall through to default
+      }
+    }
+
+    return { ranges: [], title: null };
+  }
+
+  function saveDraftData(slug, data) {
+    const dataPath = `./draft/${slug}/data.json`;
+    fs.writeFileSync(dataPath, JSON.stringify(data, null, 2), 'utf-8');
+  }
+
+  // Parse JSON body for POST and PATCH requests
+  middleware.push(function(req, res, next) {
+    if ((req.method === 'POST' || req.method === 'PATCH') && req.headers['content-type']?.includes('application/json')) {
+      let body = '';
+      req.on('data', chunk => body += chunk);
+      req.on('end', () => {
+        try {
+          req.body = JSON.parse(body);
+        } catch (e) {
+          req.body = {};
+        }
+        next();
+      });
+    } else {
+      next();
+    }
+  });
+
+  // Draft API endpoints
+  middleware.push(async function(req, res, next) {
+    const url = req.url;
+
+    // GET /api/draft/:slug/data
+    const getData = /^\/api\/draft\/([^/]+)\/data$/;
+    if (req.method === 'GET' && getData.test(url)) {
+      const [, slug] = url.match(getData);
+      const data = loadDraftData(slug);
+      sendJSON(res, 200, data);
+      return;
+    }
+
+    // POST /api/draft/:slug/save-range
+    const saveRange = /^\/api\/draft\/([^/]+)\/save-range$/;
+    if (req.method === 'POST' && saveRange.test(url)) {
+      const [, slug] = url.match(saveRange);
+      const { profileName, range, name, file, shortcode } = req.body || {};
+
+      if (!profileName || !name) {
+        sendJSON(res, 400, { error: 'Missing required fields' });
+        return;
+      }
+
+      const data = loadDraftData(slug);
+      if (!data.ranges) {
+        data.ranges = [];
+      }
+
+      const id = Date.now().toString();
+      data.ranges.push({ id, profileName, range, name, file, shortcode });
+
+      try {
+        saveDraftData(slug, data);
+        sendJSON(res, 200, { success: true, id });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // DELETE /api/draft/:slug/range/:id
+    const deleteRange = /^\/api\/draft\/([^/]+)\/range\/([^/]+)$/;
+    if (req.method === 'DELETE' && deleteRange.test(url)) {
+      const [, slug, rangeId] = url.match(deleteRange);
+
+      const data = loadDraftData(slug);
+      if (!data.ranges) {
+        sendJSON(res, 404, { error: 'Range not found' });
+        return;
+      }
+
+      data.ranges = data.ranges.filter(r => r.id !== rangeId);
+
+      try {
+        saveDraftData(slug, data);
+        sendJSON(res, 200, { success: true });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // PATCH /api/draft/:slug/update-range/:id
+    const updateRange = /^\/api\/draft\/([^/]+)\/update-range\/([^/]+)$/;
+    if (req.method === 'PATCH' && updateRange.test(url)) {
+      const [, slug, rangeId] = url.match(updateRange);
+      const { name, description } = req.body || {};
+
+      const data = loadDraftData(slug);
+      if (!data.ranges) {
+        sendJSON(res, 404, { error: 'Range not found' });
+        return;
+      }
+
+      const range = data.ranges.find(r => r.id === rangeId);
+      if (!range) {
+        sendJSON(res, 404, { error: 'Range not found' });
+        return;
+      }
+
+      // Update fields
+      if (name !== undefined) {
+        range.name = name;
+        // Regenerate shortcode with new name
+        const shortcodeOptions = { name };
+        if (range.range) {
+          shortcodeOptions.range = range.range;
+        }
+        shortcodeOptions.path = `draft/${slug}/`;
+        range.shortcode = `{% profile "${range.file}" '${JSON.stringify(shortcodeOptions).replace(/'/g, "\\'")}' %}`;
+      }
+      if (description !== undefined) {
+        range.description = description;
+      }
+
+      try {
+        saveDraftData(slug, data);
+        sendJSON(res, 200, { success: true });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // PATCH /api/draft/:slug/title - Update draft title
+    const updateTitle = /^\/api\/draft\/([^/]+)\/title$/;
+    if (req.method === 'PATCH' && updateTitle.test(url)) {
+      const [, slug] = url.match(updateTitle);
+      const { title } = req.body || {};
+
+      if (!title) {
+        sendJSON(res, 400, { error: 'Missing title' });
+        return;
+      }
+
+      const data = loadDraftData(slug);
+      data.title = title;
+
+      try {
+        saveDraftData(slug, data);
+        sendJSON(res, 200, { success: true, title });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // POST /api/render-profile - Render a profile shortcode
+    if (req.method === 'POST' && url === '/api/render-profile') {
+      const { profile, options } = req.body || {};
+
+      if (!profile || !options) {
+        sendJSON(res, 400, { error: 'Missing profile or options' });
+        return;
+      }
+
+      try {
+        // Create a fake user benchmarks for API calls
+        const fakeUserBenchmarks = {
+          get: () => ({ before: () => {}, after: () => {} })
+        };
+        const html = await profileShortcode(profile, options, fakeUserBenchmarks);
+        sendJSON(res, 200, { html });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    next();
+  });
+
+  // Proxy for Firefox Profiler
+  middleware.push(
+    createProxyMiddleware({
+      pathFilter: function(pathname, req) {
+        // Proxy profiler-specific paths
+        if (pathname.startsWith('/from-url/')) {
+          return true;
+        }
+        // Proxy profiler assets - these patterns are specific to Firefox Profiler
+        // and shouldn't conflict with the site's own assets
+        if (pathname.endsWith('.bundle.js') ||
+            pathname.startsWith('/locales/') ||
+            /^\/[a-f0-9]{20}\.(jpg|png|svg|css|wasm)$/.test(pathname) ||
+            /^\/[a-f0-9]{32}\.js$/.test(pathname) ||
+            pathname.endsWith('.map')) {
+          return true;
+        }
+        return false;
+      },
+      target: 'http://localhost:4242',
+      changeOrigin: true,
+      onProxyRes: function(proxyRes, req, res) {
+        // Remove CSP headers that might block embedding
+        delete proxyRes.headers['content-security-policy'];
+        delete proxyRes.headers['x-frame-options'];
+      }
+    })
+  );
+}
+
 export default function (eleventyConfig) {
   Profiler(eleventyConfig);
   // Start the category name with a space so it sorts before "Aggregate".
@@ -325,6 +737,15 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("profiles");
+
+  // Draft system (dev mode only)
+  if (isDev) {
+    eleventyConfig.addPassthroughCopy("draft/**/*.{jpg,jpeg,png,gif,webp}");
+    eleventyConfig.addPassthroughCopy("draft/**/*.json.gz");
+    eleventyConfig.addPassthroughCopy("draft/**/*.js");
+  } else {
+    eleventyConfig.ignores.add("draft/**");
+  }
 
   eleventyConfig.addCollection("testsAndPosts", function testsAndPostsCollection(collectionApi) {
     return collectionApi.getFilteredByGlob(["posts/*.md", "tests/*.md"]);
@@ -339,6 +760,13 @@ export default function (eleventyConfig) {
   eleventyConfig.addTransform("htmlmin", async function htmlMinTransform(content) {
     // Prior to Eleventy 2.0: use this.outputPath instead
     if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
+      // Skip CSS minification for draft pages (they have dynamically inserted content)
+      // and include the full CSS.
+      if (this.page.outputPath.includes('/draft/')) {
+        content = content.replace("</head>", `<style>${fullCss}</style></head>`);
+        return content;
+      }
+
       const b = UserBenchmarks.get("> htmlmin > " + this.page.outputPath);
       b.before();
 
@@ -546,185 +974,8 @@ export default function (eleventyConfig) {
     };
   });
 
-  eleventyConfig.addShortcode("profile", async function profileShortcode(profile, options) {
-    const profileStringId = profile + (options ? " " + options : "");
-    const b = UserBenchmarks.get("> profile > " + profileStringId);
-    b.before();
-
-    options = options ? JSON.parse(options) : {};
-    const graphHeight = 120;
-    const graphWidth = 2400;
-    const halfStrokeWidth = 3;
-    function makeSVGPath(graph) {
-      const b = UserBenchmarks.get("> profile > SVG path: " + profileStringId);
-      b.before();
-
-      let lastLetter = "";
-      function letter(l) {
-        if (l == lastLetter) {
-          return "";
-        }
-        lastLetter = l;
-        return l;
-      }
-      let lastX = -2 * halfStrokeWidth;
-      let lastY = graphHeight;
-      let path = `${letter('M')}${lastX} ${lastY}`;
-      function append(cmd) {
-        if (/^\d/.test(cmd) && /\d$/.test(path)) {
-          path += " ";
-        }
-        path += cmd;
-      }
-      function appendShorterV(y) {
-        let v = `${lastLetter != 'v' ? 'v' : ''}${y - lastY}`;
-        let V = `${lastLetter != 'V' ? 'V' : ''}${y}`;
-        if (v.length <= V.length) {
-          append(v);
-          lastLetter = 'v';
-        } else {
-          append(V);
-          lastLetter = 'V';
-        }
-      }
-
-      let x = i => Math.max(halfStrokeWidth, Math.min(graph[i].x * graphWidth, graphWidth - halfStrokeWidth)).toFixed();
-      let y = i => graph[i].y == 0 ? graphHeight + halfStrokeWidth
-          : Math.max(halfStrokeWidth, (1 - graph[i].y) * graphHeight).toFixed();
-      // draw a first point the right height and x = -strokeWidth.
-      {
-        let yi = y(0);
-        appendShorterV(yi);
-        lastY = yi;
-      }
-      for (let i = 0; i < graph.length; ++i) {
-        let xi = x(i);
-        let yi = y(i);
-        if (xi == lastX && yi == lastY) {
-          continue;
-        }
-        if (yi == lastY) {
-          while (i + 1 < graph.length && y(i + 1) == lastY) {
-            xi = x(++i);
-          }
-          append(`${letter('h')}${xi - lastX}`);
-        } else {
-          if (xi == lastX) {
-            let ys = [yi];
-            let j = 1;
-            while (i + j < graph.length && x(i + j) == xi) {
-              ys.push(y(i + j));
-              j++;
-            }
-            let usefulYs = [];
-            let max = Math.max(...ys);
-            let min = Math.min(...ys);
-            let last = ys[ys.length - 1];
-            if (max != last && max > lastY) {
-              usefulYs.push(max);
-            }
-            if (min != last && min < lastY) {
-              usefulYs.push(min);
-            }
-            usefulYs.push(last);
-
-            i += j - 1;
-            for (let usefulY of usefulYs) {
-              yi = usefulY;
-              appendShorterV(yi);
-              lastY = yi;
-            }
-          } else {
-            append(`${letter('l')}${xi - lastX}`);
-            append(`${yi - lastY}`);
-          }
-        }
-        lastX = xi;
-        lastY = yi;
-      }
-
-      // draw a last point, at x = graphWidth + 2*strokeWidth, y = lastY
-      append(`${letter('h')}${(graphWidth + 2*halfStrokeWidth) - lastX}`);
-
-      // Move down to ${graphHeight} to ensure the filled area is correct.
-      appendShorterV(graphHeight);
-
-      b.after();
-      return path;
-    }      
-
-    let {counters, meta} = await loadProfile(profile);
- 
-    let profilerQuery = "";
-    let profilerQueryParams = [];
-    if (options.name) {
-      profilerQueryParams.push("profileName=" + options.name);
-    }
-    if (options.range) {
-      profilerQueryParams.push("range=" + options.range);
-      profilerQueryParams.push("v=10");
-    }
-    if (profilerQueryParams.length) {
-      profilerQuery = "?" + profilerQueryParams.join("&");
-    }
-    const profilerIcon = `<a class="profiler-link" target="_blank" title="Ouvrir dans le Firefox Profiler" href="${profilerLink(profile)}${profilerQuery}"></a>`;
-
-    let result = "";
-    let multiCounters = counters.length > 1;
-    if (multiCounters) {
-      result += `<div class="profile">`
-    }
-    for (let {name, description, samples} of counters) {
-      let {stats, firstSample, lastSample, values} =
-        getStatsFromCounterSamples(profileStringId, {meta}, samples, options.range, multiCounters);
-      if (options.debug) {
-        console.log(profile, options, stats);
-      }
-      if (values.length == 0) {
-        throw new Error(`No sample in range, profile: ${profile}, options=${JSON.stringify(options)}`);
-      }
-      let graph = values.map(function xAndYFromValues(v, i) {
-        return ({
-          x: (samples.time[firstSample + i] - samples.time[firstSample]) / stats.durationMs,
-          y: v / stats.maxPowerW});
-      });
-      let svg = `<div><svg viewBox="0 0 ${graphWidth} ${graphHeight}">`
-          + `<path d="${makeSVGPath(graph)}"/>`
-          + `</svg></div>`;
-      if (multiCounters) {
-        result += svg;
-        continue;
-      }
-
-      const profileDescription = options.name ?
-          `<p title="${name}, ${values.length} échantillons">${options.name}${profilerIcon}</p>`
-        : `<p>${name} : ${description}, ${values.length} échantillons.${profilerIcon}</p>`;
-      result += `<div class="profile">`
-        + svg
-        + profileDescription
-        + `<table>
-<tr><th>Consommation</th><td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundEnergy(stats.energyWh) + ' | Wh }}&quot;)" title="' + stats.energyWh + ' Wh"' : ''}>${formatEnergy(stats.energyWh)} — ${formatCost(stats.energyWh)}</td></tr>
-<tr><th>Durée</th><td>${formatDuration(stats.durationMs)}</td></tr>
-</table>
-<table class="power">
-<tr><th rowspan="2"><a href="/posts/quelle-puissance-mesurer/">Puissance</a></th><td>médiane</td><td>moyenne</td><td>maximale</td></tr>
-<tr>
-<td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.medianPowerW) + ' | W }}&quot;)" title="' + stats.medianPowerW + ' W"' : ''}>${formatPower(stats.medianPowerW)}</td>
-<td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.averagePowerW) + ' | W }}&quot;)" title="' + stats.averagePowerW + ' W"' : ''}>${formatPower(stats.averagePowerW)}</td>
-<td${isDev ? ' onclick="navigator.clipboard.writeText(&quot;{{ ' + roundPower(stats.maxPowerW) + ' | W }}&quot;)" title="' + stats.maxPowerW + ' W"' : ''}>${formatPower(stats.maxPowerW)}</td>
-</tr>
-</table>`
-        + `</div>`;
-    }
-    if (multiCounters) {
-      result += options.name ?
-          `<p>${options.name}${profilerIcon}</p>`
-        : `<p>${counters.length} enregistrements.${profilerIcon}</p>`;
-      result += `</div>`;
-    }
-
-    b.after();
-    return result;
+  eleventyConfig.addShortcode("profile", async function(profile, options) {
+    return await profileShortcode(profile, options, UserBenchmarks);
   });
 
   eleventyConfig.setFrontMatterParsingOptions({
@@ -733,12 +984,21 @@ export default function (eleventyConfig) {
     excerpt_separator: "<!-- excerpt -->"
   });
 
-  eleventyConfig.setServerOptions({
-    middleware: [function (req, res, next) {
-      if (/\/profiles\/.*\.json.gz$/.test(req.url)) {
+  const middleware = [
+    function (req, res, next) {
+      if (/\/(profiles|draft)\/.*\.json\.gz$/.test(req.url)) {
         res.setHeader('access-control-allow-origin', '*');
       }
       next();
-    }],
+    }
+  ];
+
+  // Setup dev mode middleware (draft API, profiler proxy)
+  if (isDev) {
+    setupDevMiddleware(middleware);
+  }
+
+  eleventyConfig.setServerOptions({
+    middleware,
   });
 }

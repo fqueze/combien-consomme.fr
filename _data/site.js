@@ -5,5 +5,6 @@ export default function () {
     url: isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr',
     profilerUrl: isDev ? 'http://localhost:4242' : 'https://profiler.firefox.com',
     language: "fr",
+    isDev,
   };
 }

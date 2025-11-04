@@ -46,7 +46,7 @@ La puissance médiane est intéressante pour un appareil dont la puissance de d�
 
 La pompe d'un congélateur consomme beaucoup pendant quelques secondes lorsqu'elle démarre, puis a une consommation assez faible pendant plusieurs minutes.
 
-Voici ce que ça donne sur <a href="{{ "congelateur.json.gz" | profilerLink }}?hiddenLocalTracksByPid=0-1wb&markerSearch=Freezer&thread=0&v=10">un profil</a> de sa consommation :
+Voici ce que ça donne sur <a href="{{ "profiles/congelateur.json.gz" | profilerLink }}?hiddenLocalTracksByPid=0-1wb&markerSearch=Freezer&thread=0&v=10">un profil</a> de sa consommation :
 
 {% profile "congelateur.json.gz" %}
 

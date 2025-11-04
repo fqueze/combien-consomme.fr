@@ -1,0 +1,355 @@
+---
+pagination:
+  data: drafts.folders
+  size: 1
+  alias: folder
+layout: base-layout.njk
+isDraft: true
+eleventyComputed:
+  title: "{{ folder.name }}"
+  pagetitle: "🚧 {{ folder.name }}"
+  draftSlug: "{{ folder.slug }}"
+  permalink: "/draft/{{ folder.slug }}/index.html"
+---
+<article data-draft-slug="{{ folder.slug }}">
+<h1>🚧 <span id="draft-title" contenteditable="false" title="Cliquer pour modifier le titre">{{ folder.title or folder.name }}</span></h1>
+
+{% if folder.profiles.length > 0 %}
+<section>
+  <h2>Profils</h2>
+  {% for profile in folder.profiles %}
+  <div class="profile-item">
+    <code>{{ profile }}</code>
+    <button class="open-profiler-btn" data-profile="{{ profile }}" data-slug="{{ folder.slug }}">
+      Ouvrir dans le profiler
+    </button>
+  </div>
+  {% endfor %}
+
+  <div id="profiler-container" class="profiler-container" style="display: none;">
+    <div class="profiler-header">
+      <h3 id="profiler-title">Firefox Profiler</h3>
+      <div class="profiler-actions">
+        <button class="save-range-btn">Sauvegarder</button>
+        <button class="close-profiler-btn">✕</button>
+      </div>
+    </div>
+    <iframe id="profiler-iframe" class="profiler-iframe"></iframe>
+  </div>
+
+  <div id="saved-ranges" class="saved-ranges">
+    <h3>Plages sauvegardées</h3>
+    <div id="saved-ranges-list"></div>
+  </div>
+</section>
+{% endif %}
+
+{% if folder.images.length > 0 %}
+<section>
+  <h2>Images</h2>
+  <div class="images-grid">
+    {% for image in folder.images %}
+    <div class="image-item">
+      <img src="/draft/{{ folder.slug }}/{{ image }}" alt="{{ image }}">
+      <code>{{ image }}</code>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+</article>
+
+<style>
+.profile-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.profile-item code {
+  flex: 1;
+}
+
+.open-profiler-btn {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.open-profiler-btn:hover {
+  background: #0052a3;
+}
+
+.profiler-container {
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.profiler-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #e9ecef;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.profiler-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  flex: 1;
+}
+
+.profiler-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.save-range-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.save-range-btn:hover {
+  background: #218838;
+}
+
+.close-profiler-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.close-profiler-btn:hover {
+  background: #c82333;
+}
+
+.profiler-iframe {
+  width: 100%;
+  height: 350px;
+  border: none;
+  display: block;
+}
+
+.saved-ranges {
+  margin-top: 2rem;
+}
+
+.saved-ranges h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+#saved-ranges-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.saved-range-item {
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 0 0.75rem;
+  background: #f8f9fa;
+}
+
+.saved-range-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.range-summary {
+  white-space: nowrap;
+}
+
+.range-name {
+  cursor: text;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.range-name:hover {
+  background: rgba(0, 102, 204, 0.1);
+}
+
+.range-name[contenteditable="true"] {
+  background: white;
+  outline: 2px solid #0066cc;
+}
+
+.range-description {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  margin-bottom: 0.25rem;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.range-description:focus {
+  outline: 2px solid #0066cc;
+  border-color: #0066cc;
+}
+
+.range-shortcode {
+  flex: 1;
+  background: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: block;
+}
+
+.delete-range-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.delete-range-btn:hover {
+  background: #c82333;
+}
+
+.preview-error {
+  color: #dc3545;
+  padding: 1rem;
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.image-item {
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 0.5rem;
+  background: #f8f9fa;
+}
+
+.image-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.image-item code {
+  display: block;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.undo-notification {
+  background: #333;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.undo-notification-hide {
+  animation: fadeOut 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.undo-btn {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.undo-btn:hover {
+  background: #0052a3;
+}
+
+.undo-btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+#draft-title {
+  cursor: text;
+  padding: 2px 4px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+#draft-title:hover {
+  background: rgba(0, 102, 204, 0.1);
+}
+
+#draft-title[contenteditable="true"] {
+  background: white;
+  outline: 2px solid #0066cc;
+}
+</style>
+
+<script src="/draft/draft-scripts.js"></script>

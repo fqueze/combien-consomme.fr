@@ -39,9 +39,12 @@
 #}
   </head>
   <body>
-<header>
+<header{% if isDraft %} class="draft-header"{% endif %}>
   <a href="/" role="button"><h3>combien-consomme.fr</h3></a>
   <ul>
+    {%- if site.isDev %}
+    <li><a href="/draft/" id="drafts-link">Brouillons</a></li>
+    {%- endif %}
     <li><a href="{{ '/tests/' | url }}">Tests</a></li>
     <li><a href="{{ '/posts/' | url }}">Articles</a></li>
     <li><a href="{{ '/about/' | url }}">À propos</a></li>

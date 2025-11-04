@@ -1,0 +1,78 @@
+---
+layout: base-layout.njk
+pagetitle: Brouillons de tests
+pagedesc: Tests en cours de rédaction. Cette page n'est visible qu'en localhost.
+isDraft: true
+eleventyExcludeFromCollections: true
+permalink: /draft/index.html
+---
+<section>
+  <h1>{{ pagetitle }}</h1>
+  <p>{{ pagedesc }}</p>
+</section>
+
+{% for folder in drafts.folders %}
+  <article class="list">
+    <a href="/draft/{{ folder.slug }}/">{% if folder.images[0] %}{% image "draft/" + folder.slug + "/" + folder.images[0], folder.name, "192w", 192, false if loop.first else true %}{% else %}{% image "./images/hp-missing.png", "Image générique", "192w", 192, false if loop.first else true %}{% endif %}</a>
+    <h3>
+      <a href="/draft/{{ folder.slug }}/" class="draft-title-link" data-slug="{{ folder.slug }}" data-default-title="{{ folder.slug }}">{{ folder.name }}</a>
+    </h3>
+    <p class="draft-meta" data-slug="{{ folder.slug }}">
+      <span class="image-count">{{ folder.imageCount }} image{% if folder.imageCount > 1 %}s{% endif %}</span> —
+      <span class="profile-count">{{ folder.profileCount }} profil{% if folder.profileCount > 1 %}s{% endif %}</span><span class="range-count">{% if folder.rangeCount > 0 %} — {{ folder.rangeCount }} plage{% if folder.rangeCount > 1 %}s{% endif %} sauvegardée{% if folder.rangeCount > 1 %}s{% endif %}{% endif %}</span>
+    </p>
+  </article>
+{% endfor %}
+
+<style>
+.draft-title-link:before {
+  content: "🚧";
+  display: inline-block;
+  margin-right: 0.3em;
+}
+</style>
+
+<script>
+// Load custom titles and range counts from data.json files
+document.addEventListener('DOMContentLoaded', async function() {
+  const titleLinks = document.querySelectorAll('.draft-title-link');
+
+  for (const link of titleLinks) {
+    const slug = link.dataset.slug;
+
+    try {
+      const response = await fetch(`http://localhost:8080/api/draft/${slug}/data`);
+      const data = await response.json();
+
+      if (data.title) {
+        link.textContent = data.title;
+      }
+
+      // Update range count
+      if (data.ranges) {
+        const rangeCount = data.ranges.length;
+        const rangeCountEl = document.querySelector(`.draft-meta[data-slug="${slug}"] .range-count`);
+
+        if (rangeCountEl) {
+          if (rangeCount > 0) {
+            const rangePlural = rangeCount > 1 ? 's' : '';
+            const savedPlural = rangeCount > 1 ? 's' : '';
+            rangeCountEl.textContent = ` — ${rangeCount} plage${rangePlural} sauvegardée${savedPlural}`;
+          } else {
+            rangeCountEl.textContent = '';
+          }
+        }
+      }
+    } catch (error) {
+      console.error(`Error loading title for ${slug}:`, error);
+    }
+  }
+});
+</script>
+
+{% if drafts.folders.length == 0 %}
+<section>
+  <p>Aucun brouillon trouvé.</p>
+  <p>Créez un dossier dans <code>draft/</code> avec des images et un profil de consommation pour commencer.</p>
+</section>
+{% endif %}
