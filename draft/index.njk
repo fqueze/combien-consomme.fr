@@ -13,7 +13,7 @@ permalink: /draft/index.html
 
 {% for folder in drafts.folders %}
   <article class="list">
-    <a href="/draft/{{ folder.slug }}/">{% if folder.images[0] %}{% image "draft/" + folder.slug + "/" + folder.images[0], folder.name, "192w", 192, false if loop.first else true %}{% else %}{% image "./images/hp-missing.png", "Image générique", "192w", 192, false if loop.first else true %}{% endif %}</a>
+    <a href="/draft/{{ folder.slug }}/">{% if folder.img %}{% image "draft/" + folder.slug + "/" + folder.img, folder.name, "192w", 192, false if loop.first else true %}{% elif folder.images[0] %}{% image "draft/" + folder.slug + "/" + folder.images[0], folder.name, "192w", 192, false if loop.first else true %}{% else %}{% image "./images/hp-missing.png", "Image générique", "192w", 192, false if loop.first else true %}{% endif %}</a>
     <h3>
       <a href="/draft/{{ folder.slug }}/" class="draft-title-link" data-slug="{{ folder.slug }}" data-default-title="{{ folder.slug }}">{{ folder.name }}</a>
     </h3>

@@ -544,6 +544,35 @@ function setupDevMiddleware(middleware) {
     }
   });
 
+  // Serve draft files directly from draft folder (including preview subfolder)
+  middleware.push(function(req, res, next) {
+    const draftFileMatch = req.url.match(/^\/draft\/([^/]+)\/(preview\/)?(.+\.(jpg|jpeg|png|gif|webp|json\.gz|js))(?:\?.*)?$/);
+    if (draftFileMatch) {
+      const [, slug, previewPath, filename] = draftFileMatch;
+      const filePath = path.join(process.cwd(), 'draft', slug, previewPath || '', filename);
+
+      if (fs.existsSync(filePath)) {
+        const ext = path.extname(filename).toLowerCase();
+        const mimeTypes = {
+          '.jpg': 'image/jpeg',
+          '.jpeg': 'image/jpeg',
+          '.png': 'image/png',
+          '.gif': 'image/gif',
+          '.webp': 'image/webp',
+          '.gz': 'application/gzip',
+          '.js': 'application/javascript'
+        };
+
+        res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'application/octet-stream' });
+        fs.createReadStream(filePath).pipe(res);
+        return;
+      } else {
+        console.log('Draft file not found:', filePath);
+      }
+    }
+    next();
+  });
+
   // Draft API endpoints
   middleware.push(async function(req, res, next) {
     const url = req.url;
@@ -666,6 +695,131 @@ function setupDevMiddleware(middleware) {
       try {
         saveDraftData(slug, data);
         sendJSON(res, 200, { success: true, title });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // PATCH /api/draft/:slug/notes - Update draft notes
+    const updateNotes = /^\/api\/draft\/([^/]+)\/notes$/;
+    if (req.method === 'PATCH' && updateNotes.test(url)) {
+      const [, slug] = url.match(updateNotes);
+      const { notes } = req.body || {};
+
+      const data = loadDraftData(slug);
+      data.notes = notes || '';
+
+      try {
+        saveDraftData(slug, data);
+        sendJSON(res, 200, { success: true });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // PATCH /api/draft/:slug/image/:shortname - Update image metadata
+    const updateImage = /^\/api\/draft\/([^/]+)\/image\/(.+)$/;
+    if (req.method === 'PATCH' && updateImage.test(url)) {
+      const [, slug, shortname] = url.match(updateImage);
+
+      const data = loadDraftData(slug);
+      if (!data.images) {
+        data.images = {};
+      }
+      if (!data.images[shortname]) {
+        data.images[shortname] = {};
+      }
+
+      // Update fields (source, description, width, crop)
+      ['source', 'description', 'width', 'crop'].forEach(field => {
+        if (req.body?.[field] !== undefined) {
+          data.images[shortname][field] = req.body[field];
+        }
+      });
+
+      try {
+        saveDraftData(slug, data);
+        sendJSON(res, 200, { success: true });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // POST /api/draft/:slug/save-preview - Save edited image to preview folder
+    const savePreview = /^\/api\/draft\/([^/]+)\/save-preview$/;
+    if (req.method === 'POST' && savePreview.test(url)) {
+      const [, slug] = url.match(savePreview);
+      const { imageData, shortname } = req.body || {};
+
+      if (!imageData) {
+        sendJSON(res, 400, { error: 'Missing imageData' });
+        return;
+      }
+
+      try {
+        // Convert base64 data URL to buffer
+        const matches = imageData.match(/^data:image\/(\w+);base64,(.+)$/);
+        if (!matches) {
+          sendJSON(res, 400, { error: 'Invalid image data format' });
+          return;
+        }
+
+        const imageBuffer = Buffer.from(matches[2], 'base64');
+        const draftPath = path.join(process.cwd(), 'draft', slug);
+
+        // Create preview subfolder if it doesn't exist
+        const previewPath = path.join(draftPath, 'preview');
+        if (!fs.existsSync(previewPath)) {
+          fs.mkdirSync(previewPath, { recursive: true });
+        }
+
+        // Save as slug.jpg for 'img' (thumbnail), or slug-shortname.jpg for other shortnames
+        const newFilename = shortname === 'img' ? `${slug}.jpg` : `${slug}-${shortname}.jpg`;
+        const imagePath = path.join(previewPath, newFilename);
+
+        // Write the new image file
+        fs.writeFileSync(imagePath, imageBuffer);
+
+        sendJSON(res, 200, { success: true, previewFilename: `preview/${newFilename}` });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // DELETE /api/draft/:slug/image/:shortname - Delete image metadata and preview
+    const deleteImage = /^\/api\/draft\/([^/]+)\/image\/(.+)$/;
+    if (req.method === 'DELETE' && deleteImage.test(url)) {
+      const [, slug, shortname] = url.match(deleteImage);
+
+      try {
+        const data = loadDraftData(slug);
+
+        if (data.images && data.images[shortname]) {
+          // Delete the image metadata
+          delete data.images[shortname];
+
+          saveDraftData(slug, data);
+
+          // Delete the preview file if it exists
+          const draftPath = path.join(process.cwd(), 'draft', slug);
+          const previewPath = path.join(draftPath, 'preview');
+
+          // Preview filename: special case for 'img' (thumbnail)
+          const previewFilename = shortname === 'img' ? `${slug}.jpg` : `${slug}-${shortname}.jpg`;
+          const previewFilePath = path.join(previewPath, previewFilename);
+
+          if (fs.existsSync(previewFilePath)) {
+            fs.unlinkSync(previewFilePath);
+          }
+
+          sendJSON(res, 200, { success: true });
+        } else {
+          sendJSON(res, 404, { error: 'Image not found' });
+        }
       } catch (error) {
         sendJSON(res, 500, { error: error.message });
       }
