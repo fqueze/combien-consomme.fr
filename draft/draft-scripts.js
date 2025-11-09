@@ -587,7 +587,8 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       // Parse the shortcode to extract profile and options
       // Format: {% profile "filename.json.gz" '{"name":"...","range":"...","path":"..."}' %}
-      const match = shortcode.match(/\{%\s*profile\s+"([^"]+)"\s+'([^']+)'\s*%\}/);
+      // Note: The JSON string may contain escaped single quotes (\')
+      const match = shortcode.match(/\{%\s*profile\s+"([^"]+)"\s+'(.+)'\s*%\}/);
       if (!match) {
         throw new Error('Invalid shortcode format');
       }

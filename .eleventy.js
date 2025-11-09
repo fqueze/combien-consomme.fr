@@ -1073,9 +1073,11 @@ TODO: Describe measurement equipment and link to article
 
         // Add profile range templates
         for (const range of data.ranges) {
+          // Escape single quotes in the name for the Liquid shortcode
+          const escapedName = range.name.replace(/'/g, "\\'");
           template += `### TODO: Section name
 
-{% profile "${slug}.json.gz" '{"name": "${range.name}", "range": "${range.range}"}' %}
+{% profile "${slug}.json.gz" '{"name": "${escapedName}", "range": "${range.range}"}' %}
 {% comment %}Original description from draft: ${range.description || 'N/A'}{% endcomment %}
 
 TODO: Analysis and observations
