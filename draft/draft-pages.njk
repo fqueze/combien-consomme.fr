@@ -12,7 +12,22 @@ eleventyComputed:
   permalink: "/draft/{{ folder.slug }}/index.html"
 ---
 <article data-draft-slug="{{ folder.slug }}">
-<h1><span id="view-data-json-btn" class="draft-icon" title="Voir data.json">🚧</span> <span id="draft-title" contenteditable="false" title="Cliquer pour modifier le titre">{{ folder.title or folder.name }}</span></h1>
+<h1>
+  <span id="view-data-json-btn" class="draft-icon" title="Voir data.json">🚧</span>
+  <span id="draft-title" contenteditable="false" title="Cliquer pour modifier le titre">{{ folder.title or folder.name }}</span>
+  <button id="generate-template-btn" class="generate-template-btn-inline" disabled title="" style="visibility: hidden;">
+    Générer le template
+  </button>
+</h1>
+
+<div id="generate-template-status"></div>
+<div id="test-preview-container" style="display: none;">
+  <div class="preview-header">
+    <h4>Aperçu du test généré</h4>
+    <button id="refresh-preview-btn" class="refresh-preview-btn" title="Recharger l'aperçu">↻ Recharger</button>
+  </div>
+  <iframe id="test-preview-iframe"></iframe>
+</div>
 
 <div class="draft-notes-section">
   <label for="draft-notes">Notes sur le test :</label>
@@ -963,6 +978,125 @@ eleventyComputed:
 #draft-title[contenteditable="true"] {
   background: white;
   outline: 2px solid #0066cc;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.generate-template-btn-inline {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.generate-template-btn-inline:hover:not(:disabled) {
+  background: #0052a3;
+}
+
+.generate-template-btn-inline:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#generate-template-status {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+#generate-template-status.success {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+#generate-template-status.error {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+#generate-template-status.info {
+  background: #d1ecf1;
+  border: 1px solid #bee5eb;
+  color: #0c5460;
+}
+
+#generate-template-status pre {
+  margin: 0.5rem 0 0 0;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+#test-preview-container {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border: 2px solid #0066cc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #e7f3ff;
+  border-bottom: 2px solid #0066cc;
+}
+
+.preview-header h4 {
+  margin: 0;
+  color: #0066cc;
+  font-size: 1rem;
+}
+
+.refresh-preview-btn {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.refresh-preview-btn:hover {
+  background: #0052a3;
+}
+
+.refresh-preview-btn:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+}
+
+#test-preview-iframe {
+  width: 100%;
+  height: 800px;
+  border: none;
+  display: block;
+  background: white;
 }
 </style>
 

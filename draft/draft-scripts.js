@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Try loading preview file (for cropped or perspective-corrected images)
         const previewFilename = `${previewName}.jpg`;
-        const previewPath = `preview/${previewFilename}`;
+        const previewPath = `preview/images/${previewFilename}`;
 
         // Add cache-busting timestamp to force reload after save
         const cacheBust = Date.now();
@@ -425,9 +425,12 @@ document.addEventListener('DOMContentLoaded', function() {
       savedRangesList.innerHTML = '';
 
       if (data.ranges && data.ranges.length > 0) {
+        const renderPromises = [];
+
         for (const range of data.ranges) {
           const item = document.createElement('div');
           item.className = 'saved-range-item';
+          item.dataset.rangeId = range.id;
           item.innerHTML = `
             <div class="saved-range-header">
               <span class="range-summary">
@@ -445,9 +448,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Fetch and render the shortcode
           if (range.shortcode) {
-            renderShortcode(range.shortcode, range.id);
+            renderPromises.push(renderShortcode(range.shortcode, range.id));
           }
         }
+
+        // Wait for all SVGs to be rendered
+        await Promise.all(renderPromises);
 
         // Add rename functionality
         document.querySelectorAll('.range-name').forEach(nameEl => {
@@ -461,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showError(error.message);
               }
 
-              loadSavedRanges();
+              loadSavedRanges(true);
             },
             () => loadSavedRanges()
           );
@@ -1207,12 +1213,12 @@ document.addEventListener('DOMContentLoaded', function() {
         ocrBtn.textContent = '...';
 
         try {
-          // Use preview file if it exists, otherwise fall back to source
+          // Use preview file
           const previewName = shortname === 'img' ? currentSlug : `${currentSlug}-${shortname}`;
-          const previewPath = `preview/${previewName}.jpg`;
+          const imagePath = `/draft/${currentSlug}/preview/images/${previewName}.jpg`;
 
           const { data: { text } } = await Tesseract.recognize(
-            `/draft/${currentSlug}/${previewPath}`,
+            imagePath,
             'fra', // French language
             {
               logger: info => {
@@ -1667,4 +1673,194 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     () => location.reload()
   );
+
+  // Generate Template functionality
+  const generateBtn = document.getElementById('generate-template-btn');
+  const statusDiv = document.getElementById('generate-template-status');
+  const previewContainer = document.getElementById('test-preview-container');
+  const previewIframe = document.getElementById('test-preview-iframe');
+
+  // Enable button when there are ranges and main image
+  async function updateGenerateButtonState() {
+    const data = await getDraftData();
+    const hasRanges = data.ranges && data.ranges.length > 0;
+    const hasMainImage = data.images && data.images['img'];
+
+    // Check if template already exists
+    const templatePath = `draft/${currentSlug}/preview/tests/${currentSlug}`;
+    let templateExists = false;
+    try {
+      const response = await fetch(`/${templatePath}`);
+      templateExists = response.ok;
+    } catch (e) {
+      templateExists = false;
+    }
+
+    if (hasRanges && hasMainImage) {
+      generateBtn.disabled = false;
+      generateBtn.title = '';
+
+      if (templateExists) {
+        generateBtn.textContent = 'Afficher l\'aperçu';
+        generateBtn.dataset.mode = 'show';
+      } else {
+        generateBtn.textContent = 'Générer le template';
+        generateBtn.dataset.mode = 'generate';
+      }
+    } else {
+      generateBtn.disabled = true;
+      generateBtn.textContent = 'Générer le template';
+      generateBtn.dataset.mode = 'generate';
+      const reasons = [];
+      if (!hasRanges) reasons.push('Aucune plage sauvegardée');
+      if (!hasMainImage) reasons.push('Image principale (vignette) manquante');
+      generateBtn.title = reasons.join(', ');
+    }
+
+    // Remove loading state
+    generateBtn.style.visibility = 'visible';
+  }
+
+  // Initial state
+  updateGenerateButtonState();
+
+  // Update button state after ranges or images change
+  window.addEventListener('draft-data-updated', updateGenerateButtonState);
+
+  // Refresh preview button
+  const refreshPreviewBtn = document.getElementById('refresh-preview-btn');
+  refreshPreviewBtn.addEventListener('click', async () => {
+    const originalText = refreshPreviewBtn.textContent;
+    refreshPreviewBtn.disabled = true;
+    refreshPreviewBtn.textContent = '...';
+
+    try {
+      // Trigger rebuild of the preview
+      const response = await fetch(`/api/draft/${currentSlug}/rebuild-preview`, {
+        method: 'POST'
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de la reconstruction');
+      }
+
+      // Reload iframe with cache bust
+      const iframe = document.getElementById('test-preview-iframe');
+      if (iframe && iframe.src) {
+        const url = new URL(iframe.src, window.location.origin);
+        url.searchParams.set('t', Date.now());
+        iframe.src = url.toString();
+      }
+
+      setButtonState(refreshPreviewBtn, '✓', originalText);
+    } catch (error) {
+      console.error('Error rebuilding preview:', error);
+      setButtonState(refreshPreviewBtn, '✗', originalText);
+    }
+  });
+
+  generateBtn.addEventListener('click', async () => {
+    const mode = generateBtn.dataset.mode;
+
+    // If in 'show' mode, just display the existing preview
+    if (mode === 'show') {
+      const templatePath = `draft/${currentSlug}/preview/tests/${currentSlug}`;
+      previewIframe.src = `/${templatePath}?t=${Date.now()}`;
+      previewContainer.style.display = 'block';
+      previewContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    // Otherwise, generate the template
+    try {
+      generateBtn.disabled = true;
+      statusDiv.className = 'info';
+      statusDiv.textContent = 'Génération des captures d\'écran des profils...';
+
+      const data = await getDraftData(true); // Force refresh
+
+      // Step 1: Generate and upload profile screenshots
+      let uploadedCount = 0;
+      for (const range of data.ranges) {
+        statusDiv.textContent = `Génération des captures (${uploadedCount + 1}/${data.ranges.length})...`;
+
+        // Find the saved range item to get its SVG
+        const rangeElements = document.querySelectorAll('.saved-range-item');
+        let svgElement = null;
+
+        for (const elem of rangeElements) {
+          if (elem.dataset.rangeId === range.id) {
+            svgElement = elem.querySelector('svg');
+            break;
+          }
+        }
+
+        if (!svgElement) {
+          throw new Error(`Impossible de trouver le SVG pour la plage ${range.name}`);
+        }
+
+        // Convert SVG to PNG by drawing directly from DOM
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 2400;  // Match viewBox width from profileShortcode
+        canvas.height = 120;  // Match viewBox height
+
+        // Draw SVG directly using drawImage on a foreignObject
+        const svgString = new XMLSerializer().serializeToString(svgElement);
+        const img = new Image();
+        const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(svgBlob);
+
+        await new Promise((resolve, reject) => {
+          img.onload = () => {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            URL.revokeObjectURL(url);
+            resolve();
+          };
+          img.onerror = () => {
+            URL.revokeObjectURL(url);
+            reject(new Error('Erreur lors du chargement de l\'image SVG'));
+          };
+          img.src = url;
+        });
+
+        // Convert canvas to PNG data URL
+        const imageData = canvas.toDataURL('image/png');
+
+        // Upload screenshot using post() helper
+        await post('save-profile-screenshot', {
+          rangeId: range.id,
+          imageData: imageData
+        });
+
+        uploadedCount++;
+      }
+
+      // Step 2: Generate template
+      statusDiv.textContent = 'Génération du template...';
+      const result = await post('generate-template', {});
+
+      // Show success with instructions
+      statusDiv.className = 'success';
+      statusDiv.innerHTML = `
+        <strong>✅ Template généré avec succès !</strong>
+        <pre>${result.instructions}</pre>
+      `;
+
+      // Show preview iframe with the generated test
+      if (result.testPath) {
+        previewIframe.src = `/${result.testPath}`;
+        previewContainer.style.display = 'block';
+        previewContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // Update button state to show mode
+      await updateGenerateButtonState();
+
+    } catch (error) {
+      statusDiv.className = 'error';
+      statusDiv.innerHTML = `<strong>❌ Erreur :</strong> ${error.message}`;
+      await updateGenerateButtonState();
+    }
+  });
 });

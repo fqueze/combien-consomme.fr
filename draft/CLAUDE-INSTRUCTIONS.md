@@ -6,29 +6,34 @@ When the user asks you to generate a new test page from draft data, follow these
 
 Before writing anything, you need:
 
-1. **Read the draft data file** (`draft/{slug}/data.json`)
-   - Extract device description
-   - Note all profile ranges (timestamps with names)
-   - **Preserve profile descriptions as comments** - Keep original descriptions from draft data
-   - Review statistics for each profile (energy used, average/median/max power, duration)
-   - **Analyze profile screenshots** - Visual graphs showing power consumption patterns
-   - List all available images
-   - Understand the context and usage patterns
+1. **Read the generated template** (`draft/{slug}/preview/tests/{slug}.md`)
+   - The template contains all profile ranges with their shortcodes already inserted
+   - Review the profile data directory (`draft/{slug}/preview/profile-data/`) for statistics and screenshots
+   - Each profile has: energy used, average/median/max power, duration, and a visual screenshot
+   - Check available images in `draft/{slug}/preview/images/`
+   - **Read notes from draft** (if present in template as a comment)
+   - Replace all TODO items with actual content
 
-2. **Review existing similar tests** (use `draft/existing-tests.md`)
+2. **Review profile data in detail**
+   - Open each profile screenshot (`.png` files in `profile-data/`)
+   - Read the statistics file for each profile (`.txt` files)
+   - Understand the consumption patterns visually
+   - Note interesting features: spikes, plateaus, cycles
+
+3. **Review existing similar tests** (use `draft/existing-tests.md`)
    - Find related tests for cross-references
    - Check if there are comparison opportunities
    - Note similar devices to understand patterns
 
-3. **Check README.md patterns**
+4. **Check README.md patterns**
    - Review the "Recent Trends (2024-2025 Tests)" section
    - Ensure you follow current writing style
 
 ## Step 2: Plan the Test Structure
 
-**Base your plan on the profiles that actually exist in the draft data.**
+**The template already contains all the profiles - your job is to organize and describe them.**
 
-Create a mental outline including:
+Review the template structure:
 
 - **Title**: Start with "un" or "une" + descriptive name
 - **Opening paragraph**: 1-2 sentences ending with consumption question
@@ -380,7 +385,20 @@ Use French guillemets (« ») in title attribute for Wikipedia/Wiktionary links:
 
 Use these to define technical terms or provide context.
 
-## Step 5: Quality Checks
+## Step 5: Prepare for Publishing
+
+When the test is complete, fill in the publishing checklist comment at the top of the file:
+
+1. The front matter changes (layout, tags, remove isDraft/basePath)
+2. The `existing-tests.md` entry with:
+   - Slug (already filled in)
+   - Title (already filled in)
+   - Device brand and model
+   - 3-5 key findings from your analysis
+
+This information will be needed when the test is moved from preview to production.
+
+## Step 6: Quality Checks
 
 Before submitting, verify:
 
@@ -406,9 +424,16 @@ Before submitting, verify:
 - [ ] Uncertainty acknowledged where appropriate
 
 **Build verification:**
-- [ ] Run `yarn build` to verify the test is free of Eleventy errors
+- [ ] Run `npx @11ty/eleventy --incremental=draft/{slug}/preview/tests/{slug}.md` to rebuild the preview page you're editing
 - [ ] Check that all Liquid syntax is valid
 - [ ] Ensure all referenced tests/images exist
+
+**Publishing preparation:**
+- [ ] Fill in the Device brand/model in the publishing checklist comment
+- [ ] Write 3-5 key findings for the existing-tests.md entry
+- [ ] Verify the front matter changes are documented
+
+**Note:** When working on a preview test (`draft/{slug}/preview/tests/{slug}.md`), use the incremental build command to quickly rebuild just that page without waiting for a full site build.
 
 ## Important Notes
 
@@ -443,13 +468,13 @@ Before submitting, verify:
 ## Example Workflow
 
 1. User says: "Generate a test for draft/machine-a-laver-miele"
-2. You read: `draft/machine-a-laver-miele/data.json`
-3. You check: `draft/existing-tests.md` for washing machine related tests
-4. You note: Similar tests exist (machine-a-laver, seche-linge-*)
-5. You plan: **Structure the test using the profiles that DO exist** - organize them logically (overview → detail → standby), identify interesting patterns, decide narrative flow. Also note what tests would be valuable but aren't available (for plusloin)
-6. You write: Front matter, opening, Le matériel section
-7. You write: Consommation section following your planned structure with the available profiles, plus standby analysis, annual cost, autoconsommation section
-8. You write: plusloin block - suggest missing tests you identified during planning, plus other follow-up investigations
+2. You read: `draft/machine-a-laver-miele/preview/tests/machine-a-laver-miele.md` (the generated template)
+3. You check: Profile data in `draft/machine-a-laver-miele/preview/profile-data/` (screenshots and statistics)
+4. You review: `draft/existing-tests.md` for washing machine related tests
+5. You note: Similar tests exist (machine-a-laver, seche-linge-*), template has 3 profile ranges already inserted
+6. You plan: How to describe each profile, what to name each section, what analyses to add
+7. You replace: All TODO items in the template with actual content
+8. You write: Standby analysis, annual cost, autoconsommation section, plusloin block
 9. **You write tldr block LAST**: Go back and insert after `<!-- excerpt -->` using exact values from the test
 10. You verify: All checklist items completed
 

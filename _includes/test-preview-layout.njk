@@ -1,0 +1,19 @@
+---
+eleventyComputed:
+  pagetitle: "Combien consomme {{ title }} ?"
+  pagedesc: "{{ page.excerpt | trim }}"
+---
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ pagetitle }} - Preview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body style="margin: 0; padding: 1rem;">
+<article>
+<h1>{{ pagetitle }}</h1>
+<p><time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time> — {{ content | timeToRead }} de lecture</p>
+{{ content | safe }}
+</article>
+</body></html>

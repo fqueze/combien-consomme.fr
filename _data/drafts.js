@@ -50,7 +50,7 @@ export default async function() {
         // Check if there's a thumbnail preview (images.img)
         if (data.images && data.images.img) {
           // Use the preview file for the thumbnail
-          const previewFile = `preview/${entry.name}.jpg`;
+          const previewFile = `preview/images/${entry.name}.jpg`;
           const previewPath = path.join(folderPath, previewFile);
           if (fs.existsSync(previewPath)) {
             img = previewFile;

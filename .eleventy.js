@@ -12,6 +12,7 @@ import UglifyJS from "uglify-js";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import timeToRead from "eleventy-plugin-time-to-read";
 import { createProxyMiddleware } from 'http-proxy-middleware';
+import { spawn } from 'child_process';
 
 const isDev = process.env.ELEVENTY_ENV === 'dev';
 const baseUrl = isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr';
@@ -130,6 +131,45 @@ function formatCost(energyWh) {
 
 function formatEnergyCost(energyWh) {
   return `${formatEnergy(energyWh)} (${formatCost(energyWh)})`;
+}
+
+// Helper function to rebuild a draft preview
+// TODO: Should use --incremental=<filepath> but it's broken in Eleventy 3.x
+// (throws "`templateRender` has not yet initialized" error)
+// Instead, we use ELEVENTY_PREVIEW_ONLY env var to ignore everything except this preview
+function rebuildDraftPreview(slug) {
+  return new Promise((resolve, reject) => {
+    const buildProcess = spawn('npx', ['@11ty/eleventy'], {
+      cwd: process.cwd(),
+      env: {
+        ...process.env,
+        ELEVENTY_PREVIEW_ONLY: `draft/${slug}/preview`
+      }
+    });
+
+    let buildOutput = '';
+    let buildError = '';
+
+    buildProcess.stdout.on('data', (data) => {
+      buildOutput += data.toString();
+    });
+
+    buildProcess.stderr.on('data', (data) => {
+      buildError += data.toString();
+    });
+
+    buildProcess.on('error', (error) => {
+      reject(new Error(`Build process failed: ${error.message}`));
+    });
+
+    buildProcess.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`Build failed with code ${code}: ${buildError}`));
+      } else {
+        resolve({ success: true, output: buildOutput });
+      }
+    });
+  });
 }
 
 const profileCache = new Map();
@@ -546,13 +586,13 @@ function setupDevMiddleware(middleware) {
 
   // Serve draft files directly from draft folder (including preview subfolder)
   middleware.push(function(req, res, next) {
-    const draftFileMatch = req.url.match(/^\/draft\/([^/]+)\/(preview\/)?(.+\.(jpg|jpeg|png|gif|webp|json\.gz|js))(?:\?.*)?$/);
+    const draftFileMatch = req.url.match(/^\/draft\/([^/]+)\/((preview\/)?(.+)\.(jpg|jpeg|png|gif|webp|json\.gz|js))(?:\?.*)?$/);
     if (draftFileMatch) {
-      const [, slug, previewPath, filename] = draftFileMatch;
-      const filePath = path.join(process.cwd(), 'draft', slug, previewPath || '', filename);
+      const [, slug, relativePath] = draftFileMatch;
+      const filePath = path.join(process.cwd(), 'draft', slug, relativePath);
 
       if (fs.existsSync(filePath)) {
-        const ext = path.extname(filename).toLowerCase();
+        const ext = path.extname(relativePath).toLowerCase();
         const mimeTypes = {
           '.jpg': 'image/jpeg',
           '.jpeg': 'image/jpeg',
@@ -770,20 +810,20 @@ function setupDevMiddleware(middleware) {
         const imageBuffer = Buffer.from(matches[2], 'base64');
         const draftPath = path.join(process.cwd(), 'draft', slug);
 
-        // Create preview subfolder if it doesn't exist
-        const previewPath = path.join(draftPath, 'preview');
-        if (!fs.existsSync(previewPath)) {
-          fs.mkdirSync(previewPath, { recursive: true });
+        // Create preview/images subfolder if it doesn't exist
+        const previewImagesPath = path.join(draftPath, 'preview', 'images');
+        if (!fs.existsSync(previewImagesPath)) {
+          fs.mkdirSync(previewImagesPath, { recursive: true });
         }
 
         // Save as slug.jpg for 'img' (thumbnail), or slug-shortname.jpg for other shortnames
         const newFilename = shortname === 'img' ? `${slug}.jpg` : `${slug}-${shortname}.jpg`;
-        const imagePath = path.join(previewPath, newFilename);
+        const imagePath = path.join(previewImagesPath, newFilename);
 
         // Write the new image file
         fs.writeFileSync(imagePath, imageBuffer);
 
-        sendJSON(res, 200, { success: true, previewFilename: `preview/${newFilename}` });
+        sendJSON(res, 200, { success: true, previewFilename: `preview/images/${newFilename}` });
       } catch (error) {
         sendJSON(res, 500, { error: error.message });
       }
@@ -806,11 +846,11 @@ function setupDevMiddleware(middleware) {
 
           // Delete the preview file if it exists
           const draftPath = path.join(process.cwd(), 'draft', slug);
-          const previewPath = path.join(draftPath, 'preview');
+          const previewImagesPath = path.join(draftPath, 'preview', 'images');
 
           // Preview filename: special case for 'img' (thumbnail)
           const previewFilename = shortname === 'img' ? `${slug}.jpg` : `${slug}-${shortname}.jpg`;
-          const previewFilePath = path.join(previewPath, previewFilename);
+          const previewFilePath = path.join(previewImagesPath, previewFilename);
 
           if (fs.existsSync(previewFilePath)) {
             fs.unlinkSync(previewFilePath);
@@ -821,6 +861,278 @@ function setupDevMiddleware(middleware) {
           sendJSON(res, 404, { error: 'Image not found' });
         }
       } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // POST /api/draft/:slug/save-profile-screenshot - Save profile screenshot PNG
+    const saveProfileScreenshot = /^\/api\/draft\/([^/]+)\/save-profile-screenshot$/;
+    if (req.method === 'POST' && saveProfileScreenshot.test(url)) {
+      const [, slug] = url.match(saveProfileScreenshot);
+      const { rangeId, imageData } = req.body || {};
+
+      if (!rangeId || !imageData) {
+        sendJSON(res, 400, { error: 'Missing rangeId or imageData' });
+        return;
+      }
+
+      try {
+        // Convert base64 data URL to buffer
+        const matches = imageData.match(/^data:image\/(\w+);base64,(.+)$/);
+        if (!matches) {
+          sendJSON(res, 400, { error: 'Invalid image data format' });
+          return;
+        }
+
+        const imageBuffer = Buffer.from(matches[2], 'base64');
+        const profileDataPath = path.join(process.cwd(), 'draft', slug, 'preview', 'profile-data');
+
+        // Create profile-data folder if it doesn't exist
+        if (!fs.existsSync(profileDataPath)) {
+          fs.mkdirSync(profileDataPath, { recursive: true });
+        }
+
+        const screenshotPath = path.join(profileDataPath, `${rangeId}.png`);
+        fs.writeFileSync(screenshotPath, imageBuffer);
+
+        sendJSON(res, 200, { success: true, path: `draft/${slug}/preview/profile-data/${rangeId}.png` });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // POST /api/draft/:slug/generate-template - Generate template markdown and structure
+    const generateTemplate = /^\/api\/draft\/([^/]+)\/generate-template$/;
+    if (req.method === 'POST' && generateTemplate.test(url)) {
+      const [, slug] = url.match(generateTemplate);
+
+      try {
+        const data = loadDraftData(slug);
+
+        if (!data.ranges || data.ranges.length === 0) {
+          sendJSON(res, 400, { error: 'No profile ranges defined' });
+          return;
+        }
+
+        // Validate required data
+        if (!data.images || !data.images['img']) {
+          sendJSON(res, 400, { error: 'Main image (img) is required before generating template' });
+          return;
+        }
+
+        // Check for multiple profile files (not yet supported)
+        const uniqueProfiles = [...new Set(data.ranges.map(r => r.file))];
+        if (uniqueProfiles.length > 1) {
+          sendJSON(res, 400, {
+            error: 'Multiple profile files not yet supported. TODO: implement shortnames for profiles.'
+          });
+          return;
+        }
+
+        const draftPath = path.join(process.cwd(), 'draft', slug);
+        const previewPath = path.join(draftPath, 'preview');
+
+        // Create directory structure
+        const testsPath = path.join(previewPath, 'tests');
+        const profilesPath = path.join(previewPath, 'profiles');
+        const profileDataPath = path.join(previewPath, 'profile-data');
+
+        [testsPath, profilesPath, profileDataPath].forEach(dir => {
+          if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+          }
+        });
+
+        // Copy profile data
+        const sourceProfilePath = path.join(draftPath, uniqueProfiles[0]);
+        const destProfilePath = path.join(profilesPath, `${slug}.json.gz`);
+
+        if (!fs.existsSync(sourceProfilePath)) {
+          sendJSON(res, 400, { error: `Profile file not found: ${uniqueProfiles[0]}` });
+          return;
+        }
+
+        fs.copyFileSync(sourceProfilePath, destProfilePath);
+
+        // Load profile to calculate stats for each range
+        const profile = await loadProfile(sourceProfilePath);
+
+        // Generate stats markdown for each range
+        for (const range of data.ranges) {
+          const rangeId = range.id;
+
+          // Calculate stats
+          const counter = profile.counters[0]; // TODO: handle multiple counters
+          const {stats} = getStatsFromCounterSamples(
+            rangeId,
+            profile,
+            counter.samples,
+            range.range,
+            false
+          );
+
+          // Generate markdown file with stats for Claude
+          const statsMd = `# ${range.name}
+${range.description ? `\n**Notes:** ${range.description}` : ''}
+
+## Measured Statistics
+
+- **Duration:** ${formatDuration(stats.durationMs)}
+- **Energy consumed:** ${roundEnergy(stats.energyWh)} Wh (${(stats.energyWh * pricePerKWh / 1000).toFixed(2)}€)
+  - Copy: \`{{ ${roundEnergy(stats.energyWh)} | Wh }}\` or \`{{ ${roundEnergy(stats.energyWh)} | Wh€ }}\`
+- **Power:**
+  - Median: ${roundPower(stats.medianPowerW)} W → \`{{ ${roundPower(stats.medianPowerW)} | W }}\`
+  - Average: ${roundPower(stats.averagePowerW)} W → \`{{ ${roundPower(stats.averagePowerW)} | W }}\`
+  - Maximum: ${roundPower(stats.maxPowerW)} W → \`{{ ${roundPower(stats.maxPowerW)} | W }}\`
+
+## Visual Analysis
+
+See the profile screenshot \`${rangeId}.png\` in this directory for the power consumption graph over time.
+
+Look for patterns such as:
+- Initial startup spikes
+- Stable operation plateaus
+- Heating/cooling cycles
+- Repeating patterns or cycles
+- Idle/standby periods
+- Shutdown characteristics
+`;
+
+          fs.writeFileSync(path.join(profileDataPath, `${rangeId}.md`), statsMd);
+        }
+
+        // Generate template markdown
+        const today = new Date().toISOString().split('T')[0];
+        const basePath = `draft/${slug}/preview/`;
+        const mainImage = `${basePath}images/${slug}.jpg`;
+
+        let template = `---
+layout: test-preview-layout.njk
+title: ${data.title || 'TODO'}
+img: ${mainImage}
+date: ${today}
+tags: ['test-preview']
+isDraft: true
+basePath: ${basePath}
+---
+
+{% comment %}
+PUBLISHING CHECKLIST:
+1. Change layout to: test-layout.njk
+2. Remove isDraft and basePath
+3. Change tags to: ['test']
+4. Update existing-tests.md with this entry:
+
+### ${slug}
+**Title:** ${data.title || 'TODO'}
+**Device:** TODO: Brand and model
+**Key findings:**
+- TODO: Add 3-5 key findings from the test
+- TODO: Include important consumption values
+- TODO: Note any surprising or notable observations
+
+{% endcomment %}
+
+TODO: Opening paragraph (1-2 sentences ending with consumption question)
+
+<!-- excerpt -->
+
+{% tldr %}
+TODO: Write this LAST after completing all sections
+{% endtldr %}
+
+${data.notes ? `{% comment %}\nNotes from draft:\n${data.notes}\n{% endcomment %}\n\n` : ''}## Le matériel
+
+{% intro "${slug}.jpg" "TODO: Device name and model description" %}
+TODO: Device description and context
+
+### Méthode de mesure
+TODO: Describe measurement equipment and link to article
+{% endintro %}
+
+## Consommation
+
+`;
+
+        // Add image references for all defined images (except 'img' which is in intro)
+        if (data.images) {
+          for (const shortname of Object.keys(data.images)) {
+            if (shortname === 'img') continue;
+            const imgData = data.images[shortname];
+            const filename = `${slug}-${shortname}.jpg`;
+            const width = imgData.width || 500;
+            template += `{% image "./images/${filename}" "TODO" "${width}w" ${width} %}`;
+            if (imgData.description) {
+              template += `\n{% comment %}${imgData.description}{% endcomment %}`;
+            }
+            template += `\n\n`;
+          }
+        }
+
+        // Add profile range templates
+        for (const range of data.ranges) {
+          template += `### TODO: Section name
+
+{% profile "${slug}.json.gz" '{"name": "${range.name}", "range": "${range.range}"}' %}
+{% comment %}Original description from draft: ${range.description || 'N/A'}{% endcomment %}
+
+TODO: Analysis and observations
+
+`;
+        }
+
+        template += `{% plusloin %}
+TODO: Suggest 3-5 follow-up investigations
+{% endplusloin %}
+`;
+
+        // Write template
+        const templatePath = path.join(testsPath, `${slug}.md`);
+        fs.writeFileSync(templatePath, template);
+
+        // Rebuild the preview
+        try {
+          await rebuildDraftPreview(slug);
+          sendJSON(res, 200, {
+            success: true,
+            message: 'Template generated successfully',
+            instructions: `In your terminal, run:
+  cd ${process.cwd()}
+  claude
+
+Then say:
+  "Generate a test for draft/${slug}. The template is at draft/${slug}/preview/tests/${slug}.md. Profile data with statistics and screenshots are in draft/${slug}/preview/profile-data/. Read draft/CLAUDE-INSTRUCTIONS.md for guidance on how to write tests."`,
+            paths: {
+              template: `draft/${slug}/preview/tests/${slug}.md`,
+              profiles: `draft/${slug}/preview/profiles/`,
+              profileData: `draft/${slug}/preview/profile-data/`,
+              images: `draft/${slug}/preview/images/`
+            },
+            testPath: `draft/${slug}/preview/tests/${slug}`
+          });
+        } catch (buildError) {
+          console.error('Build failed:', buildError);
+          sendJSON(res, 500, { error: buildError.message });
+        }
+      } catch (error) {
+        console.error('Generate template error:', error);
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // POST /api/draft/:slug/rebuild-preview - Rebuild preview after template edits
+    const rebuildPreview = /^\/api\/draft\/([^/]+)\/rebuild-preview$/;
+    if (req.method === 'POST' && rebuildPreview.test(url)) {
+      const [, slug] = url.match(rebuildPreview);
+
+      try {
+        await rebuildDraftPreview(slug);
+        sendJSON(res, 200, { success: true, message: 'Preview rebuilt successfully' });
+      } catch (error) {
+        console.error('Rebuild preview error:', error);
         sendJSON(res, 500, { error: error.message });
       }
       return;
@@ -886,6 +1198,102 @@ export default function (eleventyConfig) {
   // Start the category name with a space so it sorts before "Aggregate".
   UserBenchmarks = eleventyConfig.benchmarkManager.get(" User");
 
+  // Parse metadata files to create mock collections
+  function parseMetadataFile(filepath, type) {
+    if (!fs.existsSync(filepath)) {
+      return [];
+    }
+    const content = fs.readFileSync(filepath, 'utf-8');
+    const items = [];
+    const sections = content.split(/^### /m).slice(1); // Skip header
+
+    for (const section of sections) {
+      const lines = section.trim().split('\n');
+      const slug = lines[0].trim();
+
+      // Find title line
+      let title = slug;
+      for (let i = 1; i < lines.length; i++) {
+        const match = lines[i].match(/^\*\*Title:\*\* (.+)$/);
+        if (match) {
+          title = match[1];
+          break;
+        }
+      }
+
+      // Create mock collection item with minimal required properties for shortcodes
+      items.push({
+        url: `/${type}/${slug}/`,
+        fileSlug: slug,
+        data: {
+          title,
+          pagetitle: type === 'tests' ? `Combien consomme ${title} ?` : title,
+          tags: [type]
+        }
+      });
+    }
+
+    return items;
+  }
+
+  // Fast preview mode: only build a specific preview directory
+  const previewOnly = process.env.ELEVENTY_PREVIEW_ONLY;
+
+  // Validate metadata files are up to date (full build only)
+  if (!previewOnly) {
+    // Use a collection to validate metadata files during the build
+    eleventyConfig.addCollection("_validateMetadata", function(collectionApi) {
+      const validations = [
+        { tag: 'test', file: 'draft/existing-tests.md', type: 'tests' },
+        { tag: 'post', file: 'draft/existing-posts.md', type: 'posts' }
+      ];
+
+      for (const { tag, file, type } of validations) {
+        const built = collectionApi.getFilteredByTag(tag).map(item => item.fileSlug);
+        const inMetadata = parseMetadataFile(file, type).map(item => item.fileSlug);
+        const missing = built.filter(slug => !inMetadata.includes(slug));
+
+        if (missing.length > 0) {
+          console.error(`\n❌ ERROR: ${file} is missing ${missing.length} ${tag}(s):`);
+          missing.forEach(slug => console.error(`  - ${slug}`));
+          console.error(`\nPlease add these ${tag}s to ${file} before building.\n`);
+          process.exit(1);
+        } else {
+          console.log(`✅ ${file}: ${built.length} ${tag}s validated`);
+        }
+      }
+
+      return []; // Return empty collection, we're just using this for validation
+    });
+  } else {
+    // Ignore production content
+    ["posts/**", "tests/**", "about.md", "feed.njk", "index.njk", "robots.njk", "sitemap.njk"]
+      .forEach(pattern => eleventyConfig.ignores.add(pattern));
+
+    // Ignore draft helper files
+    ["draft-pages.njk", "index.njk", "CLAUDE-INSTRUCTIONS.md", "README.md", "existing-tests.md", "existing-posts.md"]
+      .forEach(file => eleventyConfig.ignores.add(`draft/${file}`));
+
+    // Ignore all other draft slug directories
+    const targetSlug = previewOnly.split('/')[1];
+    fs.readdirSync('draft', { withFileTypes: true })
+      .filter(dirent => dirent.isDirectory() && dirent.name !== targetSlug)
+      .forEach(dirent => eleventyConfig.ignores.add(`draft/${dirent.name}/**`));
+
+    // Ignore profile-data within the target preview
+    eleventyConfig.ignores.add(`${previewOnly}/profile-data/**`);
+
+    // Create collections from metadata files
+    const tests = parseMetadataFile('draft/existing-tests.md', 'tests');
+    const posts = parseMetadataFile('draft/existing-posts.md', 'posts');
+
+    eleventyConfig.addCollection("test", () => tests);
+    eleventyConfig.addCollection("post", () => posts);
+
+    console.log(`[Preview Mode] Only building: ${previewOnly}/tests/**/*.md`);
+    console.log(`[Preview Mode] Loaded ${tests.length} tests and ${posts.length} posts from metadata files`);
+  }
+
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("fonts");
@@ -897,6 +1305,10 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("draft/**/*.{jpg,jpeg,png,gif,webp}");
     eleventyConfig.addPassthroughCopy("draft/**/*.json.gz");
     eleventyConfig.addPassthroughCopy("draft/**/*.js");
+    // Ignore profile-data markdown files (they're data for Claude, not templates to render)
+    eleventyConfig.ignores.add("draft/**/preview/profile-data/**");
+    // Watch preview test files for changes
+    eleventyConfig.addWatchTarget("draft/**/preview/tests/**/*.md");
   } else {
     eleventyConfig.ignores.add("draft/**");
   }
@@ -1051,18 +1463,30 @@ export default function (eleventyConfig) {
       widths: [800],
     };
 
-    let metadata = await Image("./images/" + src, imageOptions);
+    // If src includes a path separator, use as-is, otherwise prepend ./images/
+    const imgPath = src.includes('/') ? src : "./images/" + src;
+    let metadata = await Image(imgPath, imageOptions);
 
     b.after();
     return metadata.jpeg[0].url;
   });
 
   eleventyConfig.addShortcode("image", async function(src, alt, sizes, width, lazy = true) {
+    const basePath = this.ctx?.environments?.basePath;
+
+    // If basePath exists and src is relative (not absolute path, not http), prepend basePath
+    if (basePath && !src.startsWith('/') && !src.startsWith('http')) {
+      src = basePath + src;
+    }
+
     return image(src, alt, sizes, width, lazy);
   });
 
   eleventyConfig.addPairedShortcode("intro", async function(content, filename, alt) {
-    let img = await image("./images/" + filename, alt, "512w", 512, false);
+    const basePath = this.ctx?.environments?.basePath || './';
+    const imgPath = basePath + 'images/' + filename;
+
+    let img = await image(imgPath, alt, "512w", 512, false);
     return `<div id="intro"><div>${content}</div>${img}</div>`;
   });
 
@@ -1129,6 +1553,17 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addShortcode("profile", async function(profile, options) {
+    const basePath = this.ctx?.environments?.basePath;
+
+    // If basePath exists and no path in options, add it
+    if (basePath && options) {
+      const opts = JSON.parse(options);
+      if (!opts.path) {
+        opts.path = basePath + 'profiles/';
+        options = JSON.stringify(opts);
+      }
+    }
+
     return await profileShortcode(profile, options, UserBenchmarks);
   });
 
