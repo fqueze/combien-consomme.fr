@@ -1,7 +1,7 @@
 ---
 layout: test-layout.njk
 title: une machine à laver Miele récente
-img: machine-a-laver-miele.jpg
+img: machine-a-laver-miele-mini.jpg
 date: 2025-11-10
 tags: ['test']
 ---
