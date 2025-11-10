@@ -1884,4 +1884,80 @@ document.addEventListener('DOMContentLoaded', function() {
       await updateGenerateButtonState();
     }
   });
+
+  // Publish button
+  const publishBtn = document.getElementById('publish-btn');
+  const publishResults = document.getElementById('publish-results');
+
+  publishBtn.addEventListener('click', async () => {
+    if (!confirm('Êtes-vous sûr de vouloir publier ce test ? Cette action copiera les fichiers vers les dossiers de production.')) {
+      return;
+    }
+
+    const originalText = publishBtn.textContent;
+    publishBtn.disabled = true;
+    publishBtn.textContent = '...';
+
+    try {
+      const response = await fetch(`/api/draft/${currentSlug}/publish`, {
+        method: 'POST'
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Erreur lors de la publication');
+      }
+
+      // Hide preview, show results
+      document.getElementById('test-preview-container').style.display = 'none';
+      publishResults.style.display = 'block';
+
+      // Populate Claude prompt
+      document.getElementById('claude-prompt').textContent = result.claudePrompt;
+
+      // Populate git commands
+      document.getElementById('git-commands').textContent = result.gitCommands.join('\n');
+
+      // Populate files list
+      const filesList = document.getElementById('copied-files-list');
+      let filesHTML = `<li><code>${result.files.test}</code></li>`;
+      filesHTML += `<li><code>${result.files.profile}</code></li>`;
+      result.files.images.forEach(img => {
+        filesHTML += `<li><code>${img}</code></li>`;
+      });
+      if (result.existingTestsUpdated) {
+        filesHTML += `<li><code>draft/existing-tests.md</code> (updated)</li>`;
+      }
+      filesList.innerHTML = filesHTML;
+
+      publishResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } catch (error) {
+      console.error('Error publishing:', error);
+      alert(`Erreur lors de la publication : ${error.message}`);
+      publishBtn.disabled = false;
+      publishBtn.textContent = originalText;
+    }
+  });
+
+  // Copy button functionality
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.copyTarget;
+      const targetElement = document.getElementById(targetId);
+      const text = targetElement.textContent;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Copié';
+        setTimeout(() => {
+          btn.textContent = originalText;
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+        alert('Erreur lors de la copie');
+      });
+    });
+  });
 });

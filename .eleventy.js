@@ -176,6 +176,131 @@ function rebuildDraftPreview(slug) {
   });
 }
 
+async function publishDraftToProduction(slug) {
+  const draftPreviewPath = path.join('draft', slug, 'preview');
+  const draftTestPath = path.join(draftPreviewPath, 'tests', `${slug}.md`);
+  const draftImagesPath = path.join(draftPreviewPath, 'images');
+  const draftProfilePath = path.join(draftPreviewPath, 'profiles', `${slug}.json.gz`);
+
+  const testPath = path.join('tests', `${slug}.md`);
+  const imagesPath = 'images';
+  const profilePath = path.join('profiles', `${slug}.json.gz`);
+
+  // Validate source files exist
+  if (!fs.existsSync(draftTestPath)) {
+    throw new Error(`Draft test file not found: ${draftTestPath}`);
+  }
+  if (!fs.existsSync(draftProfilePath)) {
+    throw new Error(`Draft profile not found: ${draftProfilePath}`);
+  }
+
+  // Read and process the test file
+  const content = fs.readFileSync(draftTestPath, 'utf-8');
+
+  // Extract front matter ([\s\S] matches any character including newlines)
+  const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!frontMatterMatch) {
+    throw new Error('Invalid markdown file: missing front matter');
+  }
+
+  const [, frontMatter, bodyWithChecklist] = frontMatterMatch;
+
+  // Extract publishing checklist comment
+  const checklistMatch = bodyWithChecklist.match(/{% comment %}\s*PUBLISHING CHECKLIST:([\s\S]*?){% endcomment %}\s*/);
+  let existingTestsEntry = '';
+  let body = bodyWithChecklist;
+
+  if (checklistMatch) {
+    const checklistContent = checklistMatch[1];
+    // Extract the existing-tests.md entry (look for the ### slug heading after the checklist intro)
+    const entryMatch = checklistContent.match(/###\s+\S+[\s\S]*$/m);
+    if (entryMatch) {
+      existingTestsEntry = entryMatch[0].trim();
+    }
+    // Remove the entire checklist comment from body
+    body = body.replace(checklistMatch[0], '');
+  }
+
+  // Check for remaining TODOs
+  const todoMatches = body.match(/TODO:/g);
+  if (todoMatches && todoMatches.length > 0) {
+    throw new Error(`Found ${todoMatches.length} TODO marker(s) in the draft. Please complete all tasks before publishing.`);
+  }
+
+  // Update front matter - split into lines to avoid creating empty lines
+  const today = new Date().toISOString().split('T')[0];
+  const frontMatterLines = frontMatter.split('\n')
+    .map(line => {
+      if (line.match(/^layout:/)) return 'layout: test-layout.njk';
+      if (line.match(/^tags:/)) return "tags: ['test']";
+      if (line.match(/^isDraft:/)) return null;  // Remove this line
+      if (line.match(/^basePath:/)) return null;  // Remove this line
+      if (line.match(/^date:/)) return `date: ${today}`;
+      if (line.match(/^img:/)) {
+        const imgPath = line.split(':')[1].trim();
+        const filename = path.basename(imgPath);
+        return `img: ${filename}`;
+      }
+      return line;
+    })
+    .filter(line => line !== null)  // Remove null lines
+    .join('\n');
+
+  // Reconstruct the file
+  const updatedContent = `---\n${frontMatterLines}\n---\n${body}`;
+
+  // Copy files
+  fs.writeFileSync(testPath, updatedContent, 'utf-8');
+
+  // Copy images and track them
+  const copiedImages = [];
+  if (fs.existsSync(draftImagesPath)) {
+    const images = fs.readdirSync(draftImagesPath);
+    for (const image of images) {
+      const srcPath = path.join(draftImagesPath, image);
+      const destPath = path.join(imagesPath, image);
+      fs.copyFileSync(srcPath, destPath);
+      copiedImages.push(destPath);
+    }
+  }
+
+  // Copy profile
+  fs.copyFileSync(draftProfilePath, profilePath);
+
+  // Append to existing-tests.md if we have an entry
+  if (existingTestsEntry) {
+    const existingTestsPath = 'draft/existing-tests.md';
+    const existingTestsContent = fs.readFileSync(existingTestsPath, 'utf-8');
+    fs.writeFileSync(existingTestsPath, existingTestsContent + '\n' + existingTestsEntry + '\n', 'utf-8');
+  }
+
+  // Prepare Claude prompt
+  const claudePrompt = `I just published a new test: "${slug}". Please read tests/${slug}.md and add relevant cross-references in related existing tests where appropriate. This could be in "Pour aller plus loin" sections, or when describing similar devices. Look for tests with:
+- Similar device types
+- Related consumption patterns
+- Comparative insights that would be valuable to readers`;
+
+  // Prepare git commands
+  const gitCommands = [
+    `git add tests/${slug}.md images/ profiles/${slug}.json.gz draft/existing-tests.md`,
+    `git commit -m "Add test: ${slug}"`,
+    `git push`
+  ];
+
+  return {
+    success: true,
+    slug,
+    files: {
+      test: testPath,
+      profile: profilePath,
+      images: copiedImages
+    },
+    claudePrompt,
+    gitCommands,
+    existingTestsUpdated: !!existingTestsEntry
+  };
+}
+
 const profileCache = new Map();
 
 async function loadProfile(profilePath) {
@@ -1145,6 +1270,21 @@ Then say:
         sendJSON(res, 200, { success: true, message: 'Preview rebuilt successfully' });
       } catch (error) {
         console.error('Rebuild preview error:', error);
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // POST /api/draft/:slug/publish - Publish draft to production
+    const publishDraft = /^\/api\/draft\/([^/]+)\/publish$/;
+    if (req.method === 'POST' && publishDraft.test(url)) {
+      const [, slug] = url.match(publishDraft);
+
+      try {
+        const result = await publishDraftToProduction(slug);
+        sendJSON(res, 200, result);
+      } catch (error) {
+        console.error('Publish error:', error);
         sendJSON(res, 500, { error: error.message });
       }
       return;
