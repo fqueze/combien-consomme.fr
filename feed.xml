@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-09-12T08:57:31Z</updated>
+<updated>2025-11-10T20:34:19Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une machine à laver Miele récente</title>
+ <link href="https://combien-consomme.fr/tests/machine-a-laver-miele/"/>
+ <updated>2025-11-10T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/machine-a-laver-miele/</id>
+ <summary xml:lang="fr" type="html">Mamie possède une machine à laver haut de gamme de la marque Miele, avec une capacité de 8kg mais disposant d&#39;un système de « capacité variable automatique ». À quoi ressemble sa consommation ?</summary>
+</entry>
 <entry>
  <title>Toutes les multiprises ne se valent pas</title>
  <link href="https://combien-consomme.fr/posts/multiprises/"/>
@@ -142,12 +149,5 @@
  <updated>2024-08-07T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/destructeur-insectes/</id>
  <summary xml:lang="fr" type="html">Combien consomme l&#39;utilisation d&#39;une lampe destructeur d&#39;insectes ?</summary>
-</entry>
-<entry>
- <title>une imprimante HP LaserJet Pro</title>
- <link href="https://combien-consomme.fr/tests/imprimante-laserjet-pro/"/>
- <updated>2024-08-06T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/imprimante-laserjet-pro/</id>
- <summary xml:lang="fr" type="html">Combien consomme une imprimante laser professionnelle quand elle imprime ? Et quand on ne s&#39;en sert pas ?</summary>
 </entry>
 </feed>
