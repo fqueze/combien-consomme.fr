@@ -1736,6 +1736,16 @@ document.addEventListener('DOMContentLoaded', function() {
     refreshPreviewBtn.textContent = '...';
 
     try {
+      const iframe = document.getElementById('test-preview-iframe');
+
+      // Save scroll position before rebuild
+      let scrollPosition = 0;
+      try {
+        scrollPosition = iframe.contentWindow.scrollY || 0;
+      } catch (e) {
+        // Cross-origin or not loaded, ignore
+      }
+
       // Trigger rebuild of the preview
       const response = await fetch(`/api/draft/${currentSlug}/rebuild-preview`, {
         method: 'POST'
@@ -1745,11 +1755,21 @@ document.addEventListener('DOMContentLoaded', function() {
         throw new Error('Erreur lors de la reconstruction');
       }
 
-      // Reload iframe with cache bust
-      const iframe = document.getElementById('test-preview-iframe');
+      // Reload iframe with cache bust and restore scroll position
       if (iframe && iframe.src) {
         const url = new URL(iframe.src, window.location.origin);
         url.searchParams.set('t', Date.now());
+
+        // Restore scroll position after iframe loads
+        iframe.onload = () => {
+          try {
+            iframe.contentWindow.scrollTo(0, scrollPosition);
+          } catch (e) {
+            // Cross-origin or not loaded, ignore
+          }
+          iframe.onload = null; // Clean up
+        };
+
         iframe.src = url.toString();
       }
 
