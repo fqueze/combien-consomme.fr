@@ -454,3 +454,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - **Mal adapté autoconsommation solaire:** pics 450W alternés vs {% test yaourtiere Classic %} puissance constante faible
 - Afficheur temps restant
 - Claquements relais thermostat audibles
+
+### machine-a-laver-miele
+**Title:** une machine à laver Mièle récente
+**Device:** Miele W1 Series 120 (modèle WVDD 025, 8kg, A+++)
+**Key findings:**
+- Consommation programme Coton 40°C pleine charge: 1040 Wh (fabricant annonce 530 Wh à demi-charge)
+- Le chauffage initial de l'eau représente 671 Wh (65% de la consommation totale)
+- Machine à capacité variable: charge légère consomme 79% de moins (218 Wh vs 1040 Wh)
+- Consommation veille quasi nulle: 0.111W moyenne (0.97€/an)
+- Fonction Infroissable prolonge le cycle de 30 minutes après fin lavage
