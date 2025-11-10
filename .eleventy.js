@@ -151,11 +151,15 @@ function rebuildDraftPreview(slug) {
     let buildError = '';
 
     buildProcess.stdout.on('data', (data) => {
-      buildOutput += data.toString();
+      const str = data.toString();
+      buildOutput += str;
+      process.stdout.write(str);
     });
 
     buildProcess.stderr.on('data', (data) => {
-      buildError += data.toString();
+      const str = data.toString();
+      buildError += str;
+      process.stderr.write(str);
     });
 
     buildProcess.on('error', (error) => {
@@ -1077,8 +1081,14 @@ TODO: Describe measurement equipment and link to article
           const escapedName = range.name.replace(/'/g, "\\'");
           template += `### TODO: Section name
 
-{% profile "${slug}.json.gz" '{"name": "${escapedName}", "range": "${range.range}"}' %}
-{% comment %}Original description from draft: ${range.description || 'N/A'}{% endcomment %}
+{% profile "${slug}.json.gz" '{"name": "${escapedName}", "range": "${range.range}"}' %}`;
+
+          // Only add comment if there's an actual description
+          if (range.description) {
+            template += `\n{% comment %}draft: ${range.description}{% endcomment %}`;
+          }
+
+          template += `
 
 TODO: Analysis and observations
 
@@ -1302,15 +1312,17 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("profiles");
 
-  // Draft system (dev mode only)
-  if (isDev) {
+  // Draft system (dev mode or preview mode)
+  if (isDev || previewOnly) {
     eleventyConfig.addPassthroughCopy("draft/**/*.{jpg,jpeg,png,gif,webp}");
     eleventyConfig.addPassthroughCopy("draft/**/*.json.gz");
     eleventyConfig.addPassthroughCopy("draft/**/*.js");
     // Ignore profile-data markdown files (they're data for Claude, not templates to render)
     eleventyConfig.ignores.add("draft/**/preview/profile-data/**");
-    // Watch preview test files for changes
-    eleventyConfig.addWatchTarget("draft/**/preview/tests/**/*.md");
+    // Watch preview test files for changes (dev mode only)
+    if (isDev) {
+      eleventyConfig.addWatchTarget("draft/**/preview/tests/**/*.md");
+    }
   } else {
     eleventyConfig.ignores.add("draft/**");
   }
@@ -1328,21 +1340,23 @@ export default function (eleventyConfig) {
   eleventyConfig.addTransform("htmlmin", async function htmlMinTransform(content) {
     // Prior to Eleventy 2.0: use this.outputPath instead
     if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
-      // Skip CSS minification for draft pages (they have dynamically inserted content)
-      // and include the full CSS.
-      if (this.page.outputPath.includes('/draft/')) {
-        content = content.replace("</head>", `<style>${fullCss}</style></head>`);
-        return content;
-      }
-
       const b = UserBenchmarks.get("> htmlmin > " + this.page.outputPath);
       b.before();
 
+      // Apply typographic replacements to all HTML pages
       content = content.replace(/ ([!?:;»])/g, nbsp + "$1")
         .replace(/« /g, "«" + nbsp)
         .replace(/([^-].)'/g, "$1’") // avoid replacing ' in urls where spaces are replaced with -.
         .replace(/oe/g, "œ")
         .replace(/\.\.\./g, "…");
+
+      // Skip CSS minification for draft pages (they have dynamically inserted content)
+      // and include the full CSS.
+      if (this.page.outputPath.includes('/draft/')) {
+        content = content.replace("</head>", `<style>${fullCss}</style></head>`);
+        b.after();
+        return content;
+      }
 
       let bCss = UserBenchmarks.get("> htmlmin > PurgeCSS: " + this.page.outputPath);
       bCss.before();

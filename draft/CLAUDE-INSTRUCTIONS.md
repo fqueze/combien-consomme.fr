@@ -104,12 +104,14 @@ tags: ['test']
 {% raw %}
 ```markdown
 {% tldr %}
-- [Key finding with calculation using Liquid filters]
-- [Another key finding]
-- [Comparison or practical conclusion]
+- [Key finding with calculation using Liquid filters].
+- [Another key finding].
+- [Comparison or practical conclusion].
 {% endtldr %}
 ```
 {% endraw %}
+
+**Important:** End each bullet point with a period (`.`) - these are complete sentences.
 
 **Examples from recent tests:**
 {% raw %}
@@ -168,15 +170,33 @@ L'étiquette indique une puissance de {{ X | W }}.
 
 **IMPORTANT: Preserve original descriptions from draft data as Liquid comments** right after each profile/image tag for documentation.
 
+**Profile and Image Introductions:**
+
+Each profile or image should have an **introductory sentence** that:
+- Sets up what the reader will see
+- Uses actual content from the analysis (duration, consumption, key finding)
+- Ends with a colon before the profile/image shortcode
+- **AVOID generic "Voici" phrases** - adapt the first sentence of your description instead
+
+Examples:
+- ✅ GOOD: `Pendant les 2 heures d'attente avant le démarrage du cycle, la consommation est stable autour de {{ 3.7 | W }} :`
+- ✅ GOOD: `La phase de lavage avec chauffage dure {{ 6128 | s }} et consomme {{ 916 | Wh€ }}, soit {{ 916 | percent: 1040 }} de la consommation totale du cycle :`
+- ❌ BAD: `Voici la phase de lavage avec chauffage :`
+- ❌ BAD: `Voici le profil de consommation :`
+
+The intro sentence should contain a meaningful fact, not just announce what's coming.
+
 1. **Overview profile first** - Full cycle or typical day
 {% raw %}
 ```markdown
 ### [Test name]
 
-{% profile "filename.json.gz" '{"name": "Description", "range": "timestamp"}' %}
-{% comment %}Original description from draft: [description from draft data]{% endcomment %}
+[Introductory sentence with key fact ending with colon:]
 
-[Observations about the overall pattern - describe what you SEE in the profile screenshot]
+{% profile "filename.json.gz" '{"name": "Description", "range": "timestamp"}' %}
+{% comment %}draft: [description from draft data, if present]{% endcomment %}
+
+[Continue with detailed observations about the overall pattern - describe what you SEE in the profile screenshot]
 [Use observational language: "On observe...", "On remarque...", "La consommation se stabilise à..."]
 [Quote key values from profile statistics with filters: {{ value | W }}, {{ total | Wh€ }}]
 [IMPORTANT: Use only measured values from profiles - never make up numbers]
@@ -191,23 +211,43 @@ L'étiquette indique une puissance de {{ X | W }}.
 
 #### [Phase name]
 
-{% profile "filename.json.gz" '{"name": "Phase description", "range": "timestamp"}' %}
-{% comment %}Original description from draft: [description from draft data]{% endcomment %}
+[Introductory sentence with key fact ending with colon:]
 
-[Detailed observations based on the profile screenshot]
+{% profile "filename.json.gz" '{"name": "Phase description", "range": "timestamp"}' %}
+{% comment %}draft: [description from draft data, if present]{% endcomment %}
+
+[Continue with detailed observations based on the profile screenshot]
 [Describe specific features you see: startup spikes, stable operation, shutdown]
 [Explain what's happening: "On observe...", "On peut supposer que..."]
 [Connect visual patterns to device behavior]
 ```
 {% endraw %}
 
+**Heading Hierarchy:**
+- Keep heading levels reasonable - avoid excessive nesting
+- Typical structure:
+  - `##` Main sections (Le matériel, Consommation)
+  - `###` Major subsections (Informations fournies, En détail, Sur un an)
+  - `####` Sub-subsections (Étiquette, Manuel, Phase names)
+  - `#####` Only for rare additional breakdown within phases
+- If you find yourself at `######`, reconsider your organization
+
 3. **Reference images when relevant**
 {% raw %}
 ```markdown
+[Introductory sentence if the image needs context:]
+
 {% image "./images/filename.jpg" "Description" "512w" 512 %}
-{% comment %}Original description from draft: [description from draft data if provided]{% endcomment %}
+{% comment %}draft: [description from draft data, if present]{% endcomment %}
 ```
 {% endraw %}
+
+**Content Organization Around Images:**
+- Describe device features (display, controls, programs) **near their photos**
+- Don't mention the display in the intro if the display photo appears later
+- Place test plan explanation (which program, settings) right before starting the test
+- Position images after the sentence that mentions them
+- Example: If you say "the Coton 40° program is most efficient", place the program selection image right after that sentence
 
 #### Standby/Veille Analysis
 
@@ -333,8 +373,16 @@ Always use Liquid filters:
 - Power: `{{ 1234 | W }}`
 - Energy: `{{ 567 | Wh }}`
 - Cost: `{{ 89 | € }}`
-- Percentage: `{{ 123 | percent: 456 }}`
+- Percentage: `{{ 123 | percent: 456 }}` (123 as a percentage of 456)
+  - **IMPORTANT:** `percent`, `percentMore`, and `percentLess` return formatted strings - you CANNOT apply more math operations after them
+  - ❌ WRONG: `{{ 100 | percent: 1000 | times: 2 }}` (can't multiply a string)
+  - ✅ CORRECT: `{{ 100 | times: 2 | percent: 2000 }}` (do all math first, then format)
+- Percentage comparison: Choose the right filter based on the comparison:
+  - `{{ 1040 | percentMore: 736 }}` → "41% de plus" (when first value is LARGER)
+  - `{{ 736 | percentLess: 1040 }}` → "29% de moins" (when first value is SMALLER)
+  - Match your phrasing: "Device A consomme X, soit {{ X | percentMore: Y }} de plus que Device B"
 - Per-cent calculations: `{{ 0.5 | countPer€: 0.01 }}`
+- Duration: `{{ 12381 | s }}` (converts seconds to human-readable format)
 
 **Cost extrapolation - choose the right filter:**
 - For **continuous power** (standby/idle): Use W filters
@@ -343,7 +391,45 @@ Always use Liquid filters:
 - For **energy per occurrence**: Use Wh filters with frequency multiplication (PER DAY)
   - `{{ 1732 | times: 100 | Wh€PerYear }}` - Annual cost for 100 uses per day of 1732Wh each
   - `{{ 500 | times: 30 | Wh€PerMonth }}` - Monthly cost for 30 uses per day of 500Wh each
+
+**CRITICAL Liquid Filter Rules:**
+
+1. **NO scientific notation** - Liquid parser doesn't support it
+   - ❌ WRONG: `{{ 1.04e+3 | Wh€ }}`
+   - ✅ CORRECT: `{{ 1040 | Wh€ }}`
+
+2. **Math operations are sequential (left to right), NO operator priority**
+   - Operations are processed in order: `a | times: b | plus: c | times: d` = ((a × b) + c) × d
+   - ❌ WRONG: `{{ 1040 | times: 2 | times: 52 | plus: 218 | times: 52 }}` = (1040 × 2 × 52 + 218) × 52
+   - ✅ CORRECT: `{{ 1040 | times: 2 | plus: 218 | times: 52 }}` = (1040 × 2 + 218) × 52
+   - Think carefully about the order - there are no parentheses in Liquid, operations execute strictly left-to-right
+
+3. **Wh€PerYear expects DAILY consumption** - it multiplies by 365 internally
+   - ❌ WRONG: `{{ 1040 | Wh€PerYear }}` (treats 1040Wh as daily usage)
+   - ✅ CORRECT for weekly usage: Calculate total annual energy first, then use `Wh€`
+   - Example: For 2 uses per week: `{{ 1040 | times: 2 | times: 52 | Wh€ }}`
+
+4. **Make weekly calculations explicit** for clarity
+   - ❌ LESS CLEAR: `{{ 1040 | times: 104 | Wh€ }}` (what does 104 mean?)
+   - ✅ MORE CLEAR: `{{ 1040 | times: 2 | times: 52 | Wh€ }}` (2 uses/week × 52 weeks)
+
+5. **Units are NOT filters** - write them as plain text
+   - ❌ WRONG: `{{ 10 | A }}` (A for amperes is not a filter)
+   - ✅ CORRECT: `10 A`
+
+6. **Use s filter for durations** from profile statistics
+   - ❌ WRONG: `{{ 5.43 | hours }}` (hours filter doesn't exist)
+   - ✅ CORRECT: `{{ 19548 | s }}` (converts seconds to "5h26")
+   - ✅ ALSO OK: `3h26` (plain text if not doing calculations)
 {% endraw %}
+
+### French Typography
+
+**IMPORTANT: Add regular spaces before punctuation marks**
+- Add a normal space before `:` `;` `!` `?`
+- The Eleventy build scripts automatically convert them to non-breaking spaces
+- Example: `La consommation est stable :` (note the space before colon)
+- Example: `Quelle est la consommation ?` (note the space before question mark)
 
 ### Common Phrases (2024-2025 style)
 {% raw %}
@@ -424,16 +510,16 @@ Before submitting, verify:
 - [ ] Uncertainty acknowledged where appropriate
 
 **Build verification:**
-- [ ] Run `npx @11ty/eleventy --incremental=draft/{slug}/preview/tests/{slug}.md` to rebuild the preview page you're editing
 - [ ] Check that all Liquid syntax is valid
 - [ ] Ensure all referenced tests/images exist
+- [ ] After making changes, rebuild the preview with: `ELEVENTY_PREVIEW_ONLY=draft/{slug}/preview npx @11ty/eleventy`
 
 **Publishing preparation:**
 - [ ] Fill in the Device brand/model in the publishing checklist comment
 - [ ] Write 3-5 key findings for the existing-tests.md entry
 - [ ] Verify the front matter changes are documented
 
-**Note:** When working on a preview test (`draft/{slug}/preview/tests/{slug}.md`), use the incremental build command to quickly rebuild just that page without waiting for a full site build.
+**Note:** The `ELEVENTY_PREVIEW_ONLY` environment variable makes Eleventy build only the preview page (~0.6s) instead of the entire site. This allows you to quickly verify your changes work without errors.
 
 ## Important Notes
 
