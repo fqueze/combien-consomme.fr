@@ -783,7 +783,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Set custom width input if not a preset
-    const presetWidths = [250, 300, 500, 512, 700, 800];
+    const presetWidths = [250, 300, 500, 512, 700, 800, 1000];
     if (!presetWidths.includes(currentImageWidth)) {
       customWidthInput.value = currentImageWidth;
     } else {
@@ -959,161 +959,101 @@ document.addEventListener('DOMContentLoaded', function() {
     magnifierCanvas?.classList.remove('active');
   }
 
-  // Generate preview file for rectangular crop using canvas
-  async function generateRectangularPreview(points) {
-    try {
-      // Load the image into a canvas
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
+  // Generate preview canvas for rectangular crop
+  async function generateRectangularPreview(img, points) {
+    // Convert 4-point format to x, y, width, height
+    const minX = Math.min(points[0][0], points[1][0], points[2][0], points[3][0]);
+    const minY = Math.min(points[0][1], points[1][1], points[2][1], points[3][1]);
+    const maxX = Math.max(points[0][0], points[1][0], points[2][0], points[3][0]);
+    const maxY = Math.max(points[0][1], points[1][1], points[2][1], points[3][1]);
 
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-        img.src = modalImage.src;
-      });
+    const cropX = minX;
+    const cropY = minY;
+    const cropWidth = maxX - minX;
+    const cropHeight = maxY - minY;
 
-      // Convert 4-point format to x, y, width, height
-      const minX = Math.min(points[0][0], points[1][0], points[2][0], points[3][0]);
-      const minY = Math.min(points[0][1], points[1][1], points[2][1], points[3][1]);
-      const maxX = Math.max(points[0][0], points[1][0], points[2][0], points[3][0]);
-      const maxY = Math.max(points[0][1], points[1][1], points[2][1], points[3][1]);
+    // Calculate pixel coordinates
+    const cropLeftPx = img.naturalWidth * cropX / 100;
+    const cropTopPx = img.naturalHeight * cropY / 100;
+    const cropWidthPx = img.naturalWidth * cropWidth / 100;
+    const cropHeightPx = img.naturalHeight * cropHeight / 100;
 
-      const cropX = minX;
-      const cropY = minY;
-      const cropWidth = maxX - minX;
-      const cropHeight = maxY - minY;
+    // Create canvas with cropped dimensions
+    const croppedCanvas = document.createElement('canvas');
+    croppedCanvas.width = cropWidthPx;
+    croppedCanvas.height = cropHeightPx;
+    const ctx = croppedCanvas.getContext('2d');
 
-      // Calculate pixel coordinates
-      const cropLeftPx = img.naturalWidth * cropX / 100;
-      const cropTopPx = img.naturalHeight * cropY / 100;
-      const cropWidthPx = img.naturalWidth * cropWidth / 100;
-      const cropHeightPx = img.naturalHeight * cropHeight / 100;
+    // Draw cropped portion
+    ctx.drawImage(img, cropLeftPx, cropTopPx, cropWidthPx, cropHeightPx, 0, 0, cropWidthPx, cropHeightPx);
 
-      // Create canvas with crop dimensions
-      const canvas = document.createElement('canvas');
-      canvas.width = cropWidthPx;
-      canvas.height = cropHeightPx;
-      const ctx = canvas.getContext('2d');
-
-      // Draw cropped portion
-      ctx.drawImage(img, cropLeftPx, cropTopPx, cropWidthPx, cropHeightPx, 0, 0, cropWidthPx, cropHeightPx);
-
-      // Convert to data URL
-      const croppedImageData = canvas.toDataURL('image/jpeg', 0.95);
-
-      // Save to server
-      const shortname = imageNameInput.value.trim();
-      if (shortname === '') {
-        alert('Un nom court est requis pour sauvegarder l\'image');
-        throw new Error('Shortname required');
-      }
-
-      await post('save-preview', { imageData: croppedImageData, shortname });
-    } catch (error) {
-      console.error('Error generating rectangular preview:', error);
-      alert('Erreur lors de la sauvegarde de l\'image: ' + error.message);
-      throw error;
-    }
+    return croppedCanvas;
   }
 
-  // Apply perspective correction using OpenCV.js
-  async function applyPerspectiveCorrection() {
-    const points = normalizeCrop(currentCrop);
+  // Apply perspective correction using OpenCV.js - returns canvas
+  async function applyPerspectiveCorrection(img, points) {
     if (!points || !window.cv) {
-      console.error('OpenCV not loaded or no crop defined');
-      return;
+      throw new Error('OpenCV not loaded or no crop defined');
     }
 
-    try {
-      // Load the image into a canvas
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+    // Load the image into a canvas
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
-      // Get natural image dimensions
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    ctx.drawImage(img, 0, 0);
 
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-        img.src = modalImage.src;
-      });
+    // Convert percentage points to pixel coordinates
+    const srcPoints = points.map(([x, y]) => [
+      (x / 100) * img.naturalWidth,
+      (y / 100) * img.naturalHeight
+    ]);
 
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      ctx.drawImage(img, 0, 0);
+    // Calculate destination rectangle size (bounding box of corrected image)
+    const width = Math.max(
+      Math.hypot(srcPoints[1][0] - srcPoints[0][0], srcPoints[1][1] - srcPoints[0][1]),
+      Math.hypot(srcPoints[2][0] - srcPoints[3][0], srcPoints[2][1] - srcPoints[3][1])
+    );
+    const height = Math.max(
+      Math.hypot(srcPoints[3][0] - srcPoints[0][0], srcPoints[3][1] - srcPoints[0][1]),
+      Math.hypot(srcPoints[2][0] - srcPoints[1][0], srcPoints[2][1] - srcPoints[1][1])
+    );
 
-      // Convert percentage points to pixel coordinates
-      const srcPoints = points.map(([x, y]) => [
-        (x / 100) * img.naturalWidth,
-        (y / 100) * img.naturalHeight
-      ]);
+    // Destination points (rectangle)
+    const dstPoints = [
+      [0, 0],
+      [width, 0],
+      [width, height],
+      [0, height]
+    ];
 
-      // Calculate destination rectangle size (bounding box of corrected image)
-      const width = Math.max(
-        Math.hypot(srcPoints[1][0] - srcPoints[0][0], srcPoints[1][1] - srcPoints[0][1]),
-        Math.hypot(srcPoints[2][0] - srcPoints[3][0], srcPoints[2][1] - srcPoints[3][1])
-      );
-      const height = Math.max(
-        Math.hypot(srcPoints[3][0] - srcPoints[0][0], srcPoints[3][1] - srcPoints[0][1]),
-        Math.hypot(srcPoints[2][0] - srcPoints[1][0], srcPoints[2][1] - srcPoints[1][1])
-      );
+    // Create OpenCV matrices
+    const src = cv.imread(canvas);
+    const dst = new cv.Mat();
 
-      // Destination points (rectangle)
-      const dstPoints = [
-        [0, 0],
-        [width, 0],
-        [width, height],
-        [0, height]
-      ];
+    const srcMat = cv.matFromArray(4, 1, cv.CV_32FC2, srcPoints.flat());
+    const dstMat = cv.matFromArray(4, 1, cv.CV_32FC2, dstPoints.flat());
 
-      // Create OpenCV matrices
-      const src = cv.imread(canvas);
-      const dst = new cv.Mat();
+    // Get perspective transform matrix
+    const M = cv.getPerspectiveTransform(srcMat, dstMat);
 
-      const srcMat = cv.matFromArray(4, 1, cv.CV_32FC2, srcPoints.flat());
-      const dstMat = cv.matFromArray(4, 1, cv.CV_32FC2, dstPoints.flat());
+    // Apply transform
+    const dsize = new cv.Size(width, height);
+    cv.warpPerspective(src, dst, M, dsize);
 
-      // Get perspective transform matrix
-      const M = cv.getPerspectiveTransform(srcMat, dstMat);
+    // Convert back to image
+    const outputCanvas = document.createElement('canvas');
+    cv.imshow(outputCanvas, dst);
 
-      // Apply transform
-      const dsize = new cv.Size(width, height);
-      cv.warpPerspective(src, dst, M, dsize);
+    // Clean up OpenCV resources
+    src.delete();
+    dst.delete();
+    srcMat.delete();
+    dstMat.delete();
+    M.delete();
 
-      // Convert back to image
-      const outputCanvas = document.createElement('canvas');
-      cv.imshow(outputCanvas, dst);
-
-      // Get the transformed image as data URL
-      const correctedImageData = outputCanvas.toDataURL('image/jpeg', 0.95);
-
-      // Clean up OpenCV resources
-      src.delete();
-      dst.delete();
-      srcMat.delete();
-      dstMat.delete();
-      M.delete();
-
-      // Save the transformed image to the server in preview subfolder
-      const shortname = imageNameInput.value.trim();
-      if (shortname === '') {
-        alert('Un nom court est requis pour sauvegarder l\'image corrigée');
-        // Don't clear crop or continue if save is blocked
-        throw new Error('Shortname required');
-      }
-
-      try {
-        await post('save-preview', { imageData: correctedImageData, shortname });
-      } catch (saveError) {
-        console.error('Error saving transformed image:', saveError);
-        alert('Erreur lors de la sauvegarde de l\'image transformée: ' + saveError.message);
-        throw saveError; // Re-throw to prevent clearing crop on error
-      }
-    } catch (error) {
-      console.error('Perspective correction error:', error);
-      alert('Erreur lors de la correction de perspective: ' + error.message);
-    }
+    return outputCanvas;
   }
 
   // Image modal functionality
@@ -1330,16 +1270,63 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Generate new preview file if needed
-      // Only regenerate if crop or shortname changed (not width - that's just display metadata)
-      const points = normalizeCrop(currentCrop);
-      if (points && (cropChanged || shortnameChanged)) {
-        if (isRectangularCrop(points)) {
-          // Rectangular crop - generate preview with simple canvas crop
-          await generateRectangularPreview(points);
+      if (cropChanged || shortnameChanged || widthChanged) {
+        // Load the image first
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = `/draft/${currentSlug}/${currentImageFilename}`;
+        });
+
+        // Process the image based on crop type
+        let processedCanvas;
+        const points = normalizeCrop(currentCrop);
+
+        if (points) {
+          // Has crop - apply cropping
+          if (isRectangularCrop(points)) {
+            // Rectangular crop
+            processedCanvas = await generateRectangularPreview(img, points);
+          } else {
+            // Perspective correction
+            processedCanvas = await applyPerspectiveCorrection(img, points);
+          }
         } else {
-          // Non-rectangular crop - apply perspective correction
-          await applyPerspectiveCorrection();
+          // No crop - draw image as-is to canvas
+          processedCanvas = document.createElement('canvas');
+          processedCanvas.width = img.naturalWidth;
+          processedCanvas.height = img.naturalHeight;
+          const ctx = processedCanvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
         }
+
+        // Resize to target width maintaining aspect ratio (never upscale)
+        let resizedCanvas;
+        if (currentImageWidth >= processedCanvas.width) {
+          // Would upscale - use processed canvas as-is
+          resizedCanvas = processedCanvas;
+        } else {
+          // Downscale to target width using OpenCV INTER_AREA for high-quality downscaling
+          const aspectRatio = processedCanvas.height / processedCanvas.width;
+          const targetHeight = Math.round(currentImageWidth * aspectRatio);
+
+          const src = window.cv.imread(processedCanvas);
+          const dst = new window.cv.Mat();
+          const dsize = new window.cv.Size(currentImageWidth, targetHeight);
+          window.cv.resize(src, dst, dsize, 0, 0, window.cv.INTER_AREA);
+
+          resizedCanvas = document.createElement('canvas');
+          window.cv.imshow(resizedCanvas, dst);
+
+          src.delete();
+          dst.delete();
+        }
+
+        // Convert to JPEG and save
+        const imageData = resizedCanvas.toDataURL('image/jpeg', 0.95);
+        await post('save-preview', { imageData, shortname: newShortname });
       }
 
       try {
