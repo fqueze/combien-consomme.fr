@@ -274,6 +274,11 @@ async function publishDraftToProduction(slug) {
     fs.writeFileSync(existingTestsPath, existingTestsContent + '\n' + existingTestsEntry + '\n', 'utf-8');
   }
 
+  // Update data.json to mark as published
+  const draftData = loadDraftData(slug);
+  draftData.published = new Date().toISOString();
+  saveDraftData(slug, draftData);
+
   // Prepare Claude prompt
   const claudePrompt = `I just published a new test: "${slug}". Please read tests/${slug}.md and add relevant cross-references in related existing tests where appropriate. This could be in "Pour aller plus loin" sections, or when describing similar devices. Look for tests with:
 - Similar device types
@@ -669,30 +674,31 @@ async function image(src, alt, sizes, width, lazy = true) {
   return rv;
 }
 
+// Draft data helpers (used by both middleware and publish function)
+function loadDraftData(slug) {
+  const dataPath = `./draft/${slug}/data.json`;
+
+  if (fs.existsSync(dataPath)) {
+    try {
+      return JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+    } catch (error) {
+      // Invalid JSON, fall through to default
+    }
+  }
+
+  return { ranges: [], title: null };
+}
+
+function saveDraftData(slug, data) {
+  const dataPath = `./draft/${slug}/data.json`;
+  fs.writeFileSync(dataPath, JSON.stringify(data, null, 2), 'utf-8');
+}
+
 function setupDevMiddleware(middleware) {
   // Helper functions for API responses
   function sendJSON(res, statusCode, data) {
     res.writeHead(statusCode, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(data));
-  }
-
-  function loadDraftData(slug) {
-    const dataPath = `./draft/${slug}/data.json`;
-
-    if (fs.existsSync(dataPath)) {
-      try {
-        return JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-      } catch (error) {
-        // Invalid JSON, fall through to default
-      }
-    }
-
-    return { ranges: [], title: null };
-  }
-
-  function saveDraftData(slug, data) {
-    const dataPath = `./draft/${slug}/data.json`;
-    fs.writeFileSync(dataPath, JSON.stringify(data, null, 2), 'utf-8');
   }
 
   // Parse JSON body for POST and PATCH requests

@@ -40,12 +40,14 @@ export default async function() {
     let rangeCount = 0;
     let title = null;
     let img = null;
+    let published = null;
     const dataFile = path.join(folderPath, 'data.json');
     if (fs.existsSync(dataFile)) {
       try {
         const data = JSON.parse(fs.readFileSync(dataFile, 'utf-8'));
         rangeCount = data.ranges ? data.ranges.length : 0;
         title = data.title;
+        published = data.published;
 
         // Check if there's a thumbnail preview (images.img)
         if (data.images && data.images.img) {
@@ -65,13 +67,14 @@ export default async function() {
       name: title || entry.name,
       slug: entry.name,
       path: folderPath,
-      images: images,
-      profiles: profiles,
+      images,
+      profiles,
       imageCount: images.length,
       profileCount: profiles.length,
-      rangeCount: rangeCount,
-      title: title,
-      img: img
+      rangeCount,
+      title,
+      img,
+      published
     });
   }
 

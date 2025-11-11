@@ -12,14 +12,14 @@ permalink: /draft/index.html
 </section>
 
 {% for folder in drafts.folders %}
-  <article class="list">
+  <article class="list{% if folder.published %} published{% endif %}">
     <a href="/draft/{{ folder.slug }}/">{% if folder.img %}{% image "draft/" + folder.slug + "/" + folder.img, folder.name, "192w", 192, false if loop.first else true %}{% elif folder.images[0] %}{% image "draft/" + folder.slug + "/" + folder.images[0], folder.name, "192w", 192, false if loop.first else true %}{% else %}{% image "./images/hp-missing.png", "Image générique", "192w", 192, false if loop.first else true %}{% endif %}</a>
     <h3>
-      <a href="/draft/{{ folder.slug }}/" class="draft-title-link" data-slug="{{ folder.slug }}" data-default-title="{{ folder.slug }}">{{ folder.name }}</a>
+      <a href="/draft/{{ folder.slug }}/" class="draft-title-link{% if folder.published %} published{% endif %}" data-slug="{{ folder.slug }}" data-default-title="{{ folder.slug }}">{{ folder.name }}</a>
     </h3>
     <p class="draft-meta" data-slug="{{ folder.slug }}">
       <span class="image-count">{{ folder.imageCount }} image{% if folder.imageCount > 1 %}s{% endif %}</span> —
-      <span class="profile-count">{{ folder.profileCount }} profil{% if folder.profileCount > 1 %}s{% endif %}</span><span class="range-count">{% if folder.rangeCount > 0 %} — {{ folder.rangeCount }} plage{% if folder.rangeCount > 1 %}s{% endif %} sauvegardée{% if folder.rangeCount > 1 %}s{% endif %}{% endif %}</span>
+      <span class="profile-count">{{ folder.profileCount }} profil{% if folder.profileCount > 1 %}s{% endif %}</span><span class="range-count">{% if folder.rangeCount > 0 %} — {{ folder.rangeCount }} plage{% if folder.rangeCount > 1 %}s{% endif %} sauvegardée{% if folder.rangeCount > 1 %}s{% endif %}{% endif %}</span>{% if folder.published %} — <strong>✅ Publié</strong>{% endif %}
     </p>
   </article>
 {% endfor %}
@@ -29,6 +29,18 @@ permalink: /draft/index.html
   content: "🚧";
   display: inline-block;
   margin-right: 0.3em;
+}
+
+.draft-title-link.published:before {
+  content: "✅";
+}
+
+article.list.published {
+  opacity: 0.7;
+}
+
+article.list.published h3 {
+  text-decoration: line-through;
 }
 </style>
 
