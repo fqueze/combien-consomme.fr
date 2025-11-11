@@ -137,7 +137,7 @@ Pour des raisons d'économie d'énergie, l'affichage de l'heure et les touches s
 
 Le manuel indique aussi "La luminosité des touches sensitives atténuées dans le bandeau de commande peut être réglée selon sept niveaux." 1 étant le plus sombre, 7 le plus lumineux, et le réglage en usine est 3. L'économie serait donc probablement plus notable si la luminosité de l'afficheur était au maximum.{% endcomment %}
 
-On observe un petit pic au bout de 10 minutes : c'est le moment où le manuel indique que « l'affichage de l'heure et les touches sensitives s'assombrissent au bout de 10 minutes » pour économiser l'énergie :
+On observe un petit pic au bout de 10 minutes : c'est le moment où le manuel indique que « *l'affichage de l'heure et les touches sensitives s'assombrissent au bout de 10 minutes* » pour économiser l'énergie :
 
 {% image "./images/machine-a-laver-miele-afficheur.jpg" "Afficheur pendant l'attente du départ différé" "800w" 800 %}
 {% comment %}L'afficheur montre la température, la vitesse d'essorage, et le temps dans lequel le programme démarrera (ici 1h59){% endcomment %}
@@ -230,7 +230,9 @@ Pendant chaque rinçage, on observe une croissance progressive de la consommatio
 L'essorage dure environ 9 minutes :
 
 {% profile "machine-a-laver-miele.json.gz" '{"name": "Essorage", "range": "17727043m539676"}' %}
-{% comment %}draft: augmentation progressive de la conso et donc de la vitesse de rotation pour l'essorage, avec des paliers{% endcomment %} On observe une augmentation progressive de la consommation, et donc de la vitesse de rotation du tambour, avec des paliers bien marqués. Le tambour accélère progressivement jusqu'à atteindre la vitesse maximale de 1400 tours par minute pour extraire le maximum d'eau du linge.
+{% comment %}draft: augmentation progressive de la conso et donc de la vitesse de rotation pour l'essorage, avec des paliers{% endcomment %}
+
+On observe une série de paliers de consommation stable, chaque palier étant plus élevé que le précédent, correspondant à des vitesses de rotation croissantes. Chaque palier est précédé d'un pic dont la consommation croît sur environ une dizaine de secondes. On peut supposer que le pic correspond à la phase d'accélération où le moteur doit fournir un effort important pour augmenter la vitesse de rotation du tambour (en accélérant le linge gorgé d'eau), et que le palier correspond au maintien d'une vitesse stable où le moteur nécessite moins d'énergie. Le tambour accélère ainsi progressivement par paliers jusqu'à atteindre la vitesse maximale de 1400 tours par minute pour extraire le maximum d'eau du linge.
 
 #### La fin du cycle et le mode Infroissable
 
@@ -244,7 +246,7 @@ Le tambour tourne encore pendant
 
 Les 15 dernières minutes ont une consommation stable similaire à celle du départ différé, probablement juste l'électronique et l'afficheur qui restent allumés avec un message indiquant que le programme est terminé. Le manuel dit "à la fin du programme ou de la phase Infroissable, l'affichage de temps et les touches sensitives s'allument pendant 10 minutes."{% endcomment %}
 
-Pendant 30 minutes, le tambour continue de tourner de manière intermittente : c'est la fonction « Infroissable » qui permet de réduire la formation de faux plis. Le manuel indique que « le tambour tourne encore pendant 30 minutes après la fin du programme » et que « la porte du lave-linge peut être ouverte à tout moment ».
+Pendant 30 minutes, le tambour continue de tourner de manière intermittente : c'est la fonction « Infroissable » qui permet de réduire la formation de faux plis. Le manuel indique que « *le tambour tourne encore pendant 30 minutes après la fin du programme* » et que « *la porte du lave-linge peut être ouverte à tout moment* ».
 
 On observe pendant cette phase une très faible consommation, avec de petits pics réguliers correspondant aux rotations du tambour.
 
@@ -290,7 +292,7 @@ C'est {{ 218 | percentLess: 1040 }} de moins que pour une charge complète !
 
 En voyant l'enregistrement de cette deuxième lessive, les valeurs étaient tellement différentes que je me suis d'abord demandé s'il avait pu y avoir un problème lors de la mesure. Ce n'est qu'en consultant le manuel que j'ai compris : cette machine dispose d'un système de « capacité variable automatique ».
 
-C'est ici que ce système prend tout son sens : la machine détecte la faible quantité de linge et adapte automatiquement la quantité d'eau et l'énergie nécessaire. Le manuel avait raison de vanter cette fonctionnalité : « si vous avez peu de linge à laver, la capacité variable automatique du lave-linge réduit la consommation en eau et la consommation électrique. »
+C'est ici que ce système prend tout son sens : la machine détecte la faible quantité de linge et adapte automatiquement la quantité d'eau et l'énergie nécessaire. Comme le manuel le disait : « *si vous avez peu de linge à laver, la capacité variable automatique du lave-linge réduit la consommation en eau et la consommation électrique.* »
 
 #### Le chauffage avec charge légère
 
@@ -324,7 +326,7 @@ Le fabricant annonce une « consommation énergétique annuelle » de 177 kWh pa
 
 Lors de notre test d'un {% test machine-a-laver lave-linge Samsung 7kg %}, la consommation du programme Quotidien 40°C avait été mesurée à {{ 736 | Wh }}. La Miele consomme {{ 1040 | Wh }}, soit {{ 1040 | percentMore: 736 }} de plus par cycle.
 
-Mais attention : la Miele a une capacité de 8kg contre 7kg pour la Samsung, et surtout elle dispose du système de capacité variable qui permet de réduire drastiquement la consommation avec une charge légère. La Samsung consommait {{ 736 | Wh }} quelle que soit la charge.
+Mais attention : la Miele a une capacité de 8kg contre 7kg pour la Samsung, et surtout elle dispose du système de capacité variable qui permet de réduire drastiquement la consommation avec une charge légère. La Samsung n'adapte pas la quantité d'eau utilisée en fonction de la charge.
 
 ### Conseils pour l'autoconsommation photovoltaïque
 
@@ -336,7 +338,7 @@ Le manuel indique que « *les lessives modernes permettent de laver à basse tem
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cette machine à laver, on pourrait :
-- tester les autres programmes disponibles : Synthétique, Fin, Laine, Chemises, Express 20 (recommandé par le manuel pour « *les petites quantités de linge peu sale* »), Foncé/Jeans, Textiles modernes) ;
+- tester les autres programmes disponibles : Synthétique, Fin, Laine, Chemises, Express 20 (recommandé par le manuel pour « *les petites quantités de linge peu sale* »), Foncé/Jeans, Textiles modernes ;
 - mesurer l'impact de la température sur le programme Coton (20°, 30°, 40°, 60°, 90°) ;
 - comparer la consommation avec différents niveaux de remplissage du tambour (en pesant le linge pour avoir une estimation précise en kg) pour mieux comprendre le système de capacité variable ;
 - mesurer l'influence de la vitesse d'essorage sur la consommation (800, 1000, 1200, 1400 tr/min) ;

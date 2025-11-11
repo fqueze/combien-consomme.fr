@@ -163,6 +163,11 @@ L'étiquette indique une puissance de {{ X | W }}.
 
 #### Manuel
 [Quote relevant parts, especially energy-saving advice]
+
+**IMPORTANT: Put manual quotes in italics** when they are direct citations:
+- Use `« *quote from manual* »` format for inline citations
+- For blockquotes (using `>` syntax), the content is already formatted as citation
+- Example: `Le manuel indique que « *l'affichage de l'heure s'assombrit au bout de 10 minutes* » pour économiser l'énergie.`
 ```
 {% endraw %}
 
