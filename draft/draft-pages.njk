@@ -57,27 +57,31 @@ eleventyComputed:
 </div>
 
 {% if folder.profiles.length > 0 %}
-<section>
+<section id="profiles-section">
   <h2>Profils</h2>
   {% for profile in folder.profiles %}
-  <div class="profile-item">
-    <code>{{ profile }}</code>
-    <button class="open-profiler-btn" data-profile="{{ profile }}" data-slug="{{ folder.slug }}">
-      Ouvrir dans le profiler
-    </button>
-  </div>
-  {% endfor %}
-
-  <div id="profiler-container" style="display: none;">
-    <div class="profiler-header">
-      <h3 id="profiler-title">Firefox Profiler</h3>
-      <div class="profiler-actions">
-        <button class="save-range-btn">Sauvegarder</button>
-        <button class="close-profiler-btn">✕</button>
+  <div class="profile-item" data-profile="{{ profile.filename }}" data-slug="{{ folder.slug }}">
+    <div class="profile-header">
+      <button class="save-range-btn">Sauvegarder</button>
+      <div class="profile-info">
+        <span class="profile-range-info"></span>
+        <code class="profile-filename">{{ profile.filename }}</code>
+        <span class="profile-size">({{ (profile.size / 1024) | round(1) }} Ko)</span>
+      </div>
+      <div class="profile-controls">
+        <div class="profile-shortname-wrapper">
+          <input type="text" class="profile-shortname" placeholder="Nom court" data-profile="{{ profile.filename }}">
+          <button class="set-profile-shortname-btn" title="Définir comme 'profile'">⭐</button>
+        </div>
+        <button class="toggle-profiler-btn">Ouvrir le profiler</button>
       </div>
     </div>
-    <iframe id="profiler-iframe"></iframe>
+
+    <div class="profiler-container" style="display: none;">
+      <iframe class="profiler-iframe"></iframe>
+    </div>
   </div>
+  {% endfor %}
 
   <div id="saved-ranges">
     <h3>Plages sauvegardées</h3>
@@ -249,20 +253,104 @@ eleventyComputed:
 }
 
 .profile-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
   background: #f8f9fa;
   border-radius: 4px;
   margin-bottom: 1rem;
 }
 
-.profile-item code {
-  flex: 1;
+.profile-item.profiler-open .profile-filename,
+.profile-item.profiler-open .profile-size {
+  display: none;
 }
 
-.open-profiler-btn {
+.profile-item:not(.profiler-open) .profile-range-info,
+.profile-item:not(.profiler-open) .save-range-btn {
+  display: none;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+}
+
+.profile-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.profile-filename {
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+  font-family: inherit;
+}
+
+.profile-size {
+  color: #666;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.profile-range-info {
+  color: #0066cc;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.profile-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-shortname-wrapper {
+  position: relative;
+}
+
+.profile-shortname {
+  padding: calc(0.5rem - 1px);
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 120px;
+  box-sizing: border-box;
+}
+
+.set-profile-shortname-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 0 0.5rem;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: none;
+}
+
+.profile-shortname-wrapper:hover .set-profile-shortname-btn {
+  display: block;
+}
+
+.set-profile-shortname-btn:hover {
+  background: #5a6268;
+}
+
+.toggle-profiler-btn {
   background: #0066cc;
   color: white;
   border: none;
@@ -273,73 +361,40 @@ eleventyComputed:
   white-space: nowrap;
 }
 
-.open-profiler-btn:hover {
+.toggle-profiler-btn:hover {
   background: #0052a3;
 }
 
-#profiler-container {
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-  margin-bottom: 2rem;
+.profiler-container {
+  background: #fff;
+  border-top: 1px solid #dee2e6;
   overflow: hidden;
 }
 
-.profiler-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  background: #e9ecef;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.profiler-header h3 {
-  margin: 0;
-  font-size: 1rem;
-  flex: 1;
-}
-
-.profiler-actions {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+.profiler-iframe {
+  width: 100%;
+  height: 350px;
+  border: none;
+  display: block;
 }
 
 .save-range-btn {
   background: #28a745;
   color: white;
   border: none;
-  padding: 0.25rem 0.75rem;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .save-range-btn:hover {
   background: #218838;
 }
 
-.close-profiler-btn {
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  line-height: 1;
-}
-
-.close-profiler-btn:hover {
-  background: #c82333;
-}
-
-#profiler-iframe {
-  width: 100%;
-  height: 350px;
-  border: none;
-  display: block;
+.save-range-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
 }
 
 #saved-ranges {

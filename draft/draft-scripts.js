@@ -177,18 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
   window.currentSlug = document.querySelector('article[data-draft-slug]')?.dataset.draftSlug;
   const currentSlug = window.currentSlug;
 
-  const openBtn = document.querySelector('.open-profiler-btn');
-  const saveBtn = document.querySelector('.save-range-btn');
-  const closeBtn = document.querySelector('.close-profiler-btn');
-  const container = document.getElementById('profiler-container');
-  const iframe = document.getElementById('profiler-iframe');
-  const headerTitle = document.getElementById('profiler-title');
-  const savedRangesList = document.getElementById('saved-ranges-list');
   const titleEl = document.getElementById('draft-title');
   const notesEl = document.getElementById('draft-notes');
-
-  let currentProfile = openBtn ? openBtn.dataset.profile : null;
-  let stopPolling = null;
 
   // Image modal elements
   const imageModal = document.getElementById('image-modal');
@@ -230,17 +220,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!force && cachedDraftData) {
       return cachedDraftData;
     }
-    try {
-      const response = await fetch(`/api/draft/${currentSlug}/data`);
-      cachedDraftData = await response.json();
-      return cachedDraftData;
-    } catch (error) {
-      console.error('Error loading draft data:', error);
-      // Cache empty structure as fallback
-      const emptyData = { ranges: [], images: {}, title: null, notes: '' };
-      cachedDraftData = emptyData;
-      return emptyData;
-    }
+    const response = await fetch(`/api/draft/${currentSlug}/data`);
+    cachedDraftData = await response.json();
+    return cachedDraftData;
   }
 
   // Helper function to find shortname for a source filename
@@ -419,6 +401,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   async function loadSavedRanges(force = false) {
+    const savedRangesList = document.getElementById('saved-ranges-list');
+    if (!savedRangesList) return;
+
     try {
       const data = await getDraftData(force);
 
@@ -625,120 +610,283 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  if (openBtn) {
-    openBtn.addEventListener('click', function() {
-      const profile = this.dataset.profile;
-      const slug = this.dataset.slug;
-      const profilePath = 'draft/' + slug + '/' + profile;
-      const baseUrl = window.location.origin;
-      const profileUrl = baseUrl + '/' + profilePath;
-      const profilerUrl = baseUrl + '/from-url/' + encodeURIComponent(profileUrl);
-
-      iframe.src = profilerUrl;
-      container.style.display = 'block';
-      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      // Monitor iframe URL changes
-      let lastUrl = '';
-      let checkUrl = null;
-
-      function checkUrlChange() {
-        try {
-          const currentUrl = iframe.contentWindow.location.href;
-          if (currentUrl !== lastUrl) {
-            lastUrl = currentUrl;
-            updateProfilerTitle();
-          }
-        } catch (e) {
-          // Still loading or cross-origin
-        }
-      }
-
-      function startPolling() {
-        if (!checkUrl) {
-          checkUrl = setInterval(checkUrlChange, 500);
-        }
-      }
-
-      stopPolling = function() {
-        if (checkUrl) {
-          clearInterval(checkUrl);
-          checkUrl = null;
-        }
-      };
-
-      // Start polling initially
-      startPolling();
-
-      // Pause/resume polling when tab visibility changes
-      document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-          stopPolling();
-        } else {
-          startPolling();
-        }
-      });
-    });
-  }
-
-  if (saveBtn) {
-    saveBtn.addEventListener('click', async function() {
+  // Profile shortname handling
+  const profilesSection = document.getElementById('profiles-section');
+  if (profilesSection) {
+    // Load and apply profile shortnames on page load
+    (async () => {
       try {
-        const iframeUrl = iframe.contentWindow.location.href;
-        const url = new URL(iframeUrl);
-        const params = url.searchParams;
+        const data = await getDraftData();
+        const profiles = data.profiles || {};
 
-        let profileName = params.get('profileName');
-        let range = params.get('range') || '';
-
-        // Extract only the last part of the range (after the last ~)
-        range = range.replace(/.*~/, '');
-
-        if (!profileName) {
-          profileName = prompt('Nom de cette plage:');
-          if (!profileName) return;
-        }
-
-        // Generate the shortcode
-        const shortcodeOptions = {name: profileName};
-        if (range) {
-          shortcodeOptions.range = range;
-        }
-        shortcodeOptions.path = `draft/${currentSlug}/`;
-
-        const shortcode = `{% profile "${currentProfile}" '${JSON.stringify(shortcodeOptions).replace(/'/g, "\\'")}' %}`;
-
-        saveBtn.disabled = true;
-        saveBtn.textContent = 'Sauvegarde...';
-
-        await post('save-range', {
-          profileName: profileName,
-          range: range,
-          name: profileName,
-          file: currentProfile,
-          shortcode: shortcode
+        // Update each profile input with its shortname
+        profilesSection.querySelectorAll('.profile-shortname').forEach(input => {
+          const profileFilename = input.dataset.profile;
+          const shortname = profiles[profileFilename]?.shortname;
+          if (shortname !== undefined) {
+            input.value = shortname;
+          }
         });
-
-        setButtonState(saveBtn, '✓ Sauvegardé');
-        loadSavedRanges(true);
-      } catch (e) {
-        console.error('Cannot save range:', e);
-        setButtonState(saveBtn, 'Erreur');
+      } catch (error) {
+        console.error('Error loading profile shortnames:', error);
       }
-    });
+    })();
   }
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
-      if (stopPolling) {
-        stopPolling();
+  profilesSection?.addEventListener('change', async function(e) {
+    if (!e.target.classList.contains('profile-shortname')) return;
+
+    const input = e.target;
+    const profileFilename = input.dataset.profile;
+    const shortname = input.value.trim();
+
+    try {
+      await patch(`profile/${encodeURIComponent(profileFilename)}`, { shortname });
+    } catch (error) {
+      showError('Erreur lors de la sauvegarde du nom court', error);
+    }
+  });
+
+  // Quick-set "profile" shortname button
+  profilesSection?.addEventListener('click', async function(e) {
+    if (e.target.classList.contains('set-profile-shortname-btn')) {
+      const profileItem = e.target.closest('.profile-item');
+      const input = profileItem.querySelector('.profile-shortname');
+      input.value = 'profile';
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+      return;
+    }
+  });
+
+  // Profile iframe handling - support multiple open iframes
+  const activeIframes = new Map(); // Track polling for each iframe
+
+  profilesSection?.addEventListener('click', function(e) {
+    // Handle toggle button
+    const toggleBtn = e.target.closest('.toggle-profiler-btn');
+    if (toggleBtn) {
+      const profileItem = toggleBtn.closest('.profile-item');
+      const container = profileItem.querySelector('.profiler-container');
+      const iframe = profileItem.querySelector('.profiler-iframe');
+      const profileRangeInfo = profileItem.querySelector('.profile-range-info');
+
+      // Check if already open
+      if (profileItem.classList.contains('profiler-open')) {
+        // Close profiler
+        profileItem.classList.remove('profiler-open');
+        container.style.display = 'none';
+        iframe.src = '';
+        toggleBtn.textContent = 'Ouvrir le profiler';
+
+        // Stop polling for this iframe
+        if (iframe._stopPolling) {
+          iframe._stopPolling();
+        }
+
+        // Remove visibility handler
+        if (iframe._visibilityHandler) {
+          document.removeEventListener('visibilitychange', iframe._visibilityHandler);
+          iframe._visibilityHandler = null;
+        }
+      } else {
+        // Open profiler
+        const profileFilenameText = profileItem.dataset.profile;
+        const slug = profileItem.dataset.slug;
+
+        profileItem.classList.add('profiler-open');
+
+        const profilePath = 'draft/' + slug + '/' + profileFilenameText;
+        const baseUrl = window.location.origin;
+        const profileUrl = baseUrl + '/' + profilePath;
+        const profilerUrl = baseUrl + '/from-url/' + encodeURIComponent(profileUrl);
+
+        iframe.src = profilerUrl;
+        container.style.display = 'block';
+        toggleBtn.textContent = 'Fermer le profiler';
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Set up URL monitoring for this iframe
+        let lastUrl = '';
+        let checkUrl = null;
+
+        function resizeIframeToContent() {
+          const iframeDoc = iframe.contentWindow.document;
+
+          const layoutSplitter = iframeDoc.querySelector('.splitter-layout.profileViewerSplitter .layout-splitter');
+
+          if (layoutSplitter) {
+            // Get the bottom position of the splitter (includes the splitter's height)
+            const splitterRect = layoutSplitter.getBoundingClientRect();
+            const scrollTop = iframe.contentWindow.pageYOffset || iframeDoc.documentElement.scrollTop;
+            const splitterBottom = splitterRect.bottom + scrollTop;
+
+            iframe.style.height = splitterBottom + 'px';
+
+            // Close the legal footer panel if present (after measuring/resizing)
+            const footerCloseBtn = iframeDoc.querySelector('.appFooterLinksClose');
+            if (footerCloseBtn) {
+              footerCloseBtn.click();
+            }
+          }
+        }
+
+        function updateTitle() {
+          try {
+            const currentUrl = iframe.contentWindow.location.href;
+            const url = new URL(currentUrl);
+            const params = url.searchParams;
+
+            const profileName = params.get('profileName');
+            const range = params.get('range');
+
+            let rangeText = '';
+            if (range) {
+              // Extract just the last part of the range and format it
+              const cleanRange = range.replace(/.*~/, '');
+              const duration = formatRangeDuration(cleanRange);
+
+              if (profileName) {
+                rangeText = profileName + ' — ' + duration;
+              } else {
+                rangeText = 'Plage: ' + duration;
+              }
+            } else if (profileName) {
+              rangeText = profileName;
+            }
+
+            if (rangeText) {
+              profileRangeInfo.textContent = rangeText;
+            }
+          } catch (e) {
+            // Cross-origin or still loading
+          }
+        }
+
+        function checkUrlChange() {
+          try {
+            const currentUrl = iframe.contentWindow.location.href;
+            if (currentUrl !== lastUrl) {
+              lastUrl = currentUrl;
+              updateTitle();
+
+              // Check if profile is fully loaded (globalTrackOrder parameter is set)
+              const url = new URL(currentUrl);
+              if (url.searchParams.has('globalTrackOrder')) {
+                // Profile is fully loaded, resize iframe to fit content
+                resizeIframeToContent();
+              }
+            }
+          } catch (e) {
+            // Still loading or cross-origin
+          }
+        }
+
+        function startPolling() {
+          if (!checkUrl) {
+            checkUrl = setInterval(checkUrlChange, 500);
+            activeIframes.set(iframe, checkUrl);
+          }
+        }
+
+        function stopPolling() {
+          if (checkUrl) {
+            clearInterval(checkUrl);
+            checkUrl = null;
+            activeIframes.delete(iframe);
+          }
+        }
+
+        // Start polling
+        startPolling();
+
+        // Store stop function for toggle button
+        iframe._stopPolling = stopPolling;
+
+        // Pause polling when page is hidden to save resources
+        const visibilityHandler = () => {
+          if (document.hidden) {
+            stopPolling();
+          } else {
+            startPolling();
+          }
+        };
+        document.addEventListener('visibilitychange', visibilityHandler);
+
+        // Store visibility handler to remove it when closing
+        iframe._visibilityHandler = visibilityHandler;
       }
 
-      container.style.display = 'none';
-      iframe.src = '';
-      headerTitle.textContent = 'Firefox Profiler';
-    });
-  }
+      return;
+    }
+  });
+
+
+  // Handle save range button for each profile
+  profilesSection?.addEventListener('click', async function(e) {
+    const saveBtn = e.target.closest('.save-range-btn');
+    if (!saveBtn) return;
+
+    const profileItem = saveBtn.closest('.profile-item');
+    const profileFilename = profileItem.dataset.profile;
+    const iframe = profileItem.querySelector('.profiler-iframe');
+
+    try {
+      const iframeUrl = iframe.contentWindow.location.href;
+      const url = new URL(iframeUrl);
+      const params = url.searchParams;
+
+      let profileName = params.get('profileName');
+      let range = params.get('range') || '';
+
+      // Extract only the last part of the range (after the last ~)
+      range = range.replace(/.*~/, '');
+
+      if (!profileName) {
+        profileName = prompt('Nom de cette plage:');
+        if (!profileName) return;
+      }
+
+      // Generate the shortcode
+      const shortcodeOptions = {name: profileName};
+      if (range) {
+        shortcodeOptions.range = range;
+      }
+      shortcodeOptions.path = `draft/${currentSlug}/`;
+
+      const shortcode = `{% profile "${profileFilename}" '${JSON.stringify(shortcodeOptions).replace(/'/g, "\\'")}' %}`;
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Sauvegarde...';
+
+      // Check if profile needs automatic shortname
+      const shortnameInput = profileItem.querySelector('.profile-shortname');
+      if (!shortnameInput.value.trim()) {
+        // Count total profiles
+        const allProfiles = document.querySelectorAll('.profile-item');
+        const isSingleProfile = allProfiles.length === 1;
+        const isSlugNamed = profileFilename === `${currentSlug}.json.gz`;
+
+        if (isSingleProfile || isSlugNamed) {
+          // Automatically set shortname to 'profile'
+          shortnameInput.value = 'profile';
+          shortnameInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+
+      await post('save-range', {
+        range: range,
+        name: profileName,
+        file: profileFilename,
+        shortcode: shortcode
+      });
+
+      setButtonState(saveBtn, '✓ Sauvegardé');
+      loadSavedRanges(true);
+    } catch (e) {
+      console.error('Cannot save range:', e);
+      setButtonState(saveBtn, 'Erreur');
+    }
+  });
 
   // Function to load an image into the modal (defined at top level for reusability)
   async function loadImageIntoModal(shortname, sourceFilename) {
@@ -1852,7 +2000,11 @@ document.addEventListener('DOMContentLoaded', function() {
       statusDiv.className = 'success';
       statusDiv.innerHTML = `
         <strong>✅ Template généré avec succès !</strong>
-        <pre>${result.instructions}</pre>
+        <div style="margin-top: 1rem;">
+          <strong>Claude prompt:</strong>
+          <button class="copy-btn" data-copy-target="template-claude-prompt">📋 Copier</button>
+          <pre id="template-claude-prompt">${result.claudePrompt}</pre>
+        </div>
       `;
 
       // Show preview iframe with the generated test
@@ -1909,7 +2061,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Populate files list
       const filesList = document.getElementById('copied-files-list');
       let filesHTML = `<li><code>${result.files.test}</code></li>`;
-      filesHTML += `<li><code>${result.files.profile}</code></li>`;
+      result.files.profiles.forEach(profile => {
+        filesHTML += `<li><code>${profile}</code></li>`;
+      });
       result.files.images.forEach(img => {
         filesHTML += `<li><code>${img}</code></li>`;
       });
@@ -1928,23 +2082,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Copy button functionality
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.dataset.copyTarget;
-      const targetElement = document.getElementById(targetId);
-      const text = targetElement.textContent;
+  // Copy button functionality - use event delegation for dynamic buttons
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.copy-btn');
+    if (!btn) return;
 
-      navigator.clipboard.writeText(text).then(() => {
-        const originalText = btn.textContent;
-        btn.textContent = '✓ Copié';
-        setTimeout(() => {
-          btn.textContent = originalText;
-        }, 2000);
-      }).catch(err => {
-        console.error('Failed to copy:', err);
-        alert('Erreur lors de la copie');
-      });
+    const targetId = btn.dataset.copyTarget;
+    const targetElement = document.getElementById(targetId);
+    const text = targetElement.textContent;
+
+    navigator.clipboard.writeText(text).then(() => {
+      const originalText = btn.textContent;
+      btn.textContent = '✓ Copié';
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 2000);
+    }).catch(err => {
+      showError('Erreur lors de la copie', err);
     });
   });
 });

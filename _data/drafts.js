@@ -31,16 +31,24 @@ export default async function() {
       return f.match(/\.(jpg|jpeg|png|gif|webp)$/i);
     });
 
-    // Find profiles
-    const profiles = files.filter(f =>
-      f.endsWith('.json.gz')
-    );
+    // Find profiles with size info
+    const profileFiles = files
+      .filter(f => f.endsWith('.json.gz'))
+      .map(f => {
+        const profilePath = path.join(folderPath, f);
+        const stats = fs.statSync(profilePath);
+        return {
+          filename: f,
+          size: stats.size
+        };
+      });
 
     // Read draft data
     let rangeCount = 0;
     let title = null;
     let img = null;
     let published = null;
+    let profilesData = {};
     const dataFile = path.join(folderPath, 'data.json');
     if (fs.existsSync(dataFile)) {
       try {
@@ -48,6 +56,7 @@ export default async function() {
         rangeCount = data.ranges ? data.ranges.length : 0;
         title = data.title;
         published = data.published;
+        profilesData = data.profiles || {};
 
         // Check if there's a thumbnail preview (images.img)
         if (data.images && data.images.img) {
@@ -62,6 +71,16 @@ export default async function() {
         // Invalid JSON, ignore
       }
     }
+
+    // Enhance profiles with shortname data
+    const profiles = profileFiles.map(p => {
+      const shortname = profilesData[p.filename]?.shortname || '';
+
+      return {
+        ...p,
+        shortname
+      };
+    });
 
     folders.push({
       name: title || entry.name,

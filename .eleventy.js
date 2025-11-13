@@ -179,19 +179,19 @@ function rebuildDraftPreview(slug) {
 async function publishDraftToProduction(slug) {
   const draftPreviewPath = path.join('draft', slug, 'preview');
   const draftTestPath = path.join(draftPreviewPath, 'tests', `${slug}.md`);
-  const draftImagesPath = path.join(draftPreviewPath, 'images');
-  const draftProfilePath = path.join(draftPreviewPath, 'profiles', `${slug}.json.gz`);
+  const imagesPath = 'images';
+  const profilesPath = 'profiles';
+  const draftImagesPath = path.join(draftPreviewPath, imagesPath);
+  const draftProfilesPath = path.join(draftPreviewPath, profilesPath);
 
   const testPath = path.join('tests', `${slug}.md`);
-  const imagesPath = 'images';
-  const profilePath = path.join('profiles', `${slug}.json.gz`);
 
   // Validate source files exist
   if (!fs.existsSync(draftTestPath)) {
     throw new Error(`Draft test file not found: ${draftTestPath}`);
   }
-  if (!fs.existsSync(draftProfilePath)) {
-    throw new Error(`Draft profile not found: ${draftProfilePath}`);
+  if (!fs.existsSync(draftProfilesPath)) {
+    throw new Error(`Draft profiles directory not found: ${draftProfilesPath}`);
   }
 
   // Read and process the test file
@@ -264,8 +264,15 @@ async function publishDraftToProduction(slug) {
     }
   }
 
-  // Copy profile
-  fs.copyFileSync(draftProfilePath, profilePath);
+  // Copy all profiles and track them
+  const copiedProfiles = [];
+  const profiles = fs.readdirSync(draftProfilesPath);
+  for (const profile of profiles) {
+    const srcPath = path.join(draftProfilesPath, profile);
+    const destPath = path.join(profilesPath, profile);
+    fs.copyFileSync(srcPath, destPath);
+    copiedProfiles.push(destPath);
+  }
 
   // Append to existing-tests.md if we have an entry
   if (existingTestsEntry) {
@@ -287,7 +294,7 @@ async function publishDraftToProduction(slug) {
 
   // Prepare git commands
   const gitCommands = [
-    `git add tests/${slug}.md images/ profiles/${slug}.json.gz draft/existing-tests.md`,
+    `git add tests/${slug}.md images/ ${copiedProfiles.join(' ')} draft/existing-tests.md`,
     `git commit -m "Add test: ${slug}"`,
     `git push`
   ];
@@ -297,7 +304,7 @@ async function publishDraftToProduction(slug) {
     slug,
     files: {
       test: testPath,
-      profile: profilePath,
+      profiles: copiedProfiles,
       images: copiedImages
     },
     claudePrompt,
@@ -686,7 +693,7 @@ function loadDraftData(slug) {
     }
   }
 
-  return { ranges: [], title: null };
+  return { ranges: [], title: null, images: {}, profiles: {}, notes: '' };
 }
 
 function saveDraftData(slug, data) {
@@ -724,7 +731,8 @@ function setupDevMiddleware(middleware) {
     const draftFileMatch = req.url.match(/^\/draft\/([^/]+)\/((preview\/)?(.+)\.(jpg|jpeg|png|gif|webp|json\.gz|js))(?:\?.*)?$/);
     if (draftFileMatch) {
       const [, slug, relativePath] = draftFileMatch;
-      const filePath = path.join(process.cwd(), 'draft', slug, relativePath);
+      const decodedRelativePath = decodeURIComponent(relativePath);
+      const filePath = path.join(process.cwd(), 'draft', slug, decodedRelativePath);
 
       if (fs.existsSync(filePath)) {
         const ext = path.extname(relativePath).toLowerCase();
@@ -765,9 +773,9 @@ function setupDevMiddleware(middleware) {
     const saveRange = /^\/api\/draft\/([^/]+)\/save-range$/;
     if (req.method === 'POST' && saveRange.test(url)) {
       const [, slug] = url.match(saveRange);
-      const { profileName, range, name, file, shortcode } = req.body || {};
+      const { range, name, file, shortcode } = req.body || {};
 
-      if (!profileName || !name) {
+      if (!name) {
         sendJSON(res, 400, { error: 'Missing required fields' });
         return;
       }
@@ -778,7 +786,7 @@ function setupDevMiddleware(middleware) {
       }
 
       const id = Date.now().toString();
-      data.ranges.push({ id, profileName, range, name, file, shortcode });
+      data.ranges.push({ id, range, name, file, shortcode });
 
       try {
         saveDraftData(slug, data);
@@ -923,6 +931,34 @@ function setupDevMiddleware(middleware) {
       return;
     }
 
+    // PATCH /api/draft/:slug/profile/:filename - Update profile metadata
+    const updateProfile = /^\/api\/draft\/([^/]+)\/profile\/(.+)$/;
+    if (req.method === 'PATCH' && updateProfile.test(url)) {
+      const [, slug, encodedFilename] = url.match(updateProfile);
+      const filename = decodeURIComponent(encodedFilename);
+
+      const data = loadDraftData(slug);
+      if (!data.profiles) {
+        data.profiles = {};
+      }
+      if (!data.profiles[filename]) {
+        data.profiles[filename] = {};
+      }
+
+      // Update shortname field
+      if (req.body?.shortname !== undefined) {
+        data.profiles[filename].shortname = req.body.shortname;
+      }
+
+      try {
+        saveDraftData(slug, data);
+        sendJSON(res, 200, { success: true });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
     // POST /api/draft/:slug/save-preview - Save edited image to preview folder
     const savePreview = /^\/api\/draft\/([^/]+)\/save-preview$/;
     if (req.method === 'POST' && savePreview.test(url)) {
@@ -1057,15 +1093,6 @@ function setupDevMiddleware(middleware) {
           return;
         }
 
-        // Check for multiple profile files (not yet supported)
-        const uniqueProfiles = [...new Set(data.ranges.map(r => r.file))];
-        if (uniqueProfiles.length > 1) {
-          sendJSON(res, 400, {
-            error: 'Multiple profile files not yet supported. TODO: implement shortnames for profiles.'
-          });
-          return;
-        }
-
         const draftPath = path.join(process.cwd(), 'draft', slug);
         const previewPath = path.join(draftPath, 'preview');
 
@@ -1080,23 +1107,55 @@ function setupDevMiddleware(middleware) {
           }
         });
 
-        // Copy profile data
-        const sourceProfilePath = path.join(draftPath, uniqueProfiles[0]);
-        const destProfilePath = path.join(profilesPath, `${slug}.json.gz`);
+        // Find which profiles have saved ranges
+        const profilesWithRanges = new Set(data.ranges.map(r => r.file));
 
-        if (!fs.existsSync(sourceProfilePath)) {
-          sendJSON(res, 400, { error: `Profile file not found: ${uniqueProfiles[0]}` });
-          return;
+        // Validate that all profiles with ranges have shortnames
+        const profiles = data.profiles || {};
+        for (const profileFilename of profilesWithRanges) {
+          const profileData = profiles[profileFilename];
+          if (!profileData || !profileData.shortname) {
+            sendJSON(res, 400, {
+              error: `Profile "${profileFilename}" has saved ranges but no shortname. Please set a shortname first.`
+            });
+            return;
+          }
         }
 
-        fs.copyFileSync(sourceProfilePath, destProfilePath);
+        // Copy and load profiles that have saved ranges (already validated to have shortnames)
+        const loadedProfiles = new Map();
+        for (const [profileFilename, profileData] of Object.entries(profiles)) {
+          if (!profilesWithRanges.has(profileFilename)) continue; // Skip profiles with no saved ranges
 
-        // Load profile to calculate stats for each range
-        const profile = await loadProfile(sourceProfilePath);
+          const sourceProfilePath = path.join(draftPath, profileFilename);
+          if (!fs.existsSync(sourceProfilePath)) {
+            sendJSON(res, 400, { error: `Profile file not found: ${profileFilename}` });
+            return;
+          }
+
+          // Determine destination filename: slug.json.gz for "profile", slug-shortname.json.gz for others
+          const shortname = profileData.shortname;
+          const destFilename = shortname === 'profile'
+            ? `${slug}.json.gz`
+            : `${slug}-${shortname}.json.gz`;
+          const destProfilePath = path.join(profilesPath, destFilename);
+          fs.copyFileSync(sourceProfilePath, destProfilePath);
+
+          // Load profile for generating stats
+          const profile = await loadProfile(sourceProfilePath);
+          loadedProfiles.set(profileFilename, profile);
+        }
 
         // Generate stats markdown for each range
         for (const range of data.ranges) {
           const rangeId = range.id;
+
+          // Get the profile for this range
+          const profile = loadedProfiles.get(range.file);
+          if (!profile) {
+            console.warn(`Profile not loaded for range ${rangeId}: ${range.file}`);
+            continue;
+          }
 
           // Calculate stats
           const counter = profile.counters[0]; // TODO: handle multiple counters
@@ -1210,20 +1269,22 @@ TODO: Describe measurement equipment and link to article
         for (const range of data.ranges) {
           // Escape single quotes in the name for the Liquid shortcode
           const escapedName = range.name.replace(/'/g, "\\'");
-          template += `### TODO: Section name
 
-{% profile "${slug}.json.gz" '{"name": "${escapedName}", "range": "${range.range}"}' %}`;
+          // Get the shortname for this range's profile
+          const profileData = profiles[range.file];
+          const shortname = profileData?.shortname || 'profile';
+          const profileFilename = shortname === 'profile'
+            ? `${slug}.json.gz`
+            : `${slug}-${shortname}.json.gz`;
+
+          template += `{% profile "${profileFilename}" '{"name": "${escapedName}", "range": "${range.range}"}' %}`;
 
           // Only add comment if there's an actual description
           if (range.description) {
             template += `\n{% comment %}draft: ${range.description}{% endcomment %}`;
           }
 
-          template += `
-
-TODO: Analysis and observations
-
-`;
+          template += `\n\n`;
         }
 
         template += `{% plusloin %}
@@ -1241,12 +1302,7 @@ TODO: Suggest 3-5 follow-up investigations
           sendJSON(res, 200, {
             success: true,
             message: 'Template generated successfully',
-            instructions: `In your terminal, run:
-  cd ${process.cwd()}
-  claude
-
-Then say:
-  "Generate a test for draft/${slug}. The template is at draft/${slug}/preview/tests/${slug}.md. Profile data with statistics and screenshots are in draft/${slug}/preview/profile-data/. Read draft/CLAUDE-INSTRUCTIONS.md for guidance on how to write tests."`,
+            claudePrompt: `Generate a test for draft/${slug}. The template is at draft/${slug}/preview/tests/${slug}.md. Profile data with statistics and screenshots are in draft/${slug}/preview/profile-data/. Read draft/CLAUDE-INSTRUCTIONS.md for guidance on how to write tests.`,
             paths: {
               template: `draft/${slug}/preview/tests/${slug}.md`,
               profiles: `draft/${slug}/preview/profiles/`,
