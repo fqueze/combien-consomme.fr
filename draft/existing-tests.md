@@ -464,3 +464,14 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Machine à capacité variable: charge légère consomme 79% de moins (218 Wh vs 1040 Wh)
 - Consommation veille quasi nulle: 0.111W moyenne (0.97€/an)
 - Fonction Infroissable prolonge le cycle de 30 minutes après fin lavage
+
+### velo-cargo
+**Title:** un vélo cargo à assistance électrique
+**Device:** Bakfiets Biporteur Électrique Shadow STEPS (batterie 418Wh, moteur Shimano STEPS)
+**Key findings:**
+- Utilisé quotidiennement pour trajets crèche (remplace voiture)
+- Consommation: 6.2 Wh/km en moyenne, variations selon dénivelé et charge
+- Coût électrique: environ 0.15 centime/km (vs 10-15 centimes/km en voiture)
+- Veille chargeur quasi nulle (0.125W) - peut rester branché sans problème
+- Charge complète (batterie vide): 413 Wh, environ 5h30
+- Autonomie réelle: environ 55km avec 75% de batterie utilisée
