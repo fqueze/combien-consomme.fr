@@ -1529,6 +1529,8 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("draft/**/*.js");
     // Ignore profile-data markdown files (they're data for Claude, not templates to render)
     eleventyConfig.ignores.add("draft/**/preview/profile-data/**");
+    // Ignore data.json files from watch (they change frequently via API and shouldn't trigger rebuilds)
+    eleventyConfig.watchIgnores.add("draft/**/data.json");
     // Watch preview test files for changes (dev mode only)
     if (isDev) {
       eleventyConfig.addWatchTarget("draft/**/preview/tests/**/*.md");
