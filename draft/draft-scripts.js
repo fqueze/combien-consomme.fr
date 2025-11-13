@@ -1823,14 +1823,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const hasMainImage = data.images && data.images['img'];
 
     // Check if template already exists
-    const templatePath = `draft/${currentSlug}/preview/tests/${currentSlug}`;
-    let templateExists = false;
-    try {
-      const response = await fetch(`/${templatePath}`);
-      templateExists = response.ok;
-    } catch (e) {
-      templateExists = false;
-    }
+    const response = await fetch(`/api/draft/${currentSlug}/template-exists`);
+    const result = await response.json();
+    const templateExists = result.exists;
 
     if (hasRanges && hasMainImage) {
       generateBtn.disabled = false;
@@ -1865,15 +1860,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Refresh preview button
   const refreshPreviewBtn = document.getElementById('refresh-preview-btn');
-  refreshPreviewBtn.addEventListener('click', async () => {
-    const originalText = refreshPreviewBtn.textContent;
-    refreshPreviewBtn.disabled = true;
-    refreshPreviewBtn.textContent = '...';
-
-    try {
-      const iframe = document.getElementById('test-preview-iframe');
-
-      // Save scroll position before rebuild
+  refreshPreviewBtn.addEventListener('click', () => {
+    const iframe = document.getElementById('test-preview-iframe');
+    if (iframe && iframe.src) {
+      // Save scroll position before reload
       let scrollPosition = 0;
       try {
         scrollPosition = iframe.contentWindow.scrollY || 0;
@@ -1881,37 +1871,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // Cross-origin or not loaded, ignore
       }
 
-      // Trigger rebuild of the preview
-      const response = await fetch(`/api/draft/${currentSlug}/rebuild-preview`, {
-        method: 'POST'
-      });
+      // Reload iframe (middleware will trigger rebuild)
+      const url = new URL(iframe.src, window.location.origin);
+      url.searchParams.set('t', Date.now());
 
-      if (!response.ok) {
-        throw new Error('Erreur lors de la reconstruction');
-      }
+      // Restore scroll position after iframe loads
+      iframe.onload = () => {
+        try {
+          iframe.contentWindow.scrollTo(0, scrollPosition);
+        } catch (e) {
+          // Cross-origin or not loaded, ignore
+        }
+        iframe.onload = null; // Clean up
+      };
 
-      // Reload iframe with cache bust and restore scroll position
-      if (iframe && iframe.src) {
-        const url = new URL(iframe.src, window.location.origin);
-        url.searchParams.set('t', Date.now());
-
-        // Restore scroll position after iframe loads
-        iframe.onload = () => {
-          try {
-            iframe.contentWindow.scrollTo(0, scrollPosition);
-          } catch (e) {
-            // Cross-origin or not loaded, ignore
-          }
-          iframe.onload = null; // Clean up
-        };
-
-        iframe.src = url.toString();
-      }
-
-      setButtonState(refreshPreviewBtn, '✓', originalText);
-    } catch (error) {
-      console.error('Error rebuilding preview:', error);
-      setButtonState(refreshPreviewBtn, '✗', originalText);
+      iframe.src = url.toString();
     }
   });
 

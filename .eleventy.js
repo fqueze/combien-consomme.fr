@@ -726,6 +726,20 @@ function setupDevMiddleware(middleware) {
     }
   });
 
+  // Rebuild preview test pages when accessed
+  middleware.push(async function(req, res, next) {
+    const previewTestMatch = req.url.match(/^\/draft\/([^/]+)\/preview\/tests\/\1\/?(?:\?.*)?$/);
+    if (previewTestMatch) {
+      const [, slug] = previewTestMatch;
+      try {
+        await rebuildDraftPreview(slug);
+      } catch (error) {
+        console.error('Failed to rebuild preview:', error);
+      }
+    }
+    next();
+  });
+
   // Serve draft files directly from draft folder (including preview subfolder)
   middleware.push(function(req, res, next) {
     const draftFileMatch = req.url.match(/^\/draft\/([^/]+)\/((preview\/)?(.+)\.(jpg|jpeg|png|gif|webp|json\.gz|js))(?:\?.*)?$/);
@@ -1322,18 +1336,12 @@ TODO: Suggest 3-5 follow-up investigations
       return;
     }
 
-    // POST /api/draft/:slug/rebuild-preview - Rebuild preview after template edits
-    const rebuildPreview = /^\/api\/draft\/([^/]+)\/rebuild-preview$/;
-    if (req.method === 'POST' && rebuildPreview.test(url)) {
-      const [, slug] = url.match(rebuildPreview);
-
-      try {
-        await rebuildDraftPreview(slug);
-        sendJSON(res, 200, { success: true, message: 'Preview rebuilt successfully' });
-      } catch (error) {
-        console.error('Rebuild preview error:', error);
-        sendJSON(res, 500, { error: error.message });
-      }
+    // GET /api/draft/:slug/template-exists - Check if template exists
+    const templateExists = /^\/api\/draft\/([^/]+)\/template-exists$/;
+    if (req.method === 'GET' && templateExists.test(url)) {
+      const [, slug] = url.match(templateExists);
+      const templatePath = path.join(process.cwd(), 'draft', slug, 'preview', 'tests', `${slug}.md`);
+      sendJSON(res, 200, { exists: fs.existsSync(templatePath) });
       return;
     }
 
