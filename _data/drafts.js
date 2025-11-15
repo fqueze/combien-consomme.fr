@@ -18,6 +18,9 @@ export default async function() {
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
 
+    // Skip internal folders
+    if (entry.name === 'libs') continue;
+
     const folderPath = path.join(draftDir, entry.name);
     const files = fs.readdirSync(folderPath);
 
