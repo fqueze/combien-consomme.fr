@@ -88,6 +88,16 @@ Le vélo est équipé d'un dérailleur électrique automatique à 8 vitesses. L'
 {% image "./images/velo-cargo-ecran.jpg" "L'afficheur du vélo montrant 25% de batterie restante" "250w" 250 %}
 {% comment %}photo de l'afficheur du vélo, ici montrant 25% de batterie restante, ce qui correspond à l'une des mesures.{% endcomment %}
 
+Le vélo dispose de 3 modes d'assistance électrique :
+
+- **Eco** : l'assistance compense principalement le poids du vélo, mais on fait encore du sport presque comme sur un vélo normal.
+- **Normal** : l'assistance aide davantage et on arrive à destination sans se fatiguer ou transpirer.
+- **High** : l'assistance permet d'aller plus vite, notamment en accélérant les redémarrages après les arrêts.
+
+Dans tous les modes, l'assistance diminue lorsqu'on atteint 25 km/h et se coupe complètement à 26 km/h, conformément à la réglementation française sur les vélos à assistance électrique.
+
+**Tous les tests présentés dans cette page ont été réalisés avec le mode d'assistance maximum (High).**
+
 ## Consommation
 
 ### Informations fournies par le fabricant
