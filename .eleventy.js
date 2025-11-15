@@ -228,8 +228,13 @@ async function publishDraftToProduction(slug) {
     throw new Error(`Found ${todoMatches.length} TODO marker(s) in the draft. Please complete all tasks before publishing.`);
   }
 
+  // Extract title from front matter
+  const titleMatch = frontMatter.match(/^title:\s*(.+)$/m);
+  const title = titleMatch ? titleMatch[1].trim() : slug;
+
   // Update front matter - split into lines to avoid creating empty lines
-  const today = new Date().toISOString().split('T')[0];
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   const frontMatterLines = frontMatter.split('\n')
     .map(line => {
       if (line.match(/^layout:/)) return 'layout: test-layout.njk';
@@ -296,7 +301,7 @@ async function publishDraftToProduction(slug) {
   // Prepare git commands
   const gitCommands = [
     `git add tests/${slug}.md images/ ${copiedProfiles.join(' ')} draft/existing-tests.md`,
-    `git commit -m "Add test: ${slug}"`,
+    `git commit -m "Ajout du test d'${title}."`,
     `git push`
   ];
 
@@ -1277,7 +1282,8 @@ Look for patterns such as:
         }
 
         // Generate template markdown
-        const today = new Date().toISOString().split('T')[0];
+        const now = new Date();
+        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
         const basePath = `draft/${slug}/preview/`;
         const mainImage = `${basePath}images/${slug}.jpg`;
 
