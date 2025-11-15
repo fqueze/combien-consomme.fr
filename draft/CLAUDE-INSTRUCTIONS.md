@@ -8,8 +8,10 @@ Before writing anything, you need:
 
 1. **Read the generated template** (`draft/{slug}/preview/tests/{slug}.md`)
    - The template contains all profile ranges with their shortcodes already inserted
+   - **IMPORTANT: Profile ranges are in MILLISECONDS** (e.g., "170260m35998415" means from 170260ms to 35998415ms)
    - Review the profile data directory (`draft/{slug}/preview/profile-data/`) for statistics and screenshots
-   - Each profile has: energy used, average/median/max power, duration, and a visual screenshot
+   - Each profile has: energy used, average/median/max power, duration (in hours/minutes), and a visual screenshot
+   - **Duration in statistics files is already converted** to human-readable format (e.g., "9h59min")
    - Check available images in `draft/{slug}/preview/images/`
    - **Read notes from draft** (if present in template as a comment)
    - Replace all TODO items with actual content
@@ -79,6 +81,7 @@ tags: ['test']
 ### Opening Paragraph
 - 1-2 sentences introducing the device
 - End with a question about consumption: "À quoi ressemble sa consommation ?" or similar
+- **IMPORTANT: No links in the opening paragraph** - it appears in excerpts/listings
 - Follow with `<!-- excerpt -->`
 - **Add an empty tldr block** - you'll fill it at the end
 
@@ -118,6 +121,13 @@ tags: ['test']
 - "Utilisé environ 2 fois par semaine, ce sèche-linge consommera {{ 1732.56 | times: 100 | Wh€ }} par an."
 - "Il faudrait {{ 0.149 | countPer€: 0.01 }} lavages... pour dépenser 1 centime"
 - "La consommation en veille... encourage à débrancher l'appareil lorsqu'il est inutilisé."
+
+**CRITICAL: Converting profile range timestamps to durations:**
+- Profile ranges are in MILLISECONDS (e.g., "170260m9370138" = from 170260ms to 9370138ms)
+- To display as duration, use: `{{ 9370138 | divided_by: 1000 | s }}` (converts ms → seconds → human format)
+- For range durations: `{{ 12385581 | minus: 9540397 | divided_by: 1000 | s }}`
+- ❌ WRONG: `{{ 9370138 | s }}` (treats milliseconds as seconds)
+- ✅ CORRECT: `{{ 9370138 | divided_by: 1000 | s }}` (2h36min)
 {% endraw %}
 
 ### Le matériel Section
@@ -126,6 +136,7 @@ tags: ['test']
 ```markdown
 ## Le matériel
 {% intro "image.jpg" "Full device name with brand and model" %}
+
 [Description paragraph: what it is, what it does, context of use]
 
 [Optional: personal story, where it came from, why you're testing it]
@@ -142,6 +153,8 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 {% endintro %}
 ```
 {% endraw %}
+
+**IMPORTANT: The intro block must start with an empty line** after the opening tag.
 
 **For high-current devices (>12A):**
 Describe the Shelly Pro EM-50 setup in tableau électrique as shown in seche-linge-a-evacuation.
@@ -173,6 +186,8 @@ L'étiquette indique une puissance de {{ X | W }}.
 
 #### Present profiles logically:
 
+**IMPORTANT: Profile ranges are in MILLISECONDS** - To use them as durations, you MUST convert: `{{ timestamp | divided_by: 1000 | s }}`
+
 **IMPORTANT: Preserve original descriptions from draft data as Liquid comments** right after each profile/image tag for documentation.
 
 **Profile and Image Introductions:**
@@ -186,6 +201,8 @@ Each profile or image should have an **introductory sentence** that:
 Examples:
 - ✅ GOOD: `Pendant les 2 heures d'attente avant le démarrage du cycle, la consommation est stable autour de {{ 3.7 | W }} :`
 - ✅ GOOD: `La phase de lavage avec chauffage dure {{ 6128 | s }} et consomme {{ 916 | Wh€ }}, soit {{ 916 | percent: 1040 }} de la consommation totale du cycle :`
+- ✅ GOOD: `La charge complète dure {{ 9370138 | divided_by: 1000 | s }} et consomme {{ 4.34 | Wh€ }} :` (converting ms to seconds)
+- ❌ BAD: `La charge dure {{ 9370138 | s }} :` (using milliseconds directly - will show wrong duration)
 - ❌ BAD: `Voici la phase de lavage avec chauffage :`
 - ❌ BAD: `Voici le profil de consommation :`
 
@@ -386,7 +403,12 @@ Always use Liquid filters:
   - `{{ 1040 | percentMore: 736 }}` → "41% de plus" (when first value is LARGER)
   - `{{ 736 | percentLess: 1040 }}` → "29% de moins" (when first value is SMALLER)
   - Match your phrasing: "Device A consomme X, soit {{ X | percentMore: Y }} de plus que Device B"
-- Per-cent calculations: `{{ 0.5 | countPer€: 0.01 }}`
+- Per-unit calculations: `{{ 0.5 | countPer€: 0.01 }}` returns a FORMATTED STRING (e.g., "50")
+  - **IMPORTANT:** This returns a formatted string - you CANNOT apply more math operations after it
+  - **IMPORTANT:** Always add the unit manually after this filter
+  - ❌ WRONG: `{{ 4.34 | countPer€: 1 | times: 52 }}` (can't multiply a string)
+  - ✅ CORRECT: `{{ 4.34 | times: 52 | countPer€: 1 }} ans` (do all math first, then format and add unit)
+  - Example: `{{ 0.149 | countPer€: 0.01 }} lavages` → "65 lavages"
 - Duration: `{{ 12381 | s }}` (converts seconds to human-readable format)
 
 **Cost extrapolation - choose the right filter:**

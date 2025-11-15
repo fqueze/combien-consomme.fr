@@ -475,3 +475,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Veille chargeur quasi nulle (0.125W) - peut rester branché sans problème
 - Charge complète (batterie vide): 413 Wh, environ 5h30
 - Autonomie réelle: environ 55km avec 75% de batterie utilisée
+
+### casque-sans-fil-reduction-de-bruit
+**Title:** un casque sans fil à réduction de bruit
+**Device:** Sony WH-1000XM3 (modèle 2018, après 6 ans d'utilisation intensive)
+**Key findings:**
+- Charge complète d'une batterie vide : 4.34 Wh en 2h36, soit moins d'un centime
+- Charge rapide : 10 minutes fournissent 19% de la charge totale (environ 5h30 d'autonomie sur les 30h annoncées)
+- Consommation résiduelle après charge : 0.00567W (0.013€/an si laissé branché en permanence)
+- Coût annuel : 0.057€ pour une charge par semaine, totalement dérisoire comparé au prix d'achat (350€)
+- Courbe de charge typique Li-ion : pic initial 9.5W, stabilisation à 5W, décroissance progressive jusqu'à 0W
