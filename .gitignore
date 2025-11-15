@@ -9,3 +9,4 @@ _site
 yarn.lock
 future/
 audio/*
+draft/libs/

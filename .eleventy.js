@@ -13,6 +13,7 @@ import pluginRss from "@11ty/eleventy-plugin-rss";
 import timeToRead from "eleventy-plugin-time-to-read";
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { spawn } from 'child_process';
+import https from 'https';
 
 const isDev = process.env.ELEVENTY_ENV === 'dev';
 const baseUrl = isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr';
@@ -722,6 +723,70 @@ function setupDevMiddleware(middleware) {
         next();
       });
     } else {
+      next();
+    }
+  });
+
+  // Cache external libraries for offline use
+  middleware.push(async function(req, res, next) {
+    if (!req.url.startsWith('/draft/libs/')) {
+      next();
+      return;
+    }
+
+    const libraryMap = {
+      'tesseract.min.js': 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js',
+      'opencv.js': 'https://docs.opencv.org/4.x/opencv.js'
+    };
+
+    const filename = path.basename(req.url);
+    const remoteUrl = libraryMap[filename];
+
+    if (!remoteUrl) {
+      next();
+      return;
+    }
+
+    const cacheDir = path.join(process.cwd(), 'draft', 'libs');
+    const cacheFile = path.join(cacheDir, filename);
+
+    const serveContent = (content) => {
+      res.setHeader('Content-Type', 'application/javascript');
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+      res.end(content);
+    };
+
+    // Serve from cache if available
+    if (fs.existsSync(cacheFile)) {
+      serveContent(fs.readFileSync(cacheFile));
+      return;
+    }
+
+    // Download and cache
+    try {
+      https.get(remoteUrl, (response) => {
+        const chunks = [];
+        response.on('data', (chunk) => chunks.push(chunk));
+        response.on('end', () => {
+          const content = Buffer.concat(chunks);
+
+          // Create cache directory if needed
+          if (!fs.existsSync(cacheDir)) {
+            fs.mkdirSync(cacheDir, { recursive: true });
+          }
+
+          // Save to cache
+          fs.writeFileSync(cacheFile, content);
+
+          // Serve
+          serveContent(content);
+        });
+      }).on('error', (error) => {
+        console.error(`Failed to download ${remoteUrl}:`, error);
+        next();
+      });
+    } catch (error) {
+      console.error('Library caching error:', error);
       next();
     }
   });
