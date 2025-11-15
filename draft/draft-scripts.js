@@ -1,3 +1,44 @@
+// Disable live reload on draft pages to prevent page reloads during API operations
+(function() {
+  // Override location.reload to prevent Eleventy's reload client from reloading
+  const originalReload = window.location.reload.bind(window.location);
+  window.location.reload = function() {
+    console.log('[Draft] Live reload disabled - page reload prevented');
+    // Don't call originalReload
+  };
+
+  // Block WebSocket connections for live reload
+  const originalWebSocket = window.WebSocket;
+  window.WebSocket = function(url, protocols) {
+    const ws = new originalWebSocket(url, protocols);
+
+    // Intercept messages to prevent reload actions
+    const originalAddEventListener = ws.addEventListener.bind(ws);
+    ws.addEventListener = function(type, listener, options) {
+      if (type === 'message') {
+        const wrappedListener = function(event) {
+          try {
+            const data = JSON.parse(event.data);
+            if (data.type === 'eleventy.reload') {
+              console.log('[Draft] Eleventy reload message blocked');
+              return; // Don't call the original listener
+            }
+          } catch (e) {
+            // Not JSON, pass through
+          }
+          listener(event);
+        };
+        return originalAddEventListener(type, wrappedListener, options);
+      }
+      return originalAddEventListener(type, listener, options);
+    };
+
+    return ws;
+  };
+
+  console.log('[Draft] Live reload protection enabled');
+})();
+
 /**
  * Format duration in milliseconds to human-readable string
  * NOTE: This function should stay in sync with the formatDuration function in .eleventy.js
