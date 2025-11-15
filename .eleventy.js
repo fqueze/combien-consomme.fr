@@ -1531,10 +1531,8 @@ export default function (eleventyConfig) {
     eleventyConfig.ignores.add("draft/**/preview/profile-data/**");
     // Ignore data.json files from watch (they change frequently via API and shouldn't trigger rebuilds)
     eleventyConfig.watchIgnores.add("draft/**/data.json");
-    // Watch preview test files for changes (dev mode only)
-    if (isDev) {
-      eleventyConfig.addWatchTarget("draft/**/preview/tests/**/*.md");
-    }
+    // Ignore profile-data folder from watch (reference data for Claude, not templates)
+    eleventyConfig.watchIgnores.add("draft/**/preview/profile-data/**");
   } else {
     eleventyConfig.ignores.add("draft/**");
   }
