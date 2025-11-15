@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-11-13T21:58:47Z</updated>
+<updated>2025-11-15T23:19:54Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un casque sans fil à réduction de bruit</title>
+ <link href="https://combien-consomme.fr/tests/casque-sans-fil-reduction-de-bruit/"/>
+ <updated>2025-11-16T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/casque-sans-fil-reduction-de-bruit/</id>
+ <summary xml:lang="fr" type="html">Ce casque sans fil à réduction de bruit haut de gamme m&#39;accompagne fidèlement depuis plus de 6 ans dans mes voyages et mes appels en visio. Combien d&#39;électricité a-t-il consommé ?</summary>
+</entry>
 <entry>
  <title>un vélo cargo à assistance électrique</title>
  <link href="https://combien-consomme.fr/tests/velo-cargo/"/>
@@ -142,12 +149,5 @@
  <updated>2024-09-01T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/machine-a-pain/</id>
  <summary xml:lang="fr" type="html">Une machine à pain permet de créer des pains délicieux et variés, avec une texture et un goût qui feront la joie de vos sens. Mais combien consomme ce petit plaisir offert à votre famille ou vos invités ?</summary>
-</entry>
-<entry>
- <title>une fontaine pour animaux de compagnie</title>
- <link href="https://combien-consomme.fr/tests/fontaine-chat/"/>
- <updated>2024-08-08T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/fontaine-chat/</id>
- <summary xml:lang="fr" type="html">Une fontaine permet à votre fidèle compagnon d&#39;avoir une eau filtrée et toujours en mouvement, pour s&#39;hydrater avec plaisir. Combien consomme ce petit bonheur offert à votre chat ou chien ?</summary>
 </entry>
 </feed>
