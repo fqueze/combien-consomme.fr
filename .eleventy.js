@@ -76,11 +76,12 @@ function formatVoltage(voltageV) {
 }
 
 function formatPower(powerW) {
-  if (powerW < 1 && powerW > 0) {
+  const absPower = Math.abs(powerW);
+  if (absPower < 1) {
     return toPrecisionIfNotInt(powerW * 1000) + nbsp + "mW";
   }
 
-  if (powerW > 1000) {
+  if (absPower > 1000) {
     return toPrecisionIfNotInt(powerW / 1000) + nbsp + "kW";
   }
 
