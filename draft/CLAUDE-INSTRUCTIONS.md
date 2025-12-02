@@ -265,11 +265,22 @@ The intro sentence should contain a meaningful fact, not just announce what's co
 {% endraw %}
 
 **Content Organization Around Images:**
+
+**CRITICAL: The test must tell a story that integrates ALL provided images naturally.**
+
+- **Never place images in the intro block** - they belong in the body text where they're relevant
+- Images must contribute to the narrative, not just be inserted randomly
+- Think of the test as a story you're telling with text and images working together
+- Position images exactly where they illustrate what you're describing
+- Use two spaces at the end of a line before an image tag to add a line break when needed for better visual flow
+
+**Specific guidelines:**
 - Describe device features (display, controls, programs) **near their photos**
 - Don't mention the display in the intro if the display photo appears later
-- Place test plan explanation (which program, settings) right before starting the test
+- Place test plan or usage protocol explanation near the images that show the steps
 - Position images after the sentence that mentions them
 - Example: If you say "the Coton 40° program is most efficient", place the program selection image right after that sentence
+- If you have a series of images showing steps (like a cooking process), structure the text to walk through each step with its image
 
 #### Standby/Veille Analysis
 
@@ -294,18 +305,31 @@ La consommation en veille représente {{ standby | percent: total }} de la conso
 **For old appliances with mechanical switches** (no standby power):
 Simply mention in a single line that the device has no standby consumption when switched off mechanically.
 
-#### Annual Extrapolation
+#### Annual Extrapolation / Cost Analysis
+
+**Be realistic about actual usage patterns.** Don't make unrealistic projections like "once per month for years."
 
 {% raw %}
 ```markdown
-### Sur un an
+### Sur un an / Coût d'usage
 
+[For regularly used devices:]
 Si l'on suppose que [device] est utilisé(e) [frequency], la consommation annuelle sera de {{ value | Wh€PerYear }} par an.
 
-[Add standby if relevant]
-[Compare to device purchase price if known]
+[For occasional-use devices (waffle makers, raclette, etc.):]
+Le coût électrique d'une utilisation de {{ value | Wh€ }} est dérisoire comparé au coût [des ingrédients / de l'usage].
+
+Dans la réalité, ce type d'appareil est souvent acheté ou offert, sert quelques fois avec enthousiasme, puis finit oublié dans un placard. [Compare to purchase price rather than unrealistic annual projections]
+
+[Always compare to device purchase price if known - more meaningful than annual cost for occasional-use items]
 ```
 {% endraw %}
+
+**Important considerations:**
+- Recognize real usage patterns (e.g., appliances forgotten in cupboards)
+- Compare electricity cost to purchase price using `{{ energy | countPer€: price }} utilisations`
+- For professional use, mention it would require a more robust model
+- Focus on per-use cost rather than unrealistic annual projections for occasional-use items
 
 #### Replacement Economics (for old devices)
 
@@ -329,18 +353,28 @@ On va donc conseiller à [user] de faire durer son vieux tromblon encore quelque
 
 #### Autoconsommation Photovoltaïque (systematic in recent tests)
 
+**Standard residential installation in France: 3 kWc** (not 2.5 kW)
+
 {% raw %}
 ```markdown
 ### Conseils pour l'autoconsommation photovoltaïque
 
 [Analyze power profile vs solar production]
+La puissance de {{ power | W }} du [device] [reste compatible avec / est relativement élevée pour] une installation photovoltaïque domestique standard. Une installation en toiture standard de 3 kWc produira suffisamment en milieu de journée ensoleillée [, même en hiver,] pour alimenter [device].
+
 La [forte puissance / puissance alternante / consommation étalée] de [device] [rend difficile / permet / facilite] son alimentation par des panneaux photovoltaïques.
 
 [Suggest timing]
-On pourra [maximiser l'autoconsommation / essayer] en [démarrant en milieu de matinée / utilisant en journée ensoleillée].
+Pour maximiser l'autoconsommation, plusieurs options :
+- [timing option 1] ;
+- [timing option 2] ;
+- [timing option 3].
 
 [Compare to alternatives if relevant]
 Une {% test alternative-slug description %} sera plus facile à alimenter avec la production photovoltaïque.
+
+[Put economic perspective]
+Cela dit, avec un coût électrique de {{ value | Wh€ }}, l'enjeu économique reste [très faible / modéré].
 ```
 {% endraw %}
 
@@ -370,6 +404,10 @@ Pour comprendre de façon plus détaillée la consommation de [device], on pourr
 - Measure specific components separately
 - Test different usage patterns or intensities
 
+**Be specific and clear in suggestions:**
+- ❌ BAD: "évaluer l'impact de faire plusieurs gaufres d'affilée sans pause vs avec des pauses longues" (unclear: is device unplugged during pauses?)
+- ✅ GOOD: "évaluer l'impact du temps pendant lequel le gaufrier reste ouvert entre deux gaufres (perte de chaleur dans la pièce, surconsommation pour revenir à température)"
+
 **Important:** You cannot make up measurements, but you CAN suggest tests that would be valuable to conduct in the future.
 
 **Examples from recent tests:**
@@ -386,6 +424,16 @@ Pour comprendre de façon plus détaillée la consommation de [device], on pourr
 - **Curious and explanatory**: "On observe...", "Cela s'explique car..."
 - **Honest about limitations**: "Je ne sais pas exactement...", "Peut-être..."
 - **Speculative when appropriate**: "On peut supposer que...", "J'imagine que..."
+
+### Using Averages and Statistics Carefully
+
+**Be cautious when using average power values** - ensure they represent the actual usage scenario you're describing.
+
+**Examples:**
+- ❌ WRONG: "le gaufrier continuera à maintenir sa température, consommant 772 W en moyenne" (772W is the average during continuous preheating, not during normal temperature maintenance with thermostat cycles)
+- ✅ CORRECT: "le gaufrier continuera à maintenir sa température, consommant plus de 500 W en moyenne" (543W is the overall average including cycles, but rounding to "plus de 500 W" is clearer)
+
+**Key principle:** Match the statistic to the context. Don't use preheating averages to describe standby consumption, or vice versa.
 
 ### Value References
 Always use Liquid filters:

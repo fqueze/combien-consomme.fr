@@ -90,6 +90,7 @@ Evidemment, le budget fromage sera très supérieur au budget électricité.
 Pour comprendre de façon plus détaillée la consommation de cette raclette à deux, on pourrait :
 - comparer la durée nécessaire pour faire chauffer différents types de fromage ;
 - mesurer le temps nécessaire pour préparer des tranches à température ambiante, sorties du frigo, ou sorties du congélateur ;
-- mesurer la consommation d'énergie nécessaire pour la cuisson des pommes de terre qui accompagnent le fromage dans nos assiettes.
-- tester un appareil à raclette avec plus de poêlons et comparer la consommation électrique par tranche.
+- mesurer la consommation d'énergie nécessaire pour la cuisson des pommes de terre qui accompagnent le fromage dans nos assiettes ;
+- tester un appareil à raclette avec plus de poêlons et comparer la consommation électrique par tranche ;
+- comparer avec d'autres appareils de cuisson conviviale comme {% test soiree-gaufres un gaufrier %} ou une crêpière.
 {% endplusloin %}

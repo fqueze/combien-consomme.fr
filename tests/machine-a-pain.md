@@ -224,8 +224,8 @@ Si par contre la machine n'est utilisée qu'une fois par semaine (par exemple po
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cette machine à pain, on pourrait :
-- comparer la consommation des différents programmes. Nous en avons déjà testé 2 (le pain normal et le pain complet) sur les 10 que la machine propose. Nous pourrions par exemple tester de faire une brioche ou un gâteau…
-- tester l'impact sur la consommation totale des options pouvant être sélectionnées indépendamment du programme : cuire un pain plus ou moins doré ou de réaliser des pains de différents poids (500 g, 750 g ou 1 kg).
-- tester la machine à pain à différentes températures ambiantes
-pour voir si le temps de fonctionnement de la résistance pour atteindre les températures désirées (par exemple pour la phase de levée) diminue significativement lorsqu'il fait plus chaud ou augmente lorsqu'il fait froid, par exemple en hiver.
+- comparer la consommation des différents programmes. Nous en avons déjà testé 2 (le pain normal et le pain complet) sur les 10 que la machine propose. Nous pourrions par exemple tester de faire une brioche ou un gâteau… ;
+- tester l'impact sur la consommation totale des options pouvant être sélectionnées indépendamment du programme : cuire un pain plus ou moins doré ou de réaliser des pains de différents poids (500 g, 750 g ou 1 kg) ;
+- tester la machine à pain à différentes températures ambiantes pour voir si le temps de fonctionnement de la résistance pour atteindre les températures désirées (par exemple pour la phase de levée) diminue significativement lorsqu'il fait plus chaud ou augmente lorsqu'il fait froid, par exemple en hiver ;
+- comparer avec d'autres appareils à résistance chauffante et thermostat comme {% test soiree-gaufres un gaufrier %} ou {% test yaourtiere-seb-multi-delices une yaourtière moderne %}, qui utilisent également un thermostat pour gérer les cycles de chauffe.
 {% endplusloin %}

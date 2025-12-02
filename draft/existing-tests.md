@@ -485,3 +485,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Consommation résiduelle après charge : 0.00567W (0.013€/an si laissé branché en permanence)
 - Coût annuel : 0.057€ pour une charge par semaine, totalement dérisoire comparé au prix d'achat (350€)
 - Courbe de charge typique Li-ion : pic initial 9.5W, stabilisation à 5W, décroissance progressive jusqu'à 0W
+
+### soiree-gaufres
+**Title:** une soirée gaufres
+**Device:** TEFAL Croque Gaufre Grill Type 690 Serie 1 (700W)
+**Key findings:**
+- Soirée gaufres complète (salées patate douce + sucrées) : 831 Wh pour 1h31 de cuisine
+- Préchauffage nécessaire : environ 10 minutes de chauffe continue avant la première gaufre
+- Cuire une paire de gaufres : entre 44 et 69 Wh selon la recette
+- Coût électrique dérisoire comparé au coût des ingrédients et au prix d'achat
+- ATTENTION : pas d'interrupteur, il faut impérativement débrancher après utilisation (maintient température indéfiniment sinon)
