@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-12-02T20:38:17Z</updated>
+<updated>2025-12-05T22:30:40Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>le mixage d&#39;une soupe aux légumes</title>
+ <link href="https://combien-consomme.fr/tests/mixer-une-soupe/"/>
+ <updated>2025-12-05T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/mixer-une-soupe/</id>
+ <summary xml:lang="fr" type="html">Après avoir testé le {% test mixer-houmous mixage d&#39;un houmous %}, j&#39;ai voulu mesurer la consommation du même mixeur pour mixer une soupe aux légumes bien épaisse. Combien consomme le mixage d&#39;une soupe ?</summary>
+</entry>
 <entry>
  <title>une soirée gaufres</title>
  <link href="https://combien-consomme.fr/tests/soiree-gaufres/"/>
@@ -142,12 +149,5 @@
  <updated>2024-09-22T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/couteau-electrique/</id>
  <summary xml:lang="fr" type="html">Mémé l&#39;a eu pour la fête des mères. En vrai, c&#39;était toujours Pépé qui s&#39;en servait. Le bruit caractéristique du couteau électrique indiquait qu&#39;on allait passer à table dans quelques instants. Pépé aurait-il fait une économie s&#39;il avait demandé à la boulangerie qu&#39;on lui serve le pain déjà tranché ?</summary>
-</entry>
-<entry>
- <title>un robot Rapetout</title>
- <link href="https://combien-consomme.fr/tests/robot-rapetout/"/>
- <updated>2024-09-17T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/robot-rapetout/</id>
- <summary xml:lang="fr" type="html">Le robot « Rapetout », tout droit sorti des années 90, permet de râper des aliments directement au dessus de l&#39;assiette. Combien consomme ce râpage au plus près de l&#39;assiette ?</summary>
 </entry>
 </feed>
