@@ -293,6 +293,17 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Veille: 0.189W (1.66€/an si branché tout le temps)
 - Peut mixer noix de cajou (puissant)
 
+### mixer-une-soupe
+**Title:** le mixage d'une soupe aux légumes
+**Device:** Mixeur plongeant Moulinex quickchef 1000W (même appareil que mixer-houmous)
+**Key findings:**
+- Mixage de 4L de soupe: 2min47s pour 5.03 Wh (moins d'un centime)
+- Il faut mixer 32 litres de soupe pour dépenser un centime d'électricité
+- Puissance diminue pendant mixage: 125W moyenne au début (légumes en morceaux) → 104W en fin (soupe lisse)
+- Consommation maximale 160W (54% de moins que houmous) - légumes cuits plus mous que pois chiches
+- Usage hebdomadaire: 262 Wh/an (0.066€/an) - coût totalement dérisoire
+- L'enjeu énergétique est dans la cuisson des légumes, pas le mixage
+
 ### motorisation-porte-de-garage-basculante
 **Title:** Une porte de garage basculante
 **Device:** CAME V6000 automatisme pour porte basculante 6m² (kit ~200€, bas gamme)

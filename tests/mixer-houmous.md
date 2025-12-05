@@ -65,5 +65,5 @@ En supposant que la mesure réalisée ici est correcte (ou du moins que l'ordre 
 On pourrait mesurer :
 - la consommation de la cuisson des pois chiches ; elle est probablement bien plus élevée que celle du mixage, il serait pertinent de la mesurer.
 - la consommation en veille avec un enregistreur plus précis.
-- la consommation du même mixeur avec d'autres aliments plus durs (noix de cajou) ou plus mous (une soupe bien cuite).
+- la consommation du même mixeur avec d'autres aliments plus durs (noix de cajou) ou plus mous ({% test mixer-une-soupe une soupe bien cuite %}).
 {% endplusloin %}
