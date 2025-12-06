@@ -2,7 +2,7 @@
 layout: base-layout.njk
 eleventyComputed:
   pagetitle: "{{ title }}"
-  pagedesc: "{{ page.excerpt | trim }}"
+  pagedesc: "{{ page.excerpt | stripTestPostLinks | trim }}"
 ---
 <article>
 <h1>{{ title }}</h1> 

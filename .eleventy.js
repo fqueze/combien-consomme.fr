@@ -1688,6 +1688,13 @@ export default function (eleventyConfig) {
     return string.trim();
   });
 
+  eleventyConfig.addFilter('stripTestPostLinks', string => {
+    // Replace {% test slug description %} with just 'description'
+    // Replace {% post slug description %} with just 'description'
+    // Match the closing %} specifically to handle % in descriptions
+    return string.replace(/\{%\s*(test|post)\s+(\S+)\s+(.*?)\s*%\}/g, '$3');
+  });
+
   eleventyConfig.addFilter('dateIso', date => {
     return moment(date).toISOString();
   });

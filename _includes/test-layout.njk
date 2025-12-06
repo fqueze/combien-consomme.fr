@@ -2,7 +2,7 @@
 layout: base-layout.njk
 eleventyComputed:
   pagetitle: "Combien consomme {{ title }} ?"
-  pagedesc: "{{ page.excerpt | trim }}"
+  pagedesc: "{{ page.excerpt | stripTestPostLinks | trim }}"
 ---
 <article>
 <h1>{{ pagetitle }}</h1>
