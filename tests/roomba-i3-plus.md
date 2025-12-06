@@ -9,6 +9,13 @@ tags: ['test']
 Un aspirateur connecté est très pratique, mais quelle consommation supplémentaire cause-t-il ?
 <!-- excerpt -->
 
+{% tldr %}
+- Avec une heure de nettoyage par jour en moyenne et la veille 24h/24, la consommation totale annuelle sera de {{ 23.0 | plus: 45 | Wh€PerYear }} à {{ 59.4 | plus: 45 | Wh€PerYear }} selon la fréquence de vidage du bac.
+- La consommation en attente ({{ 45 | Wh€PerYear }} par an) peut être supérieure à la consommation d'aspiration.
+- Le vidage automatique du bac consomme beaucoup plus que l'aspiration (pics à haute puissance pendant quelques secondes).
+- Nettoyer le filtre et les capteurs réduit considérablement la fréquence de vidage et donc la consommation ({{ 46.5 | Wh }} → {{ 19.2 | Wh }} pour une même tâche).
+{% endtldr %}
+
 ## Le matériel
 {% intro "roomba-i3plus.jpg" "Aspirateur robot Roomba i3 plus, avec sa tour de vidage, branché sur une prise connectée Shelly Plus Plug S" %}
 Il s'agit ici d'un aspirateur robot Roomba i3 plus. L'i3 est un modèle d'entrée de gamme de la famille Roomba i.
@@ -90,7 +97,19 @@ Si l'on prend en compte les passages à la base pour le vidage du bac de poussi�
 
 Il est donc très possible que la consommation lors du nettoyage, même en utilisant la tour de vidage, soit inférieure à la consommation de veille, qui était estimée à {{ 45 | Wh€PerYear }} par an.
 
+En ajoutant la consommation de veille à la consommation de nettoyage, la consommation totale annuelle sera de {{ 23.0 | plus: 45 | Wh€PerYear }} à {{ 59.4 | plus: 45 | Wh€PerYear }}.
+
 Quoi qu'il en soit, le coût de la consommation électrique d'un tel aspirateur reste très inférieur au prix d'achat, même d'occasion.
+
+### Conseils pour l'autoconsommation photovoltaïque
+
+La consommation en attente constante de {{ 1.9 | W }} est très faible et peut être couverte par une installation photovoltaïque domestique en journée. La nuit, cette consommation devra être fournie par le réseau (ou par une batterie domestique si vous en avez une).
+
+Pour les tâches d'aspiration, la consommation instantanée varie beaucoup : quasi nulle pendant l'aspiration en déplacement (fonctionnement sur batterie), environ {{ 25 | W }} pendant la recharge, et des pics importants dépassant {{ 900 | W }} lors du vidage du bac. Ces pics de courte durée peuvent poser problème si d'autres appareils consommateurs fonctionnent en même temps.
+
+La recharge de la batterie ({{ 25 | W }}) ne pose par contre aucun problème pour l'autoconsommation. Pour maximiser l'autoconsommation photovoltaïque, il est intéressant de programmer les tâches d'aspiration suffisamment tôt dans la journée pour que la recharge puisse se terminer avant la tombée de la nuit. La plupart des aspirateurs robots permettent de programmer des horaires de nettoyage.
+
+La consommation totale étant relativement faible ({{ 23.0 | plus: 45 | Wh€ }} à {{ 59.4 | plus: 45 | Wh€ }} par an), l'enjeu économique de l'autoconsommation reste limité, mais cela permet de maximiser l'utilisation de l'énergie solaire produite localement.
 
 {% plusloin %}
 On pourrait :
