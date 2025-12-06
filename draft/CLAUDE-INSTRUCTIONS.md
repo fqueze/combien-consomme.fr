@@ -81,7 +81,7 @@ tags: ['test']
 ### Opening Paragraph
 - 1-2 sentences introducing the device
 - End with a question about consumption: "À quoi ressemble sa consommation ?" or similar
-- **IMPORTANT: No links in the opening paragraph** - it appears in excerpts/listings
+- Links using {% raw %}`{% test slug description %}`{% endraw %} or {% raw %}`{% post slug description %}`{% endraw %} are allowed - links will be stripped and only the description text will appear in meta tags (og:description, etc.)
 - Follow with `<!-- excerpt -->`
 - **Add an empty tldr block** - you'll fill it at the end
 
@@ -96,6 +96,22 @@ tags: ['test']
 - Don't introduce new calculations that aren't explained in the test content
 - Summarize key findings from "Sur un an", "En veille", "Faut-il le remplacer" sections
 
+**Structure and Content:**
+
+**First bullet point:**
+- When the device has a realistic recurring usage pattern, **start with annual cost** for that scenario
+- ✅ GOOD: "En mixant une soupe par semaine pendant un an, la consommation annuelle sera de {{ 5.03 | times: 52 | Wh€ }}."
+- ✅ GOOD: "Utilisé environ 2 fois par semaine, ce sèche-linge consommera {{ 1732.56 | times: 100 | Wh€ }} par an."
+- This gives readers immediate practical context
+- For devices without regular usage patterns (occasional use items), start with per-use cost instead
+
+**Bullet formatting:**
+- Each bullet should be **a single sentence**, not a paragraph
+- Keep bullets concise and focused on one key finding each
+- End each bullet with a period (these are complete sentences)
+- ❌ WRONG: Long bullets with multiple clauses explaining context and calculations
+- ✅ CORRECT: One clear statement per bullet
+
 **What to include:**
 - Total consumption and annual cost (from "Sur un an" section)
 - Standby consumption findings (from "En veille" section, if significant)
@@ -107,6 +123,7 @@ tags: ['test']
 {% raw %}
 ```markdown
 {% tldr %}
+- [Annual cost for typical usage OR per-use cost].
 - [Key finding with calculation using Liquid filters].
 - [Another key finding].
 - [Comparison or practical conclusion].
@@ -114,13 +131,12 @@ tags: ['test']
 ```
 {% endraw %}
 
-**Important:** End each bullet point with a period (`.`) - these are complete sentences.
-
 **Examples from recent tests:**
 {% raw %}
+- "En mixant une soupe par semaine pendant un an, la consommation annuelle sera de {{ 5.03 | times: 52 | Wh€ }}."
 - "Utilisé environ 2 fois par semaine, ce sèche-linge consommera {{ 1732.56 | times: 100 | Wh€ }} par an."
-- "Il faudrait {{ 0.149 | countPer€: 0.01 }} lavages... pour dépenser 1 centime"
-- "La consommation en veille... encourage à débrancher l'appareil lorsqu'il est inutilisé."
+- "Il faudrait {{ 0.149 | countPer€: 0.01 }} lavages pour dépenser 1 centime."
+- "La consommation en veille encourage à débrancher l'appareil lorsqu'il est inutilisé."
 
 **CRITICAL: Converting profile range timestamps to durations:**
 - Profile ranges are in MILLISECONDS (e.g., "170260m9370138" = from 170260ms to 9370138ms)
@@ -174,6 +190,12 @@ Explain that the device is connected via the electrical panel rather than a plug
 
 L'étiquette indique une puissance de {{ X | W }}.
 
+**IMPORTANT: Always interpret label information**
+- After showing a label/etiquette image, add a sentence that interprets the key information
+- Quote the exact text from the label, then explain what it means
+- Example: `L'étiquette indique « 220-240V ~50-60Hz 1000W », soit une puissance nominale de {{ 1000 | W }}.`
+- Don't just show the image without adding commentary
+
 #### Manuel
 [Quote relevant parts, especially energy-saving advice]
 
@@ -207,6 +229,13 @@ Examples:
 - ❌ BAD: `Voici le profil de consommation :`
 
 The intro sentence should contain a meaningful fact, not just announce what's coming.
+
+**For equipment images** (mixers, labels, device photos):
+- Provide a brief contextual sentence that flows naturally with surrounding content
+- ✅ GOOD: "Le mixeur plongeant que nous utilisons ici est le même que lors du {% raw %}{% test mixer-houmous test du houmous %}{% endraw %} :"
+- ✅ GOOD: "Voici les indications techniques inscrites dessus :"
+- Don't just insert the image without context
+- The sentence should connect to the broader narrative
 
 1. **Overview profile first** - Full cycle or typical day
 {% raw %}
@@ -309,9 +338,18 @@ Simply mention in a single line that the device has no standby consumption when 
 
 **Be realistic about actual usage patterns.** Don't make unrealistic projections like "once per month for years."
 
+**Add quantitative context when relevant:**
+- For food/liquid preparation, mention quantities (e.g., "4L de soupe", "5 carottes")
+- This allows calculating per-unit costs (per liter, per item)
+- Makes the test more relatable and practical
+- Example: "Il faudrait mixer {{ Wh | divided_by: liters | countPer€: 0.01 }} litres de soupe pour dépenser un centime"
+
 {% raw %}
 ```markdown
 ### Sur un an / Coût d'usage
+
+[If measuring quantities of food/liquid:]
+Le coût électrique du [action] de [quantity] [unit] est de {{ value | Wh€ }}. Il faudrait [action] {{ value | divided_by: quantity | countPer€: 0.01 }} [unit] pour dépenser un centime d'électricité.
 
 [For regularly used devices:]
 Si l'on suppose que [device] est utilisé(e) [frequency], la consommation annuelle sera de {{ value | Wh€PerYear }} par an.
@@ -456,6 +494,9 @@ Always use Liquid filters:
   - **IMPORTANT:** Always add the unit manually after this filter
   - ❌ WRONG: `{{ 4.34 | countPer€: 1 | times: 52 }}` (can't multiply a string)
   - ✅ CORRECT: `{{ 4.34 | times: 52 | countPer€: 1 }} ans` (do all math first, then format and add unit)
+  - **For unit conversions:** Do ALL math BEFORE formatting
+  - ❌ WRONG: `{{ 5.03 | countPer€: 0.01 | divided_by: 4 }}` (trying to convert soupes to litres AFTER formatting)
+  - ✅ CORRECT: `{{ 5.03 | divided_by: 4 | countPer€: 0.01 }}` (convert to litres FIRST, then format)
   - Example: `{{ 0.149 | countPer€: 0.01 }} lavages` → "65 lavages"
 - Duration: `{{ 12381 | s }}` (converts seconds to human-readable format)
 
@@ -525,6 +566,24 @@ Use the slug exactly as listed in `draft/existing-tests.md`:
 {% post slug description %}
 ```
 {% endraw %}
+
+#### Adding Cross-References After Publishing
+
+When a user asks you to add cross-references to a newly published test:
+
+1. **In plusloin blocks**: Integrate links naturally into existing suggestions
+   - Find existing text that mentions the topic
+   - Simply wrap the relevant text with the test shortcode
+   - ❌ WRONG: "nous avons depuis testé le {% raw %}{% test new-test description %}{% endraw %}, qui montre que..."
+   - ✅ CORRECT: Change "ou plus mous (une soupe bien cuite)" to "ou plus mous ({% raw %}{% test mixer-une-soupe une soupe bien cuite %}{% endraw %})"
+
+2. **Don't add results in cross-references**: Just add the link, let readers discover results themselves
+   - ❌ WRONG: "{% raw %}{% test new-test description %}{% endraw %}, qui consomme 54% de moins"
+   - ✅ CORRECT: "{% raw %}{% test new-test description %}{% endraw %}"
+
+3. **Preserve original phrasing**: Don't change the structure of sentences, just add the link
+   - Keep the existing flow and context
+   - The link should feel natural in the existing sentence
 
 ### Images
 {% raw %}
