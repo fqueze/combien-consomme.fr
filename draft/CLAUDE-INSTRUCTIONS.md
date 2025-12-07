@@ -482,6 +482,7 @@ Always use Liquid filters:
 - Energy: `{{ 567 | Wh }}`
 - Cost: `{{ 89 | € }}`
 - Percentage: `{{ 123 | percent: 456 }}` (123 as a percentage of 456)
+- Annual/Monthly from daily: `{{ 652 | PerYear }}` (converts Wh per day to Wh per year), `{{ 652 | PerMonth }}` (converts Wh per day to Wh per month)
   - **IMPORTANT:** `percent`, `percentMore`, and `percentLess` return formatted strings - you CANNOT apply more math operations after them
   - ❌ WRONG: `{{ 100 | percent: 1000 | times: 2 }}` (can't multiply a string)
   - ✅ CORRECT: `{{ 100 | times: 2 | percent: 2000 }}` (do all math first, then format)
