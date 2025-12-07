@@ -251,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let dragStartX = 0;
   let dragStartY = 0;
   let initialCropPoints = null;
+  let isDrawingNewCrop = false; // Track if we're actively drawing a new crop
   let cachedDraftData = null; // Cache the draft data to avoid repeated fetches
 
   // Track original values to detect changes
@@ -1626,6 +1627,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const startPos = screenToCropPercent(e.clientX, e.clientY);
         dragStartX = e.clientX;
         dragStartY = e.clientY;
+        isDrawingNewCrop = true; // Mark that we're actively drawing
 
         // Initialize as 4-point rectangle
         currentCrop = [
@@ -1673,7 +1675,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           currentCrop = newPoints;
           updateCropDisplay();
-        } else if (currentCrop && e.buttons === 1 && initialCropPoints === null) {
+        } else if (isDrawingNewCrop && e.buttons === 1) {
           // Drawing new crop rectangle - prioritize this over hover
           const currentPos = screenToCropPercent(e.clientX, e.clientY);
           const startPos = screenToCropPercent(dragStartX, dragStartY);
@@ -1716,8 +1718,9 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (draggedEdge !== null) {
           draggedEdge = null;
           initialCropPoints = null;
-        } else if (currentCrop && initialCropPoints === null) {
-          // Finished drawing
+        } else if (isDrawingNewCrop) {
+          // Finished drawing new crop
+          isDrawingNewCrop = false;
           const points = normalizeCrop(currentCrop);
           if (points) {
             const width = Math.abs(points[1][0] - points[0][0]);
