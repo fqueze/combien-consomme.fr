@@ -1617,18 +1617,8 @@ document.addEventListener('DOMContentLoaded', function() {
           currentCrop = newPoints;
           updateCropDisplay();
           updateMagnifier(e.clientX, e.clientY);
-        } else if (hoveredCorner !== null && currentCrop) {
-          // Hovering over a corner (not dragging) - show magnifier at corner position
-          const points = normalizeCrop(currentCrop);
-          if (points) {
-            const imgRect = modalImage.getBoundingClientRect();
-            const [x, y] = points[hoveredCorner];
-            const screenX = imgRect.left + (imgRect.width * x / 100);
-            const screenY = imgRect.top + (imgRect.height * y / 100);
-            updateMagnifier(screenX, screenY);
-          }
         } else if (currentCrop && e.buttons === 1 && initialCropPoints === null) {
-          // Drawing new crop rectangle
+          // Drawing new crop rectangle - prioritize this over hover
           const currentPos = screenToCropPercent(e.clientX, e.clientY);
           const startPos = screenToCropPercent(dragStartX, dragStartY);
 
@@ -1644,6 +1634,16 @@ document.addEventListener('DOMContentLoaded', function() {
             [x1, y2]
           ];
           updateCropDisplay();
+        } else if (hoveredCorner !== null && currentCrop) {
+          // Hovering over a corner (not dragging) - show magnifier at corner position
+          const points = normalizeCrop(currentCrop);
+          if (points) {
+            const imgRect = modalImage.getBoundingClientRect();
+            const [x, y] = points[hoveredCorner];
+            const screenX = imgRect.left + (imgRect.width * x / 100);
+            const screenY = imgRect.top + (imgRect.height * y / 100);
+            updateMagnifier(screenX, screenY);
+          }
         } else {
           // Not dragging or hovering - hide magnifier
           hideMagnifier();
