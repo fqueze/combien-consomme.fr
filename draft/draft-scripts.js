@@ -234,6 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const cropPolygon = document.getElementById('crop-polygon');
   const cropPolygonMask = document.getElementById('crop-polygon-mask');
   const cropCorners = cropSvg?.querySelectorAll('.crop-corner') || [];
+  const cropEdges = cropSvg?.querySelectorAll('.crop-edge') || [];
   const magnifierCanvas = document.getElementById('magnifier-canvas');
   const magnifierCtx = magnifierCanvas?.getContext('2d');
 
@@ -246,6 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let isNavigatingPreviews = false; // Track whether we're navigating previews or source images
   let currentCrop = null; // [[x,y], [x,y], [x,y], [x,y]] (4 corners) or {x, y, width, height} (rect)
   let draggedCorner = null;
+  let draggedEdge = null;
   let dragStartX = 0;
   let dragStartY = 0;
   let initialCropPoints = null;
@@ -1049,6 +1051,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
+    // Update edge lines positions
+    cropEdges.forEach((edge, i) => {
+      const startIdx = i;
+      const endIdx = (i + 1) % 4;
+      edge.setAttribute('x1', absPoints[startIdx][0]);
+      edge.setAttribute('y1', absPoints[startIdx][1]);
+      edge.setAttribute('x2', absPoints[endIdx][0]);
+      edge.setAttribute('y2', absPoints[endIdx][1]);
+    });
+
+    // Toggle class to hide edges for non-rectangular crops
+    cropSvg.classList.toggle('non-rectangular', !isRectangularCrop(points));
+
     cropSvg.classList.remove('hidden');
   }
 
@@ -1572,6 +1587,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       });
 
+      // Edge dragging (only for rectangular crops)
+      cropEdges.forEach((edge, index) => {
+        edge.addEventListener('mousedown', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+
+          const points = normalizeCrop(currentCrop);
+          if (!points || !isRectangularCrop(points)) return;
+
+          draggedEdge = index;
+          dragStartX = e.clientX;
+          dragStartY = e.clientY;
+          initialCropPoints = points.map(p => [...p]); // Deep copy
+        });
+      });
+
       // Clicking on overlay to draw new crop or delete existing
       cropOverlay.addEventListener('mousedown', function(e) {
         if (!isInsideImage(e.clientX, e.clientY)) return;
@@ -1617,6 +1648,31 @@ document.addEventListener('DOMContentLoaded', function() {
           currentCrop = newPoints;
           updateCropDisplay();
           updateMagnifier(e.clientX, e.clientY);
+        } else if (draggedEdge !== null && initialCropPoints) {
+          // Dragging an edge - keep it rectangular
+          const pos = screenToCropPercent(e.clientX, e.clientY);
+          const newPoints = initialCropPoints.map(p => [...p]);
+
+          // Edge 0: top (move points 0 and 1)
+          // Edge 1: right (move points 1 and 2)
+          // Edge 2: bottom (move points 2 and 3)
+          // Edge 3: left (move points 3 and 0)
+          if (draggedEdge === 0) { // Top edge
+            newPoints[0][1] = pos.y;
+            newPoints[1][1] = pos.y;
+          } else if (draggedEdge === 1) { // Right edge
+            newPoints[1][0] = pos.x;
+            newPoints[2][0] = pos.x;
+          } else if (draggedEdge === 2) { // Bottom edge
+            newPoints[2][1] = pos.y;
+            newPoints[3][1] = pos.y;
+          } else if (draggedEdge === 3) { // Left edge
+            newPoints[3][0] = pos.x;
+            newPoints[0][0] = pos.x;
+          }
+
+          currentCrop = newPoints;
+          updateCropDisplay();
         } else if (currentCrop && e.buttons === 1 && initialCropPoints === null) {
           // Drawing new crop rectangle - prioritize this over hover
           const currentPos = screenToCropPercent(e.clientX, e.clientY);
@@ -1657,6 +1713,9 @@ document.addEventListener('DOMContentLoaded', function() {
           initialCropPoints = null;
           hideMagnifier();
           // Note: Perspective correction will be applied when saving, not immediately
+        } else if (draggedEdge !== null) {
+          draggedEdge = null;
+          initialCropPoints = null;
         } else if (currentCrop && initialCropPoints === null) {
           // Finished drawing
           const points = normalizeCrop(currentCrop);
