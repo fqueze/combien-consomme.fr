@@ -46,13 +46,23 @@ export default async function() {
         };
       });
 
+    // Get modification time (from data.json if exists, else folder birthtime)
+    let modificationTime;
+    const dataFile = path.join(folderPath, 'data.json');
+    if (fs.existsSync(dataFile)) {
+      const stats = fs.statSync(dataFile);
+      modificationTime = stats.mtime;
+    } else {
+      const folderStats = fs.statSync(folderPath);
+      modificationTime = folderStats.birthtime;
+    }
+
     // Read draft data
     let rangeCount = 0;
     let title = null;
     let img = null;
     let published = null;
     let profilesData = {};
-    const dataFile = path.join(folderPath, 'data.json');
     if (fs.existsSync(dataFile)) {
       try {
         const data = JSON.parse(fs.readFileSync(dataFile, 'utf-8'));
@@ -96,7 +106,8 @@ export default async function() {
       rangeCount,
       title,
       img,
-      published
+      published,
+      modificationTime
     });
   }
 
