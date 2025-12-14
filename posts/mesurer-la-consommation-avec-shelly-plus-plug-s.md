@@ -63,5 +63,6 @@ Ce type d'enregistrement permet de voir après coup ce qui s'est passé, ce qui 
 {% plusloin "Conclusion" %}
 - Pour un prix d'environ 25 €, cette prise connectée est le moyen le plus simple d'obtenir des profils de consommation électrique similaires à ceux présentés sur ce site.
 - Elle permet d'enregistrer chaque seconde la puissance consommée par un appareil consommant jusqu'à {{ 2500 | W }}, avec une précision de {{ 0.1 | W }}.
+- Pour des mesures plus précises sur des {% post mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001 consommations inférieures à 1 W %}, un wattmètre de laboratoire offre une résolution jusqu'à 1 mW.
 - La possibilité d'exécuter des scripts directement sur la prise permet d'éviter de perdre des données en cas de perturbation du réseau Wifi pendant jusqu'à 10 minutes.
 {% endplusloin %}

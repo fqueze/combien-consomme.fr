@@ -101,7 +101,7 @@ Une fois la charge terminée, le casque éteint est resté branché au chargeur 
 {% profile "casque-sans-fil-reduction-de-bruit.json.gz" '{"name": "Resté branché après la charge", "range": "9540397m12385581"}' %}
 {% comment %}draft: consommation alors que le casque complètement chargé, resté éteint, est resté connecté au chargeur. L'alternance entre 0 et 0.1W montre que la consommation est inférieure au minimum qui peut être mesuré de façon précise à un instant donné par la prise connectée, mais la puissance moyenne reste pertinente.{% endcomment %}
 
-La consommation alterne entre 0 et {{ 0.1 | W }}, ce qui montre que la puissance réelle est inférieure au minimum que la prise connectée peut mesurer avec précision à un instant donné. Cependant, la puissance moyenne calculée sur toute la période reste pertinente : {{ 0.00567 | W }}.
+La consommation alterne entre 0 et {{ 0.1 | W }}, ce qui montre que la puissance réelle est inférieure au minimum que la prise connectée peut mesurer avec précision à un instant donné. Cependant, la puissance moyenne calculée sur toute la période reste pertinente : {{ 0.00567 | W }}. Pour des {% post mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001 mesures plus précises sur ces très faibles consommations %}, un wattmètre de laboratoire serait nécessaire.
 
 Si l'on laissait le casque branché en permanence après chaque charge, cette consommation résiduelle représenterait {{ 0.00567 | W€PerYear }} par an. C'est négligeable.
 

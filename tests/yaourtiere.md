@@ -84,7 +84,7 @@ Comme déjà mentionné, lorsque la cuisson est terminée, la consommation de la
 {% profile "yaourts-10h.json.gz" '{"name": "2 heures qui suivent la cuisson", "range": "36465377m7222040"}' %}
 {% endcomment %}
 
-La puissance consommée est trop faible pour être mesurée de façon fiable parla prise connectée Shelly, et l'enregistrement indique donc une alternance entre des valeurs à 0 et des valeurs à {{ 0.1 | W }}. La consommation moyenne sur cette période est de {{ 0.0301 | W }}. C'est trop faible pour convertir le coût de cette consommation en euros ou même en centimes d'euros.
+La puissance consommée est trop faible pour être mesurée de façon fiable par la prise connectée Shelly, et l'enregistrement indique donc une alternance entre des valeurs à 0 et des valeurs à {{ 0.1 | W }}. La consommation moyenne sur cette période est de {{ 0.0301 | W }}. C'est trop faible pour convertir le coût de cette consommation en euros ou même en centimes d'euros. Pour des mesures plus précises sur ces {% post mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001 consommations inférieures à 1 W %}, un wattmètre de laboratoire serait nécessaire.
 
 Pour se donner une idée, pour dépenser 1 centime d'euro en électricité en laissant branchée la yaourtière à la fin de la cuisson, il faudrait la laisser branchée {{ 0.0902 | times: 8 | countPer€: 0.01 }} jours ! Dit autrement, si elle ne sert qu'une fois et reste branchée ensuite toute l'année, la consommation annuelle sera de {{ 0.0902 | times: 8 | Wh€PerYear }}.
 

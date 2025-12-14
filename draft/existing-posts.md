@@ -33,6 +33,24 @@ This file lists all existing posts with their descriptions and key points to hel
 - Example profile shows full day with solar production, grid import/export, per-zone consumption patterns
 - Can identify appliance usage patterns (washing machine heating, kitchen meal prep times, freezer cycles)
 
+### mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001
+**Title:** mesurer la consommation avec un wattmètre de laboratoire programmable ISW8001
+**Summary:** Guide to using the ISW8001 professional laboratory wattmeter for high-precision power measurements, particularly for low standby consumption. Details reverse engineering of RS-232 protocol and measurement artifacts.
+**Key points:**
+- IeS ISW8001A professional lab wattmeter (French manufacturer, liquidated Nov 2024)
+- Resolution down to 1 mW (0.001W), ideal for standby measurements <1W
+- 2.1 Hz sampling rate (470ms between samples) via RS-232 serial port
+- Measures AC and DC current
+- Banana plug connections (standard for lab equipment with DC power supplies)
+- USB-to-RS-232 adapter needed for modern computers
+- Protocol reverse engineering required due to documentation errors
+- Custom web interface for live profiling and caliber control
+- Measurement artifacts: spikes during automatic range changes (filterable in software), glitches every 500 samples
+- Example measurements: Shelly plug consumption (2W standby), 40W light bulb, MacBook Pro standby (2.4W)
+- Manual range locking recommended to avoid artifacts
+- Price: ~1000€ new, >200€ used; old discontinued equipment
+- Use cases: standby consumption measurement, devices oscillating between two ranges
+
 ### mesurer-la-consommation-avec-un-wattmetre-usb
 **Title:** Mesurer la consommation avec un wattmètre USB-C AVHzY C3
 **Summary:** Guide to using the AVHzY C3 USB-C power meter for precise profiling of USB-powered devices. Features high sampling rate (1kHz) and ability to measure devices up to 240W.

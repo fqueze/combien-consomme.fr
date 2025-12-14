@@ -147,5 +147,5 @@ Pour comprendre de façon plus détaillée la consommation de ce scanner, on pou
 - mesurer si la consommation augmente lors d'un bourrage.
 - laisser le scanner en veille plus longtemps pour voir s'il finit par s'éteindre complètement au bout d'un (trop) long moment.
 - utiliser un enregistreur avec un taux d'échantillonnage plus élevé pour être capable de séparer la consommation liée à la numérisation de chacune des feuilles lors de la numérisation automatique de plusieurs documents.
-- utiliser un enregistreur plus précis sur les courants faibles pour mieux observer les fluctuation de consommation en veille et lorsque le scanner est éteint.
+- utiliser {% post mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001 un enregistreur plus précis sur les courants faibles %} pour mieux observer les fluctuation de consommation en veille et lorsque le scanner est éteint.
 {% endplusloin %}
