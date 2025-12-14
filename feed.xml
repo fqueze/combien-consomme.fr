@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-12-07T15:32:19Z</updated>
+<updated>2025-12-14T20:18:08Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>Mesurer la consommation avec un wattmètre de laboratoire programmable ISW8001</title>
+ <link href="https://combien-consomme.fr/posts/mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001/"/>
+ <updated>2025-12-14T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/posts/mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001/</id>
+ <summary xml:lang="fr" type="html">Un wattmètre de laboratoire programmable permet d&#39;enregistrer des profils de consommation avec une précision supérieure aux prises connectées, particulièrement pour les faibles puissances. Comment s&#39;en servir pour obtenir des mesures exploitables ?</summary>
+</entry>
 <entry>
  <title>le mixage d&#39;une soupe aux légumes</title>
  <link href="https://combien-consomme.fr/tests/mixer-une-soupe/"/>
@@ -142,12 +149,5 @@
  <updated>2024-12-08T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/raclette-a-deux/</id>
  <summary xml:lang="fr" type="html">Avec les fraiches soirées d&#39;hiver revient l&#39;envie d&#39;une soirée raclette... combien consomme l&#39;appareil qui trône au centre de notre table lors de ces soirées fromagées ?</summary>
-</entry>
-<entry>
- <title>un couteau électrique</title>
- <link href="https://combien-consomme.fr/tests/couteau-electrique/"/>
- <updated>2024-09-22T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/couteau-electrique/</id>
- <summary xml:lang="fr" type="html">Mémé l&#39;a eu pour la fête des mères. En vrai, c&#39;était toujours Pépé qui s&#39;en servait. Le bruit caractéristique du couteau électrique indiquait qu&#39;on allait passer à table dans quelques instants. Pépé aurait-il fait une économie s&#39;il avait demandé à la boulangerie qu&#39;on lui serve le pain déjà tranché ?</summary>
 </entry>
 </feed>
