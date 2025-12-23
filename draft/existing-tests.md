@@ -506,3 +506,14 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Cuire une paire de gaufres : entre 44 et 69 Wh selon la recette
 - Coût électrique dérisoire comparé au coût des ingrédients et au prix d'achat
 - ATTENTION : pas d'interrupteur, il faut impérativement débrancher après utilisation (maintient température indéfiniment sinon)
+
+### machine-a-cafe-expresso
+**Title:** une machine à café expresso
+**Device:** Machine à expresso De'Longhi ECP33.21.BK
+**Key findings:**
+- Préchauffage consomme 16.8 Wh en un peu plus d'une minute (puissance médiane 973W)
+- Préparation d'un double expresso consomme 7.84 Wh en environ 40 secondes
+- En attente après préchauffage : 1.69W (extinction automatique après 9 minutes)
+- Cycle complet : 24.6 Wh soit moins d'un centime
+- Il faudrait 29 ans de cafés quotidiens (2/jour) pour égaler le prix d'achat en coût électrique
+- Pas de consommation en veille quand éteinte (interrupteur mécanique)

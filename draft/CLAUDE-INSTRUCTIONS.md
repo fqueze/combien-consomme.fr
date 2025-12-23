@@ -80,7 +80,10 @@ tags: ['test']
 
 ### Opening Paragraph
 - 1-2 sentences introducing the device
-- End with a question about consumption: "À quoi ressemble sa consommation ?" or similar
+- End with an **engaging question** about consumption impact, not just "À quoi ressemble sa consommation ?"
+  - ✅ GOOD: "Quel est l'impact de ce plaisir caféiné sur la facture d'électricité ?"
+  - ✅ GOOD: "Combien coûte le plaisir de déguster des gaufres maison ?"
+  - ❌ BAD: "À quoi ressemble sa consommation ?" (too generic)
 - Links using {% raw %}`{% test slug description %}`{% endraw %} or {% raw %}`{% post slug description %}`{% endraw %} are allowed - links will be stripped and only the description text will appear in meta tags (og:description, etc.)
 - Follow with `<!-- excerpt -->`
 - **Add an empty tldr block** - you'll fill it at the end
@@ -100,8 +103,8 @@ tags: ['test']
 
 **First bullet point:**
 - When the device has a realistic recurring usage pattern, **start with annual cost** for that scenario
+- ✅ GOOD: "Si vous prenez 2 cafés par jour, la consommation annuelle sera de {{ 24.6 | times: 2 | Wh€PerYear }}."
 - ✅ GOOD: "En mixant une soupe par semaine pendant un an, la consommation annuelle sera de {{ 5.03 | times: 52 | Wh€ }}."
-- ✅ GOOD: "Utilisé environ 2 fois par semaine, ce sèche-linge consommera {{ 1732.56 | times: 100 | Wh€ }} par an."
 - This gives readers immediate practical context
 - For devices without regular usage patterns (occasional use items), start with per-use cost instead
 
@@ -111,13 +114,21 @@ tags: ['test']
 - End each bullet with a period (these are complete sentences)
 - ❌ WRONG: Long bullets with multiple clauses explaining context and calculations
 - ✅ CORRECT: One clear statement per bullet
+- **Keep the tldr SHORT** - aim for 3-4 key points maximum
+
+**Avoiding redundancy in cost statements:**
+- Use EITHER `Wh€` (which shows both energy and cost) OR add "soit moins d'un centime" - never both
+- ❌ WRONG: "consomme {{ 24.6 | Wh€ }}, soit moins d'un centime" (redundant)
+- ✅ GOOD: "consomme {{ 24.6 | Wh€ }}" (shows 24,6 Wh (0,006 €))
+- ✅ GOOD: "consomme {{ 24.6 | Wh }}, soit moins d'un centime"
 
 **What to include:**
-- Total consumption and annual cost (from "Sur un an" section)
-- Standby consumption findings (from "En veille" section, if significant)
+- Total consumption and annual cost (from "Sur un an" section) - **put this first**
+- Per-use consumption (second point)
+- Key energy-saving insight (e.g., preheating percentage, batch processing benefit)
 - Cost comparisons (per-use, annual, vs purchase price)
 - Replacement economics conclusions (from "Faut-il le remplacer" section, if old device)
-- Practical usage recommendations
+- **Only include points based on verified measurements**, not manual claims
 
 **Format:**
 {% raw %}
@@ -159,6 +170,9 @@ tags: ['test']
 
 [Optional: {% test other-slug description %} cross-references]
 
+[If someone contributed to the test: acknowledge them here]
+Example: "Merci à [Name] pour sa participation active à ce test : c'est sa machine, et c'est lui qui a préparé les cafés que nous avons mesurés."
+
 ### Méthode de mesure
 
 **IMPORTANT: Always include a `{% post %}` link to the measurement article.**
@@ -171,6 +185,10 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 {% endraw %}
 
 **IMPORTANT: The intro block must start with an empty line** after the opening tag.
+
+**Brand names:** Pay attention to correct capitalization and formatting
+- ✅ CORRECT: "De'Longhi" (with apostrophe)
+- ❌ WRONG: "DELONGHI", "Delonghi"
 
 **For high-current devices (>12A):**
 Describe the Shelly Pro EM-50 setup in tableau électrique as shown in seche-linge-a-evacuation.
@@ -203,6 +221,21 @@ L'étiquette indique une puissance de {{ X | W }}.
 - Use `« *quote from manual* »` format for inline citations
 - For blockquotes (using `>` syntax), the content is already formatted as citation
 - Example: `Le manuel indique que « *l'affichage de l'heure s'assombrit au bout de 10 minutes* » pour économiser l'énergie.`
+
+**IMPORTANT: Avoid redundant introductions in lists:**
+- If introducing a list with "Le manuel d'utilisation précise deux points :", don't repeat "Le manuel indique que" for each bullet
+- ✅ GOOD:
+  ```
+  Le manuel d'utilisation précise deux points importants :
+  - « *Consommation d'énergie lorsque le produit est éteint : 0 W* »
+  - L'extinction automatique se déclenche après 9 minutes
+  ```
+- ❌ WRONG:
+  ```
+  Le manuel d'utilisation précise deux points importants :
+  - « *Consommation d'énergie lorsque le produit est éteint : 0 W* »
+  - Le manuel indique que l'extinction automatique...
+  ```
 ```
 {% endraw %}
 
@@ -219,6 +252,7 @@ Each profile or image should have an **introductory sentence** that:
 - Uses actual content from the analysis (duration, consumption, key finding)
 - Ends with a colon before the profile/image shortcode
 - **AVOID generic "Voici" phrases** - adapt the first sentence of your description instead
+- **Don't mention specific values from a profile before showing the profile itself** - wait for the zoom/detail
 
 Examples:
 - ✅ GOOD: `Pendant les 2 heures d'attente avant le démarrage du cycle, la consommation est stable autour de {{ 3.7 | W }} :`
@@ -227,8 +261,17 @@ Examples:
 - ❌ BAD: `La charge dure {{ 9370138 | s }} :` (using milliseconds directly - will show wrong duration)
 - ❌ BAD: `Voici la phase de lavage avec chauffage :`
 - ❌ BAD: `Voici le profil de consommation :`
+- ❌ BAD: Overview says "autour de 915W" when that value only appears in a later zoom profile
 
 The intro sentence should contain a meaningful fact, not just announce what's coming.
+
+**Durations: When to use approximate vs precise values:**
+- When profile samples at the start/end are at 0W, use approximate language
+- ✅ GOOD: "dure environ 40 secondes" (when last samples are 0)
+- ✅ GOOD: "dure un peu plus d'une minute" (when excluding 0 samples at edges)
+- ✅ GOOD: "a duré un peu plus de 2 minutes" (for complete test with 0 samples)
+- ❌ BAD: "dure 41s" when the profile includes trailing 0W samples
+- Use precise durations with `{{ duration | s }}` only when samples are meaningful throughout
 
 **For equipment images** (mixers, labels, device photos):
 - Provide a brief contextual sentence that flows naturally with surrounding content
@@ -274,6 +317,36 @@ The intro sentence should contain a meaningful fact, not just announce what's co
 ```
 {% endraw %}
 
+**Choosing between median and average:**
+- For steady-state power consumption, **prefer median** over average when describing a phase
+- Median is more representative when there are brief dips or spikes
+- ✅ GOOD: "La puissance médiane est de {{ 973 | W }}" (for preheating with a brief dip)
+- ❌ LESS GOOD: "La puissance moyenne est de {{ 915 | W }}" (includes the dip's effect)
+- Use average when the variation is meaningful to the analysis
+
+**List punctuation:**
+- When describing phases as a numbered list, use proper French punctuation:
+- ✅ GOOD:
+  ```
+  On observe trois phases distinctes :
+  1. Le préchauffage initial avec une consommation élevée ;
+  2. Une courte phase d'attente avec une consommation très faible ;
+  3. La préparation du café avec deux niveaux de puissance.
+  ```
+- ❌ WRONG: No punctuation at the end of list items
+- Use semicolons (`;`) between items and a period (`.`) for the last item
+
+**Phrasing for peak power:**
+- When describing maximum power, use appropriate language:
+- ✅ GOOD: "une forte consommation allant jusqu'à {{ 1060 | W }}" (single peak)
+- ❌ LESS GOOD: "avec des pics jusqu'à {{ 1060 | W }}" (implies multiple peaks when there's only one)
+
+**Comparing to nominal power:**
+- Compare measured power to the nominal power (from label) at the RIGHT moment
+- ✅ GOOD: Compare at the highest consumption phase (e.g., heating + pump together)
+- ❌ BAD: Compare during preheating when a higher consumption phase comes later
+- Example: "cette forte consommation qui atteint {{ 1060 | W }}, proche de la puissance nominale de {{ 1100 | W }}"
+
 **Heading Hierarchy:**
 - Keep heading levels reasonable - avoid excessive nesting
 - Typical structure:
@@ -298,18 +371,29 @@ The intro sentence should contain a meaningful fact, not just announce what's co
 **CRITICAL: The test must tell a story that integrates ALL provided images naturally.**
 
 - **Never place images in the intro block** - they belong in the body text where they're relevant
+- **Never describe the test protocol in the intro** - save it for the test section itself
 - Images must contribute to the narrative, not just be inserted randomly
 - Think of the test as a story you're telling with text and images working together
 - Position images exactly where they illustrate what you're describing
 - Use two spaces at the end of a line before an image tag to add a line break when needed for better visual flow
 
+**Test narrative structure:**
+When describing a test sequence, build the story progressively:
+1. Start with the device in initial state (e.g., "Voici la machine au départ, tous les voyants sont éteints")
+2. Show the controls/switches being used (e.g., "L'interrupteur marche/arrêt se trouve sur le côté droit")
+3. Explain what you're doing (e.g., "Pour ce test, nous avons laissé préchauffer puis préparé un café")
+4. Show the progression through states with images at each step
+5. Present the complete profile, then zoom into details
+
 **Specific guidelines:**
 - Describe device features (display, controls, programs) **near their photos**
 - Don't mention the display in the intro if the display photo appears later
-- Place test plan or usage protocol explanation near the images that show the steps
+- Place test plan or usage protocol explanation IN THE TEST SECTION, not in the intro
 - Position images after the sentence that mentions them
 - Example: If you say "the Coton 40° program is most efficient", place the program selection image right after that sentence
 - If you have a series of images showing steps (like a cooking process), structure the text to walk through each step with its image
+- ❌ BAD: Intro says "Pour ce test, j'ai laissé préchauffer puis préparé un café" (save this for the test section)
+- ✅ GOOD: Intro describes what the device is, then test section explains what you did
 
 #### Standby/Veille Analysis
 
@@ -336,6 +420,8 @@ Simply mention in a single line that the device has no standby consumption when 
 
 #### Annual Extrapolation / Cost Analysis
 
+**Section title:** Consider using "Coût d'usage" instead of "Sur un an" when the section covers more than just annual cost
+
 **Be realistic about actual usage patterns.** Don't make unrealistic projections like "once per month for years."
 
 **Add quantitative context when relevant:**
@@ -344,22 +430,33 @@ Simply mention in a single line that the device has no standby consumption when 
 - Makes the test more relatable and practical
 - Example: "Il faudrait mixer {{ Wh | divided_by: liters | countPer€: 0.01 }} litres de soupe pour dépenser un centime"
 
+**When small numbers make 1 centime calculations awkward:**
+- Use 1 euro instead: `{{ value | countPer€: 1 }} [items] pour dépenser un euro`
+- ✅ GOOD: "Il faudrait préparer {{ 24.6 | countPer€: 1 }} cafés pour dépenser un euro d'électricité."
+- ❌ BAD: "Il faudrait préparer {{ 24.6 | countPer€: 0.01 }} cafés pour dépenser un centime." (result is 2, too small to be interesting)
+
 {% raw %}
 ```markdown
-### Sur un an / Coût d'usage
+### Coût d'usage
 
-[If measuring quantities of food/liquid:]
-Le coût électrique du [action] de [quantity] [unit] est de {{ value | Wh€ }}. Il faudrait [action] {{ value | divided_by: quantity | countPer€: 0.01 }} [unit] pour dépenser un centime d'électricité.
+[For items with first-use overhead (preheating, warmup):]
+Le coût électrique de [action] (préchauffage compris) est de {{ value | Wh€ }}. Il faudrait [action] {{ value | countPer€: 1 }} fois pour dépenser un euro d'électricité.
+
+Dans la réalité, si vous [repeated action] d'affilée, le préchauffage n'est nécessaire qu'une seule fois. Le coût par [item] supplémentaire n'est alors que de {{ incremental | Wh€ }}. Il faudrait [action] {{ incremental | countPer€: 0.01 }} fois supplémentaires pour dépenser un centime.
 
 [For regularly used devices:]
-Si l'on suppose que [device] est utilisé(e) [frequency], la consommation annuelle sera de {{ value | Wh€PerYear }} par an.
+Si l'on suppose que [device] est utilisé(e) [frequency], la consommation annuelle sera de {{ value | times: frequency | Wh€PerYear }} par an.
+
+[If device purchase price is known, add comparison:]
+À ce rythme, il faudrait {{ value | times: frequency | PerYear | countPer€: price }} ans pour dépenser l'équivalent du prix d'achat ([price] euros) en électricité. Pas sûr que la machine tienne aussi longtemps !
 
 [For occasional-use devices (waffle makers, raclette, etc.):]
 Le coût électrique d'une utilisation de {{ value | Wh€ }} est dérisoire comparé au coût [des ingrédients / de l'usage].
 
 Dans la réalité, ce type d'appareil est souvent acheté ou offert, sert quelques fois avec enthousiasme, puis finit oublié dans un placard. [Compare to purchase price rather than unrealistic annual projections]
 
-[Always compare to device purchase price if known - more meaningful than annual cost for occasional-use items]
+[If measuring quantities of food/liquid:]
+Le coût électrique du [action] de [quantity] [unit] est de {{ value | Wh€ }}. Il faudrait [action] {{ value | divided_by: quantity | countPer€: 0.01 }} [unit] pour dépenser un centime d'électricité.
 ```
 {% endraw %}
 
@@ -368,6 +465,7 @@ Dans la réalité, ce type d'appareil est souvent acheté ou offert, sert quelqu
 - Compare electricity cost to purchase price using `{{ energy | countPer€: price }} utilisations`
 - For professional use, mention it would require a more robust model
 - Focus on per-use cost rather than unrealistic annual projections for occasional-use items
+- **Always use `PerYear` filter instead of `times: 365`** for annual calculations
 
 #### Replacement Economics (for old devices)
 
@@ -404,15 +502,21 @@ La [forte puissance / puissance alternante / consommation étalée] de [device] 
 
 [Suggest timing]
 Pour maximiser l'autoconsommation, plusieurs options :
-- [timing option 1] ;
-- [timing option 2] ;
-- [timing option 3].
+- [timing option 1 - be specific about timing: "au déjeuner" is a specific moment (noon), distinct from general "pause café"] ;
+- [timing option 2 - if mentioning work context, be explicit about télétravail] ;
+- [timing option 3 - avoid true redundancies: don't say both "en milieu de journée" and "pause déjeuner" as they overlap] ;
+- éviter de lancer [device] en même temps qu'un gros consommateur comme {% test machine-a-laver un lave-linge %}, {% test seche-linge-a-pompe-a-chaleur un sèche-linge %} ou {% test four-a-micro-ondes un four à micro-ondes %}, pour ne pas dépasser la capacité de production solaire.
+
+**IMPORTANT: Avoid redundant phrasing**
+- ❌ BAD: "si vous avez des panneaux solaires" (this is a section ABOUT solar panels!)
+- ❌ BAD: "votre café du matin" when morning has poor solar production
+- ✅ GOOD: "votre pause café" (neutral about timing)
 
 [Compare to alternatives if relevant]
 Une {% test alternative-slug description %} sera plus facile à alimenter avec la production photovoltaïque.
 
 [Put economic perspective]
-Cela dit, avec un coût électrique de {{ value | Wh€ }}, l'enjeu économique reste [très faible / modéré].
+Cela dit, avec un coût électrique de {{ value | Wh€ }}, l'enjeu économique reste [très faible / modéré]. L'intérêt est surtout environnemental : utiliser directement l'énergie solaire.
 ```
 {% endraw %}
 
@@ -462,6 +566,13 @@ Pour comprendre de façon plus détaillée la consommation de [device], on pourr
 - **Curious and explanatory**: "On observe...", "Cela s'explique car..."
 - **Honest about limitations**: "Je ne sais pas exactement...", "Peut-être..."
 - **Speculative when appropriate**: "On peut supposer que...", "J'imagine que..."
+
+**When to use "nous" vs "je":**
+- Use "nous" for actions done during the test: "nous avons laissé préchauffer", "nous avons préparé"
+- Use "je" for personal observations and interpretations: "je n'ai pas l'explication", "j'imagine que"
+- ✅ GOOD: "Il nous a fallu quelques secondes..." (action during test)
+- ✅ GOOD: "dont je n'ai pas l'explication" (personal observation)
+- This maintains a collaborative test context while preserving individual analytical voice
 
 ### Using Averages and Statistics Carefully
 
@@ -653,6 +764,10 @@ Before submitting, verify:
 - [ ] Fill in the Device brand/model in the publishing checklist comment
 - [ ] Write 3-5 key findings for the existing-tests.md entry
 - [ ] Verify the front matter changes are documented
+
+**Final verification against instructions:**
+
+Once the test is completely written, **reread this entire instruction file from the beginning** and verify that all guidelines have been followed. This final review ensures compliance with all current best practices and style guidelines.
 
 **Note:** The `ELEVENTY_PREVIEW_ONLY` environment variable makes Eleventy build only the preview page (~0.6s) instead of the entire site. This allows you to quickly verify your changes work without errors.
 
