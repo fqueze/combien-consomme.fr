@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-12-14T20:18:08Z</updated>
+<updated>2025-12-23T22:49:27Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une machine à café expresso</title>
+ <link href="https://combien-consomme.fr/tests/machine-a-cafe-expresso/"/>
+ <updated>2025-12-23T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/machine-a-cafe-expresso/</id>
+ <summary xml:lang="fr" type="html">Les machines à café expresso permettent de préparer un café sous pression à la maison, avec une qualité proche de celle d&#39;un bar. Quel est l&#39;impact de ce plaisir caféiné sur la facture d&#39;électricité ?</summary>
+</entry>
 <entry>
  <title>Mesurer la consommation avec un wattmètre de laboratoire programmable ISW8001</title>
  <link href="https://combien-consomme.fr/posts/mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001/"/>
@@ -142,12 +149,5 @@
  <updated>2024-12-19T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/machine-apnee-sommeil/</id>
  <summary xml:lang="fr" type="html">Cette machine améliore la respiration nocturne et réduit les apnées. Combien consomme-t-elle pour réaliser ce petit miracle ?</summary>
-</entry>
-<entry>
- <title>une raclette à deux</title>
- <link href="https://combien-consomme.fr/tests/raclette-a-deux/"/>
- <updated>2024-12-08T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/raclette-a-deux/</id>
- <summary xml:lang="fr" type="html">Avec les fraiches soirées d&#39;hiver revient l&#39;envie d&#39;une soirée raclette... combien consomme l&#39;appareil qui trône au centre de notre table lors de ces soirées fromagées ?</summary>
 </entry>
 </feed>
