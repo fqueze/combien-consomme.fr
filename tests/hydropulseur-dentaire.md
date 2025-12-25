@@ -98,7 +98,7 @@ Voici un profil de 24h sans utilisation :
 
 Cette consommation en veille sur une journée correspond à plus de 4 lavages de 40 secondes !
 
-Remarque : la consommation est tellement faible que la prise connectée Shelly ne peut pas la mesurer en continu, et alterne à la place entre des valeurs à 0 et des valeurs à {{ 0.1 | W }}. La puissance moyenne indiquée sur l'enregistrement ({{ 0.02586 | W }}) reste probablement pertinente, même s'il pourrait être intéressant de la vérifier avec {% post mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001 un appareil de mesure plus précis pour les courants faibles %}.
+Remarque : la consommation est tellement faible que la prise connectée Shelly ne peut pas la mesurer en continu, et alterne à la place entre des valeurs à 0 et des valeurs à {{ 0.1 | W }}. La puissance moyenne indiquée sur l'enregistrement ({{ 0.02586 | W }}) reste probablement pertinente, même s'il pourrait être intéressant de la vérifier avec {% post mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001 un appareil de mesure plus précis pour les courants faibles %}, comme nous l'avons fait pour {% test balance-precision une balance de précision %}.
 
 ### Sur un an
 

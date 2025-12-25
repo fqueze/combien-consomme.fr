@@ -89,7 +89,8 @@ Une mesure d'une heure nous indique une puissance moyenne et médiane de {{ 2.4 
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'un nettoyeur à ultrasons, on pourrait :
-- mesurer la consommation à différents niveaux de remplissage de la cuve pour voir si la quantité de liquide à faire vibrer a une influence sur la consommation électrique.
-- comparer différents modèles de différentes marques pour voir s'il y a des modèles qui consomment moins en attente.
-- comparer avec des modèles ayant une cuve plus grande pour voir s'ils consomment plus.
+- mesurer la consommation à différents niveaux de remplissage de la cuve pour voir si la quantité de liquide à faire vibrer a une influence sur la consommation électrique ;
+- comparer différents modèles de différentes marques pour voir s'il y a des modèles qui consomment moins en attente ;
+- comparer avec des modèles ayant une cuve plus grande pour voir s'ils consomment plus ;
+- mesurer la consommation en attente avec {% post mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001 un wattmètre plus précis %} pour mieux caractériser cette faible puissance, comme nous l'avons fait pour {% test balance-precision une balance de précision %}.
 {% endplusloin %}

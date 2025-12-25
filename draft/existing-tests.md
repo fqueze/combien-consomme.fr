@@ -517,3 +517,14 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Cycle complet : 24.6 Wh soit moins d'un centime
 - Il faudrait 29 ans de cafés quotidiens (2/jour) pour égaler le prix d'achat en coût électrique
 - Pas de consommation en veille quand éteinte (interrupteur mécanique)
+
+### balance-precision
+**Title:** une balance de précision
+**Device:** Balance de précision MATFER MII-3000 (UWE) - 3000 g × 0.5 g
+**Key findings:**
+- Consommation permanente: 0.850 W (7.4€/an) même éteinte, due à l'adaptateur secteur
+- L'adaptateur seul consomme 0.849 W - la balance éteinte ne consomme presque rien
+- Allumer la balance n'ajoute que 0.129 W (+15% par rapport à éteinte)
+- Mesure avec ISW8001 nécessaire : Shelly Plus Plug S trop imprécis pour cette faible consommation
+- Rétro-éclairage LCD provoque des pics jusqu'à 1.44 W
+- Fonctionnement sur pile (9 V) éliminerait la consommation permanente de l'adaptateur
