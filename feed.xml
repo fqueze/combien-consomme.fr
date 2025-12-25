@@ -4,7 +4,7 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-12-23T22:49:27Z</updated>
+<updated>2025-12-25T22:09:41Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
@@ -16,6 +16,13 @@
  <updated>2025-12-23T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/machine-a-cafe-expresso/</id>
  <summary xml:lang="fr" type="html">Les machines à café expresso permettent de préparer un café sous pression à la maison, avec une qualité proche de celle d&#39;un bar. Quel est l&#39;impact de ce plaisir caféiné sur la facture d&#39;électricité ?</summary>
+</entry>
+<entry>
+ <title>une balance de précision</title>
+ <link href="https://combien-consomme.fr/tests/balance-precision/"/>
+ <updated>2025-12-16T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/balance-precision/</id>
+ <summary xml:lang="fr" type="html">Une balance de précision est un outil utile en cuisine pour des mesures exactes, ou dans d&#39;autres contextes nécessitant une pesée précise. Combien consomme-t-elle ?</summary>
 </entry>
 <entry>
  <title>Mesurer la consommation avec un wattmètre de laboratoire programmable ISW8001</title>
@@ -142,12 +149,5 @@
  <updated>2024-12-24T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/moulinette-s/</id>
  <summary xml:lang="fr" type="html">Maman l&#39;a achetée pour hacher la viande quand j&#39;étais petit. Mamie l&#39;a également utilisée quand elle n&#39;avait plus beaucoup de dents. Quelle est la consommation de ce vénérable mixeur qui reprend encore parfois du service ?</summary>
-</entry>
-<entry>
- <title>une machine de traitement de l&#39;apnée du sommeil</title>
- <link href="https://combien-consomme.fr/tests/machine-apnee-sommeil/"/>
- <updated>2024-12-19T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/machine-apnee-sommeil/</id>
- <summary xml:lang="fr" type="html">Cette machine améliore la respiration nocturne et réduit les apnées. Combien consomme-t-elle pour réaliser ce petit miracle ?</summary>
 </entry>
 </feed>
