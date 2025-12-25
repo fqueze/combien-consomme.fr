@@ -117,7 +117,7 @@ Si on zoome sur ce profil, on peut observer que l'imprimante alterne entre une c
 
 {% profile "laserjet-pro-M452dn-idle.json.gz" '{"name": "En veille, zoom sur 15 minutes — 1 ", "range": "13470829m900467"}' %}
 
-La consommation moyenne mesurée sur ce quart d'heure est de {{ 1.47 | W }}. Si on zoome sur une autre partie du profil, on peut constater que l'imprimante est cette fois presque tout le temps dans le mode où elle consomme environ {{ 2 | W }} :
+La consommation moyenne mesurée sur ce quart d'heure est de {{ 1.46 | W }}. Si on zoome sur une autre partie du profil, on peut constater que l'imprimante est cette fois presque tout le temps dans le mode où elle consomme environ {{ 2 | W }} :
 
 {% profile "laserjet-pro-M452dn-idle.json.gz" '{"name": "En veille, zoom sur 15 minutes — 2", "range": "15114014m900467"}' %}
 

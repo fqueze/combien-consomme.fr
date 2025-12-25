@@ -114,9 +114,9 @@ Lorsque le mixeur reste branché sans être utilisé, une petite lumière bleue 
 {% profile "mixer-une-soupe.json.gz" '{"name": "Mixeur branché mais inutilisé", "range": "753366m46573"}' %}
 {% comment %}draft: consommation en veille si on oublie de débrancher. une lumière bleue reste allumée sur le dessus du mixeur{% endcomment %}
 
-La consommation moyenne est de {{ 0.185 | W }}, ce qui est du même ordre de grandeur que les {{ 0.189 | W }} mesurés lors du test du houmous. Sur cette mesure courte, on observe une alternance entre 0 et une valeur inférieure à 1 W, ce qui correspond aux limites de précision de la prise connectée pour ces très faibles puissances.
+La consommation moyenne est de {{ 0.181 | W }}, ce qui est du même ordre de grandeur que les {{ 0.189 | W }} mesurés lors du test du houmous. Sur cette mesure courte, on observe une alternance entre 0 et une valeur inférieure à 1 W, ce qui correspond aux limites de précision de la prise connectée pour ces très faibles puissances.
 
-Si le mixeur reste branché en permanence, il consommera {{ 0.185 | W€PerYear }} par an. C'est peu, mais pour un appareil qui n'est utilisé que quelques minutes par-ci par-là, cela représente une consommation inutile qu'on peut facilement éviter en débranchant le mixeur après utilisation.
+Si le mixeur reste branché en permanence, il consommera {{ 0.181 | W€PerYear }} par an. C'est peu, mais pour un appareil qui n'est utilisé que quelques minutes par-ci par-là, cela représente une consommation inutile qu'on peut facilement éviter en débranchant le mixeur après utilisation.
 
 ### Coût d'usage
 

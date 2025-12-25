@@ -63,9 +63,9 @@ Le nettoyage de 3 minutes a consommé {{ 1.75 | Wh€ }}, les puissances maximal
 
 {% profile "nettoyeur-ultrasons.json.gz" '{"name": "Nettoyage d\'1 minute 30", "range": "993773m91732"}' %}
 
-Le nettoyage d'une minute 30 a consommé {{ 0.871 | Wh€ }}, les puissances maximale et moyenne mesurées sont à nouveau inférieures à celles mesurées lors du nettoyage précédent.
+Le nettoyage d'une minute 30 a consommé {{ 0.870 | Wh€ }}, les puissances maximale et moyenne mesurées sont à nouveau inférieures à celles mesurées lors du nettoyage précédent.
 
-En se basant sur ces mesures, pour consommer 1 centime d'électricité, il faudrait effectuer {{ 3.18 | countPer€: 0.01 }} nettoyages de 5 minutes, {{ 1.75 | countPer€: 0.01 }} nettoyages de 3 minutes, ou {{ 0.871 | countPer€: 0.01 }} nettoyages d'une minute 30.
+En se basant sur ces mesures, pour consommer 1 centime d'électricité, il faudrait effectuer {{ 3.18 | countPer€: 0.01 }} nettoyages de 5 minutes, {{ 1.75 | countPer€: 0.01 }} nettoyages de 3 minutes, ou {{ 0.870 | countPer€: 0.01 }} nettoyages d'une minute 30.
 
 ### Impact de l'échauffement du moteur
 

@@ -124,9 +124,9 @@ Il nous a fallu quelques secondes pour remarquer le voyant vert et être prêts 
 {% profile "machine-a-cafe-expresso.json.gz" '{"name": "en attente", "range": "105594m17066"}' %}
 {% comment %}draft: en attente : c'est le temps qu'il nous a fallu pour lancer la préparation du café une fois que la machine avait atteint sa température (voyant "ok" allumé). Dure probablement 9 minutes avant l'extinction automatique d'après le manuel.{% endcomment %}
 
-La consommation en attente est faible : {{ 1.65 | W }} en moyenne. D'après le manuel, la machine s'éteindrait automatiquement après 9 minutes dans cet état.
+La consommation en attente est faible : {{ 1.59 | W }} en moyenne. D'après le manuel, la machine s'éteindrait automatiquement après 9 minutes dans cet état.
 
-Si la machine restait en attente pendant 9 minutes, elle consommerait {{ 1.65 | times: 540 | divided_by: 3600 | Wh }} supplémentaires.
+Si la machine restait en attente pendant 9 minutes, elle consommerait {{ 1.59 | times: 540 | divided_by: 3600 | Wh }} supplémentaires.
 
 #### La préparation du double expresso
 

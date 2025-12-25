@@ -55,7 +55,7 @@ La consommation est stable au cours du temps, et est probablement causée quasi 
 Continuons :
 {% profile "raclette-a-deux.json.gz" '{"name": "Cuisson de la 2ième paire de tranches", "range": "494299m390616"}' %}
 
-La cuisson des deux tranches suivantes a pris moins longtemps et donc consommé moins ({{ 33.1 | Wh€ }}). On se doute que c'est car l'appareil était déjà chaud lorsque les tranches de fromage y ont été insérées, alors qu'il lui a fallu le temps de chauffer pour les premières tranches. 
+La cuisson des deux tranches suivantes a pris moins longtemps et donc consommé moins ({{ 33.0 | Wh€ }}). On se doute que c'est car l'appareil était déjà chaud lorsque les tranches de fromage y ont été insérées, alors qu'il lui a fallu le temps de chauffer pour les premières tranches. 
 
 {% profile "raclette-a-deux.json.gz" '{"name": "Cuisson de la 3ième paire de tranches", "range": "884914m286935"}' %}
 

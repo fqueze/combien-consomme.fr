@@ -97,7 +97,7 @@ Lorsque la consommation est faible pendant la confection des yaourts, il ne rest
 Zoomons sur une de ces périodes dans l'enregistrement :  
 {% profile "yaourtiere-seb-multi-delices.json.gz" '{"name":"Entre les périodes de chauffe","range":"40447022m671623"}' %}
 
-Les alternances entre des mesures de consommation à {{ 0 | W }} et des mesures à une valeur non nulle inférieure à {{ 0.5 | W }} sont probablement dues à la limite de précision de l'appareil de mesure utilisé, et donc non significative. On peut cependant relever la puissance moyenne : {{ 0.214 | W }}.
+Les alternances entre des mesures de consommation à {{ 0 | W }} et des mesures à une valeur non nulle inférieure à {{ 0.5 | W }} sont probablement dues à la limite de précision de l'appareil de mesure utilisé, et donc non significative. On peut cependant relever la puissance moyenne : {{ 0.213 | W }}.
 
 ### Consommation en veille
 

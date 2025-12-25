@@ -14,7 +14,7 @@ Combien consomme la charge d'une batterie d'ordinateur portable ? Et le chargeur
 - Pendant l'utilisation, la consommation moyenne varie de {{ 11 | W }} pour une utilisation modérée à {{ 76 | W }} pour une utilisation intensive du processeur.
 - Laisser l'ordinateur tout le temps branché lorsqu'il est éteint consomme entre {{ 0.351 | W€PerYear }} et {{ 0.857 | W€PerYear }} par an.
 - Laisser le chargeur branché lorsque l'ordinateur n'est pas connecté consomme environ {{ 0.00973 | W€PerYear }} par an. C'est négligeable, et ce n'est pas là qu'on pourra faire de vraies économies d'énergie.
-- La consommation moyenne en veille dépend beaucoup des paramètres d'alimentation choisis, et a varié lors du test de {{ 0.979 | W }} à {{ 4.73 | W }}. Laisser l'ordinateur tout le temps en veille consommerait de {{ 0.979 | W€PerYear }} à {{ 4.73 | W€PerYear }} par an. Il est  préférable de l'éteindre lorsqu'on ne s'en sert pas.
+- La consommation moyenne en veille dépend beaucoup des paramètres d'alimentation choisis, et a varié lors du test de {{ 0.978 | W }} à {{ 4.73 | W }}. Laisser l'ordinateur tout le temps en veille consommerait de {{ 0.978 | W€PerYear }} à {{ 4.73 | W€PerYear }} par an. Il est  préférable de l'éteindre lorsqu'on ne s'en sert pas.
 {% endtldr %}
 
 ## Le matériel

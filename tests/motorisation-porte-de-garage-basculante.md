@@ -85,9 +85,9 @@ On a ensuite une phase pendant laquelle on observe une surconsommation liée à 
 
 Cette phase dure 2 minutes 40 secondes. La consommation moyenne pendant cette phase est d'abord de {{ 7.1 | W }} pendant 1 minutes 36s (2 minutes après l'appui sur la commande ?) puis de {{ 6.5 | W }} pendant une minute de plus. je ne sais pas ce qui cause ce changement.
 
-On peut observer que l'énergie consommée pendant que le moteur fonctionne {{ 0.274 | Wh }} est inférieure à l'énergie consommée ensuite pendant que la lumière reste allumée ({{ 0.302 | Wh }}) !
+On peut observer que l'énergie consommée pendant que le moteur fonctionne {{ 0.273 | Wh }} est inférieure à l'énergie consommée ensuite pendant que la lumière reste allumée ({{ 0.301 | Wh }}) !
 
-La surconsommation pour l'ouverture de la porte, {{ 0.274 | minus: 0.027 | Wh }}, correspond à l'énergie consommée par la porte en attente en 3 minutes 30.
+La surconsommation pour l'ouverture de la porte, {{ 0.273 | minus: 0.027 | Wh }}, correspond à l'énergie consommée par la porte en attente en 3 minutes 30.
 
 ### Fermeture
 
@@ -96,7 +96,7 @@ La surconsommation pour l'ouverture de la porte, {{ 0.274 | minus: 0.027 | Wh }}
 Comme pour l'ouverture, on a 2 phases.
 {% profile "porte-garage-basculante.json.gz" '{"name": "Fermeture de la porte, phase de fonctionnement du moteur", "range": "2458255m24790"}' %}
 
-La consommation pendant le fonctionnement du moteur n'est ici que de {{ 0.156 | Wh }}, soit une surconsommation de {{ 0.156 | minus: 0.027 | Wh }} par rapport à la porte en attente sur la même durée, ce qui correspond à 1 minute 50 de fonctionnement en attente.
+La consommation pendant le fonctionnement du moteur n'est ici que de {{ 0.153 | Wh }}, soit une surconsommation de {{ 0.153 | minus: 0.027 | Wh }} par rapport à la porte en attente sur la même durée, ce qui correspond à 1 minute 50 de fonctionnement en attente.
 
 La consommation après la fin du fonctionnement du moteur est très similaire à ce qu'elle était lors de l'ouverture.
 

@@ -455,19 +455,24 @@ function getStatsFromCounterSamples(profileStringId, profile, samples, range = "
 
   // Calculate the duration including the first sample's interval
   let firstSampleInterval;
+  let firstSampleActualInterval; // The actual interval of the first sample (before range clipping)
   if (start > -Infinity && firstSample > 0) {
     // If a specific start range was specified, use the time from the range start to the first sample
+    firstSampleActualInterval = firstSample == 0 ? profile.meta.interval : (samples.time[firstSample] - samples.time[firstSample - 1]);
     firstSampleInterval = time(firstSample) - start;
   } else {
     // Otherwise use the regular sampling interval (not the actual time to previous sample,
     // which could be much longer if zeros were merged)
     firstSampleInterval = profile.meta.interval;
+    firstSampleActualInterval = firstSampleInterval;
   }
   let durationMs = Math.min(end, time(lastSample)) - time(firstSample) + firstSampleInterval;
 
-  let energyWh = samples.count.slice(firstSample, lastSample + 1).reduce(function sampleReducer(acc, val) {
+  // Calculate energy, adjusting the first sample proportionally if it's clipped by the range
+  let firstSampleEnergyRatio = firstSampleInterval / firstSampleActualInterval;
+  let energyWh = samples.count.slice(firstSample + 1, lastSample + 1).reduce(function sampleReducer(acc, val) {
     return acc + val;
-  }) / 1e12;
+  }, samples.count[firstSample] * firstSampleEnergyRatio) / 1e12;
 
   let stats = {
     durationMs, energyWh,
