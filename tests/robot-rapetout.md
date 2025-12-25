@@ -62,9 +62,9 @@ Une surprise sur l'enregistrement est la différence entre les puissances mesur�
 
 La puissance n'est pas constante au cours du temps, on devine que la puissance consommée varie en fonction de la résistance rencontrée pour faire tourner le disque face aux carottes, et donc que lorsque plus de morceaux de carottes sont présentés simultanément, la puissance mesurée augmente.
 
-La puissance moyenne ({{ 46.8 | W }}) est presque {{ 46.8 | divided_by: 25 | round }} fois supérieure à la puissance indiquée.
+La puissance moyenne en fonctionnement ({{ 46.8 | W }}) est presque {{ 46.8 | divided_by: 25 | round }} fois supérieure à la puissance indiquée.
 
-Même la puissance moyenne ({{ 28.3 | W }}), qui est nettement plus basse puisqu'elle prend en compte les nombreuses pauses dans le fonctionnement du moteur, est supérieure à la puissance nominale.
+Même la puissance moyenne sur l'ensemble de la mesure ({{ 28.1 | W }}), qui est nettement plus basse puisqu'elle prend en compte les nombreuses pauses dans le fonctionnement du moteur, est supérieure à la puissance nominale.
 
 La puissance au repos est nulle, le robot ne contenant pas d'électronique, il n'y a aucune consommation lorsqu'on ne l'utilise pas, même si on oublie de le débrancher.
 

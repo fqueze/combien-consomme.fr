@@ -167,14 +167,14 @@ Pendant les 2 premières secondes de l'enregistrement, la puissance mesurée att
 Après le pic de démarrage, la consommation est assez stable pendant 5 minutes :  
 {% profile "freebox-mini4k-freeplug-seul.json.gz" '{"name":"FreePlug seul - zoom sur 5 minutes","range":"84126m302904"}' %}
 
-La puissance mesurée varie entre {{ 1.2 | W }} et {{ 1.6 | W }}, avec une puissance moyenne de {{ 1.35 | W }}. Pendant ces 5 minutes, le voyant du FreePlug reste allumé en vert de façon permanente. On peut supposer que la communication CPL est active pendant ce temps.
+La puissance mesurée varie entre {{ 1.2 | W }} et {{ 1.6 | W }}, avec une puissance moyenne de {{ 1.34 | W }}. Pendant ces 5 minutes, le voyant du FreePlug reste allumé en vert de façon permanente. On peut supposer que la communication CPL est active pendant ce temps.
 
 Une fois ces 5 premières minutes passées, le voyant se met à clignoter lentement, et la consommation est beaucoup plus faible :
 {% profile "freebox-mini4k-freeplug-seul.json.gz" '{"name":"FreePlug seul - en veille","range":"387029m3625658"}' %}
 
-On observe quelques variations, d'amplitude suffisante pour exclure qu'elles soient causées uniquement par le bruit de l'appareil de mesure. La puissance moyenne mesurée de {{ 0.0627 | W }} correspondrait à une consommation de {{ 0.0627 | W€PerDay }} par jour, soit {{ 0.0627 | W€PerYear }} par an.
+On observe quelques variations, d'amplitude suffisante pour exclure qu'elles soient causées uniquement par le bruit de l'appareil de mesure. La puissance moyenne mesurée de {{ 0.0626 | W }} correspondrait à une consommation de {{ 0.0626 | W€PerDay }} par jour, soit {{ 0.0626 | W€PerYear }} par an.
 
-Si nous gardons la supposition que la différence de consommation entre le FreePlug avec le voyant vert fixe et le voyant vert clignotant est due à l'utilisation ou non des fonctions CPL, nous pouvons alors estimer l'économie d'énergie liée à l'utilisation d'un câble réseau pour relier directement le Freebox Server au Freebox Player à la différence entre la consommation du FreePlug avec CPL actif ({{ 1.35 | W }} en moyenne) et inactif ({{ 0.0627 | W }} en moyenne), soit {{ 1.35 | minus: 0.0627 | W }}. Si on suppose que le Freebox Player reste en veille toute l'année et est connecté par CPL, il consommera {{ 1.35 | minus: 0.0627 | W€PerYear }} de plus par an que s'il est connecté par un câble réseau.
+Si nous gardons la supposition que la différence de consommation entre le FreePlug avec le voyant vert fixe et le voyant vert clignotant est due à l'utilisation ou non des fonctions CPL, nous pouvons alors estimer l'économie d'énergie liée à l'utilisation d'un câble réseau pour relier directement le Freebox Server au Freebox Player à la différence entre la consommation du FreePlug avec CPL actif ({{ 1.34 | W }} en moyenne) et inactif ({{ 0.0626 | W }} en moyenne), soit {{ 1.34 | minus: 0.0626 | W }}. Si on suppose que le Freebox Player reste en veille toute l'année et est connecté par CPL, il consommera {{ 1.34 | minus: 0.0626 | W€PerYear }} de plus par an que s'il est connecté par un câble réseau.
 
 
 ### Boîtier fibre
@@ -241,7 +241,7 @@ Soit un total de {{ 8.3 | divided_by: 6 | plus: 17.1 | W€PerYear }} par an.
 
 Si le boîtier Player reste en veille quand il n'est pas utilisé, on ajoute {{ 5.90 | W }} pendant 20 heures par jour, soit {{ 5.90 | times: 20 | Wh€PerYear }} de plus par an.
 
-Si le boîtier Player est connecté par un câble réseau plutôt que par le CPL, on retire {{ 1.35 | minus: 0.0627 | W }} 4 heures par jour, soit {{ 1.35 | minus: 0.0627 | times: 4 | Wh€PerYear }} par an.
+Si le boîtier Player est connecté par un câble réseau plutôt que par le CPL, on retire {{ 1.34 | minus: 0.0626 | W }} 4 heures par jour, soit {{ 1.34 | minus: 0.0626 | times: 4 | Wh€PerYear }} par an.
 
 La consommation totale annuelle de cette Freebox sera donc comprise entre {{ 17.1 | W€PerYear }} si l'abonnement a été souscrit uniquement pour avoir internet et que le Player reste dans son carton, et {{ 17.1 | plus: 8.30 | W€PerYear }} si la télé reste allumée tout le temps.
 

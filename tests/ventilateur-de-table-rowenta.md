@@ -70,16 +70,16 @@ Même utilisé quotidiennement chaque été, ce ventilateur reste un appareil à
 
 ### Impact de l'échauffement du moteur sur la consommation
 
-Sur l'enregistrement de 5 minutes, la consommation moyenne a été mesurée à {{ 30.4 | W }}, alors que sur l'enregistrement de 4 heures, la moyenne est descendue à {{ 29.0 | W }}.
+Sur l'enregistrement de 5 minutes, la consommation moyenne a été mesurée à {{ 30.3 | W }}, alors que sur l'enregistrement de 4 heures, la moyenne est descendue à {{ 29.0 | W }}.
 
 Pour observer mieux ce phénomène, prenons un échantillon de 5 minutes toutes les heures (après le pic de consommation initial du démarrage du moteur) :  
 {% profile "ventilateur-de-table-rowenta-26h.json.gz" '{"name":"5 premières minutes","range":"7667m300529"}' %}
 
-Sur les 5 premières minutes, la consommation moyenne est à nouveau mesurée à {{ 30.4 | W }}.
+Sur les 5 premières minutes, la consommation moyenne est à nouveau mesurée à {{ 30.3 | W }}.
 
 {% profile "ventilateur-de-table-rowenta-26h.json.gz" '{"name":"5 minutes au bout d\'une heure","range":"3579980m300529"}' %}
 
-Une heure plus tard, elle est descendue à {{ 29.2 | W }}.
+Une heure plus tard, elle est descendue à {{ 29.1 | W }}.
 
 {% profile "ventilateur-de-table-rowenta-26h.json.gz" '{"name":"5 minutes au bout de 2 heures","range":"7183001m300529"}' %}
 
@@ -87,7 +87,7 @@ Au bout de 2 heures, elle est mesurée à {{ 29.0 | W }}.
 
 {% profile "ventilateur-de-table-rowenta-26h.json.gz" '{"name":"5 minutes au bout de 3 heures","range":"10796257m300529"}' %}
 
-Au bout de 3 heures, elle est à {{ 28.8 | W }}.
+Au bout de 3 heures, elle est à {{ 28.7 | W }}.
 
 {% profile "ventilateur-de-table-rowenta-26h.json.gz" '{"name":"5 minutes au bout de 4 heures","range":"14399988m300652"}' %}
 

@@ -80,7 +80,7 @@ L'alternance entre consommation élevée ou faible est probablement causée par 
 Zoomons maintenant sur le début du cycle pour regarder de façon plus détaillée le fonctionnement.
 {% profile "yaourtiere-seb-multi-delices.json.gz" '{"name":"Zoom sur les 30 premières minutes","range":"m1800285"}' %}
 
-La puissance moyenne sur la première demi-heure du cycle, {{ 56.7 | W }}, est très supérieure à la puissance moyenne sur la totalité du cycle. Cela s'explique car la yaourtière commence par chauffer en continu pendant 1 minute 40. Elle alterne ensuite entre des périodes de chauffe d'environ 30 secondes et des pauses d'un peu plus de 5 minutes. Ces durées ne sont pas parfaitement régulières, confirmant que l'allumage de la résistance est contrôlé par un thermostat plutôt que par une minuterie.
+La puissance moyenne sur la première demi-heure du cycle, {{ 56.6 | W }}, est très supérieure à la puissance moyenne sur la totalité du cycle. Cela s'explique car la yaourtière commence par chauffer en continu pendant 1 minute 40. Elle alterne ensuite entre des périodes de chauffe d'environ 30 secondes et des pauses d'un peu plus de 5 minutes. Ces durées ne sont pas parfaitement régulières, confirmant que l'allumage de la résistance est contrôlé par un thermostat plutôt que par une minuterie.
 
 #### Changement après 1 heure 30
 

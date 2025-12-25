@@ -12,7 +12,7 @@ Maman l'a achetée pour hacher la viande quand j'étais petit. Mamie l'a égalem
 {% tldr %}
 - hacher un bac de poisson cru consomme environ {{ 1.00 | Wh€ }}, avec une puissance maximale de {{ 625 | W }} ;
 - il faut hacher environ {{ 1 | countPer€: 0.01 }} bacs de poisson pour dépenser un centime ;
-- si le mixeur reste branché sans être utilisé, il consommera inutilement {{ 0.277 | W€PerYear }} par an (1 centime tous les {{ 0.277 | times: 24 | countPer€: 0.01 }} jours).
+- si le mixeur reste branché sans être utilisé, il consommera inutilement {{ 0.276 | W€PerYear }} par an (1 centime tous les {{ 0.276 | times: 24 | countPer€: 0.01 }} jours).
 {% endtldr %}
 
 ## Le matériel
@@ -81,9 +81,9 @@ Lorsque le hachoir est branché mais n'est pas utilisé, une petite lampe rouge 
 {% profile "moulinette-s.json.gz" '{"name":"Consommation en attente","range":"261279m149941"}' %}
 
 La forme du graphique indiquant une alternance de puissances mesurées à {{ 0 | W }} et à des valeurs non nulles mais inférieures à {{ 1 | W }} est ici trompeuse, elle reflète probablement une dépassement de la limite de précision de l'appareil de mesure utilisé. Il est probable que la puissance consommée lorsque le moteur ne tourne pas soit à peu près stable.
-Sur l'enregistrement de la consommation, cela correspond à une puissance moyenne de {{ 0.277 | W }}.
+Sur l'enregistrement de la consommation, cela correspond à une puissance moyenne de {{ 0.276 | W }}.
 
-Pour dépenser un centime d'électricité, il faudrait laisser l'appareil branché sans l'utiliser pendant {{ 0.277 | times: 24 | countPer€: 0.01 }} jours. S'il reste branché tout le temps, cela consommera {{ 0.277 | W€PerYear }} par an.
+Pour dépenser un centime d'électricité, il faudrait laisser l'appareil branché sans l'utiliser pendant {{ 0.276 | times: 24 | countPer€: 0.01 }} jours. S'il reste branché tout le temps, cela consommera {{ 0.276 | W€PerYear }} par an.
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de cette moulinette, on pourrait :

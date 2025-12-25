@@ -75,7 +75,7 @@ Si on laisse le gaufrier chauffer à vide pendant {{ 603195 | divided_by: 1000 |
 
 {% profile "soiree-gaufres.json.gz" '{"name": "Chauffage en continu pendant 10 minutes incluant le préchauffage", "range": "131357m603195"}' %}
 
-Pendant cette phase, l'appareil chauffe avec une puissance moyenne de {{ 772 | W }} et consomme {{ 129 | Wh€ }}.
+Pendant cette phase, l'appareil chauffe avec une puissance moyenne de {{ 770 | W }} et consomme {{ 129 | Wh€ }}.
 
 Dans la pratique, nous n'avons pas attendu tout ce temps. Après seulement quelques minutes de préchauffage, impatients de commencer, nous avons lancé la première paire de gaufres. Résultat : elle a collé aux plaques et la cuisson était inégale.
 
@@ -113,7 +113,7 @@ Pour le plat principal, nous avons préparé des gaufres salées à base de pata
 {% profile "soiree-gaufres.json.gz" '{"name": "Gaufres à la patate douce", "range": "120890m3000988"}' %}
 {% comment %}draft: 6 paires de gaufres, la pâtes à gaufres à la patate douce était épaisse.{% endcomment %}
 
-Cette phase consomme {{ 476 | Wh€ }} au total. La puissance moyenne est de {{ 573 | W }}. Nous mangions les gaufres au fur et à mesure, pendant que la paire suivante cuisait dans le gaufrier. Le rythme était soutenu, avec peu d'interruption entre les cuissons.
+Cette phase consomme {{ 476 | Wh€ }} au total. La puissance moyenne est de {{ 571 | W }}. Nous mangions les gaufres au fur et à mesure, pendant que la paire suivante cuisait dans le gaufrier. Le rythme était soutenu, avec peu d'interruption entre les cuissons.
 
 {% image "./images/soiree-gaufres-boules-patate-douce.jpg" "Deux portions de pâte à la patate douce déposées sur le gaufrier" "500w" 500 %}
 {% comment %}2 portions de pâte à la patate douce déposées sur le gaufrier. Cette pâte est épaisse et ne coule pas du tout à l'intérieur des rainures du gaufrier.{% endcomment %}
@@ -142,7 +142,7 @@ La cuisson de 8 paires de gaufres dure {{ 2525422 | divided_by: 1000 | s }} :
 
 Cette phase consomme {{ 355 | Wh€ }}, soit environ {{ 355 | divided_by: 8 | Wh€ }} par paire de gaufres. C'est légèrement moins que les gaufres à la patate douce, probablement parce que la pâte liquide transmet mieux la chaleur et cuit un peu plus rapidement.
 
-La puissance moyenne de {{ 527 | W }} est un peu plus faible que pour les gaufres salées. Le rythme de cuisson était pourtant toujours continu, mais les périodes de non-chauffe semblent légèrement plus longues. Peut-être le gaufrier refroidit-il moins vite pendant la cuisson des gaufres sucrées ?
+La puissance moyenne de {{ 507 | W }} est un peu plus faible que pour les gaufres salées. Le rythme de cuisson était pourtant toujours continu, mais les périodes de non-chauffe semblent légèrement plus longues. Peut-être le gaufrier refroidit-il moins vite pendant la cuisson des gaufres sucrées ?
 
 ### Après utilisation
 

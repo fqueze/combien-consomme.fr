@@ -59,7 +59,7 @@ Chaque cycle dure 30 secondes. Lorsque le four ne chauffe pas, la puissance cons
 
 Lorsque le four chauffe, on observe la même chose que lorsqu'il était réglé à sa puissance maximale, mais pendant seulement 5 secondes. On observe également le démarrage du chauffage qui prend environ 3 secondes à une puissance intermédiaire d'environ {{ 150 | W }}.
 
-Le four chauffant 5 secondes toutes les 30 secondes, on s'attendrait à une puissance moyenne 6 fois inférieure à la puissance moyenne mesurée lorsque le four était réglé au maximum, soit environ {{ 230 | W }}, mais la puissance moyenne mesurée est de {{ 358 | W }}. Le programme décongélation a donc une efficacité énergétique inférieure à l'utilisation du four au maximum. Ce n'est pas étonnant puisqu'on a vu que la consommation n'était pas nulle pendant les périodes de non-chauffe, et augmentait pour chaque redémarrage du chauffage.
+Le four chauffant 5 secondes toutes les 30 secondes, on s'attendrait à une puissance moyenne 6 fois inférieure à la puissance moyenne mesurée lorsque le four était réglé au maximum, soit environ {{ 230 | W }}, mais la puissance moyenne mesurée est de {{ 357 | W }}. Le programme décongélation a donc une efficacité énergétique inférieure à l'utilisation du four au maximum. Ce n'est pas étonnant puisqu'on a vu que la consommation n'était pas nulle pendant les périodes de non-chauffe, et augmentait pour chaque redémarrage du chauffage.
 
 ### Autres modes de puissance
 
@@ -70,7 +70,7 @@ Testons maintenant le comportement pour toutes les autres positions du bouton de
 #### Force « I »
 {% profile "micro-ondes.json.gz" '{"name": "Force « I »", "range": "5302864m123135"}' %}
 
-À la force « I », le four chauffe 13 secondes toutes les 30 secondes. La puissance moyenne passe à {{ 716 | W }} (alors qu'on s'attendrait à {{ 1400 | divided_by: 30 | times: 13 | W }} — `1400 / 30 * 13`).
+À la force « I », le four chauffe 13 secondes toutes les 30 secondes. La puissance moyenne passe à {{ 715 | W }} (alors qu'on s'attendrait à {{ 1400 | divided_by: 30 | times: 13 | W }} — `1400 / 30 * 13`).
 
 La puissance médiane ici mesurée à {{ 175 | W }} correspond à la puissance lorsque le four démarre la chauffe.
 

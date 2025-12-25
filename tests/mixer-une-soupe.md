@@ -94,7 +94,7 @@ En fin de mixage, lorsque le mélange est devenu homogène, la consommation rede
 {% profile "mixer-une-soupe.json.gz" '{"name": "Fin du mixage", "range": "698211m55155"}' %}
 {% comment %}draft: sur la fin du mixage où le mélange est homogène, et la consommation est redescendue.{% endcomment %}
 
-Sur cette phase de {{ 55155 | divided_by: 1000 | s }}, la puissance est stable : la moyenne est de {{ 104 | W }}, la médiane de {{ 107 | W }}, et le maximum de {{ 117 | W }}. Ces valeurs proches indiquent une consommation constante. Comparé au début du mixage, c'est {{ 125 | percentLess: 104 }}. La soupe est maintenant lisse et n'oppose plus beaucoup de résistance aux lames du mixeur.
+Sur cette phase de {{ 55155 | divided_by: 1000 | s }}, la puissance est stable : la moyenne est de {{ 103 | W }}, la médiane de {{ 107 | W }}, et le maximum de {{ 117 | W }}. Ces valeurs proches indiquent une consommation constante. Comparé au début du mixage, c'est {{ 125 | percentLess: 103 }}. La soupe est maintenant lisse et n'oppose plus beaucoup de résistance aux lames du mixeur.
 
 {% image "./images/mixer-une-soupe-resultat.jpg" "Casserole avec la soupe mixée, lisse et homogène" "500w" 500 %}
 {% comment %}la soupe une fois mixée, assez épaisse{% endcomment %}
@@ -114,9 +114,9 @@ Lorsque le mixeur reste branché sans être utilisé, une petite lumière bleue 
 {% profile "mixer-une-soupe.json.gz" '{"name": "Mixeur branché mais inutilisé", "range": "753366m46573"}' %}
 {% comment %}draft: consommation en veille si on oublie de débrancher. une lumière bleue reste allumée sur le dessus du mixeur{% endcomment %}
 
-La consommation moyenne est de {{ 0.187 | W }}, ce qui est du même ordre de grandeur que les {{ 0.189 | W }} mesurés lors du test du houmous. Sur cette mesure courte, on observe une alternance entre 0 et une valeur inférieure à 1 W, ce qui correspond aux limites de précision de la prise connectée pour ces très faibles puissances.
+La consommation moyenne est de {{ 0.185 | W }}, ce qui est du même ordre de grandeur que les {{ 0.189 | W }} mesurés lors du test du houmous. Sur cette mesure courte, on observe une alternance entre 0 et une valeur inférieure à 1 W, ce qui correspond aux limites de précision de la prise connectée pour ces très faibles puissances.
 
-Si le mixeur reste branché en permanence, il consommera {{ 0.187 | W€PerYear }} par an. C'est peu, mais pour un appareil qui n'est utilisé que quelques minutes par-ci par-là, cela représente une consommation inutile qu'on peut facilement éviter en débranchant le mixeur après utilisation.
+Si le mixeur reste branché en permanence, il consommera {{ 0.185 | W€PerYear }} par an. C'est peu, mais pour un appareil qui n'est utilisé que quelques minutes par-ci par-là, cela représente une consommation inutile qu'on peut facilement éviter en débranchant le mixeur après utilisation.
 
 ### Coût d'usage
 

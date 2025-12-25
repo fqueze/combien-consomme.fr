@@ -46,7 +46,7 @@ La consommation maximale mesurée ({{ 1853.9 | W }}) est maintenant très proche
 
 On remarque sur le graphique que la consommation varie beaucoup d'un instant à un autre. Les creux à {{ 0 | W }} correspondent évidemment à des moments où la tondeuse était arrêtée car je déplaçais la rallonge. Les pics correspondent aux moments où le moteur forçait en rencontrant des herbes plus hautes, voire à des moments où la tondeuse se bloquait presque (le moteur ralentissait) avec un bourrage d'herbe, et où j'ai dû incliner la tondeuse pour que l'herbe s'évacue par les côtés.
 
-Les consommations médiane ({{ 1118.2 | W }}) et moyenne ({{ 1074.58 | W }}) sont assez proches, et sont nettement en dessous de la puissance indiquée sur l'étiquette.
+Les consommations médiane ({{ 1111.9 | W }}) et moyenne ({{ 1074.58 | W }}) sont assez proches, et sont nettement en dessous de la puissance indiquée sur l'étiquette.
 
 ### Sur une tonte d'herbes plus régulières
 

@@ -453,7 +453,18 @@ function getStatsFromCounterSamples(profileStringId, profile, samples, range = "
   }
   powerValues.sort(function compare(a, b) { return a - b; });
 
-  let durationMs = Math.min(end, time(lastSample)) - time(firstSample);
+  // Calculate the duration including the first sample's interval
+  let firstSampleInterval;
+  if (start > -Infinity && firstSample > 0) {
+    // If a specific start range was specified, use the time from the range start to the first sample
+    firstSampleInterval = time(firstSample) - start;
+  } else {
+    // Otherwise use the regular sampling interval (not the actual time to previous sample,
+    // which could be much longer if zeros were merged)
+    firstSampleInterval = profile.meta.interval;
+  }
+  let durationMs = Math.min(end, time(lastSample)) - time(firstSample) + firstSampleInterval;
+
   let energyWh = samples.count.slice(firstSample, lastSample + 1).reduce(function sampleReducer(acc, val) {
     return acc + val;
   }) / 1e12;
@@ -466,7 +477,7 @@ function getStatsFromCounterSamples(profileStringId, profile, samples, range = "
   };
 
   b.after();
-  return {stats, firstSample, lastSample, values};
+  return {stats, firstSample, lastSample, values, firstSampleInterval};
 }
 
 function profilerLink(profilePath) {
@@ -604,7 +615,7 @@ async function profileShortcode(profile, options, userBenchmarks) {
     result += `<div class="profile">`
   }
   for (let {name, description, samples} of counters) {
-    let {stats, firstSample, lastSample, values} =
+    let {stats, firstSample, lastSample, values, firstSampleInterval} =
       getStatsFromCounterSamples(profileStringId, {meta}, samples, options.range, multiCounters);
     if (options.debug) {
       console.log(profile, options, stats);
@@ -614,7 +625,7 @@ async function profileShortcode(profile, options, userBenchmarks) {
     }
     let graph = values.map(function xAndYFromValues(v, i) {
       return ({
-        x: (samples.time[firstSample + i] - samples.time[firstSample]) / stats.durationMs,
+        x: (samples.time[firstSample + i] - samples.time[firstSample] + firstSampleInterval) / stats.durationMs,
         y: v / stats.maxPowerW});
     });
     let svg = `<div><svg viewBox="0 0 ${graphWidth} ${graphHeight}">`

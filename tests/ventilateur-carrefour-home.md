@@ -52,9 +52,9 @@ Zoomons maintenant sur chacune des vitesses :
 {% profile "ventilateur-carrefour-home.json.gz" '{"name":"Vitesse 3","range":"314386m119507"}' %}
 
 Les puissances moyennes relevées sont :
-- Vitesse 1 : environ {{ 28.4 | W }}
-- Vitesse 2 : environ {{ 30.5 | W }} ({{ 30.5 | percentMore: 28.4 }} de plus)
-- Vitesse 3 : environ {{ 37 | W }} ({{ 37 | percentMore: 30.5 }} de plus)
+- Vitesse 1 : environ {{ 28.3 | W }}
+- Vitesse 2 : environ {{ 30.5 | W }} ({{ 30.5 | percentMore: 28.3 }} de plus)
+- Vitesse 3 : environ {{ 36.9 | W }} ({{ 36.9 | percentMore: 30.5 }} de plus)
 
 La différence de puissance entre chacune des vitesses est étonnamment faible. Elle correspond cependant au ressenti lorsqu'on se place en face du ventilateur : on ne sent pas beaucoup plus d'air en passant de la vitesse 1 à la vitesse 2 ; on entend seulement une légère différence dans le niveau sonore.
 
