@@ -528,3 +528,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Mesure avec ISW8001 nécessaire : Shelly Plus Plug S trop imprécis pour cette faible consommation
 - Rétro-éclairage LCD provoque des pics jusqu'à 1.44 W
 - Fonctionnement sur pile (9 V) éliminerait la consommation permanente de l'adaptateur
+
+### minitel
+**Title:** un Minitel
+**Device:** Minitel 1B (Radiotechnique Industrielle et Commerciale, 1990)
+**Key findings:**
+- Consommation stable autour de 18,6 W que l'écran soit actif ou en veille
+- Le modem augmente légèrement la consommation à 19,2 W pendant 42 secondes
+- La luminosité réglable n'a aucun impact visible sur la consommation électrique
+- Une utilisation typique de 3 minutes pour consulter l'annuaire coûte moins d'un centime
+- Si branché en permanence, consomme 446 Wh par jour soit 163 kWh par an
