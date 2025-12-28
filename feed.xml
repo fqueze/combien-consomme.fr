@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-12-25T22:09:41Z</updated>
+<updated>2025-12-28T01:08:56Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un Minitel</title>
+ <link href="https://combien-consomme.fr/tests/minitel/"/>
+ <updated>2025-12-27T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/minitel/</id>
+ <summary xml:lang="fr" type="html">Le Minitel est l&#39;ancêtre français d&#39;Internet, qui a permis pendant trois décennies l&#39;accès à des services télématiques via le réseau téléphonique. Quelle était la consommation électrique de ces terminaux qui ont équipé des millions de foyers français ?</summary>
+</entry>
 <entry>
  <title>une machine à café expresso</title>
  <link href="https://combien-consomme.fr/tests/machine-a-cafe-expresso/"/>
@@ -142,12 +149,5 @@
  <updated>2024-12-25T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/guirlande-electrique/</id>
  <summary xml:lang="fr" type="html">C&#39;est Noël, le sapin trône dans le salon. Il brille de mille feux. De combien ces illuminations augmentent-elles le coût des fêtes ?</summary>
-</entry>
-<entry>
- <title>une « moulinette S » de Moulinex</title>
- <link href="https://combien-consomme.fr/tests/moulinette-s/"/>
- <updated>2024-12-24T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/moulinette-s/</id>
- <summary xml:lang="fr" type="html">Maman l&#39;a achetée pour hacher la viande quand j&#39;étais petit. Mamie l&#39;a également utilisée quand elle n&#39;avait plus beaucoup de dents. Quelle est la consommation de ce vénérable mixeur qui reprend encore parfois du service ?</summary>
 </entry>
 </feed>
