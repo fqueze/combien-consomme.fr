@@ -470,15 +470,12 @@ document.addEventListener('DOMContentLoaded', function() {
               ${range.shortcode ? `<code class="range-shortcode">${range.shortcode}</code>` : ''}
               <button class="delete-range-btn" data-range-id="${range.id}" title="Supprimer">✕</button>
             </div>
-            ${range.shortcode ? `
-              <textarea class="range-description" data-range-id="${range.id}" placeholder="Description (optionnel) : qu'est-ce qui est intéressant dans cette mesure ?">${range.description || ''}</textarea>
-            ` : ''}
           `;
           savedRangesList.appendChild(item);
 
           // Fetch and render the shortcode
           if (range.shortcode) {
-            renderPromises.push(renderShortcode(range.shortcode, range.id));
+            renderPromises.push(renderShortcode(range.shortcode, range.id, range.description));
           }
         }
 
@@ -609,7 +606,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  async function renderShortcode(shortcode, rangeId) {
+  async function renderShortcode(shortcode, rangeId, description) {
     // Find the saved-range-item container
     const item = document.querySelector(`.saved-range-item:has([data-range-id="${rangeId}"])`);
     if (!item) return;
@@ -642,10 +639,18 @@ document.addEventListener('DOMContentLoaded', function() {
         throw new Error('No HTML returned');
       }
 
-      // Append the rendered HTML after the description textarea
+      // Append the rendered HTML
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = result.html;
       item.appendChild(tempDiv.firstChild);
+
+      // Append the description textarea after the preview
+      const textarea = document.createElement('textarea');
+      textarea.className = 'range-description';
+      textarea.dataset.rangeId = rangeId;
+      textarea.placeholder = 'Description (optionnel) : qu\'est-ce qui est intéressant dans cette mesure ?';
+      textarea.value = description || '';
+      item.appendChild(textarea);
     } catch (error) {
       console.error('Error rendering shortcode:', error);
       const errorDiv = document.createElement('div');
