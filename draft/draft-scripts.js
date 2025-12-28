@@ -153,7 +153,8 @@ async function post(path, data) {
     body: JSON.stringify(data)
   });
   if (!response.ok) {
-    throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+    const result = await response.json();
+    throw new Error(result.error || `Server returned ${response.status}: ${response.statusText}`);
   }
   return response.json();
 }
