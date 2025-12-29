@@ -359,12 +359,23 @@ The intro sentence should contain a meaningful fact, not just announce what's co
 3. **Reference images when relevant**
 {% raw %}
 ```markdown
-[Introductory sentence if the image needs context:]
+[Introductory sentence that mentions what the image shows:]
 
 {% image "./images/filename.jpg" "Description" "512w" 512 %}
 {% comment %}draft: [description from draft data, if present]{% endcomment %}
+
+[Optional: Additional sentence after the image explaining details]
 ```
 {% endraw %}
+
+**CRITICAL: NEVER insert an image without text that references it**
+- ❌ **ABSOLUTELY FORBIDDEN:** Inserting an image tag with NO surrounding text that mentions or describes what's in the image
+- ❌ **WRONG:** Having multiple images in a row with no text between them
+- ✅ **REQUIRED:** Every image MUST have text immediately before it (and/or after it) that explicitly mentions what the reader will see or just saw
+- ✅ **GOOD:** "Au fur et à mesure de la transformation, le jus s'accumule dans la carafe :" [image] "À la fin, la carafe contient 1L :" [image]
+- ❌ **BAD:** [description of profile] [image of result 1] [image of result 2] [next section title]
+
+The image must be integrated into the narrative flow, not just dropped in.
 
 **Content Organization Around Images:**
 
@@ -750,7 +761,8 @@ Before submitting, verify:
 - [ ] Cross-references to similar tests (check existing-tests.md)
 - [ ] For old devices: replacement economics analysis
 - [ ] For food prep: ingredient cost comparison
-- [ ] Images referenced correctly
+- [ ] **CRITICAL: ALL images have text immediately before/after that mentions what's in the image - NO images without surrounding descriptive text**
+- [ ] Images referenced correctly with proper file paths
 - [ ] Conversational first-person tone maintained
 - [ ] Progressive detail (overview → zoom → analysis)
 - [ ] Uncertainty acknowledged where appropriate
@@ -776,6 +788,7 @@ Once the test is completely written, **reread this entire instruction file from 
 ### DON'T:
 - **Skip tldr or plusloin blocks** (both are REQUIRED)
 - **Make up, estimate, or invent numerical values** - use only measured values from profiles
+- **Insert images without text that describes them** - EVERY image needs text before/after mentioning what's in it
 - Use generic descriptions without specific measured values
 - Forget to address standby consumption (full analysis or brief mention as appropriate)
 - Forget annual cost calculations
@@ -783,6 +796,7 @@ Once the test is completely written, **reread this entire instruction file from 
 - Write without checking existing-tests.md for comparisons
 - Use overly certain language for uncertain observations
 - Skip the progression from overview to detail
+- Have multiple images in a row with no text between them
 
 ### DO:
 - **Always include tldr and plusloin blocks** (REQUIRED)

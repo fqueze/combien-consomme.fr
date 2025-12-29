@@ -538,3 +538,14 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - La luminosité réglable n'a aucun impact visible sur la consommation électrique
 - Une utilisation typique de 3 minutes pour consulter l'annuaire coûte moins d'un centime
 - Si branché en permanence, consomme 446 Wh par jour soit 163 kWh par an
+
+### centrifugeuse-philips
+**Title:** une centrifugeuse Philips HR1858
+**Device:** Centrifugeuse Philips HR1858 (650W, 2 vitesses)
+**Key findings:**
+- Coût par pomme : environ 0,83 Wh (moins d'un demi-centime)
+- Transformation de 4 pommes en jus : 3,33 Wh en 1min9s
+- Deux vitesses : vitesse 1 (33W à vide) pour fruits tendres, vitesse 2 (132W à vide) pour fruits durs
+- Puissance maximale mesurée : 948W lors de la transformation
+- Consommation branchée mais éteinte : 0,0151W (négligeable)
+- Couper les fruits facilite le passage et évite les blocages dans la cheminée
