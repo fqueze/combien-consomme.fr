@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2025-12-28T01:08:56Z</updated>
+<updated>2025-12-29T22:16:54Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une centrifugeuse Philips HR1858</title>
+ <link href="https://combien-consomme.fr/tests/centrifugeuse-philips/"/>
+ <updated>2025-12-29T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/centrifugeuse-philips/</id>
+ <summary xml:lang="fr" type="html">Préparer un jus de fruit frais à la maison permet de profiter pleinement des vitamines et du goût des fruits de saison. Quel est le coût énergétique pour transformer des pommes et des oranges en jus maison ?</summary>
+</entry>
 <entry>
  <title>un Minitel</title>
  <link href="https://combien-consomme.fr/tests/minitel/"/>
@@ -142,12 +149,5 @@
  <updated>2024-12-27T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/pompe-de-relevage-de-condensats-sanicondens-eco/</id>
  <summary xml:lang="fr" type="html">Le plombier a installé le cumulus dans un endroit où l&#39;évacuation naturelle de l&#39;eau sortant du groupe sécurité est impossible. Quelle erreur ! Grâce à l&#39;installation d&#39;une pompe de relevage, il ne sera plus nécessaire de vider un seau d&#39;eau une fois par semaine. Ce changement impactera-t-il la facture d&#39;électricité ?</summary>
-</entry>
-<entry>
- <title>une guirlande électrique</title>
- <link href="https://combien-consomme.fr/tests/guirlande-electrique/"/>
- <updated>2024-12-25T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/guirlande-electrique/</id>
- <summary xml:lang="fr" type="html">C&#39;est Noël, le sapin trône dans le salon. Il brille de mille feux. De combien ces illuminations augmentent-elles le coût des fêtes ?</summary>
 </entry>
 </feed>
