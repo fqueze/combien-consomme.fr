@@ -1,15 +1,18 @@
----
-pagination:
-  data: drafts.folders
-  size: 1
-  alias: folder
-layout: base-layout.njk
-isDraft: true
-eleventyComputed:
-  title: "{{ folder.name }}"
-  pagetitle: "🚧 {{ folder.name }}"
-  draftSlug: "{{ folder.slug }}"
-  permalink: "/draft/{{ folder.slug }}/index.html"
+---js
+{
+  pagination: {
+    data: "drafts.folders",
+    size: 1,
+    alias: "folder"
+  },
+  layout: "base-layout.njk",
+  isDraft: true,
+  permalink: (data) => `/draft/${data.folder.slug}/index.html`,
+  eleventyComputed: {
+    pagetitle: (data) => `🚧 ${data.folder.name}`,
+    draftSlug: (data) => data.folder.slug
+  }
+}
 ---
 <article data-draft-slug="{{ folder.slug }}">
 <h1>
