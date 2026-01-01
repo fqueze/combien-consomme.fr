@@ -11,7 +11,7 @@ Le Minitel est l'ancêtre français d'Internet, qui a permis pendant trois déce
 <!-- excerpt -->
 
 {% tldr %}
-- Le Minitel consomme {{ 18.6 | W }} lorsqu'il est allumé ({{ 19.2 | W }} lorsque le modem est actif). C'est bien moins que les {{ 35 | W }} de puissance nominale.
+- Le Minitel consomme {{ 18.6 | W }} lorsqu'il est allumé ({{ 19.2 | W }} lorsque le modem est actif). C'est bien moins que les {{ 35 | W }} de puissance nominale, qui prévoit l'alimentation de périphériques comme {% test imprimante-minitel une imprimante %}.
 - Eteint, il ne consomme rien ; pas besoin de débrancher la prise.
 - Le réglage de luminosité ou la veille automatique de l'écran n'ont aucun impact mesurable sur la consommation électrique.
 - Il aurait fallu faire {{ 0.940 | countPer€: 0.01 }} recherches de 3 minutes dans l'annuaire pour dépenser 1 centime d'électricité au tarif actuel.
@@ -75,7 +75,10 @@ PROPRIETE DE L'ETAT PTT
 
 Fin de garantie en 1990{% endcomment %}
 
-L'étiquette indique « 220V ~ 50 Hz 35 W », soit une puissance nominale de {{ 35 | W }}. On note également que l'appareil était « PROPRIETE DE L'ETAT [PTT](https://fr.wikipedia.org/wiki/Postes,_t%C3%A9l%C3%A9graphes_et_t%C3%A9l%C3%A9phones_(France) "Page « Postes, télégraphes et téléphones (France) » sur Wikipédia") » – ces terminaux étaient prêtés gratuitement aux abonnés du téléphone.
+L'étiquette indique « 220V ~ 50 Hz 35 W », soit une puissance nominale de {{ 35 | W }}.
+Comme nous le verrons plus loin dans ce test, cette puissance nominale de {{ 35 | W }} est bien supérieure à la consommation réelle du Minitel. Cette différence s'explique par la possibilité de brancher des périphériques sur la prise péri-informatique à l'arrière du Minitel. Ces périphériques, comme {% test imprimante-minitel l'imprimante du Minitel %}, sont alimentés par le Minitel et peuvent augmenter significativement sa consommation. La puissance nominale de {{ 35 | W }} correspond donc à la consommation maximale de l'ensemble Minitel + périphérique.
+
+On note également que l'appareil était « PROPRIETE DE L'ETAT [PTT](https://fr.wikipedia.org/wiki/Postes,_t%C3%A9l%C3%A9graphes_et_t%C3%A9l%C3%A9phones_(France) "Page « Postes, télégraphes et téléphones (France) » sur Wikipédia") » – ces terminaux étaient prêtés gratuitement aux abonnés du téléphone.
 
 Ce Minitel supporte deux modes de fonctionnement : le mode [Vidéotex](https://fr.wikipedia.org/wiki/Vid%C3%A9otex "Page « Vidéotex » sur Wikipédia") (le mode classique du Minitel français, 40 caractères par ligne) et le mode [ASCII](https://fr.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange "Page « American Standard Code for Information Interchange » sur Wikipédia") permettant d'aller jusqu'à 80 caractères par ligne.
 
@@ -88,7 +91,7 @@ Enfant, j'ai su taper mon prénom sur le clavier du Minitel de mes parents avant
 
 Pour les fêtes de Noël, j'ai eu l'idée de faire revivre le vieux Minitel qui prenait la poussière au garage de mes parents, devenus depuis grands-parents. Je voulais faire vivre à mon enfant l'expérience que j'ai eue à son âge.
 
-J'ai commandé un adaptateur permettant de relier le Minitel à un {% test ordinateur-portable-dell-xps-15 ordinateur moderne %} via sa prise DIN 5 broches :
+J'ai commandé un adaptateur permettant de relier le Minitel à un {% test ordinateur-portable-dell-xps-15 ordinateur moderne %} via sa prise péri-informatique ([DIN](https://fr.wikipedia.org/wiki/Connecteur_DIN "Page « Connecteur DIN » sur Wikipédia") 5 broches) :
 
 {% image "./images/minitel-adaptateur.jpg" "Adaptateur DIN vers USB" "500w" 500 %}
 {% comment %}adaptateur DIN -> USB{% endcomment %}
@@ -98,7 +101,7 @@ Cet adaptateur permet de relier le Minitel à mon MacBook, me donnant ainsi la p
 {% image "./images/minitel-arriere-branche-macbook.jpg" "Minitel connecté à un MacBook via adaptateur USB" "500w" 500 %}
 {% comment %}vue arrière avec le câble adaptateur DIN -> USB connecté à un adaptateur USB A -> USB C lui même connecté à un macbook{% endcomment %}
 
-La communication se fait à 1200 [bauds](https://fr.wikipedia.org/wiki/Baud_(mesure) "Page « Baud (mesure) » sur Wikipédia"), la vitesse par défaut du Minitel (il est possible de passer à 4800 bauds, mais cela nécessite une manipulation à refaire à chaque redémarrage). À l'époque, cette prise DIN servait par exemple à connecter une imprimante. Aujourd'hui, cette connexion bidirectionnelle permet de contrôler entièrement l'affichage et de recevoir les touches tapées au clavier, ce qui ouvre la porte à des jeux simples ou à l'affichage de texte venant d'Internet.
+La communication se fait par défaut à 1200 [bauds](https://fr.wikipedia.org/wiki/Baud_(mesure) "Page « Baud (mesure) » sur Wikipédia"), mais ce modèle de Minitel est également capable de communiquer à 4800 bauds. À l'époque, cette prise servait par exemple à connecter {% test imprimante-minitel une imprimante %}. Aujourd'hui, cette connexion bidirectionnelle permet de contrôler entièrement l'affichage et de recevoir les touches tapées au clavier, ce qui ouvre la porte à des jeux simples ou à l'affichage de texte venant d'Internet.
 
 J'ai écrit [un petit jeu pédagogique](https://github.com/fqueze/minitel?tab=readme-ov-file#jeu-dapprentissage-de-frappe) pour apprendre à mon enfant à taper son prénom. Le mot à taper est facilement configurable lors du démarrage du jeu, et nous avons utilisé « maman » pour ce test. Le mot s'affiche en haut de l'écran : les lettres déjà tapées apparaissent en blanc, celles restantes en gris. En bas, le clavier est représenté avec la lettre suivante à taper qui clignote, permettant de la localiser facilement :
 
@@ -206,5 +209,6 @@ L'écran cathodique du Minitel explique en grande partie cette consommation : ce
 Pour comprendre de façon plus détaillée la consommation du Minitel, on pourrait :
 - mesurer la consommation avec {% post mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001 un wattmètre de précision %} pour quantifier exactement l'impact du réglage de luminosité et de la veille (variations peut-être trop faibles pour être captées par la prise connectée) ;
 - comparer avec d'autres modèles de Minitel (Minitel 2, Magis) pour voir si les générations plus récentes étaient plus économes ;
-- mesurer la consommation d'un Minitel réellement connecté à une ligne téléphonique pendant un appel à un des quelques services Minitels remis en service par des passionnés.
+- mesurer la consommation d'un Minitel réellement connecté à une ligne téléphonique pendant un appel à un des quelques services Minitels remis en service par des passionnés ;
+- mesurer la consommation avec {% test imprimante-minitel un périphérique %} branché sur la prise péri-informatique.
 {% endplusloin %}

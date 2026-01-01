@@ -150,5 +150,6 @@ Pour comprendre de façon plus détaillée la consommation de cette imprimante l
 - imprimer des pages plus ou moins remplies, en noir et blanc ou en couleur, avec ou sans recto-verso, à différent niveaux de qualités, pour voir si cela affecte la consommation d'énergie ;
 - mesurer la consommation avec un appareil permettant une fréquence d'échantillonnage plus élevée afin de distinguer les différentes phases d'une impression ;
 - mesurer de nombreuses fois les mêmes impressions ou l'attente avant la mise en veille pour obtenir une consommation moyenne plus précise ;
-- mesurer la consommation lorsque l'imprimante est éteinte avec un appareil ayant une meilleure précision pour les très faibles consommations.
+- mesurer la consommation lorsque l'imprimante est éteinte avec un appareil ayant une meilleure précision pour les très faibles consommations ;
+- comparer avec d'autres technologies d'impression comme {% test imprimante-minitel l'imprimante thermique du Minitel %} qui consomme beaucoup moins mais avec des capacités d'impression très différentes.
 {% endplusloin %}

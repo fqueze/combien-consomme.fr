@@ -549,3 +549,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Puissance maximale mesurée : 948W lors de la transformation
 - Consommation branchée mais éteinte : 0,0151W (négligeable)
 - Couper les fruits facilite le passage et évite les blocages dans la cheminée
+
+### imprimante-minitel
+**Title:** l'imprimante du Minitel
+**Device:** L'imprimante du Minitel (fabriquée en 1994)
+**Key findings:**
+- L'imprimante ajoute {{ 1.3 | W }} à la consommation du Minitel lorsqu'elle est connectée mais inactive
+- Pendant l’impression, la puissance de l’imprimante atteint 7,40 W au maximum
+- Une impression complète consomme {{ 0.080 | Wh€ }}
+- La méthode d'impression par bouton est plus rapide mais corrompt tous les caractères accentués
+- L'imprimante est alimentée directement par le Minitel, ce qui explique sa puissance nominale de 35 W
