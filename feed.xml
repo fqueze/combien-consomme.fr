@@ -4,18 +4,18 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-01-01T17:17:12Z</updated>
+<updated>2026-01-03T18:47:43Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
 <entry>
- <title>l&#39;imprimante du Minitel</title>
+ <title>« L&#39;imprimante du Minitel »</title>
  <link href="https://combien-consomme.fr/tests/imprimante-minitel/"/>
  <updated>2026-01-01T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/imprimante-minitel/</id>
- <summary xml:lang="fr" type="html">Avant que le web ne se popularise, les Minitels permettaient déjà d&#39;accéder à divers services en ligne. Pour garder une trace des informations consultées, il existait une imprimante dédiée qui se connectait directement au Minitel. Quelle est la consommation électrique de cette relique des années 1990 ?</summary>
+ <summary xml:lang="fr" type="html">Avant que le web ne se popularise, les Minitels permettaient déjà d&#39;accéder à divers services en ligne. Pour garder une trace des informations consultées, il était possible de connecter une imprimante directement au Minitel. Quelle était la consommation électrique de cette relique des années 1990 ?</summary>
 </entry>
 <entry>
  <title>une centrifugeuse Philips HR1858</title>
