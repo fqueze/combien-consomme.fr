@@ -1,12 +1,12 @@
 ---
 layout: test-layout.njk
-title: l'imprimante du Minitel
+title: « L'imprimante du Minitel »
 img: imprimante-minitel.jpg
 date: 2026-01-01
 tags: ['test']
 ---
 
-Avant que le web ne se popularise, les Minitels permettaient déjà d'accéder à divers services en ligne. Pour garder une trace des informations consultées, il existait une imprimante dédiée qui se connectait directement au Minitel. Quelle est la consommation électrique de cette relique des années 1990 ?
+Avant que le web ne se popularise, les Minitels permettaient déjà d'accéder à divers services en ligne. Pour garder une trace des informations consultées, il était possible de connecter une imprimante directement au Minitel. Quelle était la consommation électrique de cette relique des années 1990 ?
 
 <!-- excerpt -->
 
@@ -19,11 +19,13 @@ Avant que le web ne se popularise, les Minitels permettaient déjà d'accéder �
 
 ## Le matériel
 
-{% intro "imprimante-minitel.jpg" "L'imprimante du Minitel" %}
+{% intro "imprimante-minitel.jpg" "« L'imprimante du Minitel »" %}
 
-L'imprimante du Minitel est un périphérique qui se connecte à l'arrière d'un [Minitel](https://fr.wikipedia.org/wiki/Minitel "Page « Minitel » sur Wikipédia") via une prise [DIN](https://fr.wikipedia.org/wiki/Connecteur_DIN "Page « Connecteur DIN » sur Wikipédia") 5 broches appelée « prise péri-informatique ». Elle utilise du [papier thermique](https://fr.wikipedia.org/wiki/Papier_thermique "Page « Papier thermique » sur Wikipédia") sur rouleau pour imprimer le contenu affiché à l'écran. Celle que nous testons ici a été fabriquée fin 1994, comme l'indique son étiquette.
+« L'imprimante du Minitel » est un périphérique qui se connecte à l'arrière d'un [Minitel](https://fr.wikipedia.org/wiki/Minitel "Page « Minitel » sur Wikipédia") via une prise [DIN](https://fr.wikipedia.org/wiki/Connecteur_DIN "Page « Connecteur DIN » sur Wikipédia") 5 broches appelée « prise péri-informatique ». Elle utilise du [papier thermique](https://fr.wikipedia.org/wiki/Papier_thermique "Page « Papier thermique » sur Wikipédia") sur rouleau pour imprimer le contenu affiché à l'écran. Celle que nous testons ici a été fabriquée fin 1994, comme l'indique son étiquette.
 
-Cette imprimante est branchée sur {% test minitel un Minitel 1B que nous avons déjà testé %}. Elle est alimentée directement par le Minitel, sans source d'alimentation externe. C'est cette possibilité de brancher des périphériques qui explique pourquoi le Minitel a une puissance nominale de {{ 35 | W }}, bien supérieure à sa consommation réelle légèrement inférieure à {{ 20 | W }}.
+Ce nom un peu pompeux, inscrit sur le dessus du boîtier, laisse penser qu'il s'agirait de l'unique modèle d'imprimante compatible avec le Minitel. En réalité, [de nombreux modèles d'imprimantes vidéotex](https://www.museeminitel.fr/2018/09/les-imprimantes-videotex/ "Les imprimantes vidéotex – Musée du Minitel") ont été commercialisés depuis les années 1980. Ce modèle particulier, sorti avec la génération de Minitels « Magis », existait en deux versions : « L'imprimante du Minitel » avec prise DIN (celle testée ici), et « L'imprimante Télétel » intégrant un modem pour se brancher directement sur la ligne téléphonique. Cette dernière version était destinée aux Magis dont l'alimentation électrique avait été réduite en supprimant la prise péri-informatique.
+
+Notre imprimante est branchée sur {% test minitel un Minitel 1B que nous avons déjà testé %}. Elle est alimentée directement par le Minitel, sans source d'alimentation externe. C'est cette possibilité de brancher des périphériques qui explique pourquoi le Minitel a une puissance nominale de {{ 35 | W }}, bien supérieure à sa consommation réelle légèrement inférieure à {{ 20 | W }}.
 
 ### Méthode de mesure
 
@@ -56,7 +58,7 @@ L'imprimante se connecte au Minitel via une prise DIN 5 broches :
 
 Voici une vue complète de l'imprimante avec son câble :
 
-{% image "./images/imprimante-minitel-vue-complete-avec-fil.jpg" "L'imprimante du Minitel avec son câble DIN" "500w" 500 %}
+{% image "./images/imprimante-minitel-vue-complete-avec-fil.jpg" "« L'imprimante du Minitel » avec son câble DIN" "500w" 500 %}
 {% comment %}image montrant l'imprimante de dessus dans son ensemble, avec le câble DIN permettant de la relier au minitel débranché, et donc clairement visible sur l'image{% endcomment %}
 
 ### Déroulement du test
@@ -236,7 +238,7 @@ La consommation reste stable à {{ 19.8 | W }} en médiane. Au bout de 4 minutes
 Enfin, j'ai débranché l'imprimante avant d'éteindre le Minitel :
 
 {% profile "imprimante-minitel.json.gz" '{"name": "Déconnexion imprimante puis extinction Minitel", "range": "957079m160604"}' %}
-{% comment %}draft: lorsque j'ai déconnecté l'imprimante du minitel, sa conso a diminué. On retrouve ici la médiane à 18,6W que j'avais dans l'autre test.{% endcomment %}
+{% comment %}draft: lorsque j'ai déconnecté « l'imprimante du Minitel », sa conso a diminué. On retrouve ici la médiane à 18,6W que j'avais dans l'autre test.{% endcomment %}
 
 Lorsque j'ai déconnecté l'imprimante, la consommation a immédiatement chuté. On retrouve une médiane à {{ 18.6 | W }}, identique à celle mesurée lors du {% test minitel test du Minitel %}.
 
