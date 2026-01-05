@@ -181,5 +181,6 @@ Pour comprendre de façon plus détaillée la consommation d'une machine à caf�
 - tester les différentes boissons que la machine peut préparer (simple expresso, double expresso, cappuccino, avec café moulu ou dosettes papier) ;
 - observer le comportement de la machine sur les 9 minutes d'attente avant l'extinction automatique (cycles de maintien en température) ;
 - comparer avec une machine à café automatique avec broyeur intégré, qui nécessite plus d'électronique et de mécanismes ;
-- tester la préparation de plusieurs cafés d'affilée pour quantifier précisément l'économie réalisée en évitant les préchauffages multiples.
+- tester la préparation de plusieurs cafés d'affilée pour quantifier précisément l'économie réalisée en évitant les préchauffages multiples ;
+- comparer avec {% test bouilloire-electrique une bouilloire électrique %} pour préparer du thé ou du café instantané.
 {% endplusloin %}

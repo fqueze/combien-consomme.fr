@@ -559,3 +559,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Une impression complète consomme {{ 0.080 | Wh€ }}
 - La méthode d'impression par bouton est plus rapide mais corrompt tous les caractères accentués
 - L'imprimante est alimentée directement par le Minitel, ce qui explique sa puissance nominale de 35 W
+
+### bouilloire-electrique
+**Title:** une bouilloire électrique
+**Device:** Philips HD 4646
+**Key findings:**
+- Appareil du quotidien très utilisé pour thés, cafés et boissons chaudes
+- Faire bouillir 1 litre d'eau consomme 110 Wh (0,03 €) en 3min10s
+- Puissance stable de 2100W (médiane), conforme à l'étiquette (2000-2400W)
+- Arrêt automatique par coupure mécanique : pas de consommation au repos
+- Coût annuel : 20 € pour 2 utilisations par jour, proche du prix d'achat de la bouilloire

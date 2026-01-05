@@ -109,4 +109,5 @@ Pour mieux comprendre la consommation des fours à micro-ondes, il serait intér
 - tester un modèle plus récent pour voir s'il a un comportement similaire lorsque la puissance sélectionnée n'est pas le maximum.
 - mesurer la consommation en veille d'un four plus moderne ayant de l'électronique avec notamment un affichage de l'heure.
 - mesurer de combien la consommation diminue si on retire l'ampoule qui éclaire l'intérieur du four. Ce n'était pas un éclairage à LED à l'époque !
+- comparer avec {% test bouilloire-electrique une bouilloire électrique %} pour chauffer de l'eau (méthode alternative).
 {% endplusloin %}

@@ -67,4 +67,5 @@ La consommation n'étant pas nulle au repos, il ne faudra pas oublier de débran
 Pour comprendre de façon plus détaillée la consommation de ce chauffe-biberon, on pourrait :
 - mesurer la consommation avec un taux d'échantillonnage plus élevé (50Hz au lieu de 1Hz), de façon à voir des détails, comme par exemple l'impact de la sonnerie qui retentit lorsque la chauffe s'arrête.
 - mesurer avec différents réglages de la minuterie.
+- comparer avec {% test bouilloire-electrique une bouilloire électrique %} pour chauffer de l'eau (méthode alternative pour réchauffer un biberon au bain-marie).
 {% endplusloin %}
