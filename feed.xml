@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-01-05T22:32:56Z</updated>
+<updated>2026-01-08T23:44:57Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un ouvre-boîtes électrique Calor</title>
+ <link href="https://combien-consomme.fr/tests/ouvre-boites-calor/"/>
+ <updated>2026-01-09T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/ouvre-boites-calor/</id>
+ <summary xml:lang="fr" type="html">Cet ouvre-boîtes électrique Calor date de 1974. Je l&#39;ai trouvé à la fin d&#39;un marché aux puces et l&#39;ai pris par curiosité, pour le comparer avec {% test ouvre-boites-electrique un ouvre-boîtes électrique Moulinex %} que nous avions déjà testé. Quel est le coût électrique de l&#39;ouverture automatique d&#39;une boîte de conserve ?</summary>
+</entry>
 <entry>
  <title>une bouilloire électrique</title>
  <link href="https://combien-consomme.fr/tests/bouilloire-electrique/"/>
@@ -142,12 +149,5 @@
  <updated>2025-04-19T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/yaourtiere-seb-multi-delices/</id>
  <summary xml:lang="fr" type="html">Fini les yaourtières de grand-mère qui ne contenaient qu&#39;une simple résistance, place au modèle électronique du 21ième siècle ! Cela change-t-il la quantité d&#39;énergie consommée pour faire des yaourts ?</summary>
-</entry>
-<entry>
- <title>une Freebox Mini 4K</title>
- <link href="https://combien-consomme.fr/tests/freebox-mini4k/"/>
- <updated>2025-02-04T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/freebox-mini4k/</id>
- <summary xml:lang="fr" type="html">Arrivée à la maison en même temps que la fibre, on a vite fait d&#39;oublier qu&#39;elle reste tout le temps allumée, mais sa consommation n&#39;est peut-être pas à négliger. Combien consomme la Freebox Mini 4K ?</summary>
 </entry>
 </feed>
