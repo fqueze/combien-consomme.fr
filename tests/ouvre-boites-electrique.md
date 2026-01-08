@@ -73,4 +73,5 @@ Sauf pour un cuisinier faisant un usage quasi industriel de son ouvre-boîtes, o
 Pour comprendre de façon plus détaillée la consommation de cet ouvre-boîtes, on pourrait :
 - mesurer la consommation lors de l'ouverture de boîtes de conserve de différents diamètres.
 - ré-affûter la lame de l'ouvre-boîte et lubrifier les pièces métalliques pour regarder si cela réduit sensiblement la consommation du moteur.
+- comparer avec d'autres modèles d'ouvre-boîtes électriques, comme {% test ouvre-boites-calor un ouvre-boîtes Calor %} de la même époque qui dispose d'un arrêt automatique.
 {% endplusloin %}

@@ -569,3 +569,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Puissance stable de 2100W (médiane), conforme à l'étiquette (2000-2400W)
 - Arrêt automatique par coupure mécanique : pas de consommation au repos
 - Coût annuel : 20 € pour 2 utilisations par jour, proche du prix d'achat de la bouilloire
+
+### ouvre-boites-calor
+**Title:** Un ouvre-boîtes électrique Calor
+**Device:** Calor modèle 26.01 (années 70)
+**Key findings:**
+- Consommation de 0.384 à 0.496 Wh par boîte selon la taille (200g à 300g)
+- Puissance réelle de 130W, bien supérieure aux 80W annoncés sur l'étiquette
+- Environ 2 fois plus gourmand que le Moulinex (0.19 Wh), mais avec arrêt automatique et système magnétique de maintien du couvercle
+- Test de 2 minutes en continu : consommation stable à 129W avec échauffement notable du moteur
+- Coût dérisoire : environ 100 boîtes pour un centime d'électricité

@@ -129,4 +129,5 @@ Deux enregistrements d'une dizaine de secondes nous donnent une puissance média
 Pour comprendre de façon plus détaillée la consommation de cet couteau électrique, on pourrait :
 - mesurer la consommation lors de la découpe d'autres types d'aliments (viandes, légumes, …)
 - mesurer la consommation avec un enregistreur ayant un taux d'échantillonnage plus élevé pour mieux voir ce qui se passe lors de la pause entre la découpe de plusieurs tranches.
+- comparer avec d'autres gadgets de cuisine électriques de la même époque, comme {% test ouvre-boites-calor un ouvre-boîtes Calor %}, pour voir si les écarts entre puissance annoncée et puissance mesurée sont similaires.
 {% endplusloin %}
