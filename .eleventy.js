@@ -1711,6 +1711,48 @@ export default function (eleventyConfig) {
     return string.replace(/\{%\s*(test|post)\s+(\S+)\s+(.*?)\s*%\}/g, '$3');
   });
 
+  eleventyConfig.addAsyncFilter('renderString', async function(str) {
+    // Rendre une chaîne Liquid avec le contexte des collections
+    const { Liquid } = await import('liquidjs');
+    const liquid = new Liquid();
+
+    // Helper pour créer un tag test/post qui génère du HTML
+    const createLinkTag = (collectionName) => ({
+      parse(tagToken) {
+        let input = tagToken.args;
+        let index = input.indexOf(" ");
+        if (index != -1) {
+          this.slug = input.slice(0, index);
+          this.label = input.slice(index + 1);
+        } else {
+          this.slug = input;
+        }
+      },
+      render(ctx) {
+        const collection = ctx.environments.collections[collectionName];
+        const item = collection.find(t => t.fileSlug == this.slug);
+        if (!item) {
+          throw new Error(`No ${this.slug} ${collectionName}`);
+        }
+        if (this.label) {
+          // Générer du HTML au lieu de Markdown
+          return `<a href="${item.url}" title="${item.data.pagetitle}">${this.label}</a>`;
+        }
+        return item.url;
+      }
+    });
+
+    liquid.registerTag('test', createLinkTag('test'));
+    liquid.registerTag('post', createLinkTag('post'));
+
+    try {
+      return await liquid.parseAndRender(str, this.ctx);
+    } catch (error) {
+      console.error('Error rendering string:', error);
+      return str;
+    }
+  });
+
   eleventyConfig.addFilter('dateIso', date => {
     return moment(date).toISOString();
   });

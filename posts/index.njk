@@ -20,7 +20,7 @@ pagedesc: Ici, on expliquera les méthodes utilisées pour mesurer la consommati
       <a href="{{ post.url | url }}">{{ post.data.title }}</a>
     </h3>
     <p><time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time> — {{ post | timeToRead }} de lecture</p>
-    <p>{{ post.page.excerpt }}</p>
+    <p>{{ post.page.excerpt | renderString | safe }}</p>
   </article>
 {% endfor %}
 {% if pagination.hrefs.length > 1 %}
