@@ -1581,7 +1581,7 @@ export default function (eleventyConfig) {
       .forEach(pattern => eleventyConfig.ignores.add(pattern));
 
     // Ignore draft helper files
-    ["draft-pages.njk", "index.njk", "CLAUDE-INSTRUCTIONS.md", "README.md", "existing-tests.md", "existing-posts.md"]
+    ["draft-pages.njk", "index.njk", "README.md", "existing-tests.md", "existing-posts.md"]
       .forEach(file => eleventyConfig.ignores.add(`draft/${file}`));
 
     // Ignore all other draft slug directories
@@ -1617,6 +1617,9 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("draft/**/*.js");
     // Ignore profile-data markdown files (they're data for Claude, not templates to render)
     eleventyConfig.ignores.add("draft/**/preview/profile-data/**");
+    // Ignore Claude helper files (contain example Liquid syntax that shouldn't be parsed)
+    eleventyConfig.ignores.add("draft/CLAUDE-INSTRUCTIONS.md");
+    eleventyConfig.ignores.add("draft/CLAUDE-VERIFICATION.md");
     // Ignore data.json files from watch (they change frequently via API and shouldn't trigger rebuilds)
     eleventyConfig.watchIgnores.add("draft/**/data.json");
     // Ignore profile-data folder from watch (reference data for Claude, not templates)
@@ -1792,6 +1795,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('€', formatEuro);
   eleventyConfig.addFilter('V', formatVoltage);
   eleventyConfig.addFilter('W', formatPower);
+  eleventyConfig.addFilter('VA', powerVA =>
+    formatPower(powerVA).replace("W", "VA"));
   eleventyConfig.addFilter('Wh', formatEnergy);
   eleventyConfig.addFilter('PerYear', WhPerDay =>
     WhPerDay * daysPerYear);

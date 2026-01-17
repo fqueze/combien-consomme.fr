@@ -2,6 +2,128 @@
 
 When the user asks you to generate a new test page from draft data, follow these instructions carefully.
 
+## MANDATORY PROCESS
+
+**You MUST follow this exact process for every test generation. No exceptions.**
+
+### Phase 1: Information Gathering
+
+1. **Use TodoWrite** to create these tasks:
+   ```
+   - Read template and profile data
+   - Plan narrative structure
+   - Write test content
+   - Final verification
+   ```
+
+2. **Read profile data and output to terminal**
+
+   For each profile, you MUST output in this exact format:
+   ```
+   === PROFIL: [profile name] ===
+   STATS (from .md file):
+   - Durée: [duration]
+   - Énergie: [energy] Wh
+   - Puissance: médiane [X]W, moyenne [Y]W, max [Z]W
+
+   IMAGE (from .png screenshot) - Ce que je VOIS:
+   - [Describe visual patterns: plateaus, spikes, gradual changes]
+   - [Describe timing of phases if visible]
+   - [Note any 0W periods at start/end]
+
+   INFÉRENCE:
+   - [What you conclude from combining stats + image]
+   - [Whether duration includes 0W samples → use "environ" phrasing]
+   - [Key characteristics for the narrative]
+
+   Usage prévu: [Which section, why]
+   ```
+
+   For each image, output:
+   ```
+   === IMAGE: [filename] ===
+   Contenu: [What the image shows]
+   Usage prévu: [Which section, context sentence]
+   ```
+
+   **CRITICAL:** Separate what you SEE in the image from what you INFER. If your visual description is wrong or incomplete, the user can correct immediately.
+
+3. **Mark "Read template and profile data" as completed**
+
+### Phase 2: Narrative Planning
+
+1. **Mark "Plan narrative structure" as in_progress**
+
+2. **Present complete narrative plan to user** following this format:
+   ```
+   PLAN DU TEST - [Device name]
+   ============================
+
+   DONNÉES DISPONIBLES:
+   - X profils with Y ranges
+   - Z images
+   - Key statistics summary
+
+   STRUCTURE NARRATIVE:
+   [Complete outline showing:
+    - Every section and subsection
+    - Where each image will appear with context
+    - Where each profile will appear with intro sentence
+    - Progression logic]
+
+   CHOIX NARRATIFS:
+   [Key narrative decisions like:
+    - Progression order
+    - Why median vs average
+    - Image placement logic
+    - Cross-reference strategy]
+
+   CALCULS (avec filtres exacts):
+   [All Liquid filter expressions to be used]
+
+   Continuer avec ce plan ? (y/n)
+   ```
+
+3. **Wait for user approval** before proceeding
+
+4. **Mark "Plan narrative structure" as completed** only after user approval
+
+### Phase 3: Writing
+
+1. **Mark "Write test content" as in_progress**
+
+2. Write all sections EXCEPT tldr block
+
+3. **Mark "Write test content" as completed**
+
+### Phase 4: Final Verification (CRITICAL)
+
+1. **Mark "Final verification" as in_progress**
+
+2. **Reread this entire instruction file** from line 1 to the end
+
+3. **Read draft/CLAUDE-VERIFICATION.md** completely to refresh your memory of all verification rules
+
+4. **Use Task tool** to launch a verification agent:
+   ```javascript
+   Task({
+     subagent_type: "general-purpose",
+     prompt: "You are a test reviewer. Read draft/CLAUDE-VERIFICATION.md for the complete checklist. Verify the test file at [path] against every item in that checklist. Return only actual violations found using the format specified in CLAUDE-VERIFICATION.md."
+   })
+   ```
+
+5. **Fix all errors** found by the verification agent
+
+6. **Write the tldr block** as the very last step, using exact values from the test body
+
+7. **Build the preview** with `ELEVENTY_PREVIEW_ONLY=draft/{slug}/preview npx @11ty/eleventy`
+
+8. **Mark "Final verification" as completed** only after all checks pass
+
+9. **Only then** present the test to the user
+
+**If you skip any of these steps, you are failing at your task.**
+
 ## Step 1: Gather Information
 
 Before writing anything, you need:
@@ -89,15 +211,7 @@ tags: ['test']
 - **Add an empty tldr block** - you'll fill it at the end
 
 ### tldr Block (REQUIRED - Write This LAST)
-**Write this block AFTER completing all other sections.**
-
-**CRITICAL: Use EXACT SAME values and filter calculations from the test body.**
-- **All numerical values MUST come from profile statistics** (energy used, average/median/max power, duration)
-- **Never make up or estimate numbers** - use only measured values from profiles
-- Reference only values that are presented in detail during the test
-- Copy the exact same Liquid filter expressions: {% raw %}`{{ 1732.56 | times: 100 | Wh€ }}`{% endraw %}
-- Don't introduce new calculations that aren't explained in the test content
-- Summarize key findings from "Sur un an", "En veille", "Faut-il le remplacer" sections
+**Write this block AFTER completing all other sections.** Use exact same values and filter calculations from the test body.
 
 **Structure and Content:**
 
@@ -148,13 +262,6 @@ tags: ['test']
 - "Utilisé environ 2 fois par semaine, ce sèche-linge consommera {{ 1732.56 | times: 100 | Wh€ }} par an."
 - "Il faudrait {{ 0.149 | countPer€: 0.01 }} lavages pour dépenser 1 centime."
 - "La consommation en veille encourage à débrancher l'appareil lorsqu'il est inutilisé."
-
-**CRITICAL: Converting profile range timestamps to durations:**
-- Profile ranges are in MILLISECONDS (e.g., "170260m9370138" = from 170260ms to 9370138ms)
-- To display as duration, use: `{{ 9370138 | divided_by: 1000 | s }}` (converts ms → seconds → human format)
-- For range durations: `{{ 12385581 | minus: 9540397 | divided_by: 1000 | s }}`
-- ❌ WRONG: `{{ 9370138 | s }}` (treats milliseconds as seconds)
-- ✅ CORRECT: `{{ 9370138 | divided_by: 1000 | s }}` (2h36min)
 {% endraw %}
 
 ### Le matériel Section
@@ -368,21 +475,9 @@ The intro sentence should contain a meaningful fact, not just announce what's co
 ```
 {% endraw %}
 
-**CRITICAL: NEVER insert an image without text that references it**
-- ❌ **ABSOLUTELY FORBIDDEN:** Inserting an image tag with NO surrounding text that mentions or describes what's in the image
-- ❌ **WRONG:** Having multiple images in a row with no text between them
-- ✅ **REQUIRED:** Every image MUST have text immediately before it (and/or after it) that explicitly mentions what the reader will see or just saw
-- ✅ **GOOD:** "Au fur et à mesure de la transformation, le jus s'accumule dans la carafe :" [image] "À la fin, la carafe contient 1L :" [image]
-- ❌ **BAD:** [description of profile] [image of result 1] [image of result 2] [next section title]
-
-The image must be integrated into the narrative flow, not just dropped in.
-
 **Content Organization Around Images:**
 
-**CRITICAL: The test must tell a story that integrates ALL provided images naturally.**
-
-- **Never place images in the intro block** - they belong in the body text where they're relevant
-- **Never describe the test protocol in the intro** - save it for the test section itself
+The test must tell a story that integrates ALL provided images naturally:
 - Images must contribute to the narrative, not just be inserted randomly
 - Think of the test as a story you're telling with text and images working together
 - Position images exactly where they illustrate what you're describing
@@ -783,38 +878,6 @@ Once the test is completely written, **reread this entire instruction file from 
 
 **Note:** The `ELEVENTY_PREVIEW_ONLY` environment variable makes Eleventy build only the preview page (~0.6s) instead of the entire site. This allows you to quickly verify your changes work without errors.
 
-## Important Notes
-
-### DON'T:
-- **Skip tldr or plusloin blocks** (both are REQUIRED)
-- **Make up, estimate, or invent numerical values** - use only measured values from profiles
-- **Insert images without text that describes them** - EVERY image needs text before/after mentioning what's in it
-- Use generic descriptions without specific measured values
-- Forget to address standby consumption (full analysis or brief mention as appropriate)
-- Forget annual cost calculations
-- Miss autoconsommation photovoltaïque section
-- Write without checking existing-tests.md for comparisons
-- Use overly certain language for uncertain observations
-- Skip the progression from overview to detail
-- Have multiple images in a row with no text between them
-
-### DO:
-- **Always include tldr and plusloin blocks** (REQUIRED)
-- **Write tldr block LAST** using exact same values/filters from test body
-- **Use ONLY measured values from profile statistics** for all calculations
-- Quote specific measured values from profiles
-- Calculate percentages and comparisons based on real data
-- Link to related tests when relevant
-- Acknowledge measurement limitations
-- Express surprise or uncertainty naturally
-- Compare electricity cost to ingredient/purchase costs
-- Analyze replacement economics for old devices
-- Consider longevity when recommending replacement
-- Describe sensory observations (sound, heat, lights)
-- Use personal context and storytelling
-- Include autoconsommation photovoltaïque section
-- Address standby consumption appropriately (thorough analysis for electronics, brief mention for mechanical switches)
-
 ## Example Workflow
 
 1. User says: "Generate a test for draft/machine-a-laver-miele"
@@ -826,30 +889,4 @@ Once the test is completely written, **reread this entire instruction file from 
 7. You replace: All TODO items in the template with actual content
 8. You write: Standby analysis, annual cost, autoconsommation section, plusloin block
 9. **You write tldr block LAST**: Go back and insert after `<!-- excerpt -->` using exact values from the test
-10. You verify: All checklist items completed
-
-## Questions to Ask Yourself
-
-Before finalizing:
-- **Have I written the tldr block LAST using exact values from the test?** (REQUIRED)
-- **Does the tldr only reference numbers that appear in the test body?** (REQUIRED)
-- **Have I included the plusloin block with 3-5 suggestions?** (REQUIRED)
-- Have I addressed standby consumption appropriately (full analysis or brief mention)?
-- Have I included the autoconsommation photovoltaïque section?
-- Have I cross-referenced similar devices?
-- For old devices: Have I discussed replacement economics?
-- For food prep: Have I compared electricity to ingredient costs?
-- Do all profile ranges have context and observations?
-- Are there any measurement artifacts I should explain?
-- Have I maintained a conversational, first-person tone?
-- Does the test tell a story, not just present data?
-
-## Critical Reminder
-
-**Every modern test (2024-2025) must have:**
-1. ✅ tldr block after opening paragraph
-2. ✅ Standby/veille addressed (full analysis for electronics, brief mention for mechanical switches)
-3. ✅ Autoconsommation photovoltaïque section
-4. ✅ plusloin block at the end
-
-**These are not optional.** Only the oldest tests lack these sections. All new tests must include them.
+10. You verify: All checklist items completed (see MANDATORY PROCESS above and draft/CLAUDE-VERIFICATION.md)

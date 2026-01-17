@@ -118,3 +118,34 @@ This file lists all existing posts with their descriptions and key points to hel
   - Average power matches what food packages indicate (e.g., 600W)
   - Maximum power is what solar installation must provide
   - Median not very useful here
+
+### linky-teleinfo-historique
+**Title:** Mesurer la consommation avec la Télé-Information Client d'un compteur Linky en mode « historique »
+**Summary:** Article documenting the capabilities and limitations of using the Linky meter's TIC (Télé-Information Client) output in "historical" mode for power measurements, including real measurement examples and detailed analysis of what works and what doesn't.
+**Key points:**
+- Linky TIC output transmits continuous data: apparent power (VA), current (A), energy index (Wh)
+- Historical mode: 1200 baud, frames every ~1.5 seconds, 10 VA resolution on apparent power
+- Standard mode: 9600 baud, includes injected power for PV installations (requires utility request)
+- Hardware: USB TIC adapter (~25€, e.g., GCE Electronics TELEINFO USB module)
+- Software: Custom Node.js application, exports to Firefox Profiler format
+- Three key values in frames:
+  - PAPP: apparent power in VA (rounded to 10 VA)
+  - BASE: energy index in 1 Wh increments (what's billed)
+  - IINST: current in integer amperes
+- Major limitations:
+  - Apparent power (VA) ≠ active power (W) - can't track actual billed consumption accurately
+  - BASE has low precision: 1 Wh increments + fixed 1.5s sampling = artificial peaks in active power graph
+  - Can't isolate individual appliances - only whole-house consumption
+  - Completely unsuitable for PV self-consumption: displays 0 when production > consumption
+  - No voltage information in historical mode
+  - IINST resolution too coarse (~230W per ampere)
+- Valid use cases:
+  - Overall daily consumption profile for whole house
+  - Detecting anomalies (devices left on)
+  - Validating subscribed power level
+  - General trends for large consumers (heating, water heater) when isolated
+- Not suitable for:
+  - Low power devices (<100W)
+  - Multiple simultaneous appliances
+  - Fast variations (<1 second)
+  - PV self-consumption analysis
