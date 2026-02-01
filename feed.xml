@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-01-17T22:23:23Z</updated>
+<updated>2026-02-01T20:48:00Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une yaourtière Rowenta vintage</title>
+ <link href="https://combien-consomme.fr/tests/yaourtiere-rowenta-vintage/"/>
+ <updated>2026-02-01T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/yaourtiere-rowenta-vintage/</id>
+ <summary xml:lang="fr" type="html">Très mignonne avec son design jaune rétro, cette yaourtière vintage avec son thermostat mécanique consomme-t-elle plus ou moins que les modèles contemporains ?</summary>
+</entry>
 <entry>
  <title>Mesurer la consommation avec la Télé-Information Client d&#39;un compteur Linky en mode « historique »</title>
  <link href="https://combien-consomme.fr/posts/linky-teleinfo-historique/"/>
@@ -142,12 +149,5 @@
  <updated>2025-06-03T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/ventilateur-de-table-rowenta/</id>
  <summary xml:lang="fr" type="html">Quand il fait chaud, un ventilateur apporte un vrai soulagement. Combien cette brise rafraichissante coûte-t-elle en électricité ?</summary>
-</entry>
-<entry>
- <title>un carillon filaire</title>
- <link href="https://combien-consomme.fr/tests/carillon-filaire/"/>
- <updated>2025-05-30T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/carillon-filaire/</id>
- <summary xml:lang="fr" type="html">Une sonnette près de la porte d&#39;entrée, c’est simple, pratique, et… toujours branché. Ce petit appareil consomme-t-il beaucoup ?</summary>
 </entry>
 </feed>
