@@ -579,3 +579,14 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Environ 2 fois plus gourmand que le Moulinex (0.19 Wh), mais avec arrêt automatique et système magnétique de maintien du couvercle
 - Test de 2 minutes en continu : consommation stable à 129W avec échauffement notable du moteur
 - Coût dérisoire : environ 100 boîtes pour un centime d'électricité
+
+### yaourtiere-rowenta-vintage
+**Title:** une yaourtière Rowenta vintage
+**Device:** Rowenta KG-76 (7 pots, thermostat mécanique)
+**Key findings:**
+- Thermostat mécanique qui régule la température par cycles marche/arrêt
+- Consommation 10h : 105 Wh (15 Wh par yaourt, soit moins d'un centime)
+- Plus économe que SEB Classic (147 Wh, -29%) et SEB Multi delices (223 Wh pour 10h, -53%)
+- Puissance moyenne 10.5W, pics à 32.7W pendant chauffage
+- Témoin lumineux 0.4W en continu (visible la nuit)
+- Le thermostat mécanique vintage bat les modèles modernes en efficacité

@@ -99,6 +99,6 @@ Note : les calculs de cette section ont été faits en divisant les coûts par 7
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation d'une yaourtière, on pourrait :
 - utiliser un appareil de mesure plus précis pour enregistrer la consommation à la fin de la cuisson ;
-- tester d'autres modèles de {% test yaourtiere-seb-multi-delices yaourtière plus modernes %} disposant d'un thermostat qui causerait une variation de la consommation en fonction de la température ambiante de la pièce ;
+- tester d'autres modèles de yaourtière : {% test yaourtiere-seb-multi-delices une yaourtière plus moderne %} avec électronique et écran, ou {% test yaourtiere-rowenta-vintage une yaourtière vintage à thermostat mécanique %} ;
 - comparer avec d'autres appareils de cuisine occasionnels comme {% test soiree-gaufres un gaufrier %} ou {% test raclette-a-deux un appareil à raclette %}, où le coût électrique est également négligeable face au coût des ingrédients.
 {% endplusloin %}

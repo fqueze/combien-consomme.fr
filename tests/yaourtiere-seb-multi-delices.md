@@ -128,5 +128,5 @@ Pour comprendre de façon plus détaillée la consommation de cette yaourtière 
 - tester cette yaourtière à différentes saisons pour voir si la consommation est plus faible en été lorsque la température ambiante est plus élevée ;
 - comparer la consommation lors de l'utilisation de lait à température ambiante ou de lait sorti du frigo, qui a donc besoin d'être réchauffé par la yaourtière ;
 - comparer la consommation énergétique par yaourt de cette yaourtière avec celle du même modèle en version à 12 pots ;
-- comparer avec le {% test yaourtiere modèle classique %}.
+- comparer avec le {% test yaourtiere modèle classique %} et {% test yaourtiere-rowenta-vintage une yaourtière vintage à thermostat mécanique %}.
 {% endplusloin %}
