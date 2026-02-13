@@ -716,7 +716,7 @@ function loadDraftData(slug) {
     }
   }
 
-  return { ranges: [], title: null, images: {}, profiles: {}, notes: '' };
+  return { ranges: [], title: null, images: {}, profiles: {}, notes: '', comments: [] };
 }
 
 function saveDraftData(slug, data) {
@@ -993,6 +993,24 @@ function setupDevMiddleware(middleware) {
 
       const data = loadDraftData(slug);
       data.notes = notes || '';
+
+      try {
+        saveDraftData(slug, data);
+        sendJSON(res, 200, { success: true });
+      } catch (error) {
+        sendJSON(res, 500, { error: error.message });
+      }
+      return;
+    }
+
+    // PATCH /api/draft/:slug/comments - Update draft comments
+    const updateComments = /^\/api\/draft\/([^/]+)\/comments$/;
+    if (req.method === 'PATCH' && updateComments.test(url)) {
+      const [, slug] = url.match(updateComments);
+      const { comments } = req.body || {};
+
+      const data = loadDraftData(slug);
+      data.comments = comments || [];
 
       try {
         saveDraftData(slug, data);
@@ -1615,6 +1633,8 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("draft/**/*.{jpg,jpeg,png,gif,webp}");
     eleventyConfig.addPassthroughCopy("draft/**/*.json.gz");
     eleventyConfig.addPassthroughCopy("draft/**/*.js");
+    eleventyConfig.addPassthroughCopy("draft/**/*.css");
+    eleventyConfig.addPassthroughCopy("draft/**/*-test.html");
     // Ignore profile-data markdown files (they're data for Claude, not templates to render)
     eleventyConfig.ignores.add("draft/**/preview/profile-data/**");
     // Ignore Claude helper files (contain example Liquid syntax that shouldn't be parsed)

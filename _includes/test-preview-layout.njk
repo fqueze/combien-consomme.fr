@@ -9,11 +9,20 @@ eleventyComputed:
     <meta charset="UTF-8">
     <title>{{ pagetitle }} - Preview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/draft/review-mode.css">
   </head>
   <body style="margin: 0; padding: 1rem;">
+<div class="review-export-banner">
+  <div class="review-export-info">
+    <span>Mode révision</span>
+    <span class="review-comment-count">0 commentaire</span>
+  </div>
+  <button class="review-export-btn">📋 Copier le prompt</button>
+</div>
 <article>
 <h1>{{ pagetitle }}</h1>
 <p><time datetime="{{ date | dateIso }}">{{ date | dateReadable }}</time> — {{ content | timeToRead }} de lecture</p>
 {{ content | safe }}
 </article>
+<script src="/draft/review-mode.js"></script>
 </body></html>
