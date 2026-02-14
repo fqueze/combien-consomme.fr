@@ -1655,14 +1655,23 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(timeToRead, {language: 'fr'});
 
-  const fullCss = fs.readFileSync("_includes/theme.css", {
-    encoding: "utf-8",
-  });
+  const cssPath = "_includes/theme.css";
+  let _fullCss = null;
+  let _cssMtime = 0;
+  function getFullCss() {
+    const mtime = fs.statSync(cssPath).mtimeMs;
+    if (!_fullCss || mtime !== _cssMtime) {
+      _fullCss = fs.readFileSync(cssPath, { encoding: "utf-8" });
+      _cssMtime = mtime;
+    }
+    return _fullCss;
+  }
   eleventyConfig.addTransform("htmlmin", async function htmlMinTransform(content) {
     // Prior to Eleventy 2.0: use this.outputPath instead
     if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
       const b = UserBenchmarks.get("> htmlmin > " + this.page.outputPath);
       b.before();
+      const fullCss = getFullCss();
 
       // Apply typographic replacements to all HTML pages
       content = content.replace(/ ([!?:;»])/g, nbsp + "$1")

@@ -65,6 +65,16 @@ html, body {
 body > *, #plusloin {
   padding: 48px 24px;
 }
+@media (max-width: 767px) {
+  body > * {
+    padding: 8px 16px;
+  }
+  #tldr, #plusloin {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding: 0 16px 8px;
+  }
+}
 #Footer {
   padding-top: 0;
   margin-top: 48px;
@@ -113,6 +123,9 @@ header.draft-header {
   font-weight: bold;
   border-radius: 4px;
 }
+@media (max-width: 767px) {
+  #drafts-link { display: none; }
+}
 
 h1, h2, h3 {
   font-family: Bai Jamjuree;
@@ -151,25 +164,24 @@ header li > a {
   cursor: pointer;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 991px) {
   #intro {
-    align-items: center;
     display: flex;
-    flex-wrap: wrap;
-  }
-
-  #intro > * {
-    flex: 0 0 auto;
-    width: 66%;
-  }
-  #intro > picture {
-    width: 33%;
+    flex-direction: column-reverse;
   }
 }
-
 @media (min-width: 992px) {
+  #intro {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
   #intro > * {
+    flex: 0 0 auto;
     width: 50% !important;
+  }
+  #intro > picture > img {
+    border-radius: 8px;
   }
   #intro > :first-child {
     padding-right: 1.2rem;
@@ -180,11 +192,18 @@ header li > a {
 }
 
 h1 {
-  font-size: 2.5rem;
-  line-height: 3rem;
+  font-size: 1.46rem;
+  line-height: 2.2rem;
 }
 
 @media (min-width: 450px) {
+  h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+}
+
+@media (min-width: 992px) {
   h1 {
     font-size: 3.25rem;
     line-height: 3.9rem;
@@ -200,11 +219,68 @@ div > h2 {
   margin-bottom: 32px;
   margin-top: 0;
 }
+@media (max-width: 575px) {
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin: 0 -16px;
+    padding: 0.5em 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  div > h2,
+  #tldr + h2 {
+    border-top: none;
+    margin: 0;
+    padding: 0.5em 16px;
+  }
+  article:not(.list) picture {
+    margin-left: -16px;
+    margin-right: -16px;
+    display: block;
+  }
+  article:not(.list) picture > img {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  article h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin-bottom: 0.25em;
+  }
+  h4 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  ul {
+    padding-left: 16px;
+  }
+  #tldr ul, #plusloin ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  article {
+    padding-bottom: 0;
+  }
+  article > h1 + p {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+  #Footer {
+    margin-top: 0;
+    font-size: 0.8rem;
+  }
+  #Footer h3 {
+    display: none;
+  }
+  #Footer img {
+    height: 16px !important;
+  }
+}
 p {
   margin-top: 0;
 }
 #intro > picture > img {
-  border-radius: 8px;
   width: 100%;
 }
 
@@ -336,27 +412,27 @@ article > h1 {
 }
 
 #plusloin > ul > li {
-  margin-bottom: 1em;
+  margin-bottom: 0.25em;
+}
+@media (min-width: 768px) {
+  #plusloin > ul > li {
+    margin-bottom: 1em;
+  }
 }
 
 .profile {
   color: #042f2e;
-  border-radius: 0px;
+  border: none;
+  border-radius: 0;
   overflow: hidden;
+  margin-left: -16px;
+  margin-right: -16px;
   margin-bottom: 1em;
 }
 .profile > div {
   padding-top: 1px;
-  border-left: 5px solid #064e3b88;
-  border-right: 5px solid #064e3b88;
   position: relative;
   padding-bottom: calc(5% - 1px);
-}
-.profile > div:first-of-type {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-top: 5px solid #064e3b88;
-  overflow: hidden;
 }
 .profile > div + div {
   border-top: solid 1.5px #064e3b88;
@@ -373,16 +449,52 @@ article > h1 {
 .profile > p {
   font-weight: bold;
   margin: 0;
-  background-color: #064e3b88;
-  border: 5px solid transparent;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  border-top: none;
 }
-.profile > p:before {
-  border-top: 1px solid #e5e7eb;
-  display: block;
-  content: "";
+@media (max-width: 767px) {
+  .profile > p,
+  .profile > table {
+    border-top: 1px solid #064e3b88;
+    background-color: #064e3b33;
+    padding-left: 0;
+    line-height: 1.6;
+  }
+  .profile > table th:first-child {
+    padding-left: 16px;
+  }
+  .profile > p {
+    padding: 0 4px 0 16px;
+    font-size: 0.85rem;
+  }
+}
+@media (min-width: 768px) {
+  .profile {
+    border: none;
+    border-radius: 8px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .profile > div {
+    border-left: 5px solid #064e3b88;
+    border-right: 5px solid #064e3b88;
+  }
+  .profile > div:first-of-type {
+    border-top: 5px solid #064e3b88;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden;
+  }
+  .profile > p {
+    background-color: #064e3b88;
+    border: 5px solid transparent;
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  .profile > p:before {
+    border-top: 1px solid #e5e7eb;
+    display: block;
+    content: "";
+  }
 }
 img {
   max-width: 100%;
@@ -396,6 +508,13 @@ table {
   background-color: #064e3b88;
   border-radius: 8px;
   margin-right: 0.25em;
+}
+@media (max-width: 767px) {
+  table {
+    margin-top: 0;
+    background-color: transparent;
+    border-radius: 0;
+  }
 }
 .power {
   margin-right: 0;
@@ -422,6 +541,26 @@ table td {
   background-color: #042f2e;
   color: #e5e7eb;
 }
+@media (max-width: 767px) {
+  table th {
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 0 4px;
+  }
+  table th::after {
+    content: "\00a0:";
+  }
+  table td {
+    padding: 0 4px;
+    font-size: 0.85rem;
+    background-color: transparent;
+    color: inherit;
+  }
+  table {
+    border-spacing: 0;
+  }
+}
 table td:last-of-type {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -443,6 +582,14 @@ table.power tr:last-of-type > td:last-of-type {
   width: 26px;
   height: 26px;
   padding: 5px;
+}
+@media (max-width: 767px) {
+  .profiler-link {
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    margin-top: 3px;
+  }
 }
 .profiler-link:hover {
   background-color: #73737344;
