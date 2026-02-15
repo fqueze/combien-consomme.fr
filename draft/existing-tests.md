@@ -590,3 +590,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Puissance moyenne 10.5W, pics à 32.7W pendant chauffage
 - Témoin lumineux 0.4W en continu (visible la nuit)
 - Le thermostat mécanique vintage bat les modèles modernes en efficacité
+
+### gaufrier-tefal-magiclean
+**Title:** un gaufrier Tefal MagicClean
+**Device:** Tefal MagicClean Type 6038 série 2
+**Key findings:**
+- Consommation de 340 Wh pour une soirée gaufres complète (préchauffage + 5 paires de gaufres)
+- Le préchauffage représente 19% de l'énergie totale et dure 4min34s
+- Après préchauffage, chaque paire de gaufres consomme environ 55 Wh
+- Le coût électrique est négligeable comparé au prix d'achat de l'appareil
+- Thermostat qui cycle entre pleine puissance et arrêt pour maintenir la température

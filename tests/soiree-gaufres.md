@@ -174,7 +174,7 @@ Cela dit, avec un coût électrique de {{ 831 | Wh€ }} pour toute la soirée, 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation du gaufrier, on pourrait :
 - tester différentes recettes de pâte (épaisse, liquide, avec plus ou moins de matière grasse) pour voir si cela influence le temps de cuisson et donc la consommation ;
-- comparer avec un gaufrier moderne à régulation électronique et voir s'il est plus économe ;
+- comparer avec {% test gaufrier-tefal-magiclean un autre modèle de gaufrier %} de puissance différente, ou un gaufrier moderne à régulation électronique et voir s'il est plus économe ;
 - mesurer la consommation avec différents temps de cuisson (gaufres blondes vs bien dorées) ;
 - évaluer l'impact du temps pendant lequel le gaufrier reste ouvert entre deux gaufres (perte de chaleur dans la pièce, surconsommation pour revenir à température) ;
 - comparer avec d'autres appareils de cuisson conviviale comme une {% test raclette-a-deux raclette %}, une crêpière ou un appareil à croque-monsieur.
