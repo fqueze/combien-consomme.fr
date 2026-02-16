@@ -1499,12 +1499,10 @@ TODO: Suggest 3-5 follow-up investigations
         if (pathname.startsWith('/from-url/')) {
           return true;
         }
-        // Proxy profiler assets - these patterns are specific to Firefox Profiler
-        // and shouldn't conflict with the site's own assets
-        if (pathname.endsWith('.bundle.js') ||
-            pathname.startsWith('/locales/') ||
-            /^\/[a-f0-9]{20}\.(jpg|png|svg|css|wasm)$/.test(pathname) ||
-            /^\/[a-f0-9]{32}\.js$/.test(pathname) ||
+        // Proxy profiler assets - Vite-style filenames: name-XXXXXXXX.ext
+        // where the hash is 8 uppercase alphanumeric characters
+        if (pathname.startsWith('/locales/') ||
+            /^\/[\w.-]+-[A-Z0-9]{8}\.(js|css|svg)$/.test(pathname) ||
             pathname.endsWith('.map')) {
           return true;
         }
