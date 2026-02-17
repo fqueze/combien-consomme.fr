@@ -600,3 +600,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Après préchauffage, chaque paire de gaufres consomme environ 55 Wh
 - Le coût électrique est négligeable comparé au prix d'achat de l'appareil
 - Thermostat qui cycle entre pleine puissance et arrêt pour maintenir la température
+
+### seche-cheveux-braun-silencio-1000
+**Title:** un sèche-cheveux Braun Silencio 1000
+**Device:** Braun Silencio 1000 (Type 4588, 1000W, années 80)
+**Key findings:**
+- Vitesse 1 consomme environ 600W grâce à une diode qui bloque la moitié des alternances du courant
+- Vitesse 2 consomme environ 1200W, soit 19% de plus que la puissance nominale de 1000W
+- Séchage cheveux moyens : 37.7 Wh en vitesse 1 vs 68.3 Wh en vitesse 2 (81% de plus pour seulement 24s de moins)
+- Séchage cheveux longs (bas du dos) en vitesse 2 : 120 Wh en environ 6 minutes
+- Appareil des années 80 toujours fonctionnel, interrupteur mécanique = zéro consommation au repos
