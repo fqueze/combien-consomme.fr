@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-02-15T22:03:06Z</updated>
+<updated>2026-02-17T23:05:28Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un sèche-cheveux Braun Silencio 1000</title>
+ <link href="https://combien-consomme.fr/tests/seche-cheveux-braun-silencio-1000/"/>
+ <updated>2026-02-18T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/seche-cheveux-braun-silencio-1000/</id>
+ <summary xml:lang="fr" type="html">Ce sèche-cheveux de {{ 1000 | W }} est un modèle typique des années 80, toujours fonctionnel. Quel est l&#39;impact d&#39;un séchage sur la facture d&#39;électricité ? Vaut-il mieux sécher en vitesse lente ou rapide ?</summary>
+</entry>
 <entry>
  <title>un gaufrier Tefal MagicClean</title>
  <link href="https://combien-consomme.fr/tests/gaufrier-tefal-magiclean/"/>
@@ -142,12 +149,5 @@
  <updated>2025-07-08T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/ventilateur-carrefour-home/</id>
  <summary xml:lang="fr" type="html">Un ventilateur peut rendre la chaleur estivale plus supportable. Ce modèle Carrefour Home promet 3 vitesses et une puissance de 40 W. Quelle est sa consommation réelle ?</summary>
-</entry>
-<entry>
- <title>Mesurer la consommation avec un wattmètre USB-C AVHzY C3</title>
- <link href="https://combien-consomme.fr/posts/mesurer-la-consommation-avec-un-wattmetre-usb/"/>
- <updated>2025-06-19T00:00:00Z</updated>
- <id>https://combien-consomme.fr/posts/mesurer-la-consommation-avec-un-wattmetre-usb/</id>
- <summary xml:lang="fr" type="html">Un wattmètre USB est un petit outil extrêmement pratique pour enregistrer le profil de consommation d&#39;un appareil alimenté en USB. Voyons comment faire avec le modèle AVHzY C3.</summary>
 </entry>
 </feed>
