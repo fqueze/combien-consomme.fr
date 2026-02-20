@@ -129,12 +129,15 @@ mark.review-highlight:hover {
   background-color: #ffc107;
   color: #042f2e;
   padding: 4px 10px;
+  border: none;
   border-radius: 12px;
   font-weight: bold;
   font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
 }
 
-.review-export-btn {
+.review-export-new-btn {
   padding: 8px 16px;
   background-color: #064e3b;
   color: white;
@@ -148,15 +151,12 @@ mark.review-highlight:hover {
   white-space: nowrap;
 }
 
-.review-export-btn:hover {
-  background-color: #064e3b;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+.review-export-new-btn:hover {
+  background-color: #065f46;
 }
 
-.review-export-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+.review-export-new-btn:active {
+  background-color: #064e3b;
 }
 
 

@@ -52,8 +52,10 @@
       applyHighlight(range, comment.id);
     }
     updateBannerCount();
-    document.querySelector('.review-export-btn')
-      .addEventListener('click', copyPromptToClipboard);
+    document.querySelector('.review-comment-count')
+      .addEventListener('click', () => exportComments(comments, false));
+    document.querySelector('.review-export-new-btn')
+      .addEventListener('click', () => exportComments(comments.filter(c => !c.exported), true));
 
     document.addEventListener('mousedown', () => { mouseDown = true; });
     document.addEventListener('mouseup', () => {
@@ -513,14 +515,26 @@
   // ---------------------------------------------------------------------------
 
   function updateBannerCount() {
+    const total = comments.length;
+    const newCount = comments.filter(c => !c.exported).length;
     document.querySelector('.review-comment-count').textContent =
-      `${comments.length} commentaire${comments.length !== 1 ? 's' : ''}`;
+      `${total} commentaire${total !== 1 ? 's' : ''}`;
+
+    const newBtn = document.querySelector('.review-export-new-btn');
+    if (newCount > 0) {
+      newBtn.hidden = false;
+      newBtn.textContent = newCount < total
+        ? `📋 Copier ${newCount} nouveau${newCount !== 1 ? 'x' : ''}`
+        : '📋 Copier';
+    } else {
+      newBtn.hidden = true;
+    }
   }
 
-  async function copyPromptToClipboard() {
-    if (!comments.length) { alert('Aucun commentaire à exporter'); return; }
+  async function exportComments(subset, markExported) {
+    if (!subset.length) { alert('Aucun commentaire à exporter'); return; }
 
-    const lines = comments.map((c, i) => {
+    const lines = subset.map((c, i) => {
       const quoted = c.selectedText || c.anchor.exact;
       const before = c.anchor.prefix ? `...${c.anchor.prefix}` : '';
       const after = c.anchor.suffix ? `${c.anchor.suffix}...` : '';
@@ -532,15 +546,26 @@
 
     try {
       await navigator.clipboard.writeText(prompt);
-      const btn = document.querySelector('.review-export-btn');
-      const orig = btn.innerHTML;
-      btn.innerHTML = '✓ Copié!';
-      btn.style.backgroundColor = '#4caf50';
-      setTimeout(() => { btn.innerHTML = orig; btn.style.backgroundColor = ''; }, 2000);
     } catch (err) {
       console.error('[Review] Clipboard failed:', err);
       alert('Erreur lors de la copie dans le presse-papiers');
+      return;
     }
+
+    if (markExported) {
+      subset.forEach(c => { c.exported = true; });
+      await persistComments();
+      updateBannerCount();
+    }
+
+    // Flash feedback on whichever button was clicked
+    const btn = markExported
+      ? document.querySelector('.review-export-new-btn')
+      : document.querySelector('.review-comment-count');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copié!';
+    btn.style.backgroundColor = '#4caf50';
+    setTimeout(() => { btn.textContent = orig; btn.style.backgroundColor = ''; }, 2000);
   }
 
   // ---------------------------------------------------------------------------
