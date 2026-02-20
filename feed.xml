@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-02-17T23:05:28Z</updated>
+<updated>2026-02-20T22:53:08Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un découpe-légumes Moulinex Fresh Express</title>
+ <link href="https://combien-consomme.fr/tests/moulinex-fresh-express/"/>
+ <updated>2026-02-20T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/moulinex-fresh-express/</id>
+ <summary xml:lang="fr" type="html">Le Moulinex Fresh Express est un découpe-légumes électrique qui permet de râper, trancher et émincer en quelques secondes. Pratique et rapide à nettoyer, on l&#39;utilise facilement au quotidien plutôt que de râper à la main. Combien d&#39;électricité consomme-t-il pour préparer des crudités ?</summary>
+</entry>
 <entry>
  <title>un sèche-cheveux Braun Silencio 1000</title>
  <link href="https://combien-consomme.fr/tests/seche-cheveux-braun-silencio-1000/"/>
@@ -142,12 +149,5 @@
  <updated>2025-09-08T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/seche-linge-a-evacuation/</id>
  <summary xml:lang="fr" type="html">Le sèche-linge à évacuation, une technologie ancienne, évacue l&#39;air chaud et humide vers l&#39;extérieur. Cette technologie simple est-elle énergivore ?</summary>
-</entry>
-<entry>
- <title>un ventilateur de table Carrefour Home 3 vitesses</title>
- <link href="https://combien-consomme.fr/tests/ventilateur-carrefour-home/"/>
- <updated>2025-07-08T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/ventilateur-carrefour-home/</id>
- <summary xml:lang="fr" type="html">Un ventilateur peut rendre la chaleur estivale plus supportable. Ce modèle Carrefour Home promet 3 vitesses et une puissance de 40 W. Quelle est sa consommation réelle ?</summary>
 </entry>
 </feed>
