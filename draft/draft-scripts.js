@@ -1469,6 +1469,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!newShortname) {
         throw new Error('Le nom court est obligatoire');
       }
+      if (!/^[a-z0-9-]+$/.test(newShortname)) {
+        throw new Error('Le nom court ne doit contenir que des lettres minuscules, chiffres et tirets');
+      }
 
       // Check if anything changed
       const cropChanged = JSON.stringify(currentCrop) !== originalCrop;
