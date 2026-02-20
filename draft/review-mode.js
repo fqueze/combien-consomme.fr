@@ -18,7 +18,7 @@
   // Constants
   // ---------------------------------------------------------------------------
   const CONTEXT_CHARS = 50;
-  const MOUSEUP_DEBOUNCE_MS = 100;
+  const SELECTION_SETTLE_MS = 200;
 
   // ---------------------------------------------------------------------------
   // State
@@ -27,7 +27,9 @@
   const draftSlug = location.pathname.match(/\/draft\/([^/]+)/)[1];
   const article = document.querySelector('article');
   let pendingSelection = null;
-  let mouseupTimer = null;
+  let selectionTimer = null;
+  let mouseDown = false;
+  let shiftHeld = false;
 
   // ---------------------------------------------------------------------------
   // Initialisation
@@ -53,12 +55,20 @@
     document.querySelector('.review-export-btn')
       .addEventListener('click', copyPromptToClipboard);
 
-    document.addEventListener('mouseup', e => {
-      clearTimeout(mouseupTimer);
-      mouseupTimer = setTimeout(() => handleSelection(e), MOUSEUP_DEBOUNCE_MS);
+    document.addEventListener('mousedown', () => { mouseDown = true; });
+    document.addEventListener('mouseup', () => {
+      mouseDown = false;
+      scheduleSelection();
+    });
+    document.addEventListener('selectionchange', () => {
+      if (!mouseDown) scheduleSelection();
     });
     document.addEventListener('keydown', e => {
+      if (e.key === 'Shift') shiftHeld = true;
       if (e.key === 'Escape') removePanel();
+    });
+    document.addEventListener('keyup', e => {
+      if (e.key === 'Shift') { shiftHeld = false; scheduleSelection(); }
     });
     document.addEventListener('click', e => {
       if (!e.target.closest('.review-comment-ui, .review-export-banner, mark.review-highlight'))
@@ -537,13 +547,22 @@
   // Global event handlers
   // ---------------------------------------------------------------------------
 
-  function handleSelection(e) {
+  function scheduleSelection() {
+    clearTimeout(selectionTimer);
+    selectionTimer = setTimeout(handleSelection, SELECTION_SETTLE_MS);
+  }
+
+  function handleSelection() {
+    if (shiftHeld) { scheduleSelection(); return; }
+
     const sel = window.getSelection();
     const text = sel.toString().trim();
     if (!text) return;
 
-    if (e.target.closest('.review-comment-ui, .review-export-banner') ||
-        e.target.closest('mark.review-highlight')) return;
+    let anchor = sel.anchorNode;
+    if (anchor.nodeType === Node.TEXT_NODE) anchor = anchor.parentNode;
+    if (anchor.closest('.review-comment-ui, .review-export-banner') ||
+        anchor.closest('mark.review-highlight')) return;
 
     const hadTemp = document.querySelectorAll('mark.review-highlight-temp').length > 0;
     if (hadTemp) {
