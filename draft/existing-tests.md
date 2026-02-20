@@ -610,3 +610,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Séchage cheveux moyens : 37.7 Wh en vitesse 1 vs 68.3 Wh en vitesse 2 (81% de plus pour seulement 24s de moins)
 - Séchage cheveux longs (bas du dos) en vitesse 2 : 120 Wh en environ 6 minutes
 - Appareil des années 80 toujours fonctionnel, interrupteur mécanique = zéro consommation au repos
+
+### moulinex-fresh-express
+**Title:** un découpe-légumes Moulinex Fresh Express
+**Device:** Moulinex Fresh Express 3-en-1 DJ75 (200W)
+**Key findings:**
+- Puissance réelle (médiane 92-102W) environ la moitié des 200W nominaux
+- Râper 2 carottes consomme 0.622 Wh en moins de 30 secondes
+- Consommation très similaire pour les 3 aliments mesurés (carottes, emmental, radis)
+- Zéro consommation au repos (bouton poussoir mécanique)
+- Coût électrique totalement dérisoire, même pour un usage quotidien

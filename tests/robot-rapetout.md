@@ -80,4 +80,5 @@ Pour comprendre de façon plus détaillée la consommation de cet robot Rapetout
 - mesurer la consommation pour râper différents types d'aliments (fromage, céleri, ...) ;
 - mesurer la consommation avec le disque servant à émincer des concombres ;
 - comparer la consommation lorsqu'on insère un seul morceau de carotte ou plusieurs simultanément. Le gain de temps lorsqu'on en râpe plusieurs simultanément est-il aussi une économie d'énergie ?
+- comparer avec {% test moulinex-fresh-express un découpe-légumes plus récent %}.
 {% endplusloin %}
