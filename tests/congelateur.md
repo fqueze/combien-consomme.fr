@@ -71,4 +71,5 @@ Pour comprendre de façon plus détaillée la consommation d'un congélateur, on
 - l'impact de l'ouverture du congélateur sur la consommation. Par exemple, la consommation sur la journée augmente-t-elle plus si on ouvre plusieurs fois quelques secondes, ou si on ouvre une fois une minute ?
 - l'impact du givre sur la consommation. Profiler la consommation avant et après dégivrage pourrait donner cette information.
 - l'impact de la température extérieure. On pourrait comparer un profil en hiver (quand la maison est chauffée, mais la buanderie ne dépasse pas 18°C) avec un profil en pleine canicule (la température dans la maison dépassant alors largement 25°C).
+- l'avantage éventuel du format coffre par rapport à {% test congelateur-armoire un congélateur armoire %} de volume similaire, l'air froid s'échappant moins lors de l'ouverture par le dessus.
 {% endplusloin %}

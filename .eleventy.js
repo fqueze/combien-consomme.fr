@@ -62,13 +62,18 @@ function formatDuration(timeMs) {
   return result;
 }
 
-function toPrecisionIfNotInt(number, decimalSeparator = ",") {
+function toPrecisionIfNotInt(number, {locale = "fr", raw = false} = {}) {
   // Because of floating point representations, we can get numbers like
   // 8.000000000000007. Treat them as if they were integers.
   let isAlmostInt = Math.round(number) == Math.round(number * 1000) / 1000;
-  return isAlmostInt ? Math.round(number)
-                     : number.toPrecision(3).replace(/\./,
-                                                     decimalSeparator);
+  if (isAlmostInt) {
+    let rounded = Math.round(number);
+    return raw ? String(rounded) : rounded.toLocaleString(locale);
+  }
+  if (raw) {
+    return number.toLocaleString("en", { maximumSignificantDigits: 3, useGrouping: false });
+  }
+  return number.toLocaleString(locale, { maximumSignificantDigits: 3 });
 }
 
 function formatVoltage(voltageV) {
@@ -89,7 +94,7 @@ function formatPower(powerW) {
 }
 
 function roundPower(powerW) {
-  return toPrecisionIfNotInt(powerW, ".");
+  return toPrecisionIfNotInt(powerW, {raw: true});
 }
 
 function formatEnergy(energyWh) {
@@ -105,7 +110,7 @@ function formatEnergy(energyWh) {
 }
 
 function roundEnergy(energyWh) {
-  return toPrecisionIfNotInt(energyWh, ".");
+  return toPrecisionIfNotInt(energyWh, {raw: true});
 }
 
 function formatEuro(costEuro) {

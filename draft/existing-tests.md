@@ -620,3 +620,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Consommation très similaire pour les 3 aliments mesurés (carottes, emmental, radis)
 - Zéro consommation au repos (bouton poussoir mécanique)
 - Coût électrique totalement dérisoire, même pour un usage quotidien
+
+### congelateur-armoire
+**Title:** un vieux congélateur armoire
+**Device:** Derby UF 30 (congélateur armoire, 256L brut / 211L net, fabriqué au Danemark, 1990)
+**Key findings:**
+- Consommation moyenne de 73W, soit {{ 73 | W€PerYear }} par an
+- Alternance de cycles d'environ 50 minutes de fonctionnement suivies de 45 à 50 minutes d'arrêt
+- Pic de démarrage du compresseur atteignant 1810W
+- Consommation mesurée 21% supérieure à l'indication de l'étiquette (1,45 kWh/24h)
+- Après 35 ans de service, la consommation totale d'électricité représente environ 5 fois le prix d'achat
