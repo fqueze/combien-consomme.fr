@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-02-20T22:53:08Z</updated>
+<updated>2026-02-23T23:00:33Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un vieux congélateur armoire</title>
+ <link href="https://combien-consomme.fr/tests/congelateur-armoire/"/>
+ <updated>2026-02-23T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/congelateur-armoire/</id>
+ <summary xml:lang="fr" type="html">Acheté par mes parents en octobre 1990, ce congélateur armoire a largement dépassé son espérance de vie. Après 35 ans de bons et loyaux services, combien coûte en électricité un congélateur aussi ancien ?</summary>
+</entry>
 <entry>
  <title>un découpe-légumes Moulinex Fresh Express</title>
  <link href="https://combien-consomme.fr/tests/moulinex-fresh-express/"/>
@@ -142,12 +149,5 @@
  <updated>2025-09-11T00:00:00Z</updated>
  <id>https://combien-consomme.fr/posts/multiprises/</id>
  <summary xml:lang="fr" type="html">On entend souvent dire que les multiprises peuvent être dangereuses, et pourtant on en a tous chez nous. Mythe ou réalité ? Regardons à l&#39;intérieur...</summary>
-</entry>
-<entry>
- <title>un sèche-linge à évacuation</title>
- <link href="https://combien-consomme.fr/tests/seche-linge-a-evacuation/"/>
- <updated>2025-09-08T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/seche-linge-a-evacuation/</id>
- <summary xml:lang="fr" type="html">Le sèche-linge à évacuation, une technologie ancienne, évacue l&#39;air chaud et humide vers l&#39;extérieur. Cette technologie simple est-elle énergivore ?</summary>
 </entry>
 </feed>
