@@ -630,3 +630,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Pic de démarrage du compresseur atteignant 1810W
 - Consommation mesurée 21% supérieure à l'indication de l'étiquette (1,45 kWh/24h)
 - Après 35 ans de service, la consommation totale d'électricité représente environ 5 fois le prix d'achat
+
+### recharge-piles-ni-mh
+**Title:** la recharge de piles Ni-MH
+**Device:** Chargeur Sony Cycle Energy BCG-34HLD (7W, AA et AAA Ni-MH)
+**Key findings:**
+- Charge complète de 4 piles AA 1900 mAh : 21.7 Wh en 6h, soit 5.4 Wh par pile
+- Charge de 2 piles AAA 700 mAh : environ 5.4 Wh au total (mesures propres)
+- Consommation résiduelle après charge : 0.06W en moyenne, la notice recommande de débrancher
+- Le chargeur utilise une charge pulsée visible sur le profil de consommation
+- Coût dérisoire : il faudrait recharger des centaines de piles pour dépenser un euro d'électricité
