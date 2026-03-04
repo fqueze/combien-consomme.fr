@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-02-23T23:00:33Z</updated>
+<updated>2026-03-04T21:40:42Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>la recharge de piles Ni-MH</title>
+ <link href="https://combien-consomme.fr/tests/recharge-piles-ni-mh/"/>
+ <updated>2026-03-04T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/recharge-piles-ni-mh/</id>
+ <summary xml:lang="fr" type="html">Les piles rechargeables Ni-MH sont une alternative économique et écologique aux piles jetables. Mais combien d&#39;électricité faut-il pour recharger ces piles ?</summary>
+</entry>
 <entry>
  <title>un vieux congélateur armoire</title>
  <link href="https://combien-consomme.fr/tests/congelateur-armoire/"/>
@@ -142,12 +149,5 @@
  <updated>2025-11-10T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/machine-a-laver-miele/</id>
  <summary xml:lang="fr" type="html">Mamie possède une machine à laver haut de gamme de la marque Miele, avec une capacité de 8kg mais disposant d&#39;un système de « capacité variable automatique ». À quoi ressemble sa consommation ?</summary>
-</entry>
-<entry>
- <title>Toutes les multiprises ne se valent pas</title>
- <link href="https://combien-consomme.fr/posts/multiprises/"/>
- <updated>2025-09-11T00:00:00Z</updated>
- <id>https://combien-consomme.fr/posts/multiprises/</id>
- <summary xml:lang="fr" type="html">On entend souvent dire que les multiprises peuvent être dangereuses, et pourtant on en a tous chez nous. Mythe ou réalité ? Regardons à l&#39;intérieur...</summary>
 </entry>
 </feed>
