@@ -640,3 +640,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Consommation résiduelle après charge : 0.06W en moyenne, la notice recommande de débrancher
 - Le chargeur utilise une charge pulsée visible sur le profil de consommation
 - Coût dérisoire : il faudrait recharger des centaines de piles pour dépenser un euro d'électricité
+
+### rasoir-electrique
+**Title:** un rasoir électrique
+**Device:** Philips Series 5000 S5530 (rasoir à têtes rotatives, chargeur HQ8505 9W)
+**Key findings:**
+- Recharge complète d'une batterie vide : 2.85 Wh en 1h, soit moins d'un centime
+- Recharger après un rasage de 8min30 ne consomme que 0.327 Wh en 9 minutes
+- Rebrancher un rasoir déjà chargé ne consomme quasi rien (0.0313 Wh en 1min22)
+- Puissance maximale de 3.2W, très loin des 9W indiqués sur le chargeur
+- Consommation en veille indétectable par la prise connectée (0W affiché)
