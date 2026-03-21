@@ -262,6 +262,17 @@ div > h2 {
     top: 0;
     z-index: 10;
   }
+  article {
+    padding-top: 0;
+  }
+  article > h1 {
+    margin: 0 -16px;
+    padding: 0.5em 16px;
+    background-color: #f3f4f6;
+    color: #374151;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
   article:not(.list) picture {
     margin-left: -16px;
     margin-right: -16px;
@@ -445,8 +456,10 @@ p {
   width: 100%;
 }
 
-article > h1 {
-  margin: 0;
+@media (min-width: 576px) {
+  article > h1 {
+    margin: 0;
+  }
 }
 
 #plusloin > ul > li {
