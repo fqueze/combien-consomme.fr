@@ -1788,6 +1788,10 @@ export default function (eleventyConfig) {
     }
   });
 
+  eleventyConfig.addFilter('year', date => {
+    return moment(date).utc().year();
+  });
+
   eleventyConfig.addFilter('dateIso', date => {
     return moment(date).toISOString();
   });
