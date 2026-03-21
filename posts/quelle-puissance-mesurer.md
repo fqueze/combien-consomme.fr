@@ -2,7 +2,7 @@
 layout: post-layout.njk 
 title: Quelle puissance mesurer ?
 date: 2024-02-10
-img: hp-wattmeter.png
+img: wattmetres.jpg
 tags: ['post']
 ---
 

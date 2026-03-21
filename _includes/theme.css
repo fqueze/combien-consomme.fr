@@ -287,6 +287,9 @@ div > h2 {
   article:not(.list) picture > img {
     width: 100%;
   }
+  .footer-site {
+    display: none;
+  }
 }
 @media (max-width: 767px) {
   article h3 {
@@ -315,9 +318,6 @@ div > h2 {
   #Footer {
     margin-top: 0;
     font-size: 0.8rem;
-  }
-  #Footer h3 {
-    display: none;
   }
   #Footer img {
     height: 16px !important;

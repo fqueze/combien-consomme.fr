@@ -21,7 +21,7 @@ eleventyImport:
   <div>
 {% for post in collections.post | reverse | limit(3) %}
     <div>
-      <h3><a href="{{ post.url | url }}">{% if post.data.img %}{% image "./images/" + post.data.img, "Image représentant l'article " + post.data.title, "380w", 380 %}{% else %}{% image "./images/hp-missing.png", "Image générique", "380w", 380 %}{% endif %}
+      <h3><a href="{{ post.url | url }}">{% image "./images/" + post.data.img, "Image représentant l'article " + post.data.title, "380w", 380 %}
       {{ post.data.title }}</a></h3>
       <time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time>
       <p>{{ post.page.excerpt }}</p>

@@ -1,15 +1,16 @@
 ---
 layout: base-layout.njk
-img: hp-a-propos.png
+img: wattmetre-kilowatts-triphase.jpg
 pagetitle: À propos de combien-consomme.fr
 pagedesc: À quelles questions combien-consomme.fr répond, pour quelle raison il a été créé, dans quel esprit.
 ---
 
+<style>#intro > picture > img { border-radius: 50%; }</style>
 <article id="about">
 
 # {{ pagetitle }}
 
-{% intro "hp-a-propos.png" "Image contenant un cadrant avec des aiguilles, et des nuages de fumée colorée autour" %}
+{% intro "wattmetre-kilowatts-triphase.jpg" "Wattmètre industriel à cadran indiquant des kilowatts — Compteur triphasé" %}
 
 L'idée de ce site est venue d'une simple recherche sur internet. On se demandait {% test yaourtiere combien consomme une yaourtière %}, combien ça coûte en électricité de faire ses yaourts, et si c'est rentable, à la fois en euros, et en CO<sub>2</sub> de faire ses yaourts soi-même plutôt que de les acheter.
 
