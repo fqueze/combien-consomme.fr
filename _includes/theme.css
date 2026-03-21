@@ -187,6 +187,12 @@ header li > a:active {
     display: flex;
     flex-direction: column-reverse;
   }
+  #about #intro > picture {
+    display: none;
+  }
+  #about #intro {
+    margin-top: 1em;
+  }
 }
 @media (min-width: 992px) {
   #intro {
