@@ -8,19 +8,21 @@ pagination:
 pagetitle: Tous les tests d'objets
 pagedesc: Pour chaque objet testé, une description de l'objet et de la méthode de mesure précédera les résultats et leur interprêtation.
 ---
-<section>
-  <h1>{{ pagetitle }}</h1>
-  <p>{{ pagedesc }}</p>
-</section>
+<p class="list-desc">{{ pagedesc }}</p>
 
+<h2 class="list-header">Combien consomme…</h2>
 {% for test in tests %}
   <article class="list">
-    <a href="{{ test.url | url }}">{% image "./images/" + test.data.img, "Image représentant " + test.data.title, "192w", 192, false if loop.first else true %}</a>
-    <h3>
-      <a href="{{ test.url | url }}">{{ test.data.pagetitle }}</a>
-    </h3>
-    <p><time datetime="{{ test.date | dateIso }}">{{ test.date | dateReadable }}</time> — {{ test | timeToRead }} de lecture</p>
-    <p>{{ test.page.excerpt | renderString | safe }}</p>
+    <a href="{{ test.url | url }}">
+      {% image "./images/" + test.data.img, "Image représentant " + test.data.title, "480w", 480, false if loop.first else true %}
+      <div class="list-overlay">
+        <h3>{{ test.data.title }}</h3>
+        <p class="list-reading-time">{{ test | timeToRead }} de lecture</p>
+      </div>
+    </a>
+    <h3><a href="{{ test.url | url }}">{{ test.data.pagetitle }}</a></h3>
+    <p class="list-meta"><time datetime="{{ test.date | dateIso }}">{{ test.date | dateReadable }}</time> — {{ test | timeToRead }} de lecture</p>
+    <p class="list-excerpt">{{ test.page.excerpt | renderString | safe }}</p>
    </article>
 {% endfor %}
 {% if pagination.hrefs.length > 1 %}

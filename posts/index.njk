@@ -8,19 +8,20 @@ pagination:
 pagetitle: Tous les articles
 pagedesc: Ici, on expliquera les méthodes utilisées pour mesurer la consommation, et d'autres réflexions sur les façons d'économiser de l'énergie.
 ---
-<section>
-  <h1>{{ pagetitle }}</h1>
-  <p>{{ pagedesc }}</p>
-</section>
+<p class="list-desc">{{ pagedesc }}</p>
 
 {% for post in posts %}
   <article class="list">
-    <a href="{{ post.url | url }}">{% if post.data.img %}{% image "./images/" + post.data.img, "Image représentant l'article " + post.data.title, "192w", 192, false if loop.first else true  %}{% else %}{% image "./images/hp-missing.png", "Image générique", "192w", 192, false if loop.first else true %}{% endif %}</a>
-    <h3>
-      <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-    </h3>
-    <p><time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time> — {{ post | timeToRead }} de lecture</p>
-    <p>{{ post.page.excerpt | renderString | safe }}</p>
+    <a href="{{ post.url | url }}">
+      {% if post.data.img %}{% image "./images/" + post.data.img, "Image représentant l'article " + post.data.title, "480w", 480, false if loop.first else true  %}{% else %}{% image "./images/hp-missing.png", "Image générique", "480w", 480, false if loop.first else true %}{% endif %}
+      <div class="list-overlay">
+        <h3>{{ post.data.title }}</h3>
+        <p class="list-reading-time">{{ post | timeToRead }} de lecture</p>
+      </div>
+    </a>
+    <h3><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>
+    <p class="list-meta"><time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time> — {{ post | timeToRead }} de lecture</p>
+    <p class="list-excerpt">{{ post.page.excerpt | renderString | safe }}</p>
   </article>
 {% endfor %}
 {% if pagination.hrefs.length > 1 %}

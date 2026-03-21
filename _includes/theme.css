@@ -88,6 +88,11 @@ body > *, #plusloin {
 
 @media (min-width: 768px) {
   body > *, #plusloin {
+    padding: 32px 36px;
+  }
+}
+@media (min-width: 992px) {
+  body > *, #plusloin {
     padding: 64px 72px;
   }
   #tldr {
@@ -233,6 +238,17 @@ div > h2 {
     margin: 0;
     padding: 0.5em 16px;
   }
+  .list-header {
+    border-top: none;
+    margin: 0;
+    padding: 0.5em 16px;
+    text-align: left;
+    background-color: #f3f4f6;
+    color: #374151;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
   article:not(.list) picture {
     margin-left: -16px;
     margin-right: -16px;
@@ -279,6 +295,15 @@ div > h2 {
 }
 p {
   margin-top: 0;
+}
+.list-desc {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+@media (max-width: 575px) {
+  .list-desc {
+    padding-bottom: 8px;
+  }
 }
 #intro > picture > img {
   width: 100%;
@@ -599,33 +624,93 @@ table.power + p {
   padding-top: 1em;
 }
 
-article.list {
+.list {
   clear: both;
 }
-article.list > a > picture {
+.list > a > picture {
   float:left;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
   overflow: hidden;
   height: 100%;
   display:block;
   max-width: 33%;
-  margin-right: 24px;
+  margin-right: 8px;
 }
-article.list > a > picture > img,
-article.list > time {
+.list > a > picture > img,
+.list > time {
   display: block;
 }
-@media (min-width: 768px) {
-  article.list > p,
-  article.list > h3,
-  article.list > time {
-    padding-left: 224px;
-  }
-}
-article.list > h1 {
+.list > h1 {
   font-size: 2rem;
   line-height: 1em;
+}
+@media (max-width: 575px) {
+  .list {
+    margin-bottom: 0;
+    padding: 0;
+  }
+  .list > a {
+    display: block;
+    position: relative;
+    text-decoration: none;
+  }
+  .list > a > picture {
+    float: none;
+    max-width: none;
+    margin-right: 0;
+  }
+  .list + .list {
+    border-top: 4px solid #e5e7eb;
+  }
+  .list > a > picture > img {
+    width: 100%;
+    aspect-ratio: 2/1;
+    object-fit: cover;
+    display: block;
+  }
+  .list-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5em 16px;
+    background-color: #042f2ec0;
+    color: #e5e7eb;
+  }
+  .list-overlay h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  .list-reading-time {
+    margin: 0;
+    color: #e5e7eb99;
+    font-size: 0.75rem;
+  }
+  .list > h3,
+  .list-meta {
+    display: none;
+  }
+  .list-excerpt {
+    margin: 0;
+    padding: 8px 16px;
+  }
+}
+@media (min-width: 576px) {
+  .list-header,
+  .list-overlay {
+    display: none;
+  }
+  .list > a > picture {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    margin-right: 24px;
+  }
+}
+@media (min-width: 768px) {
+  .list > p,
+  .list > h3,
+  .list > time {
+    padding-left: 224px;
+  }
 }
 
 /* np = next/previous */
