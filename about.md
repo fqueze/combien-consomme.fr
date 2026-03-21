@@ -25,4 +25,8 @@ Si les [mesures seront réalisées sérieusement]({{ "/posts/" | url }} "Tous le
 N'hésitez pas à vous demander "Combien consomme *&lt;objet du quotidien>* ?" et à vouloir trouver [des réponses]({{ "/tests/" | url }} "Tous les tests d'objets").
 
 *Bonne lecture !*
+
+<h2 id="contact">Contact</h2>
+
+<p>Une question, une suggestion d'objet à tester, une remarque, ou envie de contribuer ? Écrivez-moi à <span id="email"></span>.<script>document.getElementById("email").innerHTML=(function(){var n="florian",d="combien-consomme.fr",a=n+"@"+d;return "<a href=\x22mai"+"lto:"+a+"\x22>"+a+"</a>"})();</script><noscript>florian [at] combien-consomme [dot] fr</noscript></p>
 </article>
