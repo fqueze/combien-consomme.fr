@@ -650,3 +650,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Rebrancher un rasoir déjà chargé ne consomme quasi rien (0.0313 Wh en 1min22)
 - Puissance maximale de 3.2W, très loin des 9W indiqués sur le chargeur
 - Consommation en veille indétectable par la prise connectée (0W affiché)
+
+### machine-a-laver-laden
+**Title:** une machine à laver Laden de 20 ans
+**Device:** Laden EV 1089 5kg (fabriqué par Whirlpool)
+**Key findings:**
+- Cycle court à 40°C : 541 Wh, dominé par le chauffage (408 Wh, 75%)
+- Chauffage : résistance de 2300W quasi continue pendant 11 minutes
+- Essorage à 900 tr/min : 22.7 Wh (4% du total)
+- Consommation éteinte quasi nulle (interrupteur mécanique)
+- Moins gourmande que la Samsung 7kg (541 vs 736 Wh) mais capacité inférieure (5kg vs 7kg)

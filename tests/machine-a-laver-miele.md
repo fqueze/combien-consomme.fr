@@ -322,11 +322,11 @@ Pour une famille nombreuse qui ferait 5 lessives par semaine (toutes en charge c
 
 Le fabricant annonce une « consommation énergétique annuelle » de 177 kWh par an, ce qui correspond à environ 3,4 lessives par semaine avec notre mesure. C'est cohérent avec un usage familial normal.
 
-### Comparaison avec le lave-linge Samsung
+### Comparaison avec d'autres lave-linge
 
-Lors de notre test d'un {% test machine-a-laver lave-linge Samsung 7kg %}, la consommation du programme Quotidien 40°C avait été mesurée à {{ 736 | Wh }}. La Miele consomme {{ 1040 | Wh }}, soit {{ 1040 | percentMore: 736 }} de plus par cycle.
+Lors de notre test d'un {% test machine-a-laver lave-linge Samsung 7kg %}, la consommation du programme Quotidien 40°C avait été mesurée à {{ 736 | Wh }}. La Miele consomme {{ 1040 | Wh }}, soit {{ 1040 | percentMore: 736 }} de plus par cycle. Une {% test machine-a-laver-laden vieille Laden de 5 kg %} ne consomme que {{ 541 | Wh }} sur son programme court à 40°C, mais sa capacité est bien plus faible.
 
-Mais attention : la Miele a une capacité de 8kg contre 7kg pour la Samsung, et surtout elle dispose du système de capacité variable qui permet de réduire drastiquement la consommation avec une charge légère. La Samsung n'adapte pas la quantité d'eau utilisée en fonction de la charge.
+Mais attention : la Miele a une capacité de 8kg contre 7kg pour la Samsung et 5 kg pour la Laden, et surtout elle dispose du système de capacité variable qui permet de réduire drastiquement la consommation avec une charge légère. La Samsung n'adapte pas la quantité d'eau utilisée en fonction de la charge.
 
 ### Conseils pour l'autoconsommation photovoltaïque
 
