@@ -116,5 +116,6 @@ Pour comprendre de façon plus détaillée la consommation d'un ventilateur, on 
 - d'{% test ventilateur-carrefour-home autres marques %} ;
 - de différents diamètres ;
 - plus ou moins anciens ;
-- ayant de l'électronique et une télécommande.
+- ayant de l'électronique et une télécommande ;
+- comparer avec un {% test purificateur-d-air-philips purificateur d'air %} qui brasse l'air en continu en mode automatique.
 {% endplusloin %}

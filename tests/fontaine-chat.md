@@ -61,5 +61,6 @@ Pour comprendre de façon plus détaillée la consommation de cette fontaine pou
 - vérifier si la consommation varie en fonction de la quantité d'eau présente dans le bac de la fontaine ;
 - vérifier si la consommation varie en fonction du niveau de viscosité du liquide présent dans le bac (par exemple en mettant un peu d'huile) ;
 - vérifier si retirer le papillon pour avoir un seul jet au lieu de 4 réduit la consommation ;
-- s'intéresser à la consommation du transfo, en comparant l'électricité utilisée en courant continu par la fontaine à l'énergie prélevée sur le réseau électrique en courant alternatif.
+- s'intéresser à la consommation du transfo, en comparant l'électricité utilisée en courant continu par la fontaine à l'énergie prélevée sur le réseau électrique en courant alternatif ;
+- comparer avec d'autres appareils fonctionnant 24h/24, comme un {% test purificateur-d-air-philips purificateur d'air %}.
 {% endplusloin %}

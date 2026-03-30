@@ -62,5 +62,6 @@ Si l'on suppose que le destructeur d'insectes est utilisé pendant 3 mois, la co
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation de ce destructeur d'insectes, on pourrait :
 - mesurer la consommation avec un appareil de mesure ayant un taux d'échantillonnage plus élevé, afin de voir si l'électrocution d'un moustique cause un bref pic de consommation.
-- mesurer la consommation en retirant un, puis deux tubes, afin de comprendre quelle consommation est causée par chaque tube, et quelle consommation est causée par la grille à haute tension et l'interrupteur éclairé.
+- mesurer la consommation en retirant un, puis deux tubes, afin de comprendre quelle consommation est causée par chaque tube, et quelle consommation est causée par la grille à haute tension et l'interrupteur éclairé ;
+- comparer avec un {% test purificateur-d-air-philips purificateur d'air %}, une autre approche pour améliorer la qualité de l'air intérieur.
 {% endplusloin %}

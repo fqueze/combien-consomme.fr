@@ -125,5 +125,6 @@ Avec une puissance inférieure à {{ 40 | W }}, ce ventilateur peut facilement f
 Pour mieux comprendre la consommation des ventilateurs, on pourrait :
 - comparer des modèles de tailles différentes (20 cm, 30 cm, 40 cm) ;
 - mesurer d’anciens modèles, ou ceux à variateur électronique ;
-- tester d'autres formes de ventilateurs : sur pied, en colonne, au plafond.
+- tester d'autres formes de ventilateurs : sur pied, en colonne, au plafond ;
+- comparer avec un {% test purificateur-d-air-philips purificateur d'air %} qui brasse aussi l'air mais en continu.
 {% endplusloin %}

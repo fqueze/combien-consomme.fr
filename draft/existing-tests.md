@@ -660,3 +660,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Essorage à 900 tr/min : 22.7 Wh (4% du total)
 - Consommation éteinte quasi nulle (interrupteur mécanique)
 - Moins gourmande que la Samsung 7kg (541 vs 736 Wh) mais capacité inférieure (5kg vs 7kg)
+
+### purificateur-d-air-philips
+**Title:** un purificateur d'air
+**Device:** Philips AC2887/10 Séries 2000
+**Key findings:**
+- Consommation très faible en mode automatique : médiane de 3,3 W, soit environ 29 kWh par an
+- Le mode turbo atteint 42,3 W, proche de la puissance nominale de 56 W
+- Même éteint, l'appareil consomme environ 0,2 W en permanence
+- L'éclairage n'a quasiment aucun impact mesurable sur la consommation (0,2 W de différence)
+- Les pics de poussière n'augmentent la consommation journalière que de 10 % au maximum
