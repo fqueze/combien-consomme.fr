@@ -670,3 +670,14 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Même éteint, l'appareil consomme environ 0,2 W en permanence
 - L'éclairage n'a quasiment aucun impact mesurable sur la consommation (0,2 W de différence)
 - Les pics de poussière n'augmentent la consommation journalière que de 10 % au maximum
+
+### douchette-lecteur-codes-barres
+**Title:** une douchette lecteur de codes-barres
+**Device:** Eyoyo EY-001 (scanner portable USB 1D/2D CCD)
+**Key findings:**
+- Veille automatique après 30s d'inactivité, à 0.38W
+- Repos actif (prêt à scanner) : 0.74W
+- Scan actif (laser + LED) : ~1.6W max
+- La LED d'éclairage consomme ~0.4W, le bip ~90ms de surconsommation
+- Branché 24h/24 en veille : {{ 0.38 | W€PerYear }} par an
+- Changement de configuration : pic à 3.15W
