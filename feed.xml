@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-03-30T19:14:39Z</updated>
+<updated>2026-04-05T16:13:56Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une douchette lecteur de codes-barres</title>
+ <link href="https://combien-consomme.fr/tests/douchette-lecteur-codes-barres/"/>
+ <updated>2026-04-05T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/douchette-lecteur-codes-barres/</id>
+ <summary xml:lang="fr" type="html">Ce lecteur de codes-barres USB trouvé dans un vide-grenier sert à cataloguer les livres pour enfants à la maison. Quel est l&#39;impact sur la consommation de l&#39;ordinateur auquel il est branché ?</summary>
+</entry>
 <entry>
  <title>un purificateur d&#39;air</title>
  <link href="https://combien-consomme.fr/tests/purificateur-d-air-philips/"/>
@@ -142,12 +149,5 @@
  <updated>2025-12-05T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/mixer-une-soupe/</id>
  <summary xml:lang="fr" type="html">Après avoir testé le {% test mixer-houmous mixage d&#39;un houmous %}, j&#39;ai voulu mesurer la consommation du même mixeur pour mixer une soupe aux légumes bien épaisse. Combien consomme le mixage d&#39;une soupe ?</summary>
-</entry>
-<entry>
- <title>une soirée gaufres</title>
- <link href="https://combien-consomme.fr/tests/soiree-gaufres/"/>
- <updated>2025-12-02T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/soiree-gaufres/</id>
- <summary xml:lang="fr" type="html">Un gaufrier pour préparer des gaufres salées et sucrées lors d&#39;une soirée entre amis. Combien d&#39;électricité consomme-t-on pour faire des gaufres maison ?</summary>
 </entry>
 </feed>
