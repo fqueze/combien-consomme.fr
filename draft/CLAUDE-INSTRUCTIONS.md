@@ -27,6 +27,7 @@ When the user asks you to generate a new test page from draft data, follow these
    - Puissance: médiane [X]W, moyenne [Y]W, max [Z]W
 
    IMAGE (from .png screenshot) - Ce que je VOIS:
+   **IMPORTANT: Use a sub-agent (Agent tool) to view each .png screenshot** and return a text description. Never read image files directly in the main conversation — this causes "image exceeds the dimension limit" errors when multiple images accumulate in context. The sub-agent should describe:
    - [Describe visual patterns: plateaus, spikes, gradual changes]
    - [Describe timing of phases if visible]
    - [Note any 0W periods at start/end]
@@ -39,7 +40,7 @@ When the user asks you to generate a new test page from draft data, follow these
    Usage prévu: [Which section, why]
    ```
 
-   For each image, output:
+   For each image, use a sub-agent to view it (same rule as screenshots above), then output:
    ```
    === IMAGE: [filename] ===
    Contenu: [What the image shows]
