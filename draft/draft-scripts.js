@@ -180,9 +180,10 @@ function hideModal(modal) {
 // Make an element editable with click-to-edit functionality
 function makeEditable(element, onSave, onCancel) {
   element.addEventListener('click', function() {
+    if (this.contentEditable === 'true') return;
     this.contentEditable = 'true';
     this.focus();
-    // Select all text
+    // Select all text on first click
     const range = document.createRange();
     range.selectNodeContents(this);
     const sel = window.getSelection();
