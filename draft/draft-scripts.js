@@ -372,6 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const item = document.createElement('div');
         item.className = 'image-preview-item';
+        item.dataset.source = sourceFilename;
         item.innerHTML = `
           <div class="image-preview-header">
             <div class="image-preview-info">
@@ -424,10 +425,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Mark grid images that have a preview
-      const usedSources = new Set(imageEntries.map(e => e.sourceFilename));
-      document.querySelectorAll('.image-item[data-image]').forEach(el => {
-        el.classList.toggle('used', usedSources.has(el.dataset.image));
-      });
+      updateUsedImages();
     } catch (error) {
       console.error('Error loading image previews:', error);
       imagePreviewsList.innerHTML = '<p style="color: #dc3545;">Erreur lors du chargement des aperçus</p>';
@@ -465,6 +463,16 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   const NO_RANGES_HTML = '<p style="color: #6c757d; font-style: italic;">Aucune plage sauvegardée</p>';
+
+  function updateUsedImages() {
+    const usedSources = new Set();
+    document.querySelectorAll('.image-preview-item[data-source]').forEach(el => {
+      usedSources.add(el.dataset.source);
+    });
+    document.querySelectorAll('.image-item[data-image]').forEach(el => {
+      el.classList.toggle('used', usedSources.has(el.dataset.image));
+    });
+  }
 
   function updateUsedProfiles() {
     const usedFiles = new Set();
@@ -583,7 +591,13 @@ document.addEventListener('DOMContentLoaded', function() {
               updateUsedProfiles();
 
               // Show undo notification at button position
-              showUndoNotification(rangeData, buttonRect);
+              showUndoNotification(`Plage "${rangeData.name}" supprimée`, buttonRect, {
+                onUndo: async () => {
+                  // Re-save the range and reload the list
+                  await post('save-range', rangeData);
+                  loadSavedRanges(true);
+                }
+              });
             } catch (error) {
               showError(error.message);
               this.disabled = false;
@@ -602,18 +616,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function showUndoNotification(rangeData, buttonRect) {
-    // Remove any existing notification
-    const existing = document.querySelector('.undo-notification');
-    if (existing) {
-      existing.remove();
+  let activeUndoNotification = null;
+
+  function showUndoNotification(message, buttonRect, { onUndo, onConfirm }) {
+    // Dismiss any previous notification immediately (confirms its action)
+    if (activeUndoNotification) {
+      activeUndoNotification.dismiss();
+      activeUndoNotification = null;
     }
+
+    let undone = false;
 
     // Create notification
     const notification = document.createElement('div');
     notification.className = 'undo-notification';
     notification.innerHTML = `
-      <span>Plage "${rangeData.name}" supprimée</span>
+      <span>${message}</span>
       <button class="undo-btn">Annuler</button>
     `;
 
@@ -624,26 +642,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.body.appendChild(notification);
 
-    // Auto-hide after 5 seconds
-    const timeout = setTimeout(() => {
-      notification.classList.add('undo-notification-hide');
-      setTimeout(() => notification.remove(), 300);
-    }, 5000);
+    let timeout = null;
+
+    function dismiss() {
+      clearTimeout(timeout);
+      activeUndoNotification = null;
+      notification.remove();
+      if (!undone) onConfirm?.();
+    }
+
+    // Auto-dismiss after 5 seconds
+    timeout = setTimeout(dismiss, 5000);
+
+    activeUndoNotification = { dismiss };
 
     // Undo button
     notification.querySelector('.undo-btn').addEventListener('click', async function() {
+      undone = true;
       clearTimeout(timeout);
+      activeUndoNotification = null;
       this.disabled = true;
       this.textContent = '...';
 
       try {
-        // Re-save the range
-        await post('save-range', rangeData);
+        await onUndo();
         notification.remove();
-        // Reload ranges with fresh data
-        loadSavedRanges(true);
       } catch (error) {
-        console.error('Error restoring range:', error);
+        console.error('Error undoing:', error);
         this.textContent = 'Erreur';
       }
     });
@@ -1393,22 +1418,30 @@ document.addEventListener('DOMContentLoaded', function() {
       const deleteBtn = e.target.closest('.image-preview-delete-btn');
       if (deleteBtn) {
         const shortname = deleteBtn.dataset.shortname;
+        const buttonRect = deleteBtn.getBoundingClientRect();
 
-        const confirmed = confirm('Retirer cette image de la liste ? L\'image source ne sera pas supprimée, mais ses métadonnées (description, recadrage) seront effacées.');
-        if (!confirmed) return;
+        // Remove the preview item from DOM immediately
+        const item = deleteBtn.closest('.image-preview-item');
+        item.remove();
+        updateUsedImages();
 
-        try {
-          // Delete the image metadata
-          await fetch(`/api/draft/${currentSlug}/image/${encodeURIComponent(shortname)}`, {
-            method: 'DELETE'
-          });
-
-          // Reload the preview list with fresh data
-          await loadImagePreviews(true);
-        } catch (error) {
-          console.error('Error deleting image metadata:', error);
-          showError('Erreur lors de la suppression');
-        }
+        // Delete on server only after undo timeout expires
+        showUndoNotification(`Image "${shortname}" retirée`, buttonRect, {
+          onUndo: async () => {
+            // Reload the preview list (data is still on the server)
+            await loadImagePreviews(true);
+          },
+          onConfirm: async () => {
+            try {
+              // Delete the image metadata and preview file
+              await fetch(`/api/draft/${currentSlug}/image/${encodeURIComponent(shortname)}`, {
+                method: 'DELETE'
+              });
+            } catch (error) {
+              console.error('Error deleting image metadata:', error);
+            }
+          }
+        });
         return;
       }
 
