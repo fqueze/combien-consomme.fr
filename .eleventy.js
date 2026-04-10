@@ -960,7 +960,7 @@ function setupDevMiddleware(middleware) {
 
       try {
         saveDraftData(slug, data);
-        sendJSON(res, 200, { success: true });
+        sendJSON(res, 200, { success: true, range });
       } catch (error) {
         sendJSON(res, 500, { error: error.message });
       }

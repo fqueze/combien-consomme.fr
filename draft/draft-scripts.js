@@ -300,6 +300,18 @@ document.addEventListener('DOMContentLoaded', function() {
     loadImagePreviews();
   })();
 
+  // Save range description on blur (delegated to handle dynamically recreated textareas)
+  document.getElementById('saved-ranges-list')?.addEventListener('focusout', async function(e) {
+    if (!e.target.classList.contains('range-description')) return;
+    const rangeId = e.target.dataset.rangeId;
+    const description = e.target.value.trim();
+    try {
+      await patch(`update-range/${rangeId}`, { description });
+    } catch (error) {
+      console.error('Error updating description:', error);
+    }
+  });
+
   function formatRangeDuration(range) {
     if (!range) return '';
 
@@ -445,6 +457,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  const NO_RANGES_HTML = '<p style="color: #6c757d; font-style: italic;">Aucune plage sauvegardée</p>';
+
   async function loadSavedRanges(force = false) {
     const savedRangesList = document.getElementById('saved-ranges-list');
     if (!savedRangesList) return;
@@ -485,33 +499,32 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add rename functionality
         document.querySelectorAll('.range-name').forEach(nameEl => {
           const rangeId = nameEl.dataset.rangeId;
+          const originalName = nameEl.textContent;
           makeEditable(
             nameEl,
             async (newName) => {
+              if (newName === originalName) return;
               try {
-                await patch(`update-range/${rangeId}`, { name: newName });
+                const response = await patch(`update-range/${rangeId}`, { name: newName });
+                const { range } = await response.json();
+                const { shortcode, description } = range;
+
+                // Update shortcode display and re-render preview in-place
+                const item = nameEl.closest('.saved-range-item');
+                item.querySelector('.range-shortcode').textContent = shortcode;
+
+                item.querySelector('.profile')?.remove();
+                const existingDesc = item.querySelector('.range-description');
+                const currentDesc = existingDesc?.value || description || '';
+                existingDesc?.remove();
+                await renderShortcode(shortcode, rangeId, currentDesc);
               } catch (error) {
                 showError(error.message);
+                nameEl.textContent = newName;
               }
-
-              loadSavedRanges(true);
             },
-            () => loadSavedRanges()
+            () => { nameEl.textContent = originalName; }
           );
-        });
-
-        // Add description functionality
-        document.querySelectorAll('.range-description').forEach(descEl => {
-          descEl.addEventListener('blur', async function() {
-            const rangeId = this.dataset.rangeId;
-            const description = this.value.trim();
-
-            try {
-              await patch(`update-range/${rangeId}`, { description });
-            } catch (error) {
-              console.error('Error updating description:', error);
-            }
-          });
         });
 
         // Add delete functionality to all delete buttons
@@ -539,10 +552,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error(result.error || 'Impossible de supprimer');
               }
 
+              // Remove the item from DOM
+              const item = this.closest('.saved-range-item');
+              item.remove();
+
+              // Show empty message if no ranges left
+              if (!savedRangesList.querySelector('.saved-range-item')) {
+                savedRangesList.innerHTML = NO_RANGES_HTML;
+              }
+
               // Show undo notification at button position
               showUndoNotification(rangeData, buttonRect);
-              // Reload the ranges list with fresh data
-              loadSavedRanges(true);
             } catch (error) {
               showError(error.message);
               this.disabled = false;
@@ -551,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
           });
         });
       } else {
-        savedRangesList.innerHTML = '<p style="color: #6c757d; font-style: italic;">Aucune plage sauvegardée</p>';
+        savedRangesList.innerHTML = NO_RANGES_HTML;
       }
     } catch (error) {
       console.error('Error loading saved ranges:', error);
