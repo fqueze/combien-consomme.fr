@@ -422,6 +422,12 @@ document.addEventListener('DOMContentLoaded', function() {
         placeholder.outerHTML = imageHTML;
 
       }
+
+      // Mark grid images that have a preview
+      const usedSources = new Set(imageEntries.map(e => e.sourceFilename));
+      document.querySelectorAll('.image-item[data-image]').forEach(el => {
+        el.classList.toggle('used', usedSources.has(el.dataset.image));
+      });
     } catch (error) {
       console.error('Error loading image previews:', error);
       imagePreviewsList.innerHTML = '<p style="color: #dc3545;">Erreur lors du chargement des aperçus</p>';
@@ -460,6 +466,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const NO_RANGES_HTML = '<p style="color: #6c757d; font-style: italic;">Aucune plage sauvegardée</p>';
 
+  function updateUsedProfiles() {
+    const usedFiles = new Set();
+    document.querySelectorAll('.saved-range-item[data-file]').forEach(el => {
+      usedFiles.add(el.dataset.file);
+    });
+    document.querySelectorAll('.profile-item[data-profile]').forEach(el => {
+      el.classList.toggle('used', usedFiles.has(el.dataset.profile));
+    });
+  }
+
   async function loadSavedRanges(force = false) {
     const savedRangesList = document.getElementById('saved-ranges-list');
     if (!savedRangesList) return;
@@ -476,6 +492,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const item = document.createElement('div');
           item.className = 'saved-range-item';
           item.dataset.rangeId = range.id;
+          item.dataset.file = range.file;
           item.innerHTML = `
             <div class="saved-range-header">
               <span class="range-summary">
@@ -562,6 +579,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 savedRangesList.innerHTML = NO_RANGES_HTML;
               }
 
+              // Update profile used markers (this range's profile may no longer be used)
+              updateUsedProfiles();
+
               // Show undo notification at button position
               showUndoNotification(rangeData, buttonRect);
             } catch (error) {
@@ -571,9 +591,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           });
         });
+
       } else {
         savedRangesList.innerHTML = NO_RANGES_HTML;
       }
+      updateUsedProfiles();
     } catch (error) {
       console.error('Error loading saved ranges:', error);
       savedRangesList.innerHTML = '<p style="color: #dc3545;">Erreur lors du chargement des plages</p>';
