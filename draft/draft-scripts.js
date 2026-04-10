@@ -676,12 +676,28 @@ document.addEventListener('DOMContentLoaded', function() {
           if (shortname !== undefined) {
             input.value = shortname;
           }
+          // Update save-range button state
+          resetSaveRangeBtn(input.closest('.profile-item'));
         });
       } catch (error) {
         console.error('Error loading profile shortnames:', error);
       }
     })();
   }
+
+  // Reset save-range button to default state, disabled if no shortname
+  function resetSaveRangeBtn(profileItem) {
+    const shortnameInput = profileItem.querySelector('.profile-shortname');
+    const saveRangeBtn = profileItem.querySelector('.save-range-btn');
+    saveRangeBtn.textContent = 'Sauvegarder la plage';
+    saveRangeBtn.disabled = !shortnameInput.value.trim();
+  }
+
+  // Update save-range button immediately as user types
+  profilesSection?.addEventListener('input', function(e) {
+    if (e.target.classList.contains('profile-shortname'))
+      resetSaveRangeBtn(e.target.closest('.profile-item'));
+  });
 
   profilesSection?.addEventListener('change', async function(e) {
     if (!e.target.classList.contains('profile-shortname')) return;
@@ -711,162 +727,167 @@ document.addEventListener('DOMContentLoaded', function() {
   // Profile iframe handling - support multiple open iframes
   const activeIframes = new Map(); // Track polling for each iframe
 
+  // Click on profile header to open/close profiler
   profilesSection?.addEventListener('click', function(e) {
-    // Handle toggle button
-    const toggleBtn = e.target.closest('.toggle-profiler-btn');
-    if (toggleBtn) {
-      const profileItem = toggleBtn.closest('.profile-item');
-      const container = profileItem.querySelector('.profiler-container');
-      const iframe = profileItem.querySelector('.profiler-iframe');
-      const profileRangeInfo = profileItem.querySelector('.profile-range-info');
+    // Don't toggle when clicking controls inside the header
+    if (e.target.closest('.profile-controls') || e.target.closest('input') || e.target.closest('button')) return;
 
-      // Check if already open
-      if (profileItem.classList.contains('profiler-open')) {
-        // Close profiler
-        profileItem.classList.remove('profiler-open');
-        container.style.display = 'none';
-        iframe.src = '';
-        toggleBtn.textContent = 'Ouvrir le profiler';
+    const profileHeader = e.target.closest('.profile-header');
+    if (!profileHeader) return;
 
-        // Stop polling for this iframe
-        if (iframe._stopPolling) {
-          iframe._stopPolling();
-        }
+    const profileItem = profileHeader.closest('.profile-item');
+    const container = profileItem.querySelector('.profiler-container');
+    const iframe = profileItem.querySelector('.profiler-iframe');
+    const profileRangeInfo = profileItem.querySelector('.profile-range-info');
 
-        // Remove visibility handler
-        if (iframe._visibilityHandler) {
-          document.removeEventListener('visibilitychange', iframe._visibilityHandler);
-          iframe._visibilityHandler = null;
-        }
-      } else {
-        // Open profiler
-        const profileFilenameText = profileItem.dataset.profile;
-        const slug = profileItem.dataset.slug;
+    // Check if already open
+    if (profileItem.classList.contains('profiler-open')) {
+      // Close profiler
+      profileItem.classList.remove('profiler-open');
+      container.style.display = 'none';
+      iframe.src = '';
 
-        profileItem.classList.add('profiler-open');
+      // Reset range info and save button
+      profileRangeInfo.textContent = '';
+      resetSaveRangeBtn(profileItem);
 
-        const profilePath = 'draft/' + slug + '/' + profileFilenameText;
-        const baseUrl = window.location.origin;
-        const profileUrl = baseUrl + '/' + profilePath;
-        const profilerUrl = baseUrl + '/from-url/' + encodeURIComponent(profileUrl);
-
-        iframe.src = profilerUrl;
-        container.style.display = 'block';
-        toggleBtn.textContent = 'Fermer le profiler';
-        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        // Set up URL monitoring for this iframe
-        let lastUrl = '';
-        let checkUrl = null;
-
-        function resizeIframeToContent() {
-          const iframeDoc = iframe.contentWindow.document;
-
-          const layoutSplitter = iframeDoc.querySelector('.splitter-layout.profileViewerSplitter .layout-splitter');
-
-          if (layoutSplitter) {
-            // Get the bottom position of the splitter (includes the splitter's height)
-            const splitterRect = layoutSplitter.getBoundingClientRect();
-            const scrollTop = iframe.contentWindow.pageYOffset || iframeDoc.documentElement.scrollTop;
-            const splitterBottom = splitterRect.bottom + scrollTop;
-
-            iframe.style.height = splitterBottom + 'px';
-
-            // Close the legal footer panel if present (after measuring/resizing)
-            const footerCloseBtn = iframeDoc.querySelector('.appFooterLinksClose');
-            if (footerCloseBtn) {
-              footerCloseBtn.click();
-            }
-          }
-        }
-
-        function updateTitle() {
-          try {
-            const currentUrl = iframe.contentWindow.location.href;
-            const url = new URL(currentUrl);
-            const params = url.searchParams;
-
-            const profileName = params.get('profileName');
-            const range = params.get('range');
-
-            let rangeText = '';
-            if (range) {
-              // Extract just the last part of the range and format it
-              const cleanRange = range.replace(/.*~/, '');
-              const duration = formatRangeDuration(cleanRange);
-
-              if (profileName) {
-                rangeText = profileName + ' — ' + duration;
-              } else {
-                rangeText = 'Plage: ' + duration;
-              }
-            } else if (profileName) {
-              rangeText = profileName;
-            }
-
-            if (rangeText) {
-              profileRangeInfo.textContent = rangeText;
-            }
-          } catch (e) {
-            // Cross-origin or still loading
-          }
-        }
-
-        function checkUrlChange() {
-          try {
-            const currentUrl = iframe.contentWindow.location.href;
-            if (currentUrl !== lastUrl) {
-              lastUrl = currentUrl;
-              updateTitle();
-
-              // Check if profile is fully loaded (globalTrackOrder parameter is set)
-              const url = new URL(currentUrl);
-              if (url.searchParams.has('globalTrackOrder')) {
-                // Profile is fully loaded, resize iframe to fit content
-                resizeIframeToContent();
-              }
-            }
-          } catch (e) {
-            // Still loading or cross-origin
-          }
-        }
-
-        function startPolling() {
-          if (!checkUrl) {
-            checkUrl = setInterval(checkUrlChange, 500);
-            activeIframes.set(iframe, checkUrl);
-          }
-        }
-
-        function stopPolling() {
-          if (checkUrl) {
-            clearInterval(checkUrl);
-            checkUrl = null;
-            activeIframes.delete(iframe);
-          }
-        }
-
-        // Start polling
-        startPolling();
-
-        // Store stop function for toggle button
-        iframe._stopPolling = stopPolling;
-
-        // Pause polling when page is hidden to save resources
-        const visibilityHandler = () => {
-          if (document.hidden) {
-            stopPolling();
-          } else {
-            startPolling();
-          }
-        };
-        document.addEventListener('visibilitychange', visibilityHandler);
-
-        // Store visibility handler to remove it when closing
-        iframe._visibilityHandler = visibilityHandler;
+      // Stop polling for this iframe
+      if (iframe._stopPolling) {
+        iframe._stopPolling();
       }
 
-      return;
+      // Remove visibility handler
+      if (iframe._visibilityHandler) {
+        document.removeEventListener('visibilitychange', iframe._visibilityHandler);
+        iframe._visibilityHandler = null;
+      }
+    } else {
+      // Open profiler
+      const profileFilenameText = profileItem.dataset.profile;
+      const slug = profileItem.dataset.slug;
+
+      profileItem.classList.add('profiler-open');
+
+      const profilePath = 'draft/' + slug + '/' + profileFilenameText;
+      const baseUrl = window.location.origin;
+      const profileUrl = baseUrl + '/' + profilePath;
+      const profilerUrl = baseUrl + '/from-url/' + encodeURIComponent(profileUrl);
+
+      iframe.src = profilerUrl;
+      container.style.display = 'block';
+
+      // Set up URL monitoring for this iframe
+      let lastUrl = '';
+      let checkUrl = null;
+
+      function resizeIframeToContent() {
+        const iframeDoc = iframe.contentWindow.document;
+
+        const layoutSplitter = iframeDoc.querySelector('.splitter-layout.profileViewerSplitter .layout-splitter');
+
+        if (layoutSplitter) {
+          // Get the bottom position of the splitter (includes the splitter's height)
+          const splitterRect = layoutSplitter.getBoundingClientRect();
+          const scrollTop = iframe.contentWindow.pageYOffset || iframeDoc.documentElement.scrollTop;
+          const splitterBottom = splitterRect.bottom + scrollTop;
+
+          iframe.style.height = splitterBottom + 'px';
+
+          // Close the legal footer panel if present (after measuring/resizing)
+          const footerCloseBtn = iframeDoc.querySelector('.appFooterLinksClose');
+          if (footerCloseBtn) {
+            footerCloseBtn.click();
+          }
+        }
+      }
+
+      function updateRangeInfo() {
+        try {
+          const currentUrl = iframe.contentWindow.location.href;
+          const url = new URL(currentUrl);
+          const params = url.searchParams;
+
+          const profileName = params.get('profileName');
+          const range = params.get('range');
+
+          let rangeText = '';
+          if (range) {
+            // Extract just the last part of the range and format it
+            const cleanRange = range.replace(/.*~/, '');
+            const duration = formatRangeDuration(cleanRange);
+
+            if (profileName) {
+              rangeText = profileName + ' — ' + duration;
+            } else {
+              rangeText = 'Plage: ' + duration;
+            }
+          } else if (profileName) {
+            rangeText = profileName;
+          }
+
+          if (rangeText) {
+            profileRangeInfo.textContent = rangeText;
+          }
+        } catch (e) {
+          // Cross-origin or still loading
+        }
+      }
+
+      function checkUrlChange() {
+        try {
+          const currentUrl = iframe.contentWindow.location.href;
+          if (currentUrl !== lastUrl) {
+            lastUrl = currentUrl;
+            updateRangeInfo();
+
+            // Reset save button when range/name changes
+            resetSaveRangeBtn(profileItem);
+
+            // Check if profile is fully loaded (globalTrackOrder parameter is set)
+            const url = new URL(currentUrl);
+            if (url.searchParams.has('globalTrackOrder')) {
+              // Profile is fully loaded, resize iframe to fit content
+              resizeIframeToContent();
+            }
+          }
+        } catch (e) {
+          // Still loading or cross-origin
+        }
+      }
+
+      function startPolling() {
+        if (!checkUrl) {
+          checkUrl = setInterval(checkUrlChange, 500);
+          activeIframes.set(iframe, checkUrl);
+        }
+      }
+
+      function stopPolling() {
+        if (checkUrl) {
+          clearInterval(checkUrl);
+          checkUrl = null;
+          activeIframes.delete(iframe);
+        }
+      }
+
+      // Start polling
+      startPolling();
+
+      // Store stop function for closing
+      iframe._stopPolling = stopPolling;
+
+      // Pause polling when page is hidden to save resources
+      const visibilityHandler = () => {
+        if (document.hidden) {
+          stopPolling();
+        } else {
+          startPolling();
+        }
+      };
+      document.addEventListener('visibilitychange', visibilityHandler);
+
+      // Store visibility handler to remove it when closing
+      iframe._visibilityHandler = visibilityHandler;
     }
   });
 
@@ -930,11 +951,14 @@ document.addEventListener('DOMContentLoaded', function() {
         shortcode: shortcode
       });
 
-      setButtonState(saveBtn, '✓ Sauvegardé');
+      saveBtn.textContent = '✓ Sauvegardé';
+      saveBtn.disabled = true;
       loadSavedRanges(true);
     } catch (e) {
       console.error('Cannot save range:', e);
-      setButtonState(saveBtn, 'Erreur');
+      saveBtn.textContent = 'Erreur';
+      saveBtn.disabled = false;
+      setTimeout(() => resetSaveRangeBtn(profileItem), 2000);
     }
   });
 
