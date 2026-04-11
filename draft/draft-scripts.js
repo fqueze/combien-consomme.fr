@@ -503,6 +503,7 @@ document.addEventListener('DOMContentLoaded', function() {
           item.dataset.file = range.file;
           item.innerHTML = `
             <div class="saved-range-header">
+              <button class="edit-range-btn" data-file="${range.file}" data-name="${range.name}" data-range="${range.range || ''}" title="Ouvrir dans le profiler">✎</button>
               <span class="range-summary">
                 <strong class="range-name" data-range-id="${range.id}" contenteditable="false" title="Cliquer pour renommer">${range.name}</strong>
                 ${range.range ? ' — Durée: ' + formatRangeDuration(range.range) + ' — Plage: ' + range.range : ' — Profil complet'}
@@ -551,6 +552,22 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             () => { nameEl.textContent = originalName; }
           );
+        });
+
+        // Add edit functionality to open range in profiler
+        document.querySelectorAll('.edit-range-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const profileItem = document.querySelector(`.profile-item[data-profile="${this.dataset.file}"]`);
+            const url = profilerUrl(profileItem, {profileName: this.dataset.name, range: this.dataset.range});
+
+            if (profileItem.classList.contains('profiler-open')) {
+              profileItem.querySelector('.profiler-iframe').src = url;
+            } else {
+              openProfiler(profileItem, url);
+            }
+
+            profileItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
         });
 
         // Add delete functionality to all delete buttons
@@ -813,8 +830,184 @@ document.addEventListener('DOMContentLoaded', function() {
     previewDiv.classList.remove('preview-loading');
   }
 
+  function profilerUrl(profileItem, {profileName, range} = {}) {
+    const {profile, slug} = profileItem.dataset;
+    const profilePath = 'draft/' + slug + '/' + profile;
+    const baseUrl = window.location.origin;
+    let url = baseUrl + '/from-url/' + encodeURIComponent(baseUrl + '/' + profilePath);
+    const params = [];
+    if (profileName) {
+      params.push('profileName=' + encodeURIComponent(profileName));
+    }
+    if (range) {
+      params.push('range=' + range);
+      params.push('v=10'); // Firefox Profiler URL format version, required for range
+    }
+    if (params.length) {
+      url += '?' + params.join('&');
+    }
+    return url;
+  }
+
   // Profile iframe handling - support multiple open iframes
   const activeIframes = new Map(); // Track polling for each iframe
+
+  function openProfiler(profileItem, url) {
+    const container = profileItem.querySelector('.profiler-container');
+    const iframe = profileItem.querySelector('.profiler-iframe');
+    const profileRangeInfo = profileItem.querySelector('.profile-range-info');
+
+    profileItem.classList.add('profiler-open');
+
+    iframe.src = url || profilerUrl(profileItem);
+    container.style.display = 'block';
+
+    // Show initial preview of the full profile
+    updateProfilePreview(profileItem);
+
+    // Set up URL monitoring for this iframe
+    let lastUrl = '';
+    let checkUrl = null;
+
+    function resizeIframeToContent() {
+      const iframeDoc = iframe.contentWindow.document;
+
+      const layoutSplitter = iframeDoc.querySelector('.splitter-layout.profileViewerSplitter .layout-splitter');
+
+      if (layoutSplitter) {
+        // Get the bottom position of the splitter (includes the splitter's height)
+        const splitterRect = layoutSplitter.getBoundingClientRect();
+        const scrollTop = iframe.contentWindow.pageYOffset || iframeDoc.documentElement.scrollTop;
+        const splitterBottom = splitterRect.bottom + scrollTop;
+
+        iframe.style.height = splitterBottom + 'px';
+
+        // Close the legal footer panel if present (after measuring/resizing)
+        const footerCloseBtn = iframeDoc.querySelector('.appFooterLinksClose');
+        if (footerCloseBtn) {
+          footerCloseBtn.click();
+        }
+      }
+    }
+
+    function updateRangeInfo() {
+      try {
+        const currentUrl = iframe.contentWindow.location.href;
+        const url = new URL(currentUrl);
+        const params = url.searchParams;
+
+        const profileName = params.get('profileName');
+        const range = params.get('range');
+
+        let rangeText = '';
+        if (range) {
+          // Extract just the last part of the range and format it
+          const cleanRange = range.replace(/.*~/, '');
+          const duration = formatRangeDuration(cleanRange);
+
+          if (profileName) {
+            rangeText = profileName + ' — ' + duration;
+          } else {
+            rangeText = 'Plage: ' + duration;
+          }
+        } else if (profileName) {
+          rangeText = profileName;
+        }
+
+        if (rangeText) {
+          profileRangeInfo.textContent = rangeText;
+        }
+      } catch (e) {
+        // Cross-origin or still loading
+      }
+    }
+
+    function checkUrlChange() {
+      try {
+        const currentUrl = iframe.contentWindow.location.href;
+        if (currentUrl !== lastUrl) {
+          lastUrl = currentUrl;
+          updateRangeInfo();
+
+          // Reset save button when range/name changes
+          resetSaveRangeBtn(profileItem);
+
+          // Check if profile is fully loaded (globalTrackOrder parameter is set)
+          const url = new URL(currentUrl);
+          if (url.searchParams.has('globalTrackOrder')) {
+            // Profile is fully loaded, resize iframe to fit content
+            resizeIframeToContent();
+          }
+
+          // Update the SVG preview with the new selection
+          updateProfilePreview(profileItem, {
+            profileName: url.searchParams.get('profileName'),
+            range: url.searchParams.get('range')?.replace(/.*~/, '')
+          });
+        }
+      } catch (e) {
+        // Still loading or cross-origin
+      }
+    }
+
+    function startPolling() {
+      if (!checkUrl) {
+        checkUrl = setInterval(checkUrlChange, 500);
+        activeIframes.set(iframe, checkUrl);
+      }
+    }
+
+    function stopPolling() {
+      if (checkUrl) {
+        clearInterval(checkUrl);
+        checkUrl = null;
+        activeIframes.delete(iframe);
+      }
+    }
+
+    // Start polling
+    startPolling();
+
+    // Store stop function for closing
+    iframe._stopPolling = stopPolling;
+
+    // Pause polling when page is hidden to save resources
+    const visibilityHandler = () => {
+      if (document.hidden) {
+        stopPolling();
+      } else {
+        startPolling();
+      }
+    };
+    document.addEventListener('visibilitychange', visibilityHandler);
+
+    // Store visibility handler to remove it when closing
+    iframe._visibilityHandler = visibilityHandler;
+  }
+
+  function closeProfiler(profileItem) {
+    const container = profileItem.querySelector('.profiler-container');
+    const iframe = profileItem.querySelector('.profiler-iframe');
+
+    profileItem.classList.remove('profiler-open');
+    container.style.display = 'none';
+    iframe.src = '';
+
+    // Reset range info and save button
+    profileItem.querySelector('.profile-range-info').textContent = '';
+    resetSaveRangeBtn(profileItem);
+
+    // Stop polling for this iframe
+    if (iframe._stopPolling) {
+      iframe._stopPolling();
+    }
+
+    // Remove visibility handler
+    if (iframe._visibilityHandler) {
+      document.removeEventListener('visibilitychange', iframe._visibilityHandler);
+      iframe._visibilityHandler = null;
+    }
+  }
 
   // Click on profile header to open/close profiler
   profilesSection?.addEventListener('click', function(e) {
@@ -825,167 +1018,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!profileHeader) return;
 
     const profileItem = profileHeader.closest('.profile-item');
-    const container = profileItem.querySelector('.profiler-container');
-    const iframe = profileItem.querySelector('.profiler-iframe');
-    const profileRangeInfo = profileItem.querySelector('.profile-range-info');
-
-    // Check if already open
     if (profileItem.classList.contains('profiler-open')) {
-      // Close profiler
-      profileItem.classList.remove('profiler-open');
-      container.style.display = 'none';
-      iframe.src = '';
-
-      // Reset range info and save button
-      profileRangeInfo.textContent = '';
-      resetSaveRangeBtn(profileItem);
-
-      // Stop polling for this iframe
-      if (iframe._stopPolling) {
-        iframe._stopPolling();
-      }
-
-      // Remove visibility handler
-      if (iframe._visibilityHandler) {
-        document.removeEventListener('visibilitychange', iframe._visibilityHandler);
-        iframe._visibilityHandler = null;
-      }
+      closeProfiler(profileItem);
     } else {
-      // Open profiler
-      const profileFilenameText = profileItem.dataset.profile;
-      const slug = profileItem.dataset.slug;
-
-      profileItem.classList.add('profiler-open');
-
-      const profilePath = 'draft/' + slug + '/' + profileFilenameText;
-      const baseUrl = window.location.origin;
-      const profileUrl = baseUrl + '/' + profilePath;
-      const profilerUrl = baseUrl + '/from-url/' + encodeURIComponent(profileUrl);
-
-      iframe.src = profilerUrl;
-      container.style.display = 'block';
-
-      // Show initial preview of the full profile
-      updateProfilePreview(profileItem);
-
-      // Set up URL monitoring for this iframe
-      let lastUrl = '';
-      let checkUrl = null;
-
-      function resizeIframeToContent() {
-        const iframeDoc = iframe.contentWindow.document;
-
-        const layoutSplitter = iframeDoc.querySelector('.splitter-layout.profileViewerSplitter .layout-splitter');
-
-        if (layoutSplitter) {
-          // Get the bottom position of the splitter (includes the splitter's height)
-          const splitterRect = layoutSplitter.getBoundingClientRect();
-          const scrollTop = iframe.contentWindow.pageYOffset || iframeDoc.documentElement.scrollTop;
-          const splitterBottom = splitterRect.bottom + scrollTop;
-
-          iframe.style.height = splitterBottom + 'px';
-
-          // Close the legal footer panel if present (after measuring/resizing)
-          const footerCloseBtn = iframeDoc.querySelector('.appFooterLinksClose');
-          if (footerCloseBtn) {
-            footerCloseBtn.click();
-          }
-        }
-      }
-
-      function updateRangeInfo() {
-        try {
-          const currentUrl = iframe.contentWindow.location.href;
-          const url = new URL(currentUrl);
-          const params = url.searchParams;
-
-          const profileName = params.get('profileName');
-          const range = params.get('range');
-
-          let rangeText = '';
-          if (range) {
-            // Extract just the last part of the range and format it
-            const cleanRange = range.replace(/.*~/, '');
-            const duration = formatRangeDuration(cleanRange);
-
-            if (profileName) {
-              rangeText = profileName + ' — ' + duration;
-            } else {
-              rangeText = 'Plage: ' + duration;
-            }
-          } else if (profileName) {
-            rangeText = profileName;
-          }
-
-          if (rangeText) {
-            profileRangeInfo.textContent = rangeText;
-          }
-        } catch (e) {
-          // Cross-origin or still loading
-        }
-      }
-
-      function checkUrlChange() {
-        try {
-          const currentUrl = iframe.contentWindow.location.href;
-          if (currentUrl !== lastUrl) {
-            lastUrl = currentUrl;
-            updateRangeInfo();
-
-            // Reset save button when range/name changes
-            resetSaveRangeBtn(profileItem);
-
-            // Check if profile is fully loaded (globalTrackOrder parameter is set)
-            const url = new URL(currentUrl);
-            if (url.searchParams.has('globalTrackOrder')) {
-              // Profile is fully loaded, resize iframe to fit content
-              resizeIframeToContent();
-            }
-
-            // Update the SVG preview with the new selection
-            updateProfilePreview(profileItem, {
-              profileName: url.searchParams.get('profileName'),
-              range: url.searchParams.get('range')?.replace(/.*~/, '')
-            });
-          }
-        } catch (e) {
-          // Still loading or cross-origin
-        }
-      }
-
-      function startPolling() {
-        if (!checkUrl) {
-          checkUrl = setInterval(checkUrlChange, 500);
-          activeIframes.set(iframe, checkUrl);
-        }
-      }
-
-      function stopPolling() {
-        if (checkUrl) {
-          clearInterval(checkUrl);
-          checkUrl = null;
-          activeIframes.delete(iframe);
-        }
-      }
-
-      // Start polling
-      startPolling();
-
-      // Store stop function for closing
-      iframe._stopPolling = stopPolling;
-
-      // Pause polling when page is hidden to save resources
-      const visibilityHandler = () => {
-        if (document.hidden) {
-          stopPolling();
-        } else {
-          startPolling();
-        }
-      };
-      document.addEventListener('visibilitychange', visibilityHandler);
-
-      // Store visibility handler to remove it when closing
-      iframe._visibilityHandler = visibilityHandler;
+      openProfiler(profileItem);
     }
   });
 
