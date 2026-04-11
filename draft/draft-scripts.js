@@ -808,9 +808,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Profile preview rendering
   async function updateProfilePreview(profileItem, {profileName, range} = {}) {
-    const previewDiv = profileItem.querySelector('.profile-preview');
-    previewDiv.classList.add('preview-loading');
-
     const {profile, previewPath = '', slug} = profileItem.dataset;
     const options = {
       path: `draft/${slug}/${previewPath}`
@@ -822,8 +819,18 @@ document.addEventListener('DOMContentLoaded', function() {
       options.range = range;
     }
 
+    const optionsJSON = JSON.stringify(options);
+    const previewDiv = profileItem.querySelector('.profile-preview');
+    if (previewDiv.dataset.lastRender === profile + ' ' + optionsJSON) {
+      // Profiler URL can change (e.g. globalTrackOrder added) without affecting the render
+      return;
+    }
+
+    previewDiv.classList.add('preview-loading');
+
     try {
-      previewDiv.innerHTML = await renderProfile(profile, JSON.stringify(options));
+      previewDiv.innerHTML = await renderProfile(profile, optionsJSON);
+      previewDiv.dataset.lastRender = profile + ' ' + optionsJSON;
     } catch (error) {
       previewDiv.innerHTML = `<div class="preview-error">${error.message}</div>`;
     }
