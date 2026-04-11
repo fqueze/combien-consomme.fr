@@ -674,6 +674,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  async function renderProfile(profile, options) {
+    const response = await fetch('/api/render-profile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ profile, options })
+    });
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error || 'Render failed');
+    }
+    return result.html;
+  }
+
   async function renderShortcode(shortcode, rangeId, description) {
     // Find the saved-range-item container
     const item = document.querySelector(`.saved-range-item:has([data-range-id="${rangeId}"])`);
@@ -690,26 +704,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const profile = match[1];
       const options = match[2].replace(/\\'/g, "'"); // Unescape single quotes
-
-      const response = await fetch('/api/render-profile', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ profile, options })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Impossible de rendre l\'aperçu');
-      }
-
-      if (!result.html) {
-        throw new Error('No HTML returned');
-      }
-
       // Append the rendered HTML
       const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = result.html;
+      tempDiv.innerHTML = await renderProfile(profile, options);
       item.appendChild(tempDiv.firstChild);
 
       // Append the description textarea after the preview
@@ -792,6 +789,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // Profile preview rendering
+  async function updateProfilePreview(profileItem, {profileName, range} = {}) {
+    const previewDiv = profileItem.querySelector('.profile-preview');
+    previewDiv.classList.add('preview-loading');
+
+    const {profile, previewPath = '', slug} = profileItem.dataset;
+    const options = {
+      path: `draft/${slug}/${previewPath}`
+    };
+    if (profileName) {
+      options.name = profileName;
+    }
+    if (range) {
+      options.range = range;
+    }
+
+    try {
+      previewDiv.innerHTML = await renderProfile(profile, JSON.stringify(options));
+    } catch (error) {
+      previewDiv.innerHTML = `<div class="preview-error">${error.message}</div>`;
+    }
+    previewDiv.classList.remove('preview-loading');
+  }
+
   // Profile iframe handling - support multiple open iframes
   const activeIframes = new Map(); // Track polling for each iframe
 
@@ -843,6 +864,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       iframe.src = profilerUrl;
       container.style.display = 'block';
+
+      // Show initial preview of the full profile
+      updateProfilePreview(profileItem);
 
       // Set up URL monitoring for this iframe
       let lastUrl = '';
@@ -917,6 +941,12 @@ document.addEventListener('DOMContentLoaded', function() {
               // Profile is fully loaded, resize iframe to fit content
               resizeIframeToContent();
             }
+
+            // Update the SVG preview with the new selection
+            updateProfilePreview(profileItem, {
+              profileName: url.searchParams.get('profileName'),
+              range: url.searchParams.get('range')?.replace(/.*~/, '')
+            });
           }
         } catch (e) {
           // Still loading or cross-origin

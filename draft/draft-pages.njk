@@ -80,6 +80,8 @@
     <div class="profiler-container" style="display: none;">
       <iframe class="profiler-iframe"></iframe>
 
+      <div class="profile-preview"></div>
+
       <div class="profile-bottom-bar">
         <span class="profile-range-info"></span>
         <button class="save-range-btn" disabled>Sauvegarder la plage</button>
@@ -375,6 +377,20 @@
   height: 350px;
   border: none;
   display: block;
+}
+
+.profile-preview {
+  padding: 0.5rem 0.75rem;
+  background: #f8f9fa;
+}
+
+.profile-preview > .profile {
+  margin-bottom: 0;
+}
+
+.profile-preview.preview-loading {
+  filter: grayscale(1);
+  opacity: 0.5;
 }
 
 .profile-bottom-bar {
