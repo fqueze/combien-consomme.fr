@@ -744,6 +744,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Profile shortname handling
   const profilesSection = document.getElementById('profiles-section');
+
+  function setShortnameError(input, message) {
+    const wrapper = input.closest('.profile-shortname-wrapper');
+    wrapper.querySelector('.shortname-error')?.remove();
+    input.classList.toggle('conflict', !!message);
+    if (message) {
+      const span = document.createElement('span');
+      span.className = 'shortname-error';
+      span.textContent = message;
+      wrapper.appendChild(span);
+    }
+  }
+
+  function checkShortname(input) {
+    const val = input.value.trim();
+    let conflict = false;
+    if (val) {
+      const others = profilesSection.querySelectorAll('.profile-shortname');
+      for (const other of others) {
+        if (other !== input && other.value.trim() === val) {
+          conflict = true;
+          break;
+        }
+      }
+    }
+    setShortnameError(input, conflict ? 'Nom court déjà utilisé' : null);
+    resetSaveRangeBtn(input.closest('.profile-item'));
+  }
+
   if (profilesSection) {
     // Load and apply profile shortnames on page load
     (async () => {
@@ -767,18 +796,19 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
   }
 
-  // Reset save-range button to default state, disabled if no shortname
+  // Reset save-range button to default state, disabled if no shortname or conflict
   function resetSaveRangeBtn(profileItem) {
     const shortnameInput = profileItem.querySelector('.profile-shortname');
     const saveRangeBtn = profileItem.querySelector('.save-range-btn');
     saveRangeBtn.textContent = 'Sauvegarder la plage';
-    saveRangeBtn.disabled = !shortnameInput.value.trim();
+    saveRangeBtn.disabled = !shortnameInput.value.trim() || shortnameInput.classList.contains('conflict');
   }
 
-  // Update save-range button immediately as user types
+  // Update save-range button and conflict state as user types
   profilesSection?.addEventListener('input', function(e) {
-    if (e.target.classList.contains('profile-shortname'))
-      resetSaveRangeBtn(e.target.closest('.profile-item'));
+    if (e.target.classList.contains('profile-shortname')) {
+      checkShortname(e.target);
+    }
   });
 
   profilesSection?.addEventListener('change', async function(e) {
@@ -788,10 +818,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const profileFilename = input.dataset.profile;
     const shortname = input.value.trim();
 
+    checkShortname(input);
+    if (input.classList.contains('conflict')) {
+      return;
+    }
+
     try {
       await patch(`profile/${encodeURIComponent(profileFilename)}`, { shortname });
     } catch (error) {
-      showError('Erreur lors de la sauvegarde du nom court', error);
+      setShortnameError(input, error.message);
     }
   });
 

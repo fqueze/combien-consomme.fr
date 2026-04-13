@@ -1071,7 +1071,21 @@ function setupDevMiddleware(middleware) {
 
       // Update shortname field
       if (req.body?.shortname !== undefined) {
-        data.profiles[filename].shortname = req.body.shortname;
+        const newShortname = req.body.shortname;
+
+        // Validate uniqueness: no other profile in this draft may use the same shortname
+        if (newShortname) {
+          for (const [otherFile, otherData] of Object.entries(data.profiles)) {
+            if (otherFile !== filename && otherData.shortname === newShortname) {
+              sendJSON(res, 409, {
+                error: `Le nom court "${newShortname}" est déjà utilisé par ${otherFile}`
+              });
+              return;
+            }
+          }
+        }
+
+        data.profiles[filename].shortname = newShortname;
       }
 
       try {
