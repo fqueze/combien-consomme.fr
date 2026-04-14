@@ -514,10 +514,8 @@ document.addEventListener('DOMContentLoaded', function() {
           `;
           savedRangesList.appendChild(item);
 
-          // Fetch and render the shortcode
-          if (range.shortcode) {
-            renderPromises.push(renderShortcode(range.shortcode, range.id, range.description));
-          }
+          // Render the profile preview
+          renderPromises.push(renderRangePreview(range, item));
         }
 
         // Wait for all SVGs to be rendered
@@ -544,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const existingDesc = item.querySelector('.range-description');
                 const currentDesc = existingDesc?.value || description || '';
                 existingDesc?.remove();
-                await renderShortcode(shortcode, rangeId, currentDesc);
+                await renderRangePreview(range, item);
               } catch (error) {
                 showError(error.message);
                 nameEl.textContent = newName;
@@ -705,36 +703,38 @@ document.addEventListener('DOMContentLoaded', function() {
     return result.html;
   }
 
-  async function renderShortcode(shortcode, rangeId, description) {
-    // Find the saved-range-item container
-    const item = document.querySelector(`.saved-range-item:has([data-range-id="${rangeId}"])`);
-    if (!item) return;
+  function previewProfileFilename(slug, shortname) {
+    return shortname === 'profile'
+      ? `${slug}.json.gz`
+      : `${slug}-${shortname}.json.gz`;
+  }
+
+  async function renderRangePreview(range, item) {
+    // Build profile path from range.file + shortname (not from the stored shortcode)
+    const shortnameInput = document.querySelector(`.profile-shortname[data-profile="${range.file}"]`);
+    const shortname = shortnameInput?.value.trim();
+    if (!shortname) return;
+
+    const profile = previewProfileFilename(currentSlug, shortname);
+    const options = { name: range.name, path: `draft/${currentSlug}/preview/profiles/` };
+    if (range.range) {
+      options.range = range.range;
+    }
 
     try {
-      // Parse the shortcode to extract profile and options
-      // Format: {% profile "filename.json.gz" '{"name":"...","range":"...","path":"..."}' %}
-      // Note: The JSON string may contain escaped single quotes (\')
-      const match = shortcode.match(/\{%\s*profile\s+"([^"]+)"\s+'(.+)'\s*%\}/);
-      if (!match) {
-        throw new Error('Invalid shortcode format');
-      }
-
-      const profile = match[1];
-      const options = match[2].replace(/\\'/g, "'"); // Unescape single quotes
-      // Append the rendered HTML
       const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = await renderProfile(profile, options);
+      tempDiv.innerHTML = await renderProfile(profile, JSON.stringify(options));
       item.appendChild(tempDiv.firstChild);
 
       // Append the description textarea after the preview
       const textarea = document.createElement('textarea');
       textarea.className = 'range-description';
-      textarea.dataset.rangeId = rangeId;
+      textarea.dataset.rangeId = range.id;
       textarea.placeholder = 'Description (optionnel) : qu\'est-ce qui est intéressant dans cette mesure ?';
-      textarea.value = description || '';
+      textarea.value = range.description || '';
       item.appendChild(textarea);
     } catch (error) {
-      console.error('Error rendering shortcode:', error);
+      console.error('Error rendering range preview:', error);
       const errorDiv = document.createElement('div');
       errorDiv.className = 'preview-error';
       errorDiv.textContent = 'Erreur: ' + error.message;
@@ -825,6 +825,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     try {
       await patch(`profile/${encodeURIComponent(profileFilename)}`, { shortname });
+      const profileItem = input.closest('.profile-item');
+      updateProfilePreview(profileItem);
     } catch (error) {
       setShortnameError(input, error.message);
     }
@@ -843,9 +845,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Profile preview rendering
   async function updateProfilePreview(profileItem, {profileName, range} = {}) {
-    const {profile, previewPath = '', slug} = profileItem.dataset;
+    const {slug} = profileItem.dataset;
+    const shortname = profileItem.querySelector('.profile-shortname').value.trim();
+    if (!shortname) {
+      const previewDiv = profileItem.querySelector('.profile-preview');
+      previewDiv.innerHTML = '';
+      previewDiv.dataset.lastRender = '';
+      return;
+    }
+    const profile = previewProfileFilename(slug, shortname);
     const options = {
-      path: `draft/${slug}/${previewPath}`
+      path: `draft/${slug}/preview/profiles/`
     };
     if (profileName) {
       options.name = profileName;
@@ -1039,6 +1049,20 @@ document.addEventListener('DOMContentLoaded', function() {
     profileItem.querySelector('.profile-range-info').textContent = '';
     resetSaveRangeBtn(profileItem);
 
+    // Clean up preview profile if no saved ranges reference this profile
+    const profileFilename = profileItem.dataset.profile;
+    const hasRanges = document.querySelector(`.saved-range-item[data-file="${profileFilename}"]`);
+    if (!hasRanges) {
+      const shortname = profileItem.querySelector('.profile-shortname').value.trim();
+      if (shortname) {
+        fetch(`/api/draft/${currentSlug}/cleanup-preview-profile`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ shortname })
+        }).catch(() => {});
+      }
+    }
+
     // Stop polling for this iframe
     if (iframe._stopPolling) {
       iframe._stopPolling();
@@ -1093,20 +1117,20 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!profileName) return;
       }
 
-      // Generate the shortcode
+      // Generate the shortcode using the preview profile filename
+      const shortnameInput = profileItem.querySelector('.profile-shortname');
+      const shortcodeProfile = previewProfileFilename(currentSlug, shortnameInput.value.trim());
       const shortcodeOptions = {name: profileName};
       if (range) {
         shortcodeOptions.range = range;
       }
-      shortcodeOptions.path = `draft/${currentSlug}/`;
 
-      const shortcode = `{% profile "${profileFilename}" '${JSON.stringify(shortcodeOptions).replace(/'/g, "\\'")}' %}`;
+      const shortcode = `{% profile "${shortcodeProfile}" '${JSON.stringify(shortcodeOptions).replace(/'/g, "\\'")}' %}`;
 
       saveBtn.disabled = true;
       saveBtn.textContent = 'Sauvegarde...';
 
       // Check if profile needs automatic shortname
-      const shortnameInput = profileItem.querySelector('.profile-shortname');
       if (!shortnameInput.value.trim()) {
         // Count total profiles
         const allProfiles = document.querySelectorAll('.profile-item');

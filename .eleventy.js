@@ -729,6 +729,25 @@ function saveDraftData(slug, data) {
   fs.writeFileSync(dataPath, JSON.stringify(data, null, 2), 'utf-8');
 }
 
+function previewProfileFilename(slug, shortname) {
+  return shortname === 'profile'
+    ? `${slug}.json.gz`
+    : `${slug}-${shortname}.json.gz`;
+}
+
+async function ensurePreviewProfile(slug, profileFilename, shortname) {
+  const draftPath = path.join('draft', slug);
+  const destPath = path.join(draftPath, 'preview', 'profiles',
+                             previewProfileFilename(slug, shortname));
+  try {
+    await fs.promises.access(destPath);
+  } catch {
+    await fs.promises.mkdir(path.dirname(destPath), { recursive: true });
+    await fs.promises.copyFile(path.join(draftPath, profileFilename), destPath);
+  }
+  return destPath;
+}
+
 function setupDevMiddleware(middleware) {
   // Helper functions for API responses
   function sendJSON(res, statusCode, data) {
@@ -914,7 +933,20 @@ function setupDevMiddleware(middleware) {
         return;
       }
 
+      const deletedRange = data.ranges.find(r => r.id === rangeId);
       data.ranges = data.ranges.filter(r => r.id !== rangeId);
+
+      // Delete preview profile if no remaining ranges reference the same file
+      if (deletedRange) {
+        const profileFile = deletedRange.file;
+        const shortname = data.profiles[profileFile].shortname;
+        if (shortname && !data.ranges.some(r => r.file === profileFile)) {
+          await fs.promises.rm(
+            path.join('draft', slug, 'preview', 'profiles',
+                      previewProfileFilename(slug, shortname)),
+            { force: true });
+        }
+      }
 
       try {
         saveDraftData(slug, data);
@@ -947,12 +979,13 @@ function setupDevMiddleware(middleware) {
       if (name !== undefined) {
         range.name = name;
         // Regenerate shortcode with new name
+        const shortname = data.profiles[range.file].shortname;
+        const profileFilename = previewProfileFilename(slug, shortname);
         const shortcodeOptions = { name };
         if (range.range) {
           shortcodeOptions.range = range.range;
         }
-        shortcodeOptions.path = `draft/${slug}/`;
-        range.shortcode = `{% profile "${range.file}" '${JSON.stringify(shortcodeOptions).replace(/'/g, "\\'")}' %}`;
+        range.shortcode = `{% profile "${profileFilename}" '${JSON.stringify(shortcodeOptions).replace(/'/g, "\\'")}' %}`;
       }
       if (description !== undefined) {
         range.description = description;
@@ -1082,6 +1115,23 @@ function setupDevMiddleware(middleware) {
               });
               return;
             }
+          }
+        }
+
+        // Update preview profile: rename if shortname changed, delete if cleared
+        const oldShortname = data.profiles[filename].shortname;
+        if (oldShortname && oldShortname !== newShortname) {
+          const profilesDir = path.join('draft', slug, 'preview', 'profiles');
+          const oldPath = path.join(profilesDir, previewProfileFilename(slug, oldShortname));
+          if (newShortname) {
+            const newPath = path.join(profilesDir, previewProfileFilename(slug, newShortname));
+            try {
+              await fs.promises.rename(oldPath, newPath);
+            } catch (e) {
+              if (e.code !== 'ENOENT') throw e;
+            }
+          } else {
+            await fs.promises.rm(oldPath, { force: true });
           }
         }
 
@@ -1260,7 +1310,7 @@ function setupDevMiddleware(middleware) {
           }
         }
 
-        // Copy and load profiles that have saved ranges (already validated to have shortnames)
+        // Ensure preview profiles exist (already validated to have shortnames)
         const loadedProfiles = new Map();
         for (const [profileFilename, profileData] of Object.entries(profiles)) {
           if (!profilesWithRanges.has(profileFilename)) continue; // Skip profiles with no saved ranges
@@ -1271,13 +1321,7 @@ function setupDevMiddleware(middleware) {
             return;
           }
 
-          // Determine destination filename: slug.json.gz for "profile", slug-shortname.json.gz for others
-          const shortname = profileData.shortname;
-          const destFilename = shortname === 'profile'
-            ? `${slug}.json.gz`
-            : `${slug}-${shortname}.json.gz`;
-          const destProfilePath = path.join(profilesPath, destFilename);
-          fs.copyFileSync(sourceProfilePath, destProfilePath);
+          await ensurePreviewProfile(slug, profileFilename, profileData.shortname);
 
           // Load profile for generating stats
           const profile = await loadProfile(sourceProfilePath);
@@ -1409,12 +1453,9 @@ TODO: Describe measurement equipment and link to article
           // Escape single quotes in the name for the Liquid shortcode
           const escapedName = range.name.replace(/'/g, "\\'");
 
-          // Get the shortname for this range's profile
-          const profileData = profiles[range.file];
-          const shortname = profileData?.shortname || 'profile';
-          const profileFilename = shortname === 'profile'
-            ? `${slug}.json.gz`
-            : `${slug}-${shortname}.json.gz`;
+          // Get the shortname for this range's profile (validated above)
+          const shortname = profiles[range.file].shortname;
+          const profileFilename = previewProfileFilename(slug, shortname);
 
           template += `{% profile "${profileFilename}" '{"name": "${escapedName}", "range": "${range.range}"}' %}`;
 
@@ -1485,6 +1526,21 @@ TODO: Suggest 3-5 follow-up investigations
       return;
     }
 
+    // POST /api/draft/:slug/cleanup-preview-profile - Remove orphan preview profile
+    const cleanupPreviewProfile = /^\/api\/draft\/([^/]+)\/cleanup-preview-profile$/;
+    if (req.method === 'POST' && cleanupPreviewProfile.test(url)) {
+      const [, slug] = url.match(cleanupPreviewProfile);
+      const { shortname } = req.body || {};
+      if (shortname) {
+        await fs.promises.rm(
+          path.join('draft', slug, 'preview', 'profiles',
+                    previewProfileFilename(slug, shortname)),
+          { force: true });
+      }
+      sendJSON(res, 200, { success: true });
+      return;
+    }
+
     // POST /api/render-profile - Render a profile shortcode
     if (req.method === 'POST' && url === '/api/render-profile') {
       const { profile, options } = req.body || {};
@@ -1495,6 +1551,16 @@ TODO: Suggest 3-5 follow-up investigations
       }
 
       try {
+        // Ensure preview profile file exists (create by copy if missing)
+        const slug = JSON.parse(options).path.match(/^draft\/([^/]+)\//)[1];
+        const data = loadDraftData(slug);
+        for (const [filename, profileData] of Object.entries(data.profiles)) {
+          if (previewProfileFilename(slug, profileData.shortname) === profile) {
+            await ensurePreviewProfile(slug, filename, profileData.shortname);
+            break;
+          }
+        }
+
         // Create a fake user benchmarks for API calls
         const fakeUserBenchmarks = {
           get: () => ({ before: () => {}, after: () => {} })
