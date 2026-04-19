@@ -138,11 +138,11 @@ async function patch(path, data) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   });
+  const result = await response.json();
   if (!response.ok) {
-    const result = await response.json();
     throw new Error(result.error || 'Request failed');
   }
-  return response;
+  return result;
 }
 
 // Helper to make POST requests
@@ -530,8 +530,7 @@ document.addEventListener('DOMContentLoaded', function() {
             async (newName) => {
               if (newName === originalName) return;
               try {
-                const response = await patch(`update-range/${rangeId}`, { name: newName });
-                const { range } = await response.json();
+                const { range } = await patch(`update-range/${rangeId}`, { name: newName });
                 const { shortcode, description } = range;
 
                 // Update shortcode display and re-render preview in-place
@@ -700,7 +699,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!response.ok) {
       throw new Error(result.error || 'Render failed');
     }
-    return result.html;
+    return result;
   }
 
   function previewProfileFilename(slug, shortname) {
@@ -723,7 +722,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     try {
       const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = await renderProfile(profile, JSON.stringify(options));
+      tempDiv.innerHTML = (await renderProfile(profile, JSON.stringify(options))).html;
       item.appendChild(tempDiv.firstChild);
 
       // Append the description textarea after the preview
@@ -851,6 +850,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const previewDiv = profileItem.querySelector('.profile-preview');
       previewDiv.innerHTML = '';
       previewDiv.dataset.lastRender = '';
+      profileItem.querySelector('.profile-optimized-size').textContent = '';
       return;
     }
     const profile = previewProfileFilename(slug, shortname);
@@ -874,8 +874,11 @@ document.addEventListener('DOMContentLoaded', function() {
     previewDiv.classList.add('preview-loading');
 
     try {
-      previewDiv.innerHTML = await renderProfile(profile, optionsJSON);
+      const { html, optimizedSize } = await renderProfile(profile, optionsJSON);
+      previewDiv.innerHTML = html;
       previewDiv.dataset.lastRender = profile + ' ' + optionsJSON;
+      const sizeEl = profileItem.querySelector('.profile-optimized-size');
+      sizeEl.textContent = ` → ${(optimizedSize / 1024).toFixed(1)} Ko`;
     } catch (error) {
       previewDiv.innerHTML = `<div class="preview-error">${error.message}</div>`;
     }

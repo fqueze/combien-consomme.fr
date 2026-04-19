@@ -14,6 +14,7 @@ import timeToRead from "eleventy-plugin-time-to-read";
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { spawn } from 'child_process';
 import https from 'https';
+import { Worker } from 'worker_threads';
 
 const isDev = process.env.ELEVENTY_ENV === 'dev';
 const baseUrl = isDev ? 'http://localhost:8080' : 'https://combien-consomme.fr';
@@ -735,17 +736,57 @@ function previewProfileFilename(slug, shortname) {
     : `${slug}-${shortname}.json.gz`;
 }
 
+// Worker thread for heavy profile operations (avoids blocking the server)
+let profileWorker = null;
+let workerRequestId = 0;
+const workerCallbacks = new Map();
+
+function getProfileWorker() {
+  if (profileWorker) {
+    return profileWorker;
+  }
+  profileWorker = new Worker(new URL('./draft/profile-worker.js', import.meta.url));
+  profileWorker.on('message', (msg) => {
+    const cb = workerCallbacks.get(msg._id);
+    workerCallbacks.delete(msg._id);
+    if (msg.error) {
+      cb.reject(new Error(msg.error));
+    } else {
+      cb.resolve(msg);
+    }
+  });
+  profileWorker.on('error', (err) => {
+    console.error('Profile worker error:', err);
+    for (const { reject } of workerCallbacks.values()) {
+      reject(err);
+    }
+    workerCallbacks.clear();
+    profileWorker = null;
+  });
+  return profileWorker;
+}
+
+function workerRequest(msg) {
+  const id = workerRequestId++;
+  return new Promise((resolve, reject) => {
+    workerCallbacks.set(id, { resolve, reject });
+    getProfileWorker().postMessage({ ...msg, _id: id });
+  });
+}
+
 async function ensurePreviewProfile(slug, profileFilename, shortname) {
   const draftPath = path.join('draft', slug);
   const destPath = path.join(draftPath, 'preview', 'profiles',
                              previewProfileFilename(slug, shortname));
   try {
-    await fs.promises.access(destPath);
+    return (await fs.promises.stat(destPath)).size;
   } catch {
-    await fs.promises.mkdir(path.dirname(destPath), { recursive: true });
-    await fs.promises.copyFile(path.join(draftPath, profileFilename), destPath);
+    const { newSize } = await workerRequest({
+      sourcePath: path.join(draftPath, profileFilename),
+      destPath,
+    });
+    return newSize;
   }
-  return destPath;
 }
 
 function setupDevMiddleware(middleware) {
@@ -1551,12 +1592,13 @@ TODO: Suggest 3-5 follow-up investigations
       }
 
       try {
-        // Ensure preview profile file exists (create by copy if missing)
+        // Ensure preview profile file exists (create by optimizing if missing)
         const slug = JSON.parse(options).path.match(/^draft\/([^/]+)\//)[1];
         const data = loadDraftData(slug);
+        let optimizedSize;
         for (const [filename, profileData] of Object.entries(data.profiles)) {
           if (previewProfileFilename(slug, profileData.shortname) === profile) {
-            await ensurePreviewProfile(slug, filename, profileData.shortname);
+            optimizedSize = await ensurePreviewProfile(slug, filename, profileData.shortname);
             break;
           }
         }
@@ -1566,7 +1608,7 @@ TODO: Suggest 3-5 follow-up investigations
           get: () => ({ before: () => {}, after: () => {} })
         };
         const html = await profileShortcode(profile, options, fakeUserBenchmarks);
-        sendJSON(res, 200, { html });
+        sendJSON(res, 200, { html, optimizedSize });
       } catch (error) {
         sendJSON(res, 500, { error: error.message });
       }

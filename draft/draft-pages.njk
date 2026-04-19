@@ -67,7 +67,8 @@
     <div class="profile-header">
       <div class="profile-info">
         <code class="profile-filename">{{ profile.filename }}</code>
-        <span class="profile-size">({{ (profile.size / 1024) | round(1) }} Ko)</span>
+        <span class="profile-size">({{ (profile.size / 1024) | round(1) }} Ko<span
+          class="profile-optimized-size" title="Taille après optimisation timeDeltas"></span>)</span>
       </div>
       <div class="profile-controls">
         <div class="profile-shortname-wrapper">
