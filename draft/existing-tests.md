@@ -681,3 +681,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - La LED d'éclairage consomme ~0.4W, le bip ~90ms de surconsommation
 - Branché 24h/24 en veille : {{ 0.38 | W€PerYear }} par an
 - Changement de configuration : pic à 3.15W
+
+### machine-a-bulles
+**Title:** une machine à bulles
+**Device:** Machine à bulles NOVISTAR (25W étiquette)
+**Key findings:**
+- Plateau stable autour de 31 W en fonctionnement, 11,3 Wh pour 21min47s de bulles
+- Mode « TÉLÉCOMMANDE » : veille à 0,9 W médiane (≈ 2 €/an si laissé branché en permanence)
+- Légère dérive descendante du plateau : moteur électrique qui s'échauffe, comportement déjà observé sur l'aspirateur d'atelier
+- Le litre de produit à bulles (0,99 €) représente plusieurs jours de fonctionnement en équivalent électrique
+- Arceau de fixation et télécommande suggèrent un usage de type salle de spectacle plutôt que pur jouet
