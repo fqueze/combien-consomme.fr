@@ -1798,12 +1798,29 @@ export default function (eleventyConfig) {
       b.before();
       const fullCss = getFullCss();
 
-      // Apply typographic replacements to all HTML pages
-      content = content.replace(/ ([!?:;»])/g, nbsp + "$1")
+      // Apply typographic replacements to all HTML pages. These would corrupt
+      // URLs and filenames (e.g. a profile filename containing "oe" becomes
+      // "œ"), so we stash the path-bearing attribute values into an array,
+      // replacing each with its index wrapped in NUL bytes (which never appear
+      // in HTML), run the replacements, then swap the original values back in.
+      // title/alt and other text are still transformed since only these
+      // attributes are stashed.
+      //
+      // This stash/restore dance is a hack. The real fix is to stop baking the
+      // profile/image lists into the static draft page and instead load them
+      // from an API endpoint at runtime (which would also let a page reload
+      // pick up new profiles/images without restarting the server). Once that
+      // lands, the path-bearing attributes no longer exist in the HTML and this
+      // stashing can be reverted to a plain chain of .replace() calls.
+      const urls = [];
+      content = content
+        .replace(/\b(href|src|data-profile|data-image)="([^"]*)"/g, (m, attr, url) => `${attr}="\x00${urls.push(url) - 1}\x00"`)
+        .replace(/ ([!?:;»])/g, nbsp + "$1")
         .replace(/« /g, "«" + nbsp)
         .replace(/([^-].)'/g, "$1’") // avoid replacing ' in urls where spaces are replaced with -.
         .replace(/oe/g, "œ")
-        .replace(/\.\.\./g, "…");
+        .replace(/\.\.\./g, "…")
+        .replace(/\x00(\d+)\x00/g, (m, i) => urls[i]);
 
       // Skip CSS minification for draft pages (they have dynamically inserted content)
       // and include the full CSS.
