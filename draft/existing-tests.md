@@ -691,3 +691,14 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Légère dérive descendante du plateau : moteur électrique qui s'échauffe, comportement déjà observé sur l'aspirateur d'atelier
 - Le litre de produit à bulles (0,99 €) représente plusieurs jours de fonctionnement en équivalent électrique
 - Arceau de fixation et télécommande suggèrent un usage de type salle de spectacle plutôt que pur jouet
+
+### hotte-de-cuisine
+**Title:** une hotte de cuisine
+**Device:** Hotte encastrée IKEA UNDERVERK 703.891.39 (60 cm, 2025, 369 €)
+**Key findings:**
+- Étiquette TOT. 256 W (moteur 250 W + 2×3 W LED), mais aspiration mesurée seulement autour de 140 W
+- Les 3 vitesses consomment quasi la même chose (138/137/142 W), la vitesse 2 consomme même très légèrement moins que la vitesse 1
+- Décroissance nette de la consommation quand le moteur chauffe (de 152 W à 123 W sur 45 min)
+- Éclairage LED seul : 4,3 W
+- Petits pics de consommation à chaque changement de vitesse
+- Aucune consommation en veille (bouton rétractable qui coupe mécaniquement)
