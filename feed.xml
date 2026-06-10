@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-04-21T08:41:49Z</updated>
+<updated>2026-06-10T21:35:10Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>une hotte de cuisine</title>
+ <link href="https://combien-consomme.fr/tests/hotte-de-cuisine/"/>
+ <updated>2026-06-10T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/hotte-de-cuisine/</id>
+ <summary xml:lang="fr" type="html">Au-dessus des plaques, la hotte aspire les vapeurs et les odeurs de cuisson. Comme elle fait beaucoup de bruit, on est tenté de l&#39;arrêter au plus vite ; cette perception de consommation liée au vacarme est-elle juste ?</summary>
+</entry>
 <entry>
  <title>une machine à bulles</title>
  <link href="https://combien-consomme.fr/tests/machine-a-bulles/"/>
@@ -142,12 +149,5 @@
  <updated>2025-12-16T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/balance-precision/</id>
  <summary xml:lang="fr" type="html">Une balance de précision est un outil utile en cuisine pour des mesures exactes, ou dans d&#39;autres contextes nécessitant une pesée précise. Combien consomme-t-elle ?</summary>
-</entry>
-<entry>
- <title>Mesurer la consommation avec un wattmètre de laboratoire programmable ISW8001</title>
- <link href="https://combien-consomme.fr/posts/mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001/"/>
- <updated>2025-12-14T00:00:00Z</updated>
- <id>https://combien-consomme.fr/posts/mesurer-la-consommation-avec-un-wattmetre-de-laboratoire-isw8001/</id>
- <summary xml:lang="fr" type="html">Un wattmètre de laboratoire programmable permet d&#39;enregistrer des profils de consommation avec une précision supérieure aux prises connectées, particulièrement pour les faibles puissances. Comment s&#39;en servir pour obtenir des mesures exploitables ?</summary>
 </entry>
 </feed>
