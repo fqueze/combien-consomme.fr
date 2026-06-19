@@ -702,3 +702,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Éclairage LED seul : 4,3 W
 - Petits pics de consommation à chaque changement de vitesse
 - Aucune consommation en veille (bouton rétractable qui coupe mécaniquement)
+
+### moniteur-27pouces-4k-dell-p2715q
+**Title:** un moniteur 4K Dell P2715Q
+**Device:** Moniteur Dell P2715Q (27 pouces, 4K UHD 3840x2160, dalle IPS, fabriqué en octobre 2016, connectique USB-C/DisplayPort/HDMI)
+**Key findings:**
+- Écran allumé : consommation de {{ 22.7 | W }} (luminosité min) à {{ 48.9 | W }} (max) ; baisser la luminosité fait plus que diviser la puissance par deux.
+- Le passage en « dark mode » (page noire vs blanche) ne fait économiser que {{ 45.2 | percentLess: 49.6 }}.
+- Consommation en veille ({{ 0.059 | W }}) et écran éteint ({{ 0.0466 | W }}) quasi identiques et très faibles, à la limite de ce que la prise connectée peut mesurer ; le bouton power ne coupe pas l'alimentation.
+- L'option « USB On During Standby » fait passer la veille de {{ 0.059 | W }} à {{ 0.262 | W }} en moyenne.
+- En forfait jour (8 h/jour, 218 jours/an), l'écran revient à environ {{ 49.7 | times: 8 | times: 218 | Wh€ }} d'électricité par an, la veille n'en représentant que moins d'1 %.
