@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-06-10T21:35:10Z</updated>
+<updated>2026-06-19T22:21:30Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>un moniteur 4K Dell P2715Q</title>
+ <link href="https://combien-consomme.fr/tests/moniteur-27pouces-4k-dell-p2715q/"/>
+ <updated>2026-06-20T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/moniteur-27pouces-4k-dell-p2715q/</id>
+ <summary xml:lang="fr" type="html">Ce moniteur 27 pouces 4K, mon premier écran de cette définition, m&#39;a accompagné presque quotidiennement pendant dix ans avant de tomber en panne. Avant de m&#39;en séparer, quel bilan énergétique pour une décennie de bons et loyaux services ?</summary>
+</entry>
 <entry>
  <title>une hotte de cuisine</title>
  <link href="https://combien-consomme.fr/tests/hotte-de-cuisine/"/>
@@ -142,12 +149,5 @@
  <updated>2025-12-23T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/machine-a-cafe-expresso/</id>
  <summary xml:lang="fr" type="html">Les machines à café expresso permettent de préparer un café sous pression à la maison, avec une qualité proche de celle d&#39;un bar. Quel est l&#39;impact de ce plaisir caféiné sur la facture d&#39;électricité ?</summary>
-</entry>
-<entry>
- <title>une balance de précision</title>
- <link href="https://combien-consomme.fr/tests/balance-precision/"/>
- <updated>2025-12-16T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/balance-precision/</id>
- <summary xml:lang="fr" type="html">Une balance de précision est un outil utile en cuisine pour des mesures exactes, ou dans d&#39;autres contextes nécessitant une pesée précise. Combien consomme-t-elle ?</summary>
 </entry>
 </feed>
