@@ -709,9 +709,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   async function renderRangePreview(range, item) {
-    // Build profile path from range.file + shortname (not from the stored shortcode)
-    const shortnameInput = document.querySelector(`.profile-shortname[data-profile="${range.file}"]`);
-    const shortname = shortnameInput?.value.trim();
+    // Build profile path from range.file + shortname (not from the stored shortcode).
+    // Read the shortname from the draft data rather than the .profile-shortname input,
+    // which is populated by a separate async task that may not have run yet.
+    const shortname = cachedDraftData.profiles[range.file].shortname;
     if (!shortname) return;
 
     const profile = previewProfileFilename(currentSlug, shortname);
@@ -826,6 +827,13 @@ document.addEventListener('DOMContentLoaded', function() {
       await patch(`profile/${encodeURIComponent(profileFilename)}`, { shortname });
       const profileItem = input.closest('.profile-item');
       updateProfilePreview(profileItem);
+      // If saved ranges reference this profile, the shortname must already exist in
+      // the cache (a range can only be saved once a shortname is set). Sync it so
+      // renderRangePreview uses the new value, then re-render those ranges' previews.
+      if (document.querySelector(`.saved-range-item[data-file="${profileFilename}"]`)) {
+        cachedDraftData.profiles[profileFilename].shortname = shortname;
+        loadSavedRanges();
+      }
     } catch (error) {
       setShortnameError(input, error.message);
     }
