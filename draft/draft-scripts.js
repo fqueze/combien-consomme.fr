@@ -937,7 +937,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function resizeIframeToContent() {
       const iframeDoc = iframe.contentWindow.document;
 
-      const layoutSplitter = iframeDoc.querySelector('.splitter-layout.profileViewerSplitter .layout-splitter');
+      // The Firefox Profiler splits the viewer into a top half (timeline + tracks)
+      // and a bottom panel. The draggable divider between them marks the end of
+      // the useful top half.
+      const layoutSplitter = iframeDoc.querySelector('.resizableWithSplitterSplitter');
 
       if (layoutSplitter) {
         // Get the bottom position of the splitter (includes the splitter's height)
