@@ -472,6 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.image-item[data-image]').forEach(el => {
       el.classList.toggle('used', usedSources.has(el.dataset.image));
     });
+    updateGenerateButtonState();
   }
 
   function updateUsedProfiles() {
@@ -482,6 +483,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.profile-item[data-profile]').forEach(el => {
       el.classList.toggle('used', usedFiles.has(el.dataset.profile));
     });
+    updateGenerateButtonState();
   }
 
   async function loadSavedRanges(force = false) {
@@ -2171,11 +2173,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const previewContainer = document.getElementById('test-preview-container');
   const previewIframe = document.getElementById('test-preview-iframe');
 
-  // Enable button when there are ranges and main image
+  // Enable button when there are ranges and main image. Read presence from the DOM
+  // rather than the draft data so the button tracks the optimistic UI (e.g. during
+  // the undo window after a delete), matching updateUsedProfiles/updateUsedImages.
   async function updateGenerateButtonState() {
-    const data = await getDraftData();
-    const hasRanges = data.ranges && data.ranges.length > 0;
-    const hasMainImage = data.images && data.images['img'];
+    const hasRanges = !!document.querySelector('.saved-range-item');
+    const hasMainImage = !!document.querySelector('.image-preview-delete-btn[data-shortname="img"]');
 
     // Check if template already exists
     const response = await fetch(`/api/draft/${currentSlug}/template-exists`);
@@ -2207,11 +2210,9 @@ document.addEventListener('DOMContentLoaded', function() {
     generateBtn.style.visibility = 'visible';
   }
 
-  // Initial state
+  // Initial state. Subsequent updates flow through updateUsedProfiles/updateUsedImages,
+  // which run whenever ranges or image previews change.
   updateGenerateButtonState();
-
-  // Update button state after ranges or images change
-  window.addEventListener('draft-data-updated', updateGenerateButtonState);
 
   // Refresh preview button
   const refreshPreviewBtn = document.getElementById('refresh-preview-btn');
