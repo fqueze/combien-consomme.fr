@@ -1523,7 +1523,7 @@ TODO: Suggest 3-5 follow-up investigations
           sendJSON(res, 200, {
             success: true,
             message: 'Template generated successfully',
-            claudePrompt: `Generate a test for draft/${slug}. The template is at draft/${slug}/preview/tests/${slug}.md. Profile data with statistics and screenshots are in draft/${slug}/preview/profile-data/. Read draft/CLAUDE-INSTRUCTIONS.md for guidance on how to write tests.`,
+            claudePrompt: `Generate a test for draft/${slug}. The template is at draft/${slug}/preview/tests/${slug}.md. Profile data with statistics and screenshots are in draft/${slug}/preview/profile-data/.`,
             paths: {
               template: `draft/${slug}/preview/tests/${slug}.md`,
               profiles: `draft/${slug}/preview/profiles/`,
@@ -1692,6 +1692,9 @@ export default function (eleventyConfig) {
   // Fast preview mode: only build a specific preview directory
   const previewOnly = process.env.ELEVENTY_PREVIEW_ONLY;
 
+  // Ignore Claude skill files (contain example Liquid syntax that shouldn't be parsed)
+  eleventyConfig.ignores.add(".claude/**");
+
   // Validate metadata files are up to date (full build only)
   if (!previewOnly) {
     // Use a collection to validate metadata files during the build
@@ -1762,9 +1765,6 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("draft/**/*-test.html");
     // Ignore profile-data markdown files (they're data for Claude, not templates to render)
     eleventyConfig.ignores.add("draft/**/preview/profile-data/**");
-    // Ignore Claude helper files (contain example Liquid syntax that shouldn't be parsed)
-    eleventyConfig.ignores.add("draft/CLAUDE-INSTRUCTIONS.md");
-    eleventyConfig.ignores.add("draft/CLAUDE-VERIFICATION.md");
     // Ignore data.json files from watch (they change frequently via API and shouldn't trigger rebuilds)
     eleventyConfig.watchIgnores.add("draft/**/data.json");
     // Ignore profile-data folder from watch (reference data for Claude, not templates)
