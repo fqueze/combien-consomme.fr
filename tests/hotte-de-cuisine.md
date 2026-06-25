@@ -66,7 +66,7 @@ La puissance instantanée est collectée et enregistrée une fois par seconde.
 
 ### En conditions réelles : la cuisson d'artichauts
 
-Pour une première mesure, nous avons utilisé la hotte normalement, pendant la cuisson d'artichauts à la cocotte-minute. La hotte aspire le jet de vapeur que la cocotte rejette :
+Pour une première mesure, nous avons utilisé la hotte normalement, pendant la {% test cuisson-artichauts cuisson d'artichauts à la cocotte-minute %}. La hotte aspire le jet de vapeur que la cocotte rejette :
 
 {% image "./images/hotte-de-cuisine-vapeur.jpg" "La hotte aspirant la vapeur rejetée par une cocotte-minute" "300w" 300 %}
 {% comment %}La hotte en cours d'utilisation, ici avec une cocotte minute qui rejette un jet de vapeur du à la cuisson d'artichauts, vapeur aspirée par la hotte{% endcomment %}
@@ -182,7 +182,7 @@ Pour l'aspiration, une utilisation typique d'une vingtaine de minutes lors de la
 
 Avec une puissance d'environ {{ 140 | W }}, la hotte est très facile à alimenter par des panneaux solaires : une installation en toiture standard de 3 kWc produira largement de quoi la faire tourner en milieu de journée, même en hiver. Seuls une forte pluie ou un temps de neige empêcheraient d'atteindre ces {{ 140 | W }}.
 
-Mais il ne faut pas perdre de vue que, lorsque la hotte fonctionne, c'est qu'on est en train de cuisiner. Or la cuisson aux plaques consomme bien davantage que la hotte, qui ne fait que s'y ajouter. C'est donc surtout sur la cuisson qu'il faudra veiller à profiter du soleil, la hotte n'étant qu'un petit supplément.
+Mais il ne faut pas perdre de vue que, lorsque la hotte fonctionne, c'est qu'on est en train de cuisiner. Or {% test cuisson-artichauts la cuisson aux plaques %} consomme bien davantage que la hotte, qui ne fait que s'y ajouter. C'est donc surtout sur la cuisson qu'il faudra veiller à profiter du soleil, la hotte n'étant qu'un petit supplément.
 
 Pour maximiser l'autoconsommation, on pourra :
 

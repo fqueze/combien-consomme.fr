@@ -712,3 +712,12 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Consommation en veille ({{ 0.059 | W }}) et écran éteint ({{ 0.0466 | W }}) quasi identiques et très faibles, à la limite de ce que la prise connectée peut mesurer ; le bouton power ne coupe pas l'alimentation.
 - L'option « USB On During Standby » fait passer la veille de {{ 0.059 | W }} à {{ 0.262 | W }} en moyenne.
 - En forfait jour (8 h/jour, 218 jours/an), l'écran revient à environ {{ 49.7 | times: 8 | times: 218 | Wh€ }} d'électricité par an, la veille n'en représentant que moins d'1 %.
+
+### cuisson-artichauts
+**Title:** la cuisson d'artichauts à la cocotte-minute
+**Device:** Cocotte-minute SEB Clipso 4,5 L sur plaque à induction IKEA HÖGKLASSIG (404.678.26, 7,35 kW), mesure au Shelly Pro EM-50
+**Key findings:**
+- Cuire 5 artichauts : 531 Wh (0,13 €) en 27 minutes, négligeable devant le prix des artichauts
+- La montée en pression (5 min à plein régime, ~2,3 kW) coûte 199 Wh, soit 37 % du total pour 19 % du temps
+- Une fois en pression, ~950 W suffisent à entretenir le jet de vapeur pendant les 20 min de cuisson (333 Wh) ; à « 6 » la pression retombe
+- La plaque ventile encore ~50 s après extinction, pour 0,015 Wh : négligeable

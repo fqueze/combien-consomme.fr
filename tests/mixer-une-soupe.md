@@ -124,7 +124,7 @@ Le coût électrique du mixage de 4 L de soupe est de {{ 5.03 | Wh€ }}. Il fau
 
 Si l'on suppose qu'on mixe une soupe par semaine, la consommation annuelle sera de {{ 5.03 | times: 52 | Wh€ }}. Même utilisé quotidiennement, soit {{ 5.03 | Wh€PerYear }} par an, il faudrait {{ 5.03 | times: 365 | countPer€: 50 }} ans pour que le coût électrique du mixage égale le prix d'achat du mixeur (environ 50 € neuf). Le mixeur sera probablement tombé en panne bien avant.
 
-À titre de comparaison, la cuisson préalable des légumes consomme bien plus d'énergie que le mixage. Que ce soit sur une plaque de cuisson électrique, une gazinière ou au four, l'énergie nécessaire pour cuire les légumes se compte en centaines de Wh, voire en kWh, alors que le mixage ne représente que quelques Wh. L'enjeu énergétique et économique de la préparation d'une soupe se situe donc essentiellement dans la cuisson, pas dans le mixage.
+À titre de comparaison, la cuisson préalable des légumes consomme bien plus d'énergie que le mixage. Que ce soit sur une plaque de cuisson électrique, une gazinière ou au four, {% test cuisson-artichauts l'énergie nécessaire pour cuire les légumes %} se compte en centaines de Wh, voire en kWh, alors que le mixage ne représente que quelques Wh. L'enjeu énergétique et économique de la préparation d'une soupe se situe donc essentiellement dans la cuisson, pas dans le mixage.
 
 ### Conseils pour l'autoconsommation photovoltaïque
 
@@ -136,7 +136,7 @@ En revanche, la cuisson préalable des légumes consomme bien plus d'énergie qu
 
 {% plusloin %}
 Pour comprendre de façon plus détaillée la consommation du mixage, on pourrait :
-- mesurer la consommation de la cuisson des légumes, qui représente probablement l'essentiel de l'énergie nécessaire pour préparer une soupe ;
+- mesurer la consommation de la cuisson des légumes, qui représente probablement l'essentiel de l'énergie nécessaire pour préparer une soupe — une première mesure de ce genre existe déjà avec la {% test cuisson-artichauts cuisson de légumes à la cocotte-minute %} ;
 - tester le mixage de soupes avec différentes textures (bouillon clair, velouté, soupe très épaisse) pour observer l'impact de la consistance sur la consommation ;
 - comparer avec un mixeur sur socle pour voir si le principe de fonctionnement (plongeur vs bol) influence la consommation ;
 - mesurer la consommation selon les différentes vitesses du mixeur pour vérifier si cela a un impact significatif ;
