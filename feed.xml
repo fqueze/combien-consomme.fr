@@ -4,12 +4,19 @@
 <subtitle>Visualiser les consommations électriques.</subtitle>
 <link href="https://combien-consomme.fr/feed.xml" rel="self"/>
 <link href="https://combien-consomme.fr"/>
-<updated>2026-06-19T22:21:30Z</updated>
+<updated>2026-06-25T19:16:26Z</updated>
 <id>https://combien-consomme.fr</id>
 <author>
 <name>Florian Quèze</name>
 <email>florian@combien-consomme.fr</email>
 </author>
+<entry>
+ <title>la cuisson d&#39;artichauts à la cocotte-minute</title>
+ <link href="https://combien-consomme.fr/tests/cuisson-artichauts/"/>
+ <updated>2026-06-25T00:00:00Z</updated>
+ <id>https://combien-consomme.fr/tests/cuisson-artichauts/</id>
+ <summary xml:lang="fr" type="html">Cinq artichauts, une cocotte-minute et une plaque à induction : la cuisson à la vapeur sous pression a la réputation d&#39;être économe. Mais combien consomme-t-elle vraiment, et où part l&#39;énergie ?</summary>
+</entry>
 <entry>
  <title>un moniteur 4K Dell P2715Q</title>
  <link href="https://combien-consomme.fr/tests/moniteur-27pouces-4k-dell-p2715q/"/>
@@ -142,12 +149,5 @@
  <updated>2025-12-27T00:00:00Z</updated>
  <id>https://combien-consomme.fr/tests/minitel/</id>
  <summary xml:lang="fr" type="html">Le Minitel est l&#39;ancêtre français d&#39;Internet, qui a permis pendant trois décennies l&#39;accès à des services télématiques via le réseau téléphonique. Quelle était la consommation électrique de ces terminaux qui ont équipé des millions de foyers français ?</summary>
-</entry>
-<entry>
- <title>une machine à café expresso</title>
- <link href="https://combien-consomme.fr/tests/machine-a-cafe-expresso/"/>
- <updated>2025-12-23T00:00:00Z</updated>
- <id>https://combien-consomme.fr/tests/machine-a-cafe-expresso/</id>
- <summary xml:lang="fr" type="html">Les machines à café expresso permettent de préparer un café sous pression à la maison, avec une qualité proche de celle d&#39;un bar. Quel est l&#39;impact de ce plaisir caféiné sur la facture d&#39;électricité ?</summary>
 </entry>
 </feed>
