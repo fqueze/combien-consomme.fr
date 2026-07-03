@@ -721,3 +721,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - La montée en pression (5 min à plein régime, ~2,3 kW) coûte 199 Wh, soit 37 % du total pour 19 % du temps
 - Une fois en pression, ~950 W suffisent à entretenir le jet de vapeur pendant les 20 min de cuisson (333 Wh) ; à « 6 » la pression retombe
 - La plaque ventile encore ~50 s après extinction, pour 0,015 Wh : négligeable
+
+### vieux-videoprojecteur
+**Title:** un vieux vidéoprojecteur
+**Device:** Vidéoprojecteur Nobo WX28 (DLP, 2800 lumens annoncés, lampe 185 W, acheté aux puces « en l'état », nombreux pixels morts)
+**Key findings:**
+- Une projection de film d'1h45 consomme {{ 391 | Wh€ }}, à une puissance stable d'environ {{ 223 | W }} (soit {{ 223 | Wh€ }} par heure)
+- Lampe donnée pour 185 W, mais l'appareil complet tire {{ 223 | W }} en fonctionnement
+- À l'arrêt, le ventilateur continue ~15s pour refroidir la lampe
+- Veille à {{ 0.309 | W }} ({{ 0.309 | W€PerYear }} si laissé branché) : environ 5× plus qu'un moniteur ou un lecteur DVD récents (sous {{ 0.06 | W }})
+- Image médiocre (pixels morts) : encore utilisable, mais mériterait d'être remplacé, idéalement par un modèle LED d'occasion
