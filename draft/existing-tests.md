@@ -731,3 +731,13 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - À l'arrêt, le ventilateur continue ~15s pour refroidir la lampe
 - Veille à {{ 0.309 | W }} ({{ 0.309 | W€PerYear }} si laissé branché) : environ 5× plus qu'un moniteur ou un lecteur DVD récents (sous {{ 0.06 | W }})
 - Image médiocre (pixels morts) : encore utilisable, mais mériterait d'être remplacé, idéalement par un modèle LED d'occasion
+
+### faire-bouillir-eau
+**Title:** faire bouillir un litre d'eau
+**Device:** Comparatif de 4 modes de chauffe pour 1 L d'eau : bouilloire Casino WK8282 (1850-2200W), plaque électrique en fonte PROLINE RP 100 (1000W), plaque vitro-céramique IKEA FRAMTID HGC2K (2,9 kW), plaque à induction (mesure au tableau, Shelly Pro EM-50)
+**Key findings:**
+- Faire bouillir 1 L d'eau coûte de 107 Wh (bouilloire, induction) à 283 Wh (plaque en fonte) selon la méthode
+- La bouilloire et l'induction sont à égalité (107 Wh) et bien plus rapides que les plaques classiques
+- Un couvercle sur l'induction ne change quasiment rien à la chauffe initiale (113 Wh sans, 107 Wh avec)
+- Chauffer 0,5 L à la bouilloire consomme 61,6 Wh, soit bien plus de la moitié du litre : le coût fixe de chauffe du corps de l'appareil compte
+- Réponse à la question de départ : avec une induction, préchauffer à la bouilloire n'apporte presque rien ; avec toute autre plaque, la bouilloire est une nette économie

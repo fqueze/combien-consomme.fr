@@ -116,6 +116,6 @@ Pour comprendre de façon plus détaillée la consommation d'une bouilloire éle
 - tester avec différentes quantités d'eau (0,5 L, 1 L, 1,5 L) pour quantifier précisément l'économie réalisée en adaptant la quantité à ses besoins ;
 - mesurer l'impact de la température initiale de l'eau (eau du robinet en hiver vs en été, eau laissée au soleil) ;
 - comparer avec d'autres modèles de bouilloires de différentes puissances ;
-- comparer avec d'autres méthodes pour chauffer de l'eau ({% test four-a-micro-ondes four à micro-ondes %}, casserole sur plaque électrique ou à induction) ;
+- {% test faire-bouillir-eau comparer avec d'autres méthodes pour chauffer de l'eau %} ({% test four-a-micro-ondes four à micro-ondes %}, casserole sur plaque électrique ou à induction) ;
 - mesurer le rendement énergétique (énergie électrique consommée vs chaleur transmise à l'eau).
 {% endplusloin %}

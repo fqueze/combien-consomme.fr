@@ -146,5 +146,5 @@ Pour comprendre de façon plus détaillée la consommation de cette cuisson d'ar
 - cuire cinq artichauts similaires à l'eau bouillante dans une casserole, sans pression, pour comparer l'énergie totale à celle de l'autocuiseur et chiffrer ce que fait gagner la cuisson sous pression ;
 - refaire la même cuisson dans des autocuiseurs de tailles différentes : les 4,5 L utilisés ici sont parmi les plus petits, alors que les modèles de 6 L sont très répandus et certains montent jusqu'à 10 L, ce qui change la masse de métal et le volume à monter en pression ;
 - refaire la cuisson avec un volume d'eau différent au fond de la cocotte, pour mesurer l'effet de l'eau à chauffer sur la phase de montée en pression ;
-- comparer la montée en pression sur cette plaque à induction avec la même cocotte posée sur une plaque vitrocéramique ou un foyer gaz, dont le rendement est probablement très différent.
+- comparer la montée en pression sur cette plaque à induction avec la même cocotte posée sur une plaque vitrocéramique ou un foyer gaz, dont le rendement est probablement très différent — c'est la piste que nous avons suivie en {% test faire-bouillir-eau comparant plusieurs façons de faire bouillir un litre d'eau %}.
 {% endplusloin %}
