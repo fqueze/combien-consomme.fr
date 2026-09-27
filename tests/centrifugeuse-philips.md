@@ -281,7 +281,7 @@ Cela dit, avec un coût électrique de moins d'un centime par utilisation, l'enj
 Pour comprendre de façon plus détaillée la consommation de cette centrifugeuse, on pourrait :
 - tester d'autres types de fruits et légumes (carottes, betteraves, céleri, fruits rouges) pour comparer les consommations selon la dureté et la texture ;
 - mesurer l'impact du niveau de remplissage de la cheminée sur l'efficacité et la consommation ;
-- comparer avec d'autres modèles de centrifugeuses de différentes puissances ;
+- comparer avec d'autres modèles de centrifugeuses de différentes puissances, comme {% test centrifugeuse-seb-nectalia une petite centrifugeuse SEB Nectalia %} ;
 - comparer avec des presse-agrumes électriques pour les oranges et autres agrumes ;
 - comparer un exemplaire très usé (notamment avec une râpe désaffûtée) à un exemplaire comme neuf pour mesurer l'impact de l'usure sur la consommation.
 {% endplusloin %}

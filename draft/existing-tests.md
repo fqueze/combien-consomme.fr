@@ -741,3 +741,15 @@ This file lists all existing tests with their slugs, descriptions, and key findi
 - Un couvercle sur l'induction ne change quasiment rien à la chauffe initiale (113 Wh sans, 107 Wh avec)
 - Chauffer 0,5 L à la bouilloire consomme 61,6 Wh, soit bien plus de la moitié du litre : le coût fixe de chauffe du corps de l'appareil compte
 - Réponse à la question de départ : avec une induction, préchauffer à la bouilloire n'apporte presque rien ; avec toute autre plaque, la bouilloire est une nette économie
+
+### centrifugeuse-seb-nectalia
+**Title:** une centrifugeuse SEB Nectalia
+**Device:** Centrifugeuse SEB Nectalia type 8312-04 (200 W, made in France, années 90), petit modèle compact à cheminée étroite
+**Key findings:**
+- Coût par pomme : 0,84 Wh, soit 47 pommes transformées en jus pour un centime d'électricité
+- Un verre complet (3 pommes + 1 pêche) : 4,02 Wh en quelques minutes
+- Puissance mesurée de 250 à 310 W en usage, pic à 424 W : bien au-delà des 200 W de l'étiquette, alors qu'à vide la médiane reste à 182 W
+- Démarrage à vide mesuré à 400 W, soit le double de la puissance nominale
+- Même énergie par pomme que la centrifugeuse Philips HR1858 pourtant trois fois plus puissante sur l'étiquette : la cheminée étroite oblige à multiplier les remplissages
+- Une pêche (fruit mou) coûte 77 % de plus qu'une pomme, car il faut laisser tourner deux fois plus longtemps avant que le jus cesse de couler
+- Aucune consommation de veille : le moteur est commandé par un contacteur mécanique actionné en tournant le couvercle
